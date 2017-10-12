@@ -1,0 +1,432 @@
+div#index {
+    background-image: url("../images/jg1.jpg");
+    background-position: 50% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    font-family: 'Josefin Slab', serif;
+}
+
+div#tree_history, div#more_history {
+    background-image: url("../images/family_tree.jpeg");
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: 'Josefin Slab', serif;
+}
+
+div#more_history h2 {
+    background: linear-gradient(transparent, transparent 23%, white);
+    padding: 0% 0% 10%;
+    text-align: -webkit-left;
+    text-align: left;
+    color: white;
+    font-size: 165%;
+}
+
+div#more_history p {
+    background: linear-gradient(#ededec 10%, white 60%, white 75%, transparent 107%);
+    padding: 5% 4% 0%;
+    margin: -8% 0% 0%;
+    text-shadow: 0px 1px 0px gray;
+}
+
+div#more_history .ui-content {
+    position: relative;
+    z-index: 2;
+}
+
+div#reunion_site, div#register_page {
+    background-image: url("../images/jg2016.jpg");
+    background-position: 47% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Josefin Slab', serif;
+}
+
+div#contact {
+    background-image: url("../images/raleigh_skyline.jpg");
+    background-position: 65% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Josefin Slab', serif;
+}
+
+div#profile_page {
+    background-image: url("../images/raleigh_skyline.jpg");
+    background-position: 65% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Josefin Slab', serif;
+}
+
+div#social {
+    background-image: url("../images/raleigh_skyline.jpg");
+    background-position: 65% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Josefin Slab', serif;
+}
+
+div#post {
+    background-image: url("../images/raleigh_skyline.jpg");
+    background-position: 65% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Josefin Slab', serif;
+}
+
+div#post div#post_information {
+    max-width: 100%;
+    width: initial;
+    background-color: rgba(221,221,221,0.5);
+}
+
+div#post .postPhoto img {
+    max-width: 100px;
+    max-height: 100px;
+    height: auto;
+}
+
+div#post .postComment, div#post .postDate {
+    color: black;
+    text-shadow: 0px 0px 0px black;
+    font-weight: 700;
+}
+
+div#post .postDate .deletePost a {
+    text-shadow: 0px 0px 0px black;
+}
+
+#post .postOption {
+    max-width: 15%;
+    width: 11.55%;
+    position: relative;
+    display: -webkit-inline-box;
+    display: inline-flex;
+}
+
+#post .postOption a {
+    padding: 0%;
+}
+
+div#next_reunion {
+    background-image: url("../images/raleigh_skyline.jpg");
+    background-position: 65% 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: 'Josefin Slab', serif;
+}
+
+.nextReunionMobile {
+    position: absolute;
+    width: 90%;
+    color: white;
+}
+
+h2.nextReunionMobile:nth-of-type(1) {
+    top: 25%;
+}
+
+h1.nextReunionMobile {
+    width: 90%;
+    text-align: -webkit-center;
+    text-align: -webkit-center;
+    top: 13%;
+    font-size: 275%;
+}
+
+h2.nextReunionMobile:nth-of-type(2) {
+    top: 35%;
+}
+
+h2.nextReunionMobile:nth-of-type(3) {
+    top: 45%;
+}
+
+div#coming_soon_mobile {
+    z-index: 2;
+    position: fixed;
+    top: 55%;
+    font-size: 135%;
+    padding: 0% 25%;
+    color: whitesmoke;
+    text-shadow: 0px 2px 0px #6b6b6b;
+}
+
+div#bgrdOverlay {
+    position: absolute;
+    background: black;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    bottom: 0;
+    opacity: 0.5;
+}
+
+.pageHeader.ui-title {
+    margin: 0% 0% 0% 3%;
+    text-align: -webkit-left;
+    text-align: left;
+    font-size: 130%;
+}
+
+.ui-header.ui-bar-inherit {
+    background-color: transparent;
+    border: none;
+    color: white;
+    z-index: 2;
+    position: relative;
+}
+
+#popup_errorMsg .ui-header.ui-bar-inherit {
+    background-color: darkred;
+    font-size: 130%;
+}
+
+#popup_errorMsg .errorHeader {
+    margin: 0% 70% 0% 0%;
+    padding: 2% 0% 1% 8%;
+    /* border-bottom: solid 1px white; */
+    border-right: solid 1px white;
+    text-align: -webkit-left;
+    text-align: left;
+}
+
+#popup_errorMsg.ui-popup p {
+    background-color: grey;
+    margin: 0;
+    padding: 3%;
+    color: white;
+}
+
+div#reunion_history.ui-content {
+    z-index: 1;
+    background: transparent;
+    background-color: transparent;
+    color: black;
+    position: inherit;
+    color: white;
+}
+
+div#reunion_history a.mobileHomeLink.ui-btn {
+    text-decoration: none;
+    min-width: 50%;
+    background-color: #202020;
+    padding: 2% 3%;
+    border-radius: 10px;
+    opacity: 0.8;
+    z-index: 2;
+    font-size: 100%;
+    color: whitesmoke;
+    text-shadow: 0px 0px 0px black;
+    font-family: 'Josefin Slab', serif;
+}
+
+a.mobileLink.homePage.ui-btn, div#reunion_site a.mobileLink.homePage.ui-btn, 
+div#register_page a.mobileLink.homePage.ui-btn {
+    background: rgba(0,0,0,0.25);
+    border: outset 1px rgba(0,0,0,1);
+    position: absolute;
+    top: 0px;
+    width: 32%;
+    right: 2%;
+    padding: 1% 0%;
+    color: white;
+    text-shadow: 0px 2px 0px black;
+    font-weight: 300;
+    border-radius: 10px;
+    z-index: 3;
+}
+
+#reunion_site a.mobileLink.ui-btn, #register_page a.mobileLink.ui-btn, 
+#profile_page a.mobileLink.ui-btn, #contact a.mobileLink.ui-btn,
+#social a.mobileLink.ui-btn, #post a.mobileLink.ui-btn {
+    display: inline-block;
+    width: 32%;
+    border: none;
+    background: transparent;
+    padding: 0%;
+    text-align: -webkit-center;
+    text-align: center;
+    color: white;
+    font-size: 120%;
+    font-family: 'Josefin Slab', serif;
+}
+
+#reunion_site a.mobileLink.activeMobileSite.ui-btn, #register_page a.mobileLink.activeMobileSite.ui-btn {
+    background: linear-gradient(to bottom right, #6eff00, transparent, #358100);
+}
+div#reunion_site a.mobileLink.homePage.ui-btn, div#register_page a.mobileLink.homePage.ui-btn {
+    padding: 1% 0%;
+    top: 1%;
+}
+
+#mobile_nav {
+    margin: 2% -4.6% 0%;
+    z-index: 2;
+}
+
+div#registration_div, div#login_div {
+    border: none;
+    margin: 40% 0% 0% 0%;
+    padding: 0% 0% 0% 0%;
+    z-index: 2;
+    position: relative;
+    background-color: transparent;
+}
+
+div#login_div h2, div#registration_div h2 {
+    border-bottom: solid 2px white;
+    margin: 0% 15% 10%;
+    color: white;
+    padding: 0% 0% 5% 0%;
+}
+
+#profile_page {
+    font-family: 'Josefin Slab', serif;
+}
+
+div#profile_header {
+    display: -webkit-box;
+    display: block;
+    font-size: 150%;
+    position: relative;
+    margin: 0;
+    color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+div#profile_header > .ui-checkbox {
+    position: absolute;
+    top: 25%;
+    right: 15%;
+}
+
+div#profile_header h3#profile_header_name {
+    margin: 0% 0% 0% 0%;
+}
+
+h3#family_header, h3#contact_header, h3#social_header, h3#post_header {
+    background-color: transparent;
+    /* font-size: 125%; */
+    padding: 0% 0% 0% 1%;
+    color: whitesmoke;
+    margin: 0% 0% 0%;
+}
+
+h3#post_header,
+h3#contact_header, 
+h3#social_header {
+    display: -webkit-inline-box;
+    display: inline-block;
+    min-width: 60%;
+    max-width: 65%;
+}
+
+span.visibleHeaderSpan {
+    font-size: initial;
+    min-width: initial;
+    position: inherit;
+    right: initial;
+    top: initial;
+}
+
+div#family_information .header_div {
+    margin: 2.5% 0%;
+    position: relative;
+    font-size: 125%;
+    background-color: rgba(0,0,0,0.3);
+    color: whitesmoke;
+}
+
+div#profile_page .sectionDiv, div#social .sectionDiv, div#contact .sectionDiv,
+div#post .sectionDiv {
+    max-width: 50%;
+    min-width: 40%;
+    display: -webkit-inline-box;
+    display: inline-block;
+}
+
+div#contact .sectionDiv.sectionDivPhone1,
+div#contact .sectionDiv.sectionDivPhone2 {
+    max-width: 15%;
+    min-width: 10%;
+    text-align: -webkit-center;
+    text-align: center;
+}
+
+div#contact .sectionDiv.sectionDivPhone3 {
+    max-width: 17%;
+    min-width: 10%;
+    text-align: -webkit-center;
+    text-align: center;
+}
+
+.inputTitle {
+    color: whitesmoke;
+}
+
+div#profile_page .sectionDiv.sectionDivDOB, 
+div#profile_page .sectionDiv.sectionDescent,
+div#contact .sectionDiv.sectionState {
+    width: 50%;
+}
+
+div#profile_page .sectionDiv input {
+    /* max-width: 50%; */
+}
+
+div#profile_page .ui-content, div#contact .ui-content, 
+div#social .ui-content, div#post .ui-content {
+    position: relative;
+}
+
+div#profile_page img#profile_photo, div#social img#profile_photo, 
+div#contact img#profile_photo, div#post img#profile_photo {
+    position: absolute;
+    max-width: 60px;
+    max-height: 60px;
+    z-index: 3;
+    padding: 0%;
+    top: 0;
+    right: 0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 7px black;
+}
+
+div#profile_page div#profile_photo, div#contact div#profile_photo, 
+div#social div#profile_photo, div#post div#profile_photo {
+    width: initial;
+    position: absolute;
+    display: initial;
+    top: 5px;
+    right: 6px;
+}
+
+#reunion_site a.mobileLink.registerBtn.ui-btn, #profile_page a.mobileLink.socialBtn.ui-btn,
+#social a.mobileLink.profileBtn.ui-btn, #contact a.mobileLink.socialBtn.ui-btn,
+#post a.mobileLink.socialBtn.ui-btn, #register_page a.mobileLink.registerBtn.ui-btn {
+    border-right: solid 1.5px white;
+    border-left: solid 1.5px white;
+    font-size: 120%;
+}
+
+#profile_page .profileInput {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+div#reunion_history p {
+    text-shadow: 0px 0px 0px black;
+}
+.ui-slider.ui-slider-switch.ui-slider-track.ui-shadow-inset.ui-bar-inherit.ui-corner-all.ui-mini {
+
+margin: 0% 2% 0% 0%;
+
+padding: 0% 0%;
+
+float: right;
+}

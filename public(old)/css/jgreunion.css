@@ -1,0 +1,4477 @@
+@import url(https://fonts.googleapis.com/css?family=Lato|Oswald|Lora|Berkshire+Swash|Josefin+Slab|Open+Sans+Condensed:300|Pinyon+Script|Roboto+Slab|PT+Sans+Narrow|Poiret+One|Bitter|Playfair+Display|Lobster|Libre+Baskerville|Josefin+Sans|Sigmar+One|Alegreya|Pacifico|Architects+Daughter|Dancing+Script|Exo|Righteous|Josefin+Slab|Abril+Fatface|Pathway+Gothic+One|Bangers|Kaushan+Script|Old+Standard+TT|Lobster+Two|Passion+One|Courgette|Cinzel|Philosopher);
+body {
+  margin: 0px;
+  position: relative;
+  background-color: black;
+}
+button:focus {
+	outline:0 !important;
+}
+button:hover {
+	cursor: pointer;
+}
+.container {
+	position: relative;
+	margin: 0 auto;
+	font-family: 'Josefin Slab', serif;
+}
+div#allMembersPage::after {
+	content: "";
+	position: absolute;
+	background-image: url("../images/jg2016.jpg");
+	top: 10%;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-size: 100% 100%;
+	background-position: center center;
+	z-index: -1;
+	opacity: 0.5;
+}
+div#charlottePage {
+    
+}
+div#charlottePage::after {
+	content: "";
+	position: absolute;
+	background-image: url("../images/raleigh_skyline.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	opacity: 0.4;
+}
+.addDollarSign, .addSeparationComm {
+    position: relative;
+}
+
+.addDollarSign input[type="number"] {
+	padding: 0.5% 0% 0.5% 3%;
+	width: 62% !important;
+}
+
+.addDollarSign::before {
+	content: "$";
+	position: absolute;
+	top: 24%;
+	left: 35.2%;
+}
+
+.addSeparationComm::after {
+	content: "Separate with comma";
+	position: absolute;
+	top: 8%;
+	right: 5%;
+	font-size: 80%;
+}
+#loginPage, #registerPage {
+	background: linear-gradient(#030502, #6b9d3e 43%, #000000 98%);
+}
+
+#return_messages {
+    position: fixed;
+    z-index: 3;
+    right: 1%;
+    top: 1%;
+    width: 25%;
+}
+.message {
+    background: rgba(0,100,0,0.75);
+    color: white;
+    border-radius: 10px;
+    border: solid 2px dimgray;
+    box-shadow: 0px 0px 10px green;
+    margin: 2% 0%;
+}
+.errors {
+    background: rgba(139, 0, 0, 0.75);
+    color: white;
+    border-radius: 10px;
+    border: solid 2px dimgray;
+    box-shadow: 0px 0px 10px red;
+    margin: 2% 0%;
+}
+/*div#container::after {
+	content: "";
+	position: absolute;
+	background: linear-gradient(#6b9d3e, #6b9d3e 43%, #000000 98%);
+	background-image: url("../images/BlackHistory2015_037.png");
+	top: 0%;
+	left: 0;
+	right: 0px;
+	bottom: 0;
+	z-index: -1;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	background-position: 137% 110%;
+}*/
+#profilePage.container #navi, #allMembersPage #navi,
+#indProfilePage #navi {
+padding: 0% 1.5% 0%;
+background: linear-gradient(rgb(66, 66, 66), rgb(66, 66, 66), rgb(66, 66, 66), #6C9F3E); */
+position: relative;
+position: relative;
+}
+div#overlay, div#overlay_adminPage, div#overlay_PhillyPage {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  opacity: 0.8;
+  display: none;
+}
+div#modal {  
+  position: fixed;  
+  left: 25%;
+  width: 50%;
+  height: 70%;
+  top: -30%;
+  z-index: 6;
+  display: none;
+}
+div#registration_modal, #confirmation_modal {
+    position: absolute;
+    background-color: white;
+    left: 14%;
+    width: 71.6%;
+    padding: 0% 0% 0%;
+    border: solid 2px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 25px whitesmoke;
+    min-height: 14%;
+    top: -30%;
+    z-index: 6;
+    display: none;
+    overflow: inherit;
+}
+div#registered_modal {
+	display: none;
+	position: fixed;
+	z-index: 5;
+	top: 10%;
+	margin: 0% 25%;
+	padding: 0%;
+	max-width: 50%;
+	width: 50%;
+	max-height: 50%;
+	overflow: initial;
+	box-shadow: 0px 0px 10px whitesmoke;
+}
+div#registered_modal {}
+div#errors_modal {
+    position: absolute;
+    top: 0.55%;
+    left: 0.5%;
+    z-index: 5;
+    width: 20%;
+    background-color: white;
+    box-shadow: 0px 0px 10px whitesmoke;
+    display: none;
+    overflow: auto;
+}
+div#modal_adminPage, div#modal_confirmation, div#modal_confirm_delete, div#modal_confirm_reg_delete, div.edit_admin_user_div {
+  position: fixed;
+  width: 50%;
+  margin: 1% 25%;
+  border-radius: 10px;
+  z-index: 6;
+  display: none;
+  overflow: visible;
+}
+#modal_confirm_another {
+    position: fixed;
+    background-color: green;
+    right: 3%;
+    width: 8.1%;
+    text-align: center;
+    height: 15%;
+    color: white;
+    padding: 1% 1%;
+    border-radius: 10px;
+    z-index: 6;
+    top: -10%;
+	display: none;
+}
+div#confirmed_modal {
+    position: absolute;
+    background-color: white;
+    top: 2%;
+    display: none;
+    left: 25%;
+    max-width: 45%;
+    font-size: 150%;
+    border-radius: 5px;
+    z-index: 6;
+    overflow: auto;
+    border: inset 2px green;
+}
+div#confirmed_modal h2 {
+    background-color: green;
+    color: white;
+    padding: 2% 0%;
+}
+p#successMessage {
+    padding: 0% 11%;
+    margin: 0% 0% 5%;
+}
+h2#errors_modal_header {
+    background-color: #DC0000;
+    color: white;
+}
+p#errors_modal_contentP {
+    padding: 0% 5%;
+}
+div#edit_admin_user_content,div#add_admin_user_content {
+    color: white;
+    padding: 2%;
+    margin: 2% 0%;
+    font-size: 130%;
+    border-radius: 10px;
+    position: relative;
+    border-style: outset outset outset inset;
+    border-color: brown;
+    background-color: rgba(165, 42, 42, 0.5);
+}
+form#edit_adminUser_form input,form#add_adminUser_form input {
+    width: 99%;
+    font-size: 100%;
+    margin: 0.5% 0%;
+}
+button.edit_adminUser_btn,button.add_adminUser_btn {
+    margin: 2% 25%;
+    width: 50%;
+    padding: 1% 0%;
+    font-size: 100%;
+    border-radius: 5px;
+}
+form#edit_adminUser_form,form#add_adminUser_form {
+    padding: 0% 20%;
+    text-align: -webkit-center;
+    text-align-last: center;
+}
+#edit_admin_user_header,#add_admin_user_header {
+	border-bottom: solid 2px;
+}
+[hidden] {
+  position: absolute;
+}
+h1 {
+	margin: 0px;
+}
+h2 {
+  text-align: center;
+  font-size: 200%;
+  margin-top: 0%;
+  padding-top: 0%;
+  font-family: 'Josefin Slab', serif;
+}
+hr {
+  border-width: 4px;
+}
+#reunion_page {
+	padding: 0 14%;
+	background: linear-gradient(90deg, rgb(55, 55, 55),black 15%, black 85%, rgb(55, 55, 55));
+}
+#jgreunion_page {
+  background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0), white);
+  padding: 0% 0% 0%;
+  position: relative;
+  margin-bottom: 0px;
+  /* min-height: 400px; */
+  /* max-height: 405px; */
+}
+div#jgreunion_page::after {content: "";position: absolute;top: 0;right: 0;left: 0;bottom: 0px;background: rgba(0,0,0,0.60);z-index: 0;}
+.error_border {
+    border-color: red;
+}
+.good_border {
+	border-color: green;
+}
+.matches {
+	background-color: yellow !important;
+	color: black !important;
+}
+div.message {
+    position: absolute;
+    background-color: #02d002;
+    color: white;
+    opacity: 0.9;
+    max-width: 10%;
+    left: 20px;
+    top: 10px;
+    z-index: 1;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px darkgray;
+}
+div.message ul {
+    width: 90%;
+    max-width: 100%;
+    padding: 0% 0% 0% 10%;
+}
+div.errors {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background-color: darkred;
+    color: wheat;
+    z-index: 1;
+    opacity: 0.9;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px darkgray;
+    max-width: 20%;
+}
+.errors ul {
+    padding: 0% 10% 0%;
+    max-width: 94%;
+}
+p.profileInfo {
+    margin: 0;
+    display: -webkit-inline-box;
+    display: inline-block;
+}
+div#profile_header, div.profile_info_div {
+    margin-left: 25.5%;
+}
+div.profile_info_div {
+    font-size: 115%;
+}
+div#profile_header, div#post_header_div {
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+h2.postHeader, div.indPost {
+	text-align: -webkit-left;
+	text-align: left;
+	padding: 1.5% 2%;
+	max-width: 100%;
+}
+.profilePhoto, .profileHeader {
+    float: left;
+}
+.profilePhoto{
+    margin: 0% 3% 0% 0%;
+}
+h3.profileHeaderName {
+    margin: 0.5% 0% 0%;
+}
+h3.profileHeaderName a {
+    text-decoration: underline;
+    color: #3ca4ff;
+}
+.postPhoto {
+    clear: both;
+    padding: 1% 0%;
+    max-width: 100%;
+}
+.postPhoto img {
+    max-width: 200px;
+    max-height: 200px;
+    float: left;
+    margin: 1% 0.5%;
+    border: solid 1.5px;
+    box-shadow: 0px 0px 10px;
+}
+.postComment {
+    clear: both;
+    padding: 2% 0% 1%;
+}
+div.postDate {
+    display: table;
+    width: 100%;
+}
+.sectionDiv {
+    padding: 0.3% 0%;
+}
+h2#profile_header_name {
+    text-align: -webkit-left;
+    text-align: left;
+    margin-bottom: 0.5%;
+}
+div#profile_information input,div#profile_information select {
+    display: -webkit-inline-box;
+    display: inline-block;
+    width: 60%;
+    border: none;
+    font-size: 90%;
+    font-family: 'Josefin Slab', serif;
+}
+div#profile_information input.profileInputGreenBtn,
+div#profile_information input.profileInputJacksonBtn,
+div#profile_information input.profileInputFriendBtn,
+div#profile_information input.profileInputSpouseBtn,
+div#profile_information input.profileInputBtn {
+    padding: 1% 0%;
+    text-align: -webkit-center;
+    text-align: center;
+    background-color: darkgrey;
+    color: white;
+    border: solid 1px black;
+    width: 15%;
+    margin: 0% 0% 0% -0.5%;
+}
+input.profileInput.profileSiblingInput {
+    margin: 0% 0% 0% -1%;
+}
+input.profileInput.profileInputChildren {
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input#submit_profile_update {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    max-width: 12%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+}
+.postBtn {
+    position: absolute;
+    top: 3.5%;
+    right: 2%;
+    max-width: 12%;
+    min-width: 10%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    font-size: 100%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+    text-align: -webkit-center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: floralwhite;
+    font-family: 'Josefin Slab', serif;
+}
+.allPostBtn {
+    position: absolute;
+    top: 3.5%;
+    right: 13%;
+    max-width: 12%;
+    min-width: 10%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+    text-align: -webkit-center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: floralwhite;
+}
+.postDate .deletePost {
+    font-size: 90%;
+}
+.postDate .deletePost a {
+    text-decoration: none;
+    color: darkred;
+    text-shadow: 4px 5px darkgray;
+}
+span.inputTitle.descentTitle {
+    padding: 0% 0% 1%;
+}
+div.header_div h3 {
+    margin: 0px;
+    background-color: beige;
+    padding: 0.5% 0% 0% 0.5%;
+}
+div.header_div {
+    margin: 2.5% 0%;
+    position: relative;
+}
+img.profilePicture {
+    max-width: 120px;
+    max-height: 120px;
+    height: 75px;
+    width: 75px;
+}
+div#profile_information input:focus, div#profile_information select:focus {
+    outline: none;
+}
+div#profile_information input.profileNameInput1 {
+    max-width: 12%;
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileNameInput2 {
+    width: 50%;
+}
+input.profileInput.profileInputSpouse {
+    margin: 0% 0% 0% -1%;
+    max-width: 50%;
+}
+div#profile_information input.profileInputAddress {
+    width: 25%;
+    margin: 0% 0% 0% -0.8%;
+}
+div#profile_information input.profileInputCity {
+    width: 15%;
+}
+div#profile_information select.profileInputState {
+    max-width: 8%;
+}
+div#profile_information input.profileInputZip {
+    width: 10%;
+}
+div#profile_information input.profileInputPhone1,
+div#profile_information input.profileInputPhone2,
+div#profile_information input.profileInputPhone3 {
+    width: 6%;
+}
+input.profileInput.profileInputDOB {
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileInputPhone3 {
+    width: initial !important;
+}
+div#profile_information input.profileInputGreenBtn {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	/* border-right: solid 0.5px black; */
+	margin: 0% 0% 0% -1%;
+}
+span.visibleHeaderSpan {
+    font-size: 80%;
+    min-width: initial;
+    position: absolute;
+    right: 5%;
+    top: 25%;
+}
+div#profile_information input.visibleCheckBox {
+    width: initial;
+    position: absolute;
+    right: 0px;
+    top: 15%;
+}
+.descentDiv {
+	display: inline;
+}
+div#profile_information input.profileInputJacksonBtn {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	/* border-left: solid 0.5px black; */
+}
+div#profile_information input.profileInput.descentSelected {
+    background-color: darkgreen;
+}
+div#profile_information input.profileInputMother {
+	width: 10%;
+	margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileInputFather {
+	max-width: 50%;
+	margin-left: 5%;
+}
+span.separator {
+    min-width: 0%;
+    font-size: 100%;
+}
+span.phone_par_span {
+    min-width: 0%;
+    margin: 0% -0.4% 0% -2%;
+}
+
+span.phone_span {
+    min-width: 0%;
+    margin: 0% -0% 0% -0%;
+}
+div#family_account {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-width: 100%;
+    min-width: 15%;
+    text-align: -webkit-right;
+    text-align: right;
+}
+div#home_link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 100%;
+    min-width: 15%;
+    text-align: -webkit-left;
+    text-align: left;
+}
+
+a#profile_registration {
+    text-decoration: none;
+    color: whitesmoke;
+    padding: 1% 1%;
+    font-size: 125%;
+    border-radius: 5px;
+    background-color: darkslategrey;
+    position: absolute;
+    bottom: 10px;
+    left: 5px;
+    max-width: 190px;
+    text-align: -webkit-center;
+    text-align: center;
+}
+div#profile_information {
+    position: relative;
+    max-width: 50%;
+    width: 50%;
+    display: -webkit-inline-box;
+    display: inline-block;
+    float: left;
+}
+div#post_information {
+    display: -webkit-inline-box;
+    display: inline-block;
+    max-width: 50%;
+    width: 50%;
+    float: right;
+    min-height: 890px;
+    max-height: 890px;
+    overflow: auto;
+    background-color: #dddddd;
+    position: relative;
+}
+.newPost {
+    padding: 2% 5%;
+}
+div#profile_photo {
+    width: 25%;
+    position: relative;
+    display: table;
+    table-layout: fixed;
+    float: left;
+}
+img#profile_photo {
+    position: relative;
+    max-width: 100%;
+    padding: 10% 3% 0%;
+    width: 200px;
+    height: 200px;
+}
+input#change_img_btn {
+    width: 200px !important;
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    margin: 0% 0% 0% 3%;
+    padding: 2% 0%;
+    opacity: 0.85;
+    background-color: #62aa62;
+    border: none;
+    color: white;
+    font-size: 100%;
+}
+a.profileLink, a.homeLink {
+    font-size: 150%;
+    color: white;
+    text-decoration: none;
+}
+a.profileLink:first-of-type {
+    border-right: solid 1.5px whitesmoke;
+    padding: 0% 5% 0% 0%;
+}
+a.profileLink:last-of-type {
+    padding: 0% 0% 0% 2.5%;
+}
+.indPost {
+    border-bottom: solid 1px #c9c9c9;
+}
+.postDate .indPostDate {
+    font-size: 90%;
+    text-align: -webkit-right;
+    text-align: right;
+    float: right;
+}
+/*div#slideshow_overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: gray;
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}*/
+div#contact_content p {
+  margin: 4px;
+}
+div#registration_div_wrapper, div#login_div_wrapper {
+position: relative;
+padding: 3% 25%;
+}
+h2#reg_form_header {
+    text-align: -webkit-center;
+    text-align: center;
+    margin: 1% 20% 1.5%;
+    padding: 1% 0%;
+    border-bottom: solid 2px #004d64;
+    color: white;
+}
+div#registration_div, div#login_div {
+    border: solid 2px #004d64;
+    border-radius: 5px;
+    background-color: darkgray;
+}
+div#reg_form_input, div#login_form_input {
+    margin: 0% 20% 2%;
+}
+div#login_form_input input.regInput {
+    width: 100%;
+    margin: 0.3% 0%;
+    font-size: 115%;
+}
+div#reg_form_input {
+    margin: 0% 20% 2%;
+}
+input#reg_form_btn, #login_submit_btn {
+    padding: 1%;
+    margin: 1% 0% 0%;
+    min-width: 20%;
+    border: outset 2.5px darkgoldenrod;
+    border-radius: 5px;
+    box-shadow: 2.5px 2.5px 5px darkgray;
+    background-color: #004d64;
+    color: white;
+}
+input#reg_form_btn::after {
+	content: "Pass";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+}
+div#page_header, div#footer {
+text-align: center;
+}
+div#page_header {
+    background: linear-gradient(90deg, rgb(55, 55, 55),black 15%, black 85%, rgb(55, 55, 55));
+    color: white;
+    padding: 0% 14%;
+    font-size: 200%;
+}
+#admin_form {
+  display: none;
+  position: absolute;
+  width: 19.6%;
+  top: 20%;
+  right: 2%;
+}
+#jgphilly_page_header {
+	background-color: black;
+	padding: 4% 0%;
+	font-family: 'Berkshire Swash', cursive;
+}
+label {
+  max-width: 45%;
+  width: 45%;
+  display: inline-block;
+  text-align: -webkit-auto;
+  font-size: 130%;
+}
+div#modal_adminPage label {
+	font-size: 115%
+}
+#submit_form {
+  border-radius: 10px;
+  width: 50%;
+  margin: 3% 16%;
+}
+.reunion_content {
+	background-color: white;
+	position: relative;
+	font-family: 'Josefin Slab', serif;
+}
+h2#payments_header {
+  color: green;
+}
+/*#form_information, #hotel_information, #activities_information, #suggestions, #payments, #contact_information
+{
+	width: 100%;
+}*/
+#hotel_information {
+	padding-bottom: 3%;
+}
+#hotel_content {
+	margin: 0% 5%;
+	border-radius: 10px;
+	padding: 2% 2%;
+	font-size: 175%;
+	opacity: 0.9;
+	min-height: 210px;
+	/* text-align: -webkit-center; */
+	/* text-align: center; */
+}
+div#hotel_content p {
+  margin: 2% 0%;
+  font-size: 80%;
+}
+div#hotel_content dl {
+    margin: -3% 28% 0%;
+    width: 100%;
+    font-size: 90%;
+}
+dd#directions_link {
+    text-decoration: underline;
+    color: blue;
+}
+#hotel_pic {
+  float: left;
+  height: 210px;
+  width: 210px;
+  margin-right: 3%;
+}
+#hotel_content button {
+    background-color: #A1927A;
+    border: outset 3px #637145;
+    border-radius: 10px;
+    color: white;
+    font-size: 115%;
+    margin: 5% 20% 0%;
+    max-width: 70%;
+    min-width: 60%;
+    padding: 1% 0%;
+    font-family: 'Josefin Slab', serif;
+}
+#hotel_content button:hover {
+    background-color: #62523D;
+    border: inset 3px #4F6236;
+}
+#hotel_content button a {
+    text-decoration: none;
+    display: inline;
+    width: 100%;
+	font-family: 'Josefin Slab', serif;
+    font-size: 150%;
+}
+.nextReunion {
+    position: absolute;
+    color: whitesmoke;
+    width: 100%;
+    top: -10%;
+    text-align: -webkit-center;
+    text-align: center;
+    text-shadow: 2px 4px 2px black;
+}
+#coming_soon_message p {
+    left: 25%;
+    margin: 0%;
+    position: absolute;
+    padding: 0% 0% 0%;
+    font-size: 195%;
+    color: whitesmoke;
+    width: 50%;
+    top: -15%;
+    text-align: -webkit-center;
+    text-align: center;
+    text-shadow: 2px 4px 2px black;
+    font-weight: 600;
+}
+div.directionOptions {
+    display: -webkit-inline-box;
+    display: inline-block;
+    max-width: 50%;
+    min-width: 40%;
+    margin: 1% 1%;
+    width: 45%;
+    border: solid 2px;
+    border-radius: 10px;
+    padding: 0.5%;
+    background-color: white;
+}
+div#hotel_directions, div.directionOptions, #close_directions {
+    display: none;
+    z-index: 11;
+}
+div#hotel_directions {
+    position: fixed;
+    top: 0;
+    padding: 5%;
+}
+div#directions1 h2, div#directions3 h2 {
+    padding: 2% 23% 0%;
+}
+div#directions4 p {
+    padding: 0% 5%;
+}
+button#close_directions {
+    border: outset 2px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px whitesmoke;
+    padding: 1%;
+    font-size: 140%;
+    margin: 5% 39%;
+    width: 20%;
+}
+#activities_information {
+	padding-bottom: 2%;
+}
+a#fb_link {
+    margin: 0% 0% 0% 0%;
+    text-decoration: none;
+    border-radius: 5px;
+    background-image: url("../images/facebook-icon.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 3% 0% 0% 0%;
+}
+a#fb_link button {
+    font-size: 150%;
+    display: inherit;
+    border: none;
+    padding: 0%;
+    color: black;
+    width: 100%;
+    font-weight: 600;
+    font-family: 'Josefin Slab', serif;
+    background-color: initial;
+    background-color: transparent;
+    text-align: -webkit-center;
+    text-align: center;
+}
+.payment_option p {
+    margin: 0;
+    font-size: 110%;
+    padding: 0% 0%;
+}
+.payment_option {
+    display: inline-block;
+    float: left;
+    width: 41.3%;
+    padding: 1% 2% 2%;
+    max-width: 45%;
+    margin: 0% 2% 5%;
+}
+div#electronic_payment_option, div#paper_payment_option {
+    background-color: #6BF14A;
+    border: double #4ED44E;
+    border-radius: 10px;
+}
+div#electronic_payment_option p {
+    padding: 1% 0% 5%;
+}
+div#electronic_payment_option p:last-of-type {
+    padding: 0% 0%;
+}
+div#paper_payment_option p {
+    margin: 3% 0%;
+}
+#checks_address {
+    text-align: -webkit-center;
+    text-align: center;
+}
+#checks_address span {
+	display:-webkit-inline-box-;
+	display:inline-block;
+	width: 100%;
+}
+div#paper_payment_option p.paymentsFinePrint {
+	margin: 0% 0%;
+}
+div#show_profiles {
+	
+width: 100%;
+	
+overflow: auto;
+}
+div#show_profiles .profilePreview {
+    background-color: #66923e;
+    margin: 1% 2.9% 1%;
+    max-width: 44%;
+    width: 44%;
+    padding: 0% 0% 0.1%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px black;
+    opacity: 0.75;
+    position: relative;
+    min-height: 175px;
+    height: 200px;
+    max-height: 200px;
+    display: -webkit-inline-box;
+    display: inline-block;
+}
+#all_profiles_header {
+    background: linear-gradient(#6b9d3e, #619a38, transparent 56%);
+    color: white;
+    padding: 1% 2%;
+}
+.profilePreviewHeader .profilePreviewPhoto,.profilePreviewHeader .profilePreviewNameLink {
+    /* float: left; */
+}
+.profilePreviewHeader .profilePreviewPhoto {
+    max-width: 25%;
+    margin: 1% 1%;
+    position: absolute;
+}
+.profilePreviewNameLink {
+    padding: 2% 0% 0%;
+    max-width: 80%;
+    margin: 0% 0% 0% 30%;
+}
+.profilePreviewNameLink h2 {
+    text-align: -webkit-left;
+    text-align: left;
+}
+a.userProfileLink {
+    color: #a1cdf7;
+}
+.profilePreviewInfo {
+    margin: 0% 2% 0% 30%;
+    padding: 0% 0%;
+}
+.profilePreviewInfoP {
+    margin: 1% 0%;
+    font-size: 125%;
+    color: whitesmoke;
+}
+div#show_profiles .profilePreview img {
+    max-width: 165px;
+    max-height: 165px;
+    width: 165px;
+    height: 165px;
+}
+div#registrationReminderMsg p {
+    margin: 0 auto;
+    padding: 0% 0% 7%;
+    color: red;
+    font-size: 125%;
+}
+div#registrationReminderMsg {
+    display: block;
+    width: 70%;
+    clear: both;
+    margin: 0% 15%;
+}
+span#registrationLink {
+    min-width: inherit;
+    display: initial;
+    font-size: 115%;
+    text-decoration: underline;
+    color: #BD0000;
+    cursor: pointer;
+}
+.activities_content {
+  min-width: 86%;
+  max-width: 45%;
+  margin: 1% 5%;
+  min-height: 200px;
+  opacity: 0.8;
+  font-size: 130%;
+  padding: 0% 2% 1%;
+  border-radius: 10px;
+  position: relative;
+}
+.activities_content:nth-of-type(1) {
+  background-image: url("../images/picnic_bgrd.jpg");
+  background-size: 100% 100%;
+  min-height: 300px;
+  background-repeat: no-repeat;
+  color: white;
+}
+.activities_content ul {
+    padding: 0% 31%;
+    list-style: none;
+}
+.activities_content:nth-of-type(2) {
+  background-image: url("../images/cookout.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: white;
+  opacity: 0.9;
+}
+.activities_content:nth-of-type(2) p {
+  padding: 0%;
+}
+.activities_content:nth-of-type(2) dl {
+  padding: 0%;
+}
+.activities_content:nth-of-type(3) {
+    background-image: url("../images/banquet_hall.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    color: white;
+}
+.activities_content:nth-of-type(3) P {
+  font-weight: 600;
+  margin-top: -1%;
+}
+.activities_content:nth-of-type(4) {
+  background-image: url("../images/goodby02.jpg");
+  background-repeat: no-repeat;
+  background-size: 25% 100%;
+  color: black;
+  height: 300px;
+  border: solid;
+}
+.activities_content:nth-of-type(4) p {
+  padding: 0% 33%;
+}
+.activities_content_bgrd_skirt {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+.activities_content *:not(.activities_content_bgrd_skirt) {
+    position: relative;
+}
+#suggestions {
+	padding-bottom: 2%;
+}
+#suggestions_content {
+  margin: 0% 2%;
+  opacity: 0.9;
+  border-radius: 10px;
+  padding: 2% 0%;
+  font-size: 125%;
+}
+#contact_information_header {
+  color: dodgerblue;
+}
+#contact_content i  {
+  color: dodgerblue;
+}
+#contact_information {
+	padding-bottom: 2%;
+}
+#contact_content {
+	margin: 0% 2%;
+	padding: 1% 10%;
+	border-radius: 10px;
+	opacity: 0.8;
+	font-weight: bold;
+	font-size: 130%;
+	position: relative;
+}
+#payments_content {
+  margin: 0% 2%;
+  padding: 12% 22% 1%;
+  border-radius: 10px;
+  opacity: 0.8;
+  font-weight: bold;
+  font-size: 130%;
+  position: relative;
+}
+#demo_list_table {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+    /* border: solid 2px darkgreen; */
+    border-radius: 10px;
+    table-layout: fixed;
+}
+#demo_list_table caption {
+    font-size: 300%;
+    background-color: darkseagreen;
+    padding: 1% 0%;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    /* border: solid 2px darkgreen; */
+}
+table#demo_list_table th {
+    color: white;
+    font-size: 140%;
+    text-decoration: underline;
+}
+td.edit_user_data, td.delete_user {
+    padding: 0.4% 1%;
+    min-width: 10px;
+}
+td.editState, td.editZip {
+    text-align: center;
+	padding: 0% 1%;
+}
+button.edit_user_btn, button.edit_RegMemData_btn {
+    border-radius: 5px;
+    border: inset 2px darkred;
+    background-color: darkgrey;
+    color: ghostwhite;
+    width: 100%;
+}
+button.delete_user_btn, button.delete_RegMemData_btn {
+    border-radius: 5px;
+    border: outset 2px darkred;
+    background-color: #C30303;
+    color: ghostwhite;
+    width: 100%;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+li.divider {
+    border: solid 20px;
+}
+div#display_all_users {
+    margin: 0% 10%;
+    position: relative;
+}
+div#demo_list {
+    width: inherit;
+}
+table#demo_list_table th, table#demo_list_table td {
+	/* border: solid 2px darkgreen; */
+	padding: 5px 5px;
+}
+table#demo_list_table td {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	text-align: -webkit-center;
+}
+table#registered_members_table caption {
+    font-size: 300%;
+    background-color: #029E02;
+    padding: 1% 0%;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    /* border: solid 2px darkgreen; */
+}
+table#registered_members_table tr:nth-of-type(odd) {
+    background-color: #029E02;
+    color: white;
+    position: relative;
+}
+table#demo_list_table tr:first-of-type {
+    background-color: darkseagreen;
+}
+#demo_list_table tr:nth-of-type(odd) {
+    background-color: #779A77;
+    color: floralwhite;
+}
+div#registered_members {position: relative;}
+table#registered_members_table {
+    max-width: 100%;
+    width: 100%;
+    position: relative;
+    border-collapse: collapse;
+    /* border: inset 4px darkgreen; */
+    border-radius: 10px;
+    table-layout: fixed;
+}
+table#registered_members_table td, table#registered_members_table th {
+    /* border: solid 2px darkgreen; */
+    text-align: -webkit-center;
+    text-align: -webkit-center;
+}
+table#registered_members_table td {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	padding: 3px 5px;
+}
+.editRegAT, .editRegGT, .editRegTA, .editRegTY, .editRegTC, .editRegDue, .editRegNotes, .editNotes, .editRegDate, .editNotesData, .editRegNotesData, .editRegPaid {
+    text-align: -webkit-center;
+	text-align: center;
+}
+th.editRow1 {
+    width: 8%;
+}
+th.editRow2 {
+	width: 12%;
+}
+th.editRow3 {
+	width: 10%;
+}
+th.editRow4 {
+	width: 5%;
+}
+th.editRow5 {
+	width: 4%;
+}
+th.editRow6 {
+	width: 4%;
+}
+th.editRow7 {
+	width: 10%;
+}
+th.editRow8 {
+	width: 8%;
+}
+th.editRow9 {
+	width: 8%;
+}
+th.editRow10 {
+	width: 8%;
+}
+th.editRow11 {
+	width: 5%;
+}
+th.editRow12 {
+	width: 5%;
+}
+th.editRow13 {
+	width: 4%;
+}
+th.editRow14 {
+	width: 5%;
+}
+th.editRow15 {
+	width: 6%;
+}
+th.editRow16 {
+    width: 9%;
+}
+th.editRow17 {
+    width: 9%;
+}
+th.editRow18 {
+    width: 8%;
+}
+th.editRow19 {
+    width: 30%;
+}
+th.editRow20 {
+    width: 7%;
+}
+th.editRow21 {
+    width: 7%;
+}
+th.editRow22 {
+    width: 7%;
+}
+th.editRow23 {
+    width: 5%;
+}
+th.editRow24 {
+    width: 7%;
+}
+th.editRow25 {
+    width: 7%;
+}
+.editNotes.tooltip, .editRegNotes.tooltip, .tooltipImage, .totalRegToolip.tooltip {
+	position: relative;
+	/* display: inline-block; */
+	/* border: none !important; */
+	/* padding: 9px 30px !important; */
+	overflow: visible !important;
+}
+/*.tooltip .editNotesData {
+	visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    top: -5px;
+    left: 103%;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    //Position the tooltip text - see examples below!
+    position: absolute;
+    z-index: 1;
+}*/
+.tooltip .editRegNotesData, .tooltip .editNotesData {
+	visibility: hidden;
+	max-width: 121px;
+	min-width: 119px;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	top;
+	top: 0px;
+	left: 400%;
+	padding: 5px 0;
+	border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-i;
+	word-wrap: break-word;
+}
+.tooltip .totalRegSpan {
+	visibility: hidden;
+	max-width: 150px;
+	min-width: 120px;
+	width: 150px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	top;
+	top: 110%;
+	left: 10%;
+	z-index: 1;
+	padding: 5px 0;
+	border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-i;
+	word-wrap: break-word;
+}
+.tooltipImage #fancy_cut_image {
+	visibility: hidden;
+	max-width: 121px;
+	min-width: 119px;
+	width: 120px;
+	max-height: 65px;
+	background-color: black;
+	color: #fff;
+	text-align: center;
+	top;
+	top: 89%;
+	left: 0px;
+	padding: 5px 0;
+	border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+	position: absolute;
+	z-i;
+	word-wrap: break-word;
+}
+span#fancy_cut_image img {
+    height: 65px;
+    width: 110px;
+}
+.tooltip:hover {
+    background-color: darkblue;
+    color: white;
+}
+.totalRegToolip.tooltip:hover {
+    border-bottom-left-radius: 10px;
+}
+.tooltipImage {
+}
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .editNotesData, .tooltip:hover .editRegNotesData, .tooltipImage:hover #fancy_cut_image, .totalRegToolip.tooltip:hover .totalRegSpan {
+    visibility: visible;
+}
+#modal_adminPage input[type="text"], #modal_adminPage input[type="email"],#modal_adminPage input[type="number"] {
+	width: 50%;
+}
+input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
+  border-radius: 5px;
+  width: 94%;
+}
+
+.indPost.reunionRegistration input, .indPost.reunionRegistration select {
+    font-size: 125%;
+    padding: 0.5%;
+    margin: 0.5% 0%;
+}
+
+.indPost.reunionRegistration select {
+    width: 95.5%;
+    border-radius: 5px;
+    border: inset 2.5px;
+}
+textarea {
+    width: 49.5%;
+    border-radius: 7px;
+    margin: 2% 0% 0% 0%;
+    border: inset 2px;
+}
+#admin_nav, #admin_nav ul, #admin_nav ul li, #admin_nav ul li a {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  list-style: none;
+  line-height: 1;
+  display: block;
+  position: relative;
+}
+#admin_nav {
+  width: auto;
+  height: 59px;
+  padding-bottom: 4px;
+}
+#admin_nav #bg-one, #admin_nav #bg-two, #admin_nav #bg-three, #admin_nav #bg-four {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+#admin_nav #bg-one {
+  height: 10px;
+  background: #029E02;
+}
+#admin_nav #bg-two {
+  height: 59px;
+  z-index: 1;
+}
+#admin_nav #bg-three {
+  bottom: 4px;
+  height: 55px;
+  z-index: 2;
+  background: #222222;
+  background: -moz-linear-gradient(top, #555555 0%, #222222 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #555555), color-stop(100%, #222222));
+  background: -webkit-linear-gradient(top, #555555 0%, #222222 100%);
+  background: -o-linear-gradient(top, #555555 0%, #222222 100%);
+  background: -ms-linear-gradient(top, #555555 0%, #222222 100%);
+  background: linear-gradient(to bottom, #555555 0%, #222222 100%);
+}
+#admin_nav #bg-four {
+  bottom: 4px;
+  height: 55px;
+  z-index: 3;
+}
+#admin_nav ul {
+  height: 59px;
+}
+#admin_nav ul li {
+  float: left;
+  margin-right: 4px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  z-index: 4;
+}
+#admin_nav ul li a {
+  padding: 24px 30px 20px 30px;
+  margin-bottom: 4px;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #eeeeee;
+  font-size: 15px;
+  text-decoration: none;
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+#admin_nav ul li:first-child, #admin_nav ul li:first-child > a {
+  border-bottom-left-radius: 3px;
+}
+#admin_nav ul li:hover:not(#show_loggedIn_user), #admin_nav ul li.active {
+  background: #029E02;
+  background: -moz-linear-gradient(top, #12C52E 0%, #029E02 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #12C52E), color-stop(100%, #029E02));
+  background: -webkit-linear-gradient(top, #12C52E 0%, #029E02 100%);
+  background: -o-linear-gradient(top, #12C52E 0%, #029E02 100%);
+  background: -ms-linear-gradient(top, #12C52E 0%, #029E02 100%);
+  background: linear-gradient(to bottom, #12C52E 0%, ##029E02 100%);
+}
+#admin_nav ul li a:hover, #admin_nav ul li.active > a {
+  color: #ffffff;
+}
+table#admin_users_table {
+    width: 100%;
+    text-align: -webkit-center;
+    text-align: center;
+    table-layout: fixed;
+}
+table#admin_users_table input {
+    border: none;
+    text-align: -webkit-center;
+    text-align: center;
+    font-family: 'Josefin Slab', serif;
+}
+div#admin_users {
+    margin: 0%;
+    padding: 2% 15%;
+}
+button#add_new_admin_user_btn {
+    height: 100%;
+    width: 10%;
+    border-radius: 75px;
+    padding: 4%;
+    background-image: url("../images/add_icon.png");
+    background-size: 100% 100%;
+    background-position: center center;
+}
+button.editable, button.notEditable,button.deleteAdminUser {
+    width: 50%;
+    border-radius: 5px;
+}
+button.editable {background-color: green;color: white;border-color: darkseagreen;}
+button.deleteAdminUser {
+    background-color: darkred;
+    color: white;
+    border-color: #bb0000;
+}
+button.notEditable {}
+#search_field_regs input#search_btn, #search_field_demos input#search_btn {
+    width: 100%;
+    margin: 0%;
+    border-radius: 5px;
+    min-height: 2em;
+    background-color: seashell;
+}
+div#search_field_regs, div#search_field_demos {
+    width: 39.8%;
+    margin: 2% 0% 2% 10%;
+    display: -webkit-inline-box;
+    display: inline-block;
+    border: none;
+    padding: 0px;
+}
+div#calculations, div#calculations2 {
+    display: inline-block;
+    width: 39.8%;
+    margin: 2% 9.9% 2% 0%;
+    border: none;
+    padding: 0% 0% 0%;
+}
+#calculations table, div#calculations2 table {
+    table-layout: fixed;
+    display: inline-table;
+    width: 80%;
+    text-align: -webkit-center;
+    text-align: center;
+    margin: 0% 10%;
+    background-color: darkred;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+#calculations table td, #calculations2 table td {
+    width: 33.3%;
+    color: white;
+    padding: 1% 0% 1%;
+    text-align: -webkit-center;
+    text-align: center;
+}
+#calculations table th, #calculations2 table th {
+    padding: 2% 0% 1%;
+    color: white;
+    border-bottom: solid #b8b5b5 2px;
+}
+div#addEdit_users {
+	background-color: whitesmoke;
+	width: 100%;
+	margin: 0% 0%;
+	padding: 1% 1%;
+	border-radius: 10px;
+	font-size: 130%;
+	min-height: 70%;
+	/* max-height: 90%; */
+	border-style: double;
+	border-color: darkred;
+}
+#switchToMember, #switchToReg {
+	position: absolute;
+	display: block;
+	bottom: 5px;
+	text-decoration: underline;
+	color: blue;
+	font-size: 110%;
+}
+#switchToReg {
+	left: 35.5%;
+}
+#switchToMember {
+	left: 33%;
+}
+div#modal_confirmation_content {
+	background-color: whitesmoke;
+	width: 90%;
+	margin: 2% 4%;
+	padding: 1% 1%;
+	border-radius: 10px;
+	font-size: 130%;
+	border-style: double;
+	border-color: #228b22;
+}
+div#modal_confirmation_content h2 {
+    background-color: forestgreen;
+    color: white;
+    padding: 2%;
+    margin: -1% -1%;
+    border-radius: 5px;
+    margin-bottom: 0%;
+}
+button.close_modal {
+    width: 50%;
+    font-size: 100%;
+    text-align: center;
+    margin: 3% 25%;
+    padding: 2% 0%;
+    border: outset 3px #658844;
+    background-color: #228B22;
+    border-radius: 10px;
+    color: white;
+}
+div#scroll_to_top {
+    background-image: url("../images/topOfPage.jpg");
+    min-height: 6%;
+    min-width: 6%;
+    position: fixed;
+    z-index: 1;
+    right: 2%;
+    bottom: 2%;
+    background-size: 100% 100%;
+	background-position: center center;
+    border-radius: 50%;
+	display: none;
+}
+p.updatedUser_data {
+    padding: 3% 2%;
+    border-radius: 5px;
+    margin-top: 1%;
+    font-size: 130%;
+    text-align: -webkit-center;
+    text-align: center;
+}
+#newUser_form input[type="text"], #newUser_form input[type="password"], #newUser_form input[type="email"], #editUser_form input[type="text"], #editUser_form input[type="password"], #editUser_form input[type="email"] {
+  width: 50%;
+  border-radius: 5px;
+}
+#newUser_form select, #editUser_form select {
+    width: 50.4%;
+    margin-left: -0.7%;
+    border: inset 2px;
+	border-radius: 5px;
+}
+h1#modal_adminPage_header {
+  font-size: 175%;
+  background-color: rgb(72, 68, 68);
+  margin: 0% 0% 3%;
+  text-align: -webkit-center;
+  text-align: center;
+  color: white;
+  padding: 1% 0%;
+}
+button.submit_new, button.submit_another, button.submit_RegAndNew, button.submit_RegNew {
+    width: 49%;
+    padding: 1% 0%;
+    margin: 4% 0%;
+    border-radius: 5px;
+    border: inset 2px darkred;
+    color: white;
+    font-size: 105%;
+}
+div#reg_form_input input.regInput {
+	width: 100%;
+	margin: 0.3% 0%;
+	font-size: 115%;
+}
+div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
+    max-width: 48.5%;
+}
+button.submit_new, button.submit_RegNew {
+	background-color: rgb(72, 68, 68);
+}
+button.submit_another, button.submit_RegAndNew {
+	background-color: rgb(105, 100, 100);
+}
+button.submit_edit, button.submit_RegEdit, button.cancel_edit {
+    border-radius: 10px;
+    width: 45%;
+    border: solid 2px rgb(111, 6, 2);
+    font-size: 105%;
+    background-color: rgb(72, 68, 68);
+    margin: 2% 2%;
+    color: white;
+}
+#newUser_form label {
+  max-width: 25%;
+  width: 25%;
+  display: inline-block;
+  margin-left: 12%;
+} 
+.mail_preference {
+  width: 45.5%;
+  max-width: 45.5%;
+  min-width: 40%;
+  margin: 0% 2%;
+  border: solid 2px darkgreen;
+  border-radius: 3px;
+  position: absolute;
+  bottom: 25%;
+ } 
+ 
+.ePreferred {
+	right: 0%;
+} 
+.mPreferred {
+	left: 0%;
+}
+  
+#ePreferred_btn, #mPreferred_btn {
+  background-color: greenyellow;
+}
+div#modal_delete_content, div#modal_delete_reg_content {
+    color: white;
+    background-color: brown;
+    padding: 2%;
+    margin: 1% 1%;
+    font-size: 130%;
+    border-radius: 10px;
+    position: relative;
+    border-style: outset outset outset inset;
+    border-color: brown;
+}
+div#modal_delete_content p {
+    text-align: center;
+	margin: 1%;
+}
+div#modal_delete_content h2 {
+    margin: 0%;
+}
+div#modal_delete_content label {
+    font-size: 100%;
+}
+div#modal_delete_reg_content h2 {
+    margin: 0% 0% 1%;
+}
+div#modal_delete_reg_content p {
+    text-align: center;
+    margin: 0% 0% 1.5%;
+}
+div#modal_delete_reg_content label {
+    font-size: 100%;
+	padding: 0.4% 0%;
+}
+button.yes_delete, button.no_delete {
+    width: 30%;
+    margin: 1% 9% 0%;
+    border-radius: 5px;
+    border: inset 2px gray;
+	font-size: 100%;
+}
+button.no_delete {
+    background-color: darkgreen;
+    color: white;
+}
+button.yes_delete {
+    background-color: darkgreen;
+    color: white;
+}
+#form_information {
+  background-color: black;
+}
+#dl_header {
+  text-align: center;
+  background-color: goldenrod;
+  margin: 0%;
+  padding: 10% 0%;
+  color: white;
+}
+#footer {
+  background: linear-gradient(white 12%, black 40%, black);
+  color: white;
+  bottom: 0px;
+  right: 0%;
+  width: 100%;
+}
+#footer_info {
+  margin: 0%;
+  padding: 2% 0%;
+  text-align: center;
+  font-size: 85%;
+}
+span#created_date {
+  padding: 0% 3%;
+}
+div#navi form {
+	position: relative;
+}
+div.showing_image {
+  width: 100%;
+  /* max-height: 400px; */
+  margin: 0% 0%;
+}
+div.image_div {
+    display: none;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 100% 30%;
+}
+.slideShowImage {
+	min-height: 400px;
+	max-height: 400px;
+	width: 100%;
+}
+button#admin_login_btn, button#admin_page_btn {
+	border: none;
+	background-color: bisque;
+	font-family: 'Josefin Slab', serif;
+	width: 100%;
+	height: 100%;
+	padding: 25.1% 2%;
+}
+div#image_slide_show {
+  position: inherit;
+  height: 100%;
+  width: 100%;
+}
+div#image_caption {
+	position: absolute;
+	color: white;
+	top: 1%;
+	left: initial;
+	width: 70%;
+	margin: 0% 14%;
+}  
+h2.image_caption_header {
+  padding: 0.5% 1%;
+  margin: 0%;
+  color: white;
+  position: absolute;
+  left: 2%;
+  top: 4%;
+  max-width: 35%;
+  z-index: 2;
+  border: solid 2px;
+  border-radius: 5px;
+  background: rgba(58, 58, 21, 0.5);
+  box-shadow: 0px 0px 5px black;
+  display: none;
+}
+button#stop_slideshow {
+  display: block;
+  width: 44.5%;
+  border-radius: 10px;
+  border: solid burlywood;
+  background-color: bisque;
+  position: absolute;
+  bottom: 3%;
+ 
+}
+button#slideshow_right {
+  position: absolute;
+  top: 33%;
+  right: 19%;
+  height: 12%;
+  width: 3%;
+  border-radius: 65px;
+}
+button#slideshow_left {
+  position: absolute;
+  left: 17%;
+  top: 33%;
+  height: 12%;
+  width: 3%;
+  border-radius: 65px;  
+}
+div#navi {
+  /* background: linear-gradient(rgb(66, 66, 66), rgb(66, 66, 66), rgb(66, 66, 66), #6C9F3E); */
+  color: white;
+  position: absolute;
+  padding: 8% 0% 0%;
+  z-index: 2;
+  max-width: 100%;
+}
+div#navi.registerPageNavi, div#navi.loginPageNavi {
+    position: relative;
+    padding: 3% 0%;
+}
+.page_header {
+  display: inline-block;
+  position: relative;
+}
+.page_header:first-of-type {
+  font-size: 192%;
+  text-align: center;
+  font-family: 'Pinyon Script', cursive;
+}
+h1#option1, h1#option2 {
+	background-color: gray;
+	color: white;
+	text-align: -webkit-center;
+	text-align: center;
+	padding: 5% 0%;
+	margin: 5% 0%;
+	border-radius: 10px;
+	border: outset;
+}
+#admin_login {
+  border-radius: 5px;
+  border: solid burlywood;
+  background-color: bisque;
+  width: 10%;
+  position: absolute;
+  font-size: 100%;
+  right: 1.5%;
+}
+input#submit_button {
+  width: 97%;
+  margin-top: 3%;
+  border-radius: 5px;
+  border: outset 3px burlywood;
+  background-color: bisque;
+}
+div#jgreunion_past_future {
+  position: relative;
+  background-color: white;
+  padding: 3% 2% 2%;
+}
+#upcoming_btn, #past_btn {
+  width: 100%;
+  border-radius: 5px;
+  border: solid burlywood;
+  background-color: bisque;
+  text-decoration: none;
+  padding: 5% 0%;
+  font-size: 170%;
+  display: -webkit-inline-box;
+  display: inline-box;
+  color: black;
+  text-align: -webkit-center;
+  text-align: center;
+}
+#upcoming_btn:hover, #past_btn:hover {
+	background-color: rgb(255, 248, 240);
+}
+#past_btn:hover {
+	background-color: rgb(255, 248, 240);
+}
+#upcoming_btn, #past_btn {
+  text-decoration: none;
+  color: black;
+  width: 100%;
+  display: inline-block;
+  height: 100%;
+  padding: 5% 0%;
+  font-family: 'Josefin Slab', serif;
+}
+button#past_btn {
+    text-align: center;
+    text-align: -webkit-center;
+}
+ul#jgreunion_past_future_list {
+  list-style: none;
+  padding: 0% 0%;
+  position: relative;
+}
+ul#jgreunion_past_future_list > li {
+  display: inline-block;
+  width: 40%;
+  margin: 0% 4%;
+  position: relative;
+}
+ul#past_reunions {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  list-style: none;
+  background-color: bisque;
+  border-left: solid burlywood;
+  border-right: solid burlywood;
+  border-bottom: solid burlywood;
+  border-radius: 5px;
+  padding: 1% 14.5% 1%;
+  width: 70%;
+  text-align: -webkit-center;
+  text-align: center;
+}
+ul#past_reunions li {
+    font-size: 120%;
+}
+ul#past_reunions a {
+    color: blue;
+}
+div#reunion_history {
+  background: linear-gradient(white, rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), white);
+  padding: 1.5% 15% 1% 1%;
+  color: white;
+  font-size: 110%;
+}
+#reunion_history_pic {
+  float: left;
+  height: 12em;
+  width: 17em;
+  margin-right: 3%;
+  margin-bottom: 1%;
+}
+img#paypal_icon {
+  position: absolute;
+  top: 0%;
+  left: 31%;
+  border: solid 5px rgb(61, 165, 70);
+  border-radius: 10px;
+  padding-left: 3%;
+}
+span#paypal_email {
+  display: block;
+  text-align: center;
+  color: green;
+}
+#fbImage_text {
+  position: absolute;
+  right: 10%;
+  top: 36%;
+  text-align: center;
+}
+#reunion_descent {
+  position: relative;
+  background: linear-gradient(white, white 100%, white 100%);
+}
+div#reunion_descent p:last-of-type {
+    margin-bottom: 0;
+}
+#family_tree_pic {
+  width: 23%;
+  right: 6%;
+  height: 100%;
+  position: absolute;
+}
+#music_player {
+	position: fixed;
+	top: 0.5%;
+    left: 1%;
+}
+#no_music{
+position: absolute;
+  right: 15%;
+  bottom: 10%;
+  font-size: 150%;
+  width: 30%;
+  background-color: rgb(255, 71, 71);
+  border-radius: 10px;
+  border: outset gray;
+  color: white;
+  font-family: 'Josefin Slab', serif;
+}
+#yes_music {
+  position: absolute;
+  bottom: 10%;
+  left: 15%;
+  font-size: 150%;
+  width: 30%;
+  border: outset gray;
+  color: white;
+  border-radius: 10px;
+  background-color: rgb(77, 171, 77);
+  font-family: 'Josefin Slab', serif;
+}
+#jackson_descent, #green_descent {
+  padding: 0% 6.2%;
+}
+button#takeLater_btn {
+  position: absolute;
+  right: 15%;
+  bottom: 10%;
+  font-size: 150%;
+  width: 30%;
+  background-color: rgb(255, 71, 71);
+  border-radius: 10px;
+  border: outset gray;
+  color: white;
+  font-family: 'Josefin Slab', serif;
+}
+button#takeNow_btn {
+  position: absolute;
+  bottom: 10%;
+  left: 15%;
+  font-size: 150%;
+  width: 30%;
+  border: outset gray;
+  color: white;
+  border-radius: 10px;
+  background-color: rgb(77, 171, 77);
+  font-family: 'Josefin Slab', serif;
+}
+span#takeNow_span {
+  color: rgb(77, 171, 77);
+  text-transform: uppercase;
+}
+span#takeLater_span {
+  color: rgb(255, 71, 71);
+  text-transform: uppercase;
+}
+div#survey_div {  
+  margin: 3% 2%;
+  padding: 5% 13% 0%;
+  border-radius: 10px; 
+  position: relative;
+  background-color: white;
+  box-shadow: 0px 0px 20px black;
+}
+div#backgrd_watermark {
+	position: absolute;
+	background-image: url("../images/family_tree.jpeg");
+	background-position: center center;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.05;
+}
+#survey_div h1{
+	text-align: center;
+}
+.survey_background1 {
+	height: 65%;
+}
+.survey_background2 {
+	background-color: white;
+	height: 90%;
+}
+div#all_registered_user {
+    overflow: auto;
+}
+table#registered_members {
+    width: 100%;
+    font-size: 115%;
+    table-layout: fixed;
+    text-align: -webkit-center;
+    text-align: center;
+    border-collapse: collapse;
+}
+table#registered_members caption {
+    background-color: white;
+    font-size: 200%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: solid green;
+}
+table#registered_members tr:nth-of-type(even) {
+    background-color: green;
+    color: white;
+}
+table#registered_members tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+table#registered_members th {
+    font-size: 125%;
+    background-color: black;
+}
+button.closeBtn {
+    position: absolute;
+    top: -2%;
+    left: 2.3%;
+    border-radius: 50%;
+    padding: 15px;
+    background-image: url("../images/x.png");
+    background-size: 100% 100%;
+    background-position: center center;
+}
+table#registrationFormTable {
+    width: 100%;
+    padding: 3% 0% 3%;
+    font-size: 115%;
+}
+table#addtionalOptionsTable {
+    width: 100%;
+    padding: 0% 0% 0%;
+    font-size: 115%;
+    table-layout: fixed;
+}
+table#addt_tee_table,table#fancy_cut_table {
+	table-layout:fixed;
+	width: 100%;
+}
+table#addt_table_headers {
+    width: 100%;
+    table-layout: fixed;
+}
+table#addt_tee_table input, table#fancy_cut_table input {
+    text-align: -webkit-center;
+    text-align: center;
+}
+#loading_image {
+	display: none;
+	position: fixed;
+	z-index: 5;
+	top: 45%;
+	left: 45%;
+}
+select#fancyCutOption,#additionalTeeOption {
+    width: 80%;
+    margin: 0% 10%;
+    border-radius: 5px;
+    border: inset 2px;
+}
+.attending_adult_row, .attending_youth_row, .attending_children_row, #attending_children_row_default, #attending_youth_row_default {
+	display:none;
+}
+.addtionalOptionsRow {
+	display: none;
+}
+td.addtionalOptionsTD1 {
+    width: 27%;
+}
+td.addtionalOptionsTD2 {
+    width: 13%;
+}
+td.addtionalOptionsTD3 {
+    width: 70%;
+}
+.label_input {
+    max-width: 100%;
+    width: 50% !important;
+}
+div#phillyRegistrationForm {
+    position: relative;
+    overflow: auto;
+}
+div#phillyRegistrationForm h1, div#phillyRegistrationForm h3 {
+    text-align: -webkit-center;
+	text-align: center;
+}
+div#phillyRegistrationForm h1 {
+    padding: 2% 0%;
+    background-color: cadetblue;
+    color: white;
+}
+h3#registrationDueAlert {
+    background-color: red;
+    color: white;
+    padding-bottom: 0.5%;
+}
+form#registrationForm {
+    padding: 1.5% 11.5% 0%;
+}
+.costPP {
+	text-align: center;
+}
+button#registrationFormBtn {
+    position: fixed;
+    top: 0%;
+    right: 1.3%;
+    min-height: 15%;
+    /* max-height: 20%; */
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: #A1927A;
+    color: white;
+    border: solid 2px white;
+    font-family: 'Josefin Slab', serif;
+    font-size: 120%;
+    width: 11%;
+    box-shadow: initial;
+    z-index: 2;
+    padding: 0;
+}
+button#registrationFormBtn span {
+    font-size: 100%;
+    max-width: 100%;
+    padding: 10px 10px;
+}
+span#registrationFormSpan,span#registeredUsersSpan {
+    border-bottom: solid white 2px;
+}
+button#registrationFormBtn span:hover {
+    text-decoration: underline;
+    color: black;
+    background-color: tan;
+}
+button#submitRegistration {
+    position: absolute;
+    bottom: 1%;
+    right: 2%;
+    min-width: 10%;
+    max-width: 11%;
+    width: 10%;
+    border-radius: 5px;
+    font-size: 100%;
+    border-color: darkgreen;
+    background-color: green;
+    color: white;
+}
+button#addtionalOptionsBtn {
+    border-radius: 5px;
+    font-size: 100%;
+    width: 50%;
+    margin: 2% 25%;
+    border-color: darkgoldenrod;
+    background-color: #FFAA42;
+    font-size: 100%;
+    color: whitesmoke;
+}
+.addPadding {
+	padding: 0% 0% 10% !important;
+}
+h1#confirmationFormHeader {
+    color: white;
+    background-color: darkred;
+    text-align: -webkit-center;
+	text-align: center;
+    padding: 0.5% 0%;
+}
+p.confirmationP {
+    display: inline-block;
+    max-width: 50%;
+    min-width: 25%;
+    margin: 0%;
+    font-size: 115%;
+    padding: 0.5% 0% 0% 30%;
+}
+span {
+    min-width: 25%;
+    display: inline-block;
+    font-size: 110%;
+}
+table.confirm_attendees {
+    max-width: 50%;
+    min-width: 40%;
+    margin: 3% 30%;
+    font-size: 125%;
+}
+button.editFormBtn {
+    margin: 0% 19.5% 2% 1%;
+    background-color: goldenrod;
+    border-color: darkgoldenrod;
+    color: whitesmoke;
+}
+button#confirmFormBtn {
+    margin: 0% 0% 2% 19%;
+    background-color: green;
+    border-color: darkgreen;
+    color: white;
+}
+button#confirmFormBtn, button.editFormBtn {
+    display: -webkit-inline-box;
+    width: 30%;
+    font-size: 130%;
+    border-radius: 5px;
+}
+#contact_information_table {
+    width: 100%;
+    margin: 2% 0% 10% 0%;
+}
+#contact_information_table td {
+    font-size: 90%;
+    font-weight: initial;
+}
+table#contact_information_table th {
+    text-align: left;
+}
+/*Smartphones portrait*/
+@media only screen and (min-width:320px) and (max-width:767px) {
+body {
+    margin: 0 auto;
+}
+div#scroll_to_top {
+    min-height: 9%;
+    min-width: 9%;
+}
+	
+div#modal {
+  left: 4%;
+  width: 92%;
+  height: 85%;
+  top: -5%;
+}
+#survey_div h1 {
+    text-align: center;
+    padding: 5% 0%;
+}
+div#registration_modal, #confirmation_modal {
+    left: 5%;
+    width: 90%;
+}
+form#registrationForm {
+    padding: 0% 3%;
+}
+label {
+    max-width: 60%;
+    width: 60%;
+    min-width: 45%;
+    display: inline-block;
+    text-align: -webkit-auto;
+    font-size: 130%;
+}
+input[type='number'] {
+    width: 75%;
+}
+input[type="text"], input[type="password"], input[type="email"], input[type="number"],textarea {
+    max-width: 100%;
+    width: 90%;
+    margin: 0.5% 0%;
+}
+button#confirmFormBtn, button.editFormBtn {
+    display: -webkit-inline-box;
+    width: 80%;
+    font-size: 130%;
+    border-radius: 5px;
+    padding: 1% 0%;
+}
+button.editFormBtn {
+    margin: 0% 10% 2%;
+    background-color: goldenrod;
+    border-color: darkgoldenrod;
+    color: whitesmoke;
+}
+div#registration_modal, #confirmation_modal {
+    min-height: initial;
+}
+div#confirmed_modal {
+    left: 5%;
+    max-width: 90%;
+}
+button#confirmFormBtn {
+    margin: 0% 0% 7% 10%;
+    background-color: green;
+    border-color: darkgreen;
+    color: white;
+}
+p.confirmationP {
+    padding: 0.5% 0% 0% 0%;
+    min-width: 40%;
+}
+table.confirm_attendees {
+    max-width: 90%;
+    min-width: 70%;
+    margin: 7% 15%;
+    font-size: 125%;
+}
+#past_btn {
+	padding: 9% 0%;
+}
+button#takeLater_btn, #no_music {
+  right: 15%;
+  bottom: 5%;
+  width: 70%;
+  padding: 3% 0%;
+}
+button#takeNow_btn, #yes_music {
+  padding: 3% 0%;
+  bottom: 20%;
+  left: 15%;
+  font-size: 150%;
+  width: 70%;
+}
+button#addtionalOptionsBtn {
+    width: 80%;
+    margin: 2% 10%;
+}
+input#submitRegistration {
+    right: 55%;
+    width: 40%;
+    padding: 1% 0%;
+}
+div#navi {
+padding: 10% 0%;
+}
+.page_header:first-of-type {
+text-align: -webkit-center;
+text-align: center;
+font-size: 150%;
+width: 100%;
+padding: 11% 0%;
+}
+#admin_login {
+  padding: 2.1% 1%;
+  width: 50%;
+  right: 25%;
+  bottom: 4%;
+}
+button#admin_login_btn {
+  text-align: -webkit-center;
+  text-align: center;
+  width: 100%;
+  padding: 4% 0%;
+  font-size: 110%;
+}
+#admin_form {
+    width: 60%;
+    bottom: 2%;
+    left: 0px;
+    right: initial;
+    top: initial;
+    margin: 0% 20%;
+}
+input#submit_button {
+    width: 91.5%;
+    margin-top: 0.5%;
+}
+div.showing_image {
+width: 100%;
+margin: 0% 0%;
+}
+div#image_caption {
+  top: 1%;
+  left: 1%;
+}
+ul#jgreunion_past_future_list > li {
+  width: 92%;
+  margin: 3% 4%;
+  position: relative;
+}
+ul#past_reunions {
+  padding: 1% 3.2% 1%;
+  width: inherit;
+}
+#reunion_history_pic {
+  height: 10em;
+  width: 10em;
+}
+div#reunion_history {
+  padding: 1.5% 6% 1%;
+}
+#family_tree_pic {
+  display: none;
+}
+span#last_updated {
+  display: none;
+}
+div#page_header {
+  padding: 0% 1%;
+  font-size: 150%;
+}
+#reunion_page {
+  padding: 0 1%;
+}
+#form_information img {
+  min-height: 400px;
+  height: 400px;
+}
+#hotel_pic {
+  height: 210px;
+  width: 100%;
+  margin: 0% 0% 5% 0%;
+}
+table#contact_information_table td:first-of-type, table#contact_information_table th:first-of-type {
+    display: none;
+}
+button#registrationFormBtn {
+    display: none;
+}
+.activities_content {
+  min-height: 600px;
+}
+.activities_content:nth-of-type(4) {
+  background-size: 100% 70%;
+  background-position: center bottom;
+}
+.activities_content:nth-of-type(4) p {
+    padding: 0% 15%;
+}
+#contact_content {
+  padding: 1% 1%;
+}
+div#contact_content p {
+  margin: 4px;
+  text-align: -webkit-center;
+  text-align: center;
+}
+#hotel_content button {
+    font-size: 115%;
+    margin: 5% 0% 0%;
+    max-width: 100%;
+    min-width: 100%;
+}
+a#fb_link {
+    margin: 0% 0% 0% 0%;
+    padding: 0% 0% 0%;
+    text-decoration: none;
+    border-radius: 5px;
+    background-image: url("../images/facebook-icon.jpg");
+    background-size: 35% 100%;
+    background-repeat: no-repeat;
+    padding: 5% 0%;
+}
+a#fb_link button {
+    padding: 0% 0% 0% 30%;
+}
+#contact_information_table {
+    margin: 2% 10% 10%;
+    width: 80%;
+    text-align: -webkit-center;
+    text-align: center;
+}
+.payment_option {
+	width: initial;
+	max-width: initial;
+	font-size: 105%;
+}
+.payment_option h2 {
+    margin-bottom: 3%;
+}
+#footer_info span {
+    min-width: 25%;
+    display: inline-block;
+    font-size: 115%;
+    padding: 1% 2%;
+}
+div#electronic_payment_option p:last-of-type {
+    padding: 1% 0% 25%;
+}
+.activities_content ul {
+    padding: 0% 15%;
+}
+div#hotel_content dl {
+    margin: -4% 0% 0%;
+}
+div.directionOptions {
+    max-width: 98%;
+    min-width: 75%;
+    width: 98%;
+    padding: 0.5%;
+}
+div#paper_payment_option p.paymentsFinePrint {
+    margin: 0% 0%;
+}
+table#contact_information_table th {
+    text-align: -webkit-center;
+    text-align: center;
+}
+button#submitRegistration {
+    right: 12%;
+}
+div#errors_modal {
+    top: 16%;
+    width: 50%;
+    left: 25%;
+}
+h1#confirmationFormHeader {
+    padding: 1.5% 0%;
+    margin: 0% 0% 2%;
+}
+#confirmationForm {
+	padding: 0% 10%;
+}
+#confirmationForm span {
+	max-width: 50%;
+	min-width: 40%;
+}
+#deleteUser_form input[type="text"], #deleteUser_form input[type="password"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="password"], #deleteReg_form input[type="email"], input[type="number"] {
+    width: 30%;
+}
+div#modal_delete_reg_content label {
+    font-size: 100%;
+    padding: 0.4% 0%;
+}
+textarea {
+    width: 29%;
+}
+button.yes_delete, button.no_delete {
+    width: 92%;
+    margin: 4%;
+}
+div#calculations, div#search_field_regs {
+    width: 39%;
+}
+#coming_soon_message p {
+    left: 10%;
+    margin: 0%;
+    padding: 10% 0% 0%;
+    font-size: 150%;
+    width: 80%;
+    top: -50%;
+}
+.nextReunion {
+    padding: 15% 0% 0%;
+    top: -25%;
+}
+.slideShowImage {
+min-height: 300px;
+max-height: 300px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px black;
+max-width: 100%;
+width: 100%;
+margin: 0% 0%;
+}
+a.profileLink, a.homeLink {
+    font-size: 140%;
+    color: white;
+    text-decoration: none;
+}
+div#family_account {
+    max-width: 100%;
+    min-width: 50%;
+}
+div#registration_div_wrapper, div#login_div_wrapper {
+    position: relative;
+    padding: 3% 5%;
+}
+h2#reg_form_header {
+    margin: 4% 10%;
+}
+div#reg_form_input, div#login_form_input {
+    margin: 0% 10% 0%;
+}
+div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
+    max-width: 47.8%;
+}
+input#reg_form_btn, #login_submit_btn {
+    min-width: 50%;
+    font-size: 105%;
+    padding: 1.5% 1%;
+    margin: 3% 25%;
+}
+div.message {
+    position: absolute;
+    background-color: #02d002;
+    color: white;
+    opacity: 0.9;
+    max-width: 10%;
+    left: 20px;
+    top: 10px;
+    z-index: 1;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px darkgray;
+}
+div.message ul {
+    width: 90%;
+    max-width: 100%;
+    padding: 0% 0% 0% 10%;
+}
+div.errors {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background-color: darkred;
+    color: wheat;
+    z-index: 1;
+    opacity: 0.9;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px darkgray;
+    max-width: 20%;
+}
+.errors ul {
+    padding: 0% 10% 0%;
+    max-width: 94%;
+}
+p.profileInfo {
+    margin: 0;
+    display: -webkit-inline-box;
+    display: inline-block;
+}
+div#profile_header, div.profile_info_div {
+    margin-left: 25.5%;
+}
+div.profile_info_div {
+    font-size: 115%;
+}
+div#profile_header, div#post_header_div {
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+h2.postHeader, div.indPost {
+	text-align: -webkit-left;
+	text-align: left;
+	padding: 1.5% 2%;
+	max-width: 100%;
+}
+.profilePhoto, .profileHeader {
+    float: left;
+}
+.profilePhoto{
+    margin: 0% 3% 0% 0%;
+}
+h3.profileHeaderName {
+    margin: 0.5% 0% 0%;
+}
+h3.profileHeaderName a {
+    text-decoration: underline;
+    color: #3ca4ff;
+}
+.postPhoto {
+    clear: both;
+    padding: 1% 0%;
+    max-width: 100%;
+}
+.postPhoto img {
+    max-width: 200px;
+    max-height: 200px;
+    float: left;
+    margin: 1% 0.5%;
+    border: solid 1.5px;
+    box-shadow: 0px 0px 10px;
+}
+.postComment {
+    clear: both;
+    padding: 2% 0% 1%;
+}
+div.postDate {
+    display: table;
+    width: 100%;
+}
+.sectionDiv {
+    padding: 0.3% 0%;
+}
+h2#profile_header_name {
+    text-align: -webkit-left;
+    text-align: left;
+    margin-bottom: 0.5%;
+}
+div#profile_information input,div#profile_information select {
+    display: -webkit-inline-box;
+    display: inline-block;
+    width: 60%;
+    border: none;
+    font-size: 90%;
+    font-family: 'Josefin Slab', serif;
+}
+div#profile_information input.profileInputGreenBtn,
+div#profile_information input.profileInputJacksonBtn,
+div#profile_information input.profileInputBtn {
+    width: 25%;
+    padding: 1% 0%;
+    text-align: -webkit-center;
+    text-align: center;
+    background-color: darkgrey;
+    color: white;
+    border: solid 1px black;
+}
+input.profileInput.profileSiblingInput {
+    margin: 0% 0% 0% -1%;
+}
+input.profileInput.profileInputChildren {
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input#submit_profile_update {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    max-width: 12%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+}
+.postBtn {
+    position: absolute;
+    top: 3.5%;
+    right: 2%;
+    max-width: 12%;
+    min-width: 10%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    font-size: 100%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+    text-align: -webkit-center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: floralwhite;
+    font-family: 'Josefin Slab', serif;
+}
+.allPostBtn {
+    position: absolute;
+    top: 3.5%;
+    right: 13%;
+    max-width: 12%;
+    min-width: 10%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+    text-align: -webkit-center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: floralwhite;
+}
+.postDate .deletePost {
+    font-size: 90%;
+}
+.postDate .deletePost a {
+    text-decoration: none;
+    color: darkred;
+    text-shadow: 4px 5px darkgray;
+}
+span.inputTitle.descentTitle {
+    padding: 0% 0% 3%;
+}
+div.header_div h3 {
+    margin: 0px;
+    background-color: beige;
+    padding: 0.5% 0% 0% 0.5%;
+}
+div.header_div {
+    margin: 2.5% 0%;
+    position: relative;
+}
+img.profilePicture {
+    max-width: 120px;
+    max-height: 120px;
+    height: 75px;
+    width: 75px;
+}
+div#profile_information input:focus, div#profile_information select:focus {
+    outline: none;
+}
+div#profile_information input.profileNameInput1 {
+    max-width: 12%;
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileNameInput2 {
+    width: 50%;
+}
+input.profileInput.profileInputSpouse {
+    margin: 0% 0% 0% -1%;
+    max-width: 50%;
+}
+div#profile_information input.profileInputAddress {
+    width: 25%;
+    margin: 0% 0% 0% -0.8%;
+}
+div#profile_information input.profileInputCity {
+    width: 15%;
+}
+div#profile_information select.profileInputState {
+    max-width: 8%;
+}
+div#profile_information input.profileInputZip {
+    width: 10%;
+}
+div#profile_information input.profileInputPhone1,
+div#profile_information input.profileInputPhone2,
+div#profile_information input.profileInputPhone3 {
+    width: 6%;
+}
+input.profileInput.profileInputDOB {
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileInputPhone3 {
+    width: initial !important;
+}
+div#profile_information input.profileInputGreenBtn {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	/* border-right: solid 0.5px black; */
+	margin: 0% 0% 0% -1%;
+}
+span.visibleHeaderSpan {
+    font-size: 80%;
+    min-width: initial;
+    position: absolute;
+    right: 5%;
+    top: 25%;
+}
+div#profile_information input.visibleCheckBox {
+    width: initial;
+    position: absolute;
+    right: 0px;
+    top: 15%;
+}
+.descentDiv {
+	display: inline;
+}
+div#profile_information input.profileInputJacksonBtn {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	/* border-left: solid 0.5px black; */
+}
+div#profile_information input.profileInput.descentSelected {
+    background-color: darkgreen;
+}
+div#profile_information input.profileInputMother {
+	width: 10%;
+	margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileInputFather {
+	max-width: 50%;
+	margin-left: 5%;
+}
+span.separator {
+    min-width: 0%;
+    font-size: 100%;
+}
+span.phone_par_span {
+    min-width: 0%;
+    margin: 0% -0.4% 0% -2%;
+}
+div#family_account {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-width: 100%;
+    min-width: 15%;
+    text-align: -webkit-right;
+    text-align: right;
+}
+div#home_link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 100%;
+    min-width: 15%;
+    text-align: -webkit-left;
+    text-align: left;
+}
+div#profile_information {
+    position: relative;
+    max-width: 50%;
+    width: 50%;
+    display: -webkit-inline-box;
+    display: inline-block;
+    float: left;
+}
+div#post_information {
+    display: -webkit-inline-box;
+    display: inline-block;
+    max-width: 50%;
+    width: 50%;
+    float: right;
+    min-height: 890px;
+    max-height: 890px;
+    overflow: auto;
+    background-color: #dddddd;
+    position: relative;
+}
+.newPost {
+    padding: 2% 5%;
+}
+div#profile_photo {
+    width: 25%;
+    position: relative;
+    display: table;
+    table-layout: fixed;
+    float: left;
+}
+img#profile_photo {
+    position: relative;
+    max-width: 100%;
+    padding: 10% 3% 0%;
+    width: 200px;
+    height: 200px;
+}
+input#change_img_btn {
+    width: 200px !important;
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    margin: 0% 0% 0% 3%;
+    padding: 2% 0%;
+    opacity: 0.85;
+    background-color: #62aa62;
+    border: none;
+    color: white;
+    font-size: 100%;
+}
+}
+/*Coverage between smaller screens*/
+@media only screen and (min-width:768px) and (max-width:1023px) {
+div#modal {
+    height: 80%;
+    width: 80%;
+    left: 10%;
+}
+div#survey_div {
+  font-size: 115%;
+}
+button#takeNow_btn, button#takeLater_btn, #yes_music, #no_music {
+  width: 40%;
+  padding: 4% 0%;
+  bottom: 7%;
+}
+button#takeLater_btn, #no_music {
+  right: 7%;
+}
+button#takeNow_btn, #yes_music {
+  left: 7%;
+}
+.page_header:first-of-type {
+font-size: 192%;
+text-align: -webkit-center;
+text-align: center;
+width: 100%;
+padding: 15% 0%;
+}
+div#navi {
+padding: 2% 0% 9%;
+}
+#admin_login {
+  padding: 2% 1%;
+  width: 64%;
+  right: 16%;
+}
+button#admin_login_btn {
+  text-align: center;
+  width: 100%;
+  font-size: 120%;
+  padding: 1.1% 2%;
+}
+#admin_form {
+  width: 35%;
+  top: 69%;
+  right: 29.5%;
+}
+input#submit_button {
+  width: 100%;
+  margin-top: 1.3%;
+  border-radius: 5px;
+  border: solid burlywood;
+  background-color: bisque;
+}
+div.showing_image {
+width: 100%;
+margin: 0% 0%;
+}
+div#image_caption {
+    top: 1%;
+    left: initial;
+    width: 70%;
+    margin: 0% 14%;
+}
+#jackson_descent, #green_descent {
+  padding: 0% 25%;
+}
+div#jackson_descent h2, div#green_descent h2 {
+  text-align: left;
+}
+div#reunion_history {
+  padding: 1.5% 6% 1%;
+}
+input[type="text"], input[type="password"] {
+  width: 98%;
+}
+ul#jgreunion_past_future_list > li {
+  width: 55%;
+  margin: 1% 22%;
+}
+ul#past_reunions {
+  padding: 1% 22.6% 1%;
+}
+.payment_option {
+    width: initial;
+    max-width: initial;
+    font-size: 105%;
+}
+div#paper_payment_option p.paymentsFinePrint {
+    margin: 0%;
+}
+div#electronic_payment_option p:last-of-type {
+    padding: 0% 0% 20%;
+}
+a#fb_link {
+    margin: 0% 0% 0% 0%;
+    padding: 3% 0%;
+}
+#contact_content {
+    margin: 0% 2%;
+    padding: 1% 0%;
+}
+#contact_information_table {
+    width: 100%;
+    margin: 2% 0% 10% 0%;
+    text-align: -webkit-center;
+    text-align: center;
+}
+table#contact_information_table th {
+    text-align: -webkit-center;
+    text-align: center;
+}
+a#fb_link button {
+    font-size: 150%;
+    font-weight: 600;
+    display: inherit;
+    max-width: 100%;
+    border: none;
+    padding: 0%;
+    width: 100%;
+}
+#hotel_pic {
+    float: left;
+    height: 210px;
+    width: 100%;
+    margin: 0% 0% 2%;
+}
+div#hotel_content dl {
+    margin: -4% 0% 0%;
+    width: 100%;
+}
+button#submitRegistration {
+    right: 15%;
+}
+div#errors_modal {
+    z-index: 6;
+    border: solid 2px;
+}
+button#confirmFormBtn, button.editFormBtn {
+    width: 60%;
+    padding: 1% 0%;
+}
+button#confirmFormBtn {
+	margin: 1% 20%;
+}
+button.editFormBtn {
+	margin: 1% 20%;
+}
+form#registrationForm {
+    padding: 0% 1%;
+}
+div#registration_form_content {
+	padding: 0% 10%;
+}
+#deleteUser_form input[type="text"], #deleteUser_form input[type="password"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="password"], #deleteReg_form input[type="email"], input[type="number"] {
+    width: 50%;
+    border-radius: 5px;
+}
+div#calculations, div#search_field_regs {
+    width: 39.5%;
+}
+#coming_soon_message p {
+top: -25%;
+}
+h2.nextReunion {
+	
+margin: 4% 0%;
+}
+}
+/*Coverage between smaller screen*/
+@media only screen and (min-width:1024px) and (max-width:1279px) {
+div#modal {
+  font-size: 115%;
+  height: 50%;
+  border-radius: 10px;
+}
+button#takeLater_btn, #no_music {
+  right: 7%;
+  font-size: 150%;
+  padding: 3% 1%;
+  width: 40%;
+}
+button#takeNow_btn, #yes_music {
+  left: 7%;
+  font-size: 150%;
+  padding: 3% 1%;
+  width: 40%;
+}
+div.showing_image {
+width: 100%;
+margin: 0% 0%;
+}
+div#image_caption {
+  top: 1%;
+  left: initial%;
+}
+div#reunion_history {
+  padding: 1.5% 6% 1%;
+  font-size: 130%;
+}
+div#jackson_descent h2, #green_descent h2 {
+  text-align: -webkit-left;
+}
+#jackson_descent, #green_descent {
+  padding: 0% 28% 0% 6%;
+  font-size: 115%;
+}
+#family_tree_pic {
+  right: 4%;
+}
+#contact_content {
+  padding: 1% 8%;
+  font-size: 130%;
+}
+#payments_content {
+  padding: 15% 14% 1%;
+}
+img#paypal_icon {
+  left: 24%;
+}
+.page_header:first-of-type {
+font-size: 155%;
+width: 100%;
+padding: 9% 0%;
+text-align: -webkit-center;
+text-align: center;
+}
+ul#jgreunion_past_future_list > li {
+  width: 40%;
+  margin: 1% 4%;
+  position: relative;
+}
+ul#past_reunions {
+   padding: 1% 30.2% 1%;
+}
+div#navi {
+padding: 3.5% 0% 3%;
+width: 100%;
+}
+#admin_login {
+  top: 5%;
+  width: 12%;
+}
+#admin_form {
+  width: 13.6%;
+  top: 10%;
+  right: 1%;
+}
+input[type="text"], input[type="password"] {
+  width: 94%;
+  border-radius: 5px;
+}
+#hotel_content button {
+    margin: 5% 20% 0%;
+}
+.payment_option {
+    display: inline-block;
+    float: left;
+    width: 91%;
+    padding: 1% 2% 2%;
+    max-width: 95%;
+    margin: 0% 2% 5%;
+}
+a#fb_link {
+    margin: 0% 0% 0% 0%;
+}
+input#submitRegistration {
+    right: 10%;
+}
+div#survey_div {
+    height: 50%;
+}
+button#admin_login_btn {
+    font-size: 130%;
+    padding: 20% 0%;
+}
+input[type="number"] {
+}
+div#hotel_content dl {
+    margin: -4% 0% 0%;
+    width: 100%;
+    font-size: 90%;
+}
+#hotel_pic {
+    width: 100%;
+    margin: 0% 0% 2%;
+}
+div#electronic_payment_option p:last-of-type {
+    padding: 0% 0% 10%;
+}
+div#paper_payment_option p.paymentsFinePrint {
+    margin: 0% 0%;
+}
+button#submitRegistration {
+    right: 11%;
+}
+#contact_information_table {
+    text-align:-webkit-center;
+    text-align: center;
+}
+table#contact_information_table th {
+    text-align:-webkit-center;
+    text-align: middle;
+}
+div#errors_modal {
+    z-index: 6;
+    background-color: white;
+    box-shadow: 0px 0px 10px whitesmoke;
+    border: solid 2px;
+}
+form#registrationForm {
+    padding: 0% 3.5%;
+}
+div#registration_form_content {
+	padding: 0% 15%;
+}
+#deleteUser_form input[type="text"], #deleteUser_form input[type="password"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="password"], #deleteReg_form input[type="email"], input[type="number"] {
+    width: 50%;
+    border-radius: 5px;
+}
+div#profile_information {
+    position: relative;
+    max-width: 50%;
+    width: 0%;
+    display: -webkit-inline-box;
+    display: inline-block;
+    float: left;
+}
+}
+/*Coverage between larger screen*/
+@media only screen and (min-width:1280px) and (max-width:1449px) {
+div#modal {
+  font-size: 125%;
+}
+
+div#navi {
+    /* width: 99%; */
+}
+div#errors_modal {
+   width: 13%;
+}
+button#takeLater_btn, #no_music {
+  right: 7%;
+  width: 40%;
+  padding: 2% 0%;
+}
+button#takeNow_btn, #yes_music {
+  left: 7%;
+  width: 40%;
+  padding: 2% 0%;
+}
+.page_header:first-of-type {text-align: -webkit-center;text-align: center;width: 100%;padding: 5% 0%;}
+#admin_login {
+  right: 1%;
+  bottom: 18%;
+}
+button#admin_login_btn {
+  font-size: 110%;
+}
+#admin_form {
+  width: 10%;
+  right: 0.5%;
+}
+div#reunion_history {
+  padding: 1.5% 6% 1%;
+  font-size: 150%;
+}
+#reunion_descent {
+  font-size: 140%;
+}
+#jackson_descent, #green_descent {
+  padding: 0% 30% 0% 6%;
+}
+#family_tree_pic {
+  width: 25%;
+  right: 2%;
+}
+div#hotel_content dl {
+    margin: -3% 25% 0%;
+    width: 100%;
+    font-size: 90%;
+}
+div#directions1 h2, div#directions3 h2 {
+    padding: 2% 23% 0%;
+}
+div#directions4 h2 {
+	padding: 2% 5% 0%;
+}
+div#electronic_payment_option p:last-of-type {
+    padding: 0% 0% 25%;
+}
+table#contact_information_table th {
+    text-align: middle;
+}
+#deleteUser_form input[type="text"], #deleteUser_form input[type="number"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="number"], #deleteReg_form input[type="email"] {
+    width: 50%;
+    border-radius: 5px;
+}
+button.closeBtn {
+    position: absolute;
+    top: -2%;
+    left: -2.7%;
+    border-radius: 50%;
+    padding: 15px;
+    background-image: url("../images/x.png");
+    background-size: 100% 100%;
+    background-position: center center;
+}
+div#profile_information {
+    max-width: 60%;
+    width: 60%;
+}
+div#post_information {
+    max-width: 40%;
+    width: 40%;
+}
+div.message {
+    min-width: 10%;
+    max-width: 15%;
+    padding: 0% 2% 0%;
+}
+div#profile_information input, div#profile_information select {
+    display: -webkit-inline-box;
+    display: inline-block;
+    width: 60%;
+    border: none;
+    font-size: 100%;
+    font-family: 'Josefin Slab', serif;
+}
+input.profileInput.profileInputDOB {
+    margin: 0% 0% 0% -1%;
+}
+input#change_img_btn {
+	max-width: 100%;
+	width: 99% !important;
+	margin: 0% 0% 2% 3.2%;
+	position: absolute;
+	bottom: 0%;
+	left: 0;
+	border: none;
+}
+div#profile_header, div.profile_info_div {
+    margin-left: 30%;
+}
+.postBtn {
+    right: 2%;
+    max-width: 15%;
+    min-width: 15%;
+}
+.allPostBtn {
+    right: 20%;
+    max-width: 15%;
+    min-width: 15%;
+}
+div.message {
+position: absolute;
+background-color: #11ce11;
+left: 20px;
+top: 10px;
+z-index: 1;
+max-width: 15%;
+min-width: 10%;
+border-radius: 3px;
+box-shadow: 0px 0px 10px darkgray;
+}
+div.errors {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background-color: darkred;
+    z-index: 1;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px darkgray;
+}
+div.profile_info_div {
+    font-size: 115%;
+}
+div#profile_header, div#post_header_div {
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+h2.postHeader, div.indPost {
+text-align: -webkit-left;
+text-align: left;
+padding: 1.5% 3%;
+max-width: 100%;
+}
+
+.indPost.reunionRegistration input, .indPost.reunionRegistration select {
+    font-size: 125%;
+    padding: 0.5%;
+    margin: 0.5% 0%;
+}
+
+.indPost.reunionRegistration select {
+    width: 95.5%;
+    border-radius: 5px;
+    border: inset 2.5px;
+}
+
+.indPost.reunionRegistration .phone3, .indPost.reunionRegistration .phone4 {
+    max-width: 27.6%;
+}
+h2#all_post_header.postHeader {
+	
+padding: 0% 45% 0% 3%;
+}
+.profilePhoto, .profileHeader {
+    float: left;
+}
+.profilePhoto{
+    margin: 0% 7% 0% 0%;
+}
+.profileHeader {
+    float: left;
+}
+.postPhoto {
+    clear: both;
+    padding: 1% 0%;
+    max-width: 100%;
+}
+.postPhoto img {
+    max-width: 200px;
+    max-height: 200px;
+    float: left;
+    margin: 1% 0.5%;
+    border: solid 1.5px;
+    box-shadow: 0px 0px 10px;
+}
+.postComment {
+    clear: both;
+    padding-top: 1%;
+}
+h2#profile_header_name {
+    text-align: -webkit-left;
+    text-align: left;
+    margin-bottom: 0.5%;
+}
+div#profile_information input.profileInputGreenBtn, 
+div#profile_information input.profileInputJacksonBtn,
+div#profile_information input.profileInputSpouseBtn,
+div#profile_information input.profileInputFriendBtn {
+    width: 15%;
+    padding: 1% 0%;
+    text-align: -webkit-center;
+    text-align: center;
+    background-color: darkgrey;
+    color: white;
+    border: solid 1px black;
+}
+div#profile_information input#submit_profile_update {
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    max-width: 12%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+}
+.postDate .deletePost {
+    font-size: 90%;
+}
+.postDate .deletePost a {
+    text-decoration: none;
+    color: darkred;
+    text-shadow: 4px 5px darkgray;
+}
+img.profilePicture {
+    max-width: 120px;
+    max-height: 120px;
+    height: 75px;
+    width: 75px;
+}
+div#profile_information input:focus, div#profile_information select:focus {
+    outline: none;
+}
+div#profile_information input.profileNameInput1 {
+    max-width: 12%;
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileNameInput2 {
+    width: 50%;
+}
+div#profile_information input.profileInputAddress {
+    width: 25%;
+    margin: 0% 0% 0% -0.8%;
+}
+div#profile_information input.profileInputCity {
+    width: 20%;
+}
+div#profile_information select.profileInputState {
+    max-width: 9%;
+}
+div#profile_information input.profileInputZip {
+    width: 15%;
+}
+div#profile_information input.profileInputPhone1,
+div#profile_information input.profileInputPhone2,
+div#profile_information input.profileInputPhone3 {
+    width: 8%;
+}
+div#profile_information input.profileInputGreenBtn {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	/* border-right: solid 0.5px black; */
+	margin: 0% 0% 0% -1%;
+}
+.descentDiv {
+	display: inline;
+}
+div#profile_information input.profileInputJacksonBtn {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	/* border-left: solid 0.5px black; */
+}
+div#profile_information input.profileInputMother {
+	width: 14%;
+	margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileInputFather {
+	max-width: 50%;
+	margin-left: 5%;
+}
+span.separator {
+    min-width: 0%;
+    font-size: 100%;
+}
+span.phone_par_span {
+    min-width: 0%;
+    margin: 0% -0% 0% -2.8%;
+}
+
+span.phone_span {
+    min-width: 0%;
+    margin: 0% 0.5% 0% 0.5%;
+}
+div#family_account {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-width: 100%;
+    min-width: 15%;
+    text-align: -webkit-right;
+    text-align: right;
+}
+div#home_link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 100%;
+    min-width: 15%;
+    text-align: -webkit-left;
+    text-align: left;
+}
+
+a#profile_registration {
+}
+.newPost {
+    padding: 2% 5%;
+}
+div#profile_photo {
+    width: 25%;
+    position: relative;
+    display: table;
+    table-layout: fixed;
+    float: left;
+}
+img#profile_photo {
+    position: relative;
+    max-width: 100%;
+    max-height: 20%;
+    padding: 10% 3% 0%;
+    width: 200px;
+    height: 200px;
+}
+div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
+	max-width: 48%;
+}
+div#reg_form_input input.regInput {
+    width: 98%;
+}
+}
+/*Even Larger Screens*/
+@media only screen and (min-width:1450px) {
+#admin_login {
+    padding: 1%;
+    width: 9%;
+    right: 1%;
+    top: 15px;
+}
+button#admin_login_btn {
+  border: none;
+  background-color: bisque;
+  font-family: 'Josefin Slab', serif;
+  font-size: 120%;
+}
+#admin_form {
+  position: absolute;
+  width: 12.6%;
+  top: 20%;
+  right: 1%;
+}
+#navi form {
+  margin-left: initial;
+}
+input[type="text"], input[type="password"] {
+  border-radius: 5px;
+  width: 94%;
+}
+div#reg_form_input input.regInput {
+    width: 98.8%;
+}
+div#reg_form_input input.regInput.regFNInput,div#reg_form_input input.regInput.regLNInput {
+    /* max-width: 49%; */
+}
+input#submit_button {
+  width: 97%;
+  margin-top: 1%;
+}
+button#takeNow_btn, button#takeLater_btn, #yes_music, #no_music {
+  font-size: 200%;
+  padding: 2% 0%;
+}
+div#navi {
+  padding: 8% 0% 3%;
+}
+.page_header:first-of-type {
+  font-size: 250%;
+  text-align: -webkit-center;
+  text-align: center;
+  width: 100%;
+}
+div#survey_div p {
+  font-size: 150%;
+}
+#upcoming_btn, #past_btn {
+  padding: 5% 0%;
+}
+#jackson_descent, #green_descent {
+  font-size: 140%;
+}
+div#reunion_history {
+  font-size: 150%;
+}
+h2#reg_form_header {
+    /* font-size: 125%; */
+}
+#pastReunion_overlay h2 {
+  margin: 20% 32% 0%;
+}
+ul#past_reunions {
+    padding: 2% 0%;
+    width: 99.1%;
+    text-align: -webkit-auto;
+    text-align: center;
+}
+span {
+    font-size: 150%;
+}
+p.confirmationP {
+    font-size: 150%;
+}
+table.confirm_attendees {
+    font-size: 150%;
+}
+div#registration_modal, #confirmation_modal, #confirmed_modal {
+    left: 21%;
+    width: 60%;
+}
+div#hotel_content dl {
+    margin: -3% 22% 0%;
+    width: 100%;
+    font-size: 90%;
+}
+div#directions1 h2, div#directions3 h2 {
+    padding: 2% 0% 0%;
+}
+#contact_information_table {
+    width: 100%;
+    margin: 2% 0% 10% 15%;
+}
+div#electronic_payment_option p:last-of-type {
+    padding: 0% 0% 30%;
+}
+#deleteUser_form input[type="text"], #deleteUser_form input[type="number"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="number"], #deleteReg_form input[type="email"], input[type="number"] {
+    width: 94%;
+    border-radius: 5px;
+}
+button.closeBtn {
+    position: absolute;
+    top: -2%;
+    left: -1.7%;
+    border-radius: 50%;
+    padding: 15px;
+    background-image: url("../images/x.png");
+    background-size: 100% 100%;
+    background-position: center center;
+}
+}
+/*Smartphones portrait*/
+@media only screen and (min-device-width:320px) and (max-device-width:768px) {
+div#modal {
+    height: 80%;
+    width: 80%;
+    left: 10%;
+}
+#past_btn {
+	padding: 9% 0%;
+}
+input#submit_button {
+    width: 95%;
+}
+button#takeLater_btn, #no_music {
+  right: 15%;
+  bottom: 10%;
+  width: 70%;
+  padding: 3% 0%;
+}
+button#takeNow_btn, #yes_music {
+  padding: 3% 0%;
+  bottom: 23%;
+  left: 15%;
+  font-size: 150%;
+  width: 70%;
+}
+div#navi {
+  padding: 2% 5% 21%;
+}
+.page_header:first-of-type {
+  text-align: -webkit-center;
+  text-align: center;
+}
+#admin_login {
+  padding: 2.1% 1%;
+  width: 50%;
+  right: 25%;
+  bottom: 4%;
+}
+button#admin_login_btn {
+  text-align: -webkit-center;
+  text-align: center;
+  width: 100%;
+  padding: 4% 0%;
+  font-size: 110%;
+}
+#admin_form {
+  width: 50%;
+  bottom: 4%;
+  right: 25%;
+  top: initial;
+}
+input[type="text"], input[type="password"] {
+  width: 90%;
+}
+div.showing_image {
+  width: 99%;
+  margin: 0% 0.5%;
+}
+div#image_caption {
+  top: 1%;
+  left: 1%;
+}
+ul#jgreunion_past_future_list > li {
+  width: 92%;
+  margin: 3% 4%;
+  position: relative;
+}
+ul#past_reunions {
+  padding: 1% 3.2% 1%;
+}
+#reunion_history_pic {
+  height: 10em;
+  width: 10em;
+}
+div#reunion_history {
+  padding: 1.5% 6% 1%;
+  font-size: 120%;
+  background: transparent;
+}
+#reunion_descent {
+  font-size: 120%;
+}
+#family_tree_pic {
+  display: none;
+}
+span#last_updated {
+  display: none;
+}
+div#page_header {
+  padding: 0% 1%;
+  font-size: 150%;
+}
+#reunion_page {
+  padding: 0 1%;
+}
+#form_information img {
+  min-height: 400px;
+  height: 400px;
+}
+#hotel_pic {
+  height: 210px;
+  width: 100%;
+  margin-right: 3%;
+}
+.activities_content {
+  min-height: 600px;
+}
+.activities_content:nth-of-type(4) {
+  background-size: 100% 73%;
+  background-position: center bottom;
+}
+#contact_content {
+  padding: 1% 1%;
+}
+div#contact_content p {
+  margin: 4px;
+  text-align: -webkit-center;
+  text-align: center;
+}
+a#fb_link {
+  width: 95%;
+  margin: 3% 2.5% 1%;
+}
+a#fb_link img {
+  width: 150px;
+}
+#fbImage_text {
+  right: 2%;
+  top: 24%;
+}
+div#navi,#profilePage.container #navi {
+    padding: 10% 5%;
+}
+#coming_soon_message p {
+    left: 10%;
+    margin: 0%;
+    padding: 10% 0% 0%;
+    font-size: 150%;
+    width: 80%;
+    top: -50%;
+}
+.nextReunion {
+    padding: 15% 0% 0%;
+    top: -25%;
+}
+.slideShowImage {
+    min-height: 300px;
+    max-height: 300px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px black;
+    max-width: 94%;
+    width: 94%;
+    margin: 0% 3%;
+}
+a.profileLink, a.homeLink {
+    font-size: 140%;
+    color: white;
+    text-decoration: none;
+}
+div#family_account {
+    max-width: 100%;
+    min-width: 50%;
+}
+div#registration_div_wrapper, div#login_div_wrapper {
+    position: relative;
+    padding: 3% 5%;
+    background: inherit;
+}
+div#registration_div, div#login_div {
+    margin: 0% 0% 20%;
+}
+h2#reg_form_header {
+    margin: 4% 10%;
+}
+div#reg_form_input, div#login_form_input {
+    margin: 0% 10% 0%;
+}
+div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
+    max-width: 47.75%;
+}
+input#reg_form_btn, #login_submit_btn {
+    min-width: 50%;
+    font-size: 105%;
+    padding: 1.5% 1%;
+    margin: 3% 25%;
+}
+div.message {
+    position: absolute;
+    background-color: #02d002;
+    color: white;
+    opacity: 0.9;
+    max-width: 10%;
+    left: 20px;
+    top: 10px;
+    z-index: 1;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px darkgray;
+}
+div.message ul {
+    width: 90%;
+    max-width: 100%;
+    padding: 0% 0% 0% 10%;
+}
+div.errors {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    background-color: darkred;
+    color: wheat;
+    z-index: 1;
+    opacity: 0.9;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px darkgray;
+    max-width: 20%;
+}
+.errors ul {
+    padding: 0% 10% 0%;
+    max-width: 94%;
+}
+p.profileInfo {
+    margin: 0;
+    display: -webkit-inline-box;
+    display: inline-block;
+}
+div#profile_header, div.profile_info_div {
+    margin-left: 2%;
+}
+div.profile_info_div {
+    font-size: 115%;
+}
+div#profile_header {display: none;}
+div#post_header_div {
+    padding-top: 3%;
+    padding-bottom: 2%;
+}
+h2.postHeader, div.indPost {
+	text-align: -webkit-left;
+	text-align: left;
+	padding: 1.5% 2%;
+	max-width: 100%;
+}
+.profilePhoto, .profileHeader {
+    float: left;
+}
+.profilePhoto{
+    margin: 0% 3% 0% 0%;
+}
+h3.profileHeaderName {
+    margin: 0.5% 0% 0%;
+}
+h3.profileHeaderName a {
+    text-decoration: underline;
+    color: #3ca4ff;
+}
+.postPhoto {
+    clear: both;
+    padding: 1% 0%;
+    max-width: 100%;
+}
+.postPhoto img {
+    max-width: 200px;
+    max-height: 200px;
+    float: left;
+    margin: 1% 0.5%;
+    border: solid 1.5px;
+    box-shadow: 0px 0px 10px;
+}
+.postComment {
+    clear: both;
+    padding: 2% 0% 1%;
+}
+div.postDate {
+    display: table;
+    width: 100%;
+}
+.sectionDiv {
+    padding: 0.3% 0%;
+}
+span {
+    min-width: 35%;
+    display: inline-block;
+    font-size: 130%;
+}
+h2#profile_header_name {
+    text-align: -webkit-left;
+    text-align: left;
+    margin-bottom: 0.5%;
+}
+div#profile_information input,div#profile_information select {
+    display: -webkit-inline-box;
+    display: inline-block;
+    width: 60%;
+    border: none;
+    font-size: 110%;
+    font-family: 'Josefin Slab', serif;
+}
+div#profile_information input.profileInputGreenBtn,
+div#profile_information input.profileInputJacksonBtn,
+div#profile_information input.profileInputBtn {
+    width: 25%;
+    padding: 1% 0%;
+    text-align: -webkit-center;
+    text-align: center;
+    background-color: darkgrey;
+    color: white;
+    border: solid 1px black;
+}
+input.profileInput.profileSiblingInput {
+    margin: 0% 0% 0% -1%;
+}
+input.profileInput.profileInputChildren {
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input#submit_profile_update {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    max-width: 30%;
+    border-radius: 10px;
+    padding: 2% 0%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+    font-size: 140%;
+}
+.postBtn {
+    position: absolute;
+    top: 3.5%;
+    right: 2%;
+    max-width: 12%;
+    min-width: 10%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    font-size: 100%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+    text-align: -webkit-center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: floralwhite;
+    font-family: 'Josefin Slab', serif;
+}
+.allPostBtn {
+    position: absolute;
+    top: 3.5%;
+    right: 13%;
+    max-width: 12%;
+    min-width: 10%;
+    border-radius: 10px;
+    padding: 1% 0%;
+    border: outset 2px #45955e;
+    box-shadow: 0.5px 0.5px 5px #1c1c1c;
+    text-align: -webkit-center;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    background-color: floralwhite;
+}
+.postDate .deletePost {
+    font-size: 90%;
+}
+.postDate .deletePost a {
+    text-decoration: none;
+    color: darkred;
+    text-shadow: 4px 5px darkgray;
+}
+span.inputTitle.descentTitle {
+    padding: 0% 0% 3%;
+}
+div.header_div h3 {
+    margin: 0px;
+    background-color: beige;
+    padding: 0.5% 0% 0% 0.5%;
+}
+div.header_div {
+    margin: 2.5% 0%;
+    position: relative;
+    font-size: 125%;
+}
+img.profilePicture {
+    max-width: 120px;
+    max-height: 120px;
+    height: 75px;
+    width: 75px;
+}
+div#profile_information input:focus, div#profile_information select:focus {
+    outline: none;
+}
+div#profile_information input.profileNameInput1 {
+    max-width: 30%;
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileNameInput2 {
+    width: initial;
+    max-width: 25%;
+}
+input.profileInput.profileInputSpouse {
+    margin: 0% 0% 0% -1%;
+    max-width: 50%;
+}
+div#profile_information input.profileInputAddress {
+    width: 25%;
+    margin: 0% 0% 0% -0.8%;
+}
+div#profile_information input.profileInputCity {
+    width: 15%;
+}
+div#profile_information select.profileInputState {
+    max-width: 8%;
+}
+div#profile_information input.profileInputZip {
+    width: 10%;
+}
+div#profile_information input.profileInputPhone1,
+div#profile_information input.profileInputPhone2,
+div#profile_information input.profileInputPhone3 {
+    width: 10%;
+}
+input.profileInput.profileInputDOB {
+    margin: 0% 0% 0% -1%;
+}
+div#profile_information input.profileInputPhone3 {
+    width: initial !important;
+    max-width: 20%;
+}
+div#profile_information input.profileInputGreenBtn {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	/* border-right: solid 0.5px black; */
+	margin: 0% 0% 0% -1%;
+}
+span.visibleHeaderSpan {
+    font-size: 80%;
+    min-width: initial;
+    position: absolute;
+    right: 5%;
+    top: 25%;
+}
+div#profile_information input.visibleCheckBox {
+    width: initial;
+    position: absolute;
+    right: 0px;
+    top: 15%;
+}
+.descentDiv {
+	display: inline;
+}
+div#profile_information input.profileInputJacksonBtn {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	/* border-left: solid 0.5px black; */
+}
+div#profile_information input.profileInput.descentSelected {
+    background-color: darkgreen;
+}
+div#profile_information input.profileInputMother {
+	width: initial;
+	margin: 0% 0% 0% -1%;
+	max-width: 25%;
+}
+div#profile_information input.profileInputFather {
+	max-width: 25%;
+	margin-left: 5%;
+}
+span.separator {
+    min-width: 0%;
+    font-size: 100%;
+}
+span.phone_par_span {
+    min-width: 0%;
+    margin: 0% -0.4% 0% -2%;
+}
+div#family_account {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    max-width: 100%;
+    min-width: 45%;
+    text-align: -webkit-right;
+    text-align: right;
+}
+div#home_link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    max-width: 100%;
+    min-width: 15%;
+    text-align: -webkit-left;
+    text-align: left;
+}
+div#profile_information {
+    position: relative;
+    max-width: 100%;
+    width: inherit;
+    display: -webkit-inline-box;
+    display: inline-block;
+    float: none;
+    padding: 0% 2%;
+}
+div#post_information {
+    display: -webkit-inline-box;
+    display: inline-block;
+    max-width: 50%;
+    width: 50%;
+    float: none;
+    min-height: 890px;
+    max-height: 890px;
+    overflow: auto;
+    background-color: #dddddd;
+    position: relative;
+}
+.newPost {
+    padding: 2% 5%;
+}
+div#profile_photo {
+    width: 58%;
+    position: relative;
+    display: table;
+    float: none;
+}
+img#profile_photo {
+    position: relative;
+    max-width: 100%;
+    padding: 10% 3% 0%;
+    width: 200px;
+    height: 200px;
+}
+input#change_img_btn {
+    width: 200px !important;
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+    margin: 0% 0% 0% 3%;
+    padding: 2% 0%;
+    opacity: 0.85;
+    background-color: #62aa62;
+    border: none;
+    color: white;
+    font-size: 100%;
+}
+}
+/*Smaller length screens*/
+@media only screen and (max-height:699px) {
+}
+/*Normal length screens*/
+@media only screen and (min-height:700px) and (max-height:800px) {
+}
+/*Longer length screens*/
+@media only screen and (min-height:905px) {
+	
+}

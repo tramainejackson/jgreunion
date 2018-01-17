@@ -1,19 +1,14 @@
-@import url(https://fonts.googleapis.com/css?family=Lato|Oswald|Lora|Berkshire+Swash|Josefin+Slab|Open+Sans+Condensed:300|Pinyon+Script|Roboto+Slab|PT+Sans+Narrow|Poiret+One|Bitter|Playfair+Display|Lobster|Libre+Baskerville|Josefin+Sans|Sigmar+One|Alegreya|Pacifico|Architects+Daughter|Dancing+Script|Exo|Righteous|Josefin+Slab|Abril+Fatface|Pathway+Gothic+One|Bangers|Kaushan+Script|Old+Standard+TT|Lobster+Two|Passion+One|Courgette|Cinzel|Philosopher);
 body {
   margin: 0px;
   position: relative;
   background-color: black;
+  font-family: 'Josefin Slab', serif;
 }
 button:focus {
 	outline:0 !important;
 }
 button:hover {
 	cursor: pointer;
-}
-.container {
-	position: relative;
-	margin: 0 auto;
-	font-family: 'Josefin Slab', serif;
 }
 div#allMembersPage::after {
 	content: "";
@@ -94,25 +89,18 @@ div#charlottePage::after {
     box-shadow: 0px 0px 10px red;
     margin: 2% 0%;
 }
-/*div#container::after {
-	content: "";
-	position: absolute;
-	background: linear-gradient(#6b9d3e, #6b9d3e 43%, #000000 98%);
-	background-image: url("../images/BlackHistory2015_037.png");
-	top: 0%;
-	left: 0;
-	right: 0px;
-	bottom: 0;
-	z-index: -1;
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
-	background-position: 137% 110%;
-}*/
+.jumbotron-fluid {
+	margin: 0px -15px;
+	background: url(/images/jg5.jpg);
+	background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
 #profilePage.container #navi, #allMembersPage #navi,
 #indProfilePage #navi {
 padding: 0% 1.5% 0%;
-background: linear-gradient(rgb(66, 66, 66), rgb(66, 66, 66), rgb(66, 66, 66), #6C9F3E); */
-position: relative;
+background: linear-gradient(rgb(66, 66, 66), rgb(66, 66, 66), rgb(66, 66, 66), #6C9F3E);
 position: relative;
 }
 div#overlay, div#overlay_adminPage, div#overlay_PhillyPage {
@@ -714,7 +702,7 @@ div#registration_div, div#login_div {
     background-color: darkgray;
 }
 div#reg_form_input, div#login_form_input {
-    margin: 0% 20% 2%;
+    margin: 0% 5% 2%;
 }
 div#login_form_input input.regInput {
     width: 100%;
@@ -3474,7 +3462,12 @@ button#takeNow_btn, #yes_music {
   width: 40%;
   padding: 2% 0%;
 }
-.page_header:first-of-type {text-align: -webkit-center;text-align: center;width: 100%;padding: 5% 0%;}
+.page_header:first-of-type {
+	text-align: -webkit-center;
+	text-align: center;
+	width: 100%;
+	padding: 5% 0%;
+}
 #admin_login {
   right: 1%;
   bottom: 18%;

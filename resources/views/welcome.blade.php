@@ -11,8 +11,26 @@
 @section('content')
 	<div id="jgreunion_page">
 		<div id="navi">
-			<div class="page_header">
-				<h1>Jackson &amp; Green Family Reunion</h1>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col">
+						<nav class="nav nav-pills justify-content-end">
+							@if(!Auth::check())
+								<a href='/registration' class='profileLink nav-link'>Register</a>
+								<a href='/login' class='profileLink nav-link'>Login</a>
+							@else
+								<a href='/profile' class='profileLink nav-link'>My Profile</a>
+								<a href='/logout' class='profileLink nav-link'>Logout</a>
+							@endif
+						</nav>
+					</div>
+				</div>
+			</div>
+			
+			<div id="family_account" class="mt-5">
+				<div class="page_header">
+					<h1 class="text-center display-3 my-5">Jackson &amp; Green Family Reunion</h1>
+				</div>
 			</div>
 			
 			@foreach($images as $image)
@@ -22,16 +40,6 @@
 					<h2 class='image_caption_header'>{{ $image->image_description }}</h2>							
 				@endif
 			@endforeach
-				
-			<div id="family_account">
-				@if(!Auth::check())
-					<a href='/registration' class='profileLink'>Register</a>
-					<a href='/login' class='profileLink'>Login</a>
-				@else
-					<a href='/profile' class='profileLink'>My Profile</a>
-					<a href='/logout' class='profileLink'>Logout</a>
-				@endif
-			</div>
 		</div>
 		<div id="image_slide_show">
 			@foreach($images as $image)

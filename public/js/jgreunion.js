@@ -4,11 +4,23 @@ $(document).ready(function()
 	var windowHeight = window.innerHeight;
 	var documentHeight = document.body.clientHeight;
 	var screenHeight = screen.height;
-//Make the body min height the same size as the window height 	
+		
+	//Make the body min height the same size as the window height 	
 	$(".container").css({minHeight:windowHeight+"px"});
 	$("#show_profiles").css({maxHeight:(windowHeight -(windowHeight * .35))+"px"});
-//Make all modals max-height 80% of the window
+	
+	//Make all modals max-height 80% of the window
 	$("#confirmation_modal, #confirmed_modal, #registration_modal, #registered_modal, #all_registered_user, #phillyRegistrationForm, #errors_modal").css({maxHeight:(windowHeight * .80)+"px"});
+	
+	// Add new committee member row
+	$('body').on('click', '.addCommitteeMember', function() {
+		var newCommitteeRow = $('.committeeRow').clone();
+		
+		$(newCommitteeRow).removeClass('committeeRow')
+			.removeAttr('hidden')
+			.insertBefore('.committeeRow');
+		$('.committeeRow').prev().find('select').focus();
+	});
 	
 //Add button to users table
 	addNewAdminBtn();

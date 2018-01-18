@@ -23,8 +23,10 @@ div#allMembersPage::after {
 	z-index: -1;
 	opacity: 0.5;
 }
-div#charlottePage {
-    
+.form-block-header h3 {
+    border-bottom: 1px solid darkgray;
+    margin-top: 50px;
+    margin-bottom: 10px;
 }
 div#charlottePage::after {
 	content: "";
@@ -569,13 +571,13 @@ span.phone_span {
     margin: 0% -0% 0% -0%;
 }
 div#family_account {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    max-width: 100%;
-    min-width: 15%;
-    text-align: -webkit-right;
-    text-align: right;
+    /* position: absolute; */
+    /* top: 10px; */
+    /* right: 10px; */
+    /* max-width: 100%; */
+    /* min-width: 15%; */
+    /* text-align: -webkit-right; */
+    /* text-align: right; */
 }
 div#home_link {
     position: absolute;
@@ -658,10 +660,6 @@ a.profileLink, a.homeLink {
 }
 a.profileLink:first-of-type {
     border-right: solid 1.5px whitesmoke;
-    padding: 0% 5% 0% 0%;
-}
-a.profileLink:last-of-type {
-    padding: 0% 0% 0% 2.5%;
 }
 .indPost {
     border-bottom: solid 1px #c9c9c9;
@@ -1931,6 +1929,7 @@ div#navi {
   position: absolute;
   padding: 8% 0% 0%;
   z-index: 2;
+  width: 100%;
   max-width: 100%;
 }
 div#navi.registerPageNavi, div#navi.loginPageNavi {
@@ -1938,8 +1937,6 @@ div#navi.registerPageNavi, div#navi.loginPageNavi {
     padding: 3% 0%;
 }
 .page_header {
-  display: inline-block;
-  position: relative;
 }
 .page_header:first-of-type {
   font-size: 192%;
@@ -3841,7 +3838,7 @@ button#takeNow_btn, button#takeLater_btn, #yes_music, #no_music {
   padding: 2% 0%;
 }
 div#navi {
-  padding: 8% 0% 3%;
+  padding: 0%;
 }
 .page_header:first-of-type {
   font-size: 250%;

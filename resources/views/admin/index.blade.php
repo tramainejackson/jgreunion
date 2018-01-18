@@ -20,26 +20,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12">
-				<nav class="nav">
-					@if(!Auth::check())
-						<a href='/registration' class='profileLink'>Register</a>
-						<a href='/login' class='profileLink'>Login</a>
-					@else
-						<a href='/profile' class='profileLink'>My Profile</a>
-						<a href='/registrations' class='profileLink'>Registrations</a>
-						<a href='/administrator' class='profileLink'>Family Members</a>
-						<a href='/reunions' class='profileLink'>Reunions</a>
-						<a href='/logout' class='profileLink'>Logout</a>
-					@endif
+			<div class="col-3">
+				<nav class="nav nav-pills justify-content-center py-3">
+					<a href='/' class='profileLink nav-link'>Home</a>
+					<a href='/logout' class='profileLink nav-link'>Logout</a>
 				</nav>
-				<nav class="nav">
-					@if(!Auth::check())
-						<a href='/' class='homeLink'>Home</a>
-					@else
-						<a href='/' class='homeLink profileLink'>Home</a>
-						<a href='/logout' class='profileLink'>Logout</a>
-					@endif
+			</div>
+			<div class="col-9">
+				<nav class="nav nav-pills justify-content-start py-3">
+					<a href='/profile' class='profileLink nav-link border-0'>My Profile</a>
+					<a href='/registrations' class='profileLink nav-link'>Registrations</a>
+					<a href='/administrator' class='profileLink nav-link active'>Family Members</a>
+					<a href='/reunions' class='profileLink nav-link'>Reunions</a>
+					<a href='/settings' class='profileLink nav-link'>Settings</a>
 				</nav>
 			</div>
 		</div>
@@ -48,8 +41,7 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
-							<th>MR</th>
-							<th>MRS</th>
+							<th>Firstname</th>
 							<th>Lastname</th>
 							<th>Address</th>
 							<th>City</th>
@@ -65,8 +57,7 @@
 					<tbody>
 						@foreach($distribution_list as $member)
 							<tr>
-								<td class="text-truncate">{{ $member->mr_firstname }}</td>
-								<td class="text-truncate">{{ $member->ms_firstname }}</td>
+								<td class="text-truncate">{{ $member->firstname }}</td>
 								<td class="text-truncate">{{ $member->lastname }}</td>
 								<td class="text-truncate">{{ $member->address }}</td>
 								<td class="text-truncate">{{ $member->city }}</td>

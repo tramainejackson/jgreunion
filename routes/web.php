@@ -25,19 +25,15 @@ Route::get('/past_reunion/{id}', function () {
 });
 
 Route::get('/administrator', function () {
-	$distribution_list = \App\Reunion_dl::all();
+	$distribution_list = \App\Reunion_dl::orderby('lastname', 'asc')->orderby('address', 'asc')->get();
 	
     return view('admin.index', compact('registrations', 'distribution_list'));
 });
 
-Route::get('/registrations/{reunions}', function (\App\Reunion $reunions) {
-	$registrations = \App\Registration::where('reunion_id', $reunions->id)->get();
-	
-    return view('admin.registrations', compact('registrations', 'reunions'));
-});
-
 Auth::routes();
 
-Route::resource('/registration', 'RegistrationController');
+Route::resource('/registrations', 'RegistrationController');
+
+Route::resource('/reunions', 'ReunionController');
 
 Route::get('/home', 'HomeController@index')->name('home');

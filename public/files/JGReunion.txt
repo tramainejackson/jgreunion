@@ -1,8 +1,8 @@
 ------------------------------------------------
-		jackson / Green Family Reunion
+		Jackson / Green Family Reunion
 ------------------------------------------------
 
-Create a create, edit and show page for reunions
+Make something with Photoshop as a picture background for logged in pages
 Create a show page distribution list and registrations
 Add a button that allows admin to add family member from dl to new reunion registered
 Update past reunions show page
@@ -11,4 +11,5 @@ Create a settings page for admin
 Add popover on notes sections
 Allow user to have a profile and be an admin
 Add relationship for registrations and distribution_list
+Done: Create a create, edit and show page for reunions
 export HTTP_PROXY="http://155.247.166.25:8080"

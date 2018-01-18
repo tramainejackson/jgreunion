@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Registration;
 use App\Reunion;
+use App\Reunion_dl;
+use App\State;
+use App\Year;
+use App\Committee_Title;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
 
-class RegistrationController extends Controller
+class ReunionController extends Controller
 {
 	/**
      * Create a new controller instance.
@@ -28,9 +32,11 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-		$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
+        $reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
+		$states = State::all();
+		$years = Year::all();
 		
-        return view('admin.registrations.index', compact('reunions'));
+        return view('admin.reunions.index', compact('reunions', 'states', 'years'));
     }
 
     /**
@@ -40,7 +46,12 @@ class RegistrationController extends Controller
      */
     public function create()
     {
-        //
+		$states = State::all();
+		$years = Year::all();
+		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$titles = Committee_Title::all();
+		
+        return view('admin.reunions.create', compact('states', 'years', 'members', 'titles'));
     }
 
     /**
@@ -57,24 +68,21 @@ class RegistrationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\registration  $registration
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-		$reunion = Reunion::find($id);
-        $registrations = Registration::where('reunion_id', $reunion->id)->get();
-	
-		return view('admin.registrations.show', compact('registrations', 'reunion'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\registration  $registration
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(registration $registration)
+    public function edit($id)
     {
         //
     }
@@ -83,10 +91,10 @@ class RegistrationController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\registration  $registration
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, registration $registration)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -94,10 +102,10 @@ class RegistrationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\registration  $registration
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(registration $registration)
+    public function destroy($id)
     {
         //
     }

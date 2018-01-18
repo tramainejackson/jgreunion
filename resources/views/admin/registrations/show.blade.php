@@ -20,26 +20,19 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-12">
-				<nav class="nav">
-					@if(!Auth::check())
-						<a href='/registration' class='profileLink'>Register</a>
-						<a href='/login' class='profileLink'>Login</a>
-					@else
-						<a href='/profile' class='profileLink'>My Profile</a>
-						<a href='/registrations' class='profileLink'>Registrations</a>
-						<a href='/administrator' class='profileLink'>Family Members</a>
-						<a href='/reunions' class='profileLink'>Reunions</a>
-						<a href='/logout' class='profileLink'>Logout</a>
-					@endif
+			<div class="col-3">
+				<nav class="nav nav-pills justify-content-center py-3">
+					<a href='/' class='profileLink nav-link'>Home</a>
+					<a href='/logout' class='profileLink nav-link'>Logout</a>
 				</nav>
-				<nav class="nav">
-					@if(!Auth::check())
-						<a href='/' class='homeLink'>Home</a>
-					@else
-						<a href='/' class='homeLink profileLink'>Home</a>
-						<a href='/logout' class='profileLink'>Logout</a>
-					@endif
+			</div>
+			<div class="col-9">
+				<nav class="nav nav-pills justify-content-start py-3">
+					<a href='/profile' class='profileLink nav-link border-0'>My Profile</a>
+					<a href='/registrations' class='profileLink nav-link active'>Registrations</a>
+					<a href='/administrator' class='profileLink nav-link'>Family Members</a>
+					<a href='/reunions' class='profileLink nav-link'>Reunions</a>
+					<a href='/settings' class='profileLink nav-link'>Settings</a>
 				</nav>
 			</div>
 		</div>
@@ -48,7 +41,7 @@
 			</div>
 		</div>
 		<div class="">
-			<h2 class="">Registrations for {{ $reunions->reunion_city . ' ' .  $reunions->reunion_year }}</h2>
+			<h2 class="">Registrations for {{ $reunion->reunion_city . ' ' .  $reunion->reunion_year }}</h2>
 		</div>
 		<div id="registrations_list" class="row bg-light">
 			<div class="col-12">

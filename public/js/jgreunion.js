@@ -22,6 +22,29 @@ $(document).ready(function()
 		$('.committeeRow').prev().find('select').focus();
 	});
 	
+	// Button toggle switch
+	$('body').on("click", "button", function(e) {
+		if(!$(this).hasClass('btn-primary') || !$(this).hasClass('btn-danger')) {
+			if($(this).children().val() == "Y") {
+				$(this).addClass('active btn-success').children().attr("checked", true);
+				$(this).siblings().addClass('btn-secondary').removeClass('active btn-danger').children().removeAttr("checked");
+				
+				// If this is the contacts page, toggle the addresses select div visibility
+				if($('.tenantProp').length > 0) {
+					$('.tenantProp').slideDown();
+				}
+			} else if($(this).children().val() == 'N') {
+				$(this).addClass('active btn-danger').children().attr("checked", true);
+				$(this).siblings().addClass('btn-secondary').removeClass('active btn-success').children().removeAttr("checked");
+				
+				// If this is the contacts page, toggle the addresses select div visibility
+				if($('.tenantProp').length > 0) {
+					$('.tenantProp').slideUp();
+				}
+			}
+		}	
+	});
+	
 //Add button to users table
 	addNewAdminBtn();
 	removeMessages();	

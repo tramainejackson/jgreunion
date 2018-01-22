@@ -1436,12 +1436,7 @@ span#fancy_cut_image img {
     border-radius: 5px;
     border: inset 2.5px;
 }
-textarea {
-    width: 49.5%;
-    border-radius: 7px;
-    margin: 2% 0% 0% 0%;
-    border: inset 2px;
-}
+
 #admin_nav, #admin_nav ul, #admin_nav ul li, #admin_nav ul li a {
   margin: 0;
   padding: 0;
@@ -3790,10 +3785,6 @@ button#admin_login_btn {
 #navi form {
   margin-left: initial;
 }
-input[type="text"], input[type="password"] {
-  border-radius: 5px;
-  width: 94%;
-}
 div#reg_form_input input.regInput {
     width: 98.8%;
 }
@@ -3868,10 +3859,6 @@ div#directions1 h2, div#directions3 h2 {
 }
 div#electronic_payment_option p:last-of-type {
     padding: 0% 0% 30%;
-}
-#deleteUser_form input[type="text"], #deleteUser_form input[type="number"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="number"], #deleteReg_form input[type="email"], input[type="number"] {
-    width: 94%;
-    border-radius: 5px;
 }
 button.closeBtn {
     position: absolute;

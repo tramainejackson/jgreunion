@@ -31,7 +31,7 @@ class RegistrationController extends Controller
     public function index()
     {
 		$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
-		
+
         return view('admin.registrations.index', compact('reunions'));
     }
 
@@ -53,7 +53,7 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		
     }
 
     /**
@@ -66,7 +66,7 @@ class RegistrationController extends Controller
     {
 		$reunion = Reunion::find($id);
         $registrations = Registration::where('reunion_id', $reunion->id)->get();
-	
+
 		return view('admin.registrations.show', compact('registrations', 'reunion'));
     }
 
@@ -80,7 +80,7 @@ class RegistrationController extends Controller
     {
 		$states = State::all();
 		$family = Reunion_dl::where('family_id', $registration->reunion_dl->family_id)->get();
-		
+
 		return view('admin.registrations.edit', compact('registration', 'states', 'family'));
     }
 
@@ -91,9 +91,10 @@ class RegistrationController extends Controller
      * @param  \App\registration  $registration
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, registration $registration)
+    public function update(Request $request, Registration $registration)
     {
-        //
+        dd($registration);
+        $member = Reunion_dl::find($request->reg_member);
     }
 
     /**

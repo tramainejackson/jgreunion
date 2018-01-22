@@ -26,10 +26,10 @@
 			</div>
 			<div class="col-9">
 				<nav class="nav nav-pills justify-content-start py-3">
-					<a href='/profile' class='profileLink nav-link border-0'>My Profile</a>
-					<a href='/administrator' class='profileLink nav-link'>Family Members</a>
+					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
+					<a href='/administrator' class='profileLink nav-link border-0'>Family Members</a>
 					<a href='/reunions' class='profileLink nav-link active'>Reunions</a>
-					<a href='/settings' class='profileLink nav-link'>Settings</a>
+					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
 				</nav>
 			</div>
 		</div>
@@ -45,6 +45,18 @@
 					<h2 class="text-left">Edit {{ ucwords($reunion->reunion_city) }} Reunion</h2>
 				</div>
 				{!! Form::open(['action' => ['ReunionController@update', 'reunion' => $reunion->id], 'method' => 'PUT']) !!}
+					<div class="form-group">
+						{{ Form::label('type', 'Reunion Complete', ['class' => 'd-block form-control-label']) }}
+								
+						<div class="btn-group">
+							<button type="button" class="btn{{ $reunion->reunion_complete == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
+								<input type="checkbox" name="reunion_complete" value="Y" hidden {{ $reunion->reunion_complete == 'Y' ? 'checked' : '' }} />Yes
+							</button>
+							<button type="button" class="btn px-3{{ $reunion->reunion_complete == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
+								<input type="checkbox" name="reunion_complete" value="N" hidden {{ $reunion->reunion_complete == 'N' ? 'checked' : '' }} />No
+							</button>
+						</div>
+					</div>
 					<div class="form-group">
 						<label class="form-label" for="reunion_city">City</label>
 						<input type="text" name="reunion_city" class="form-control" value="{{ old('reunion_city') ? old('reunion_city') : $reunion->reunion_city }}" />

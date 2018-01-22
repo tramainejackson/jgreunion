@@ -23,16 +23,19 @@
 			<div class="col-3">
 				<nav class="nav nav-pills justify-content-center py-3">
 					<a href='/' class='profileLink nav-link'>Home</a>
-					<a href='/logout' class='profileLink nav-link'>Logout</a>
+					<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+					
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						{{ csrf_field() }}
+					</form>
 				</nav>
 			</div>
 			<div class="col-9">
 				<nav class="nav nav-pills justify-content-start py-3">
-					<a href='/profile' class='profileLink nav-link border-0'>My Profile</a>
-					<a href='/registrations' class='profileLink nav-link'>Registrations</a>
-					<a href='/administrator' class='profileLink nav-link active'>Family Members</a>
+					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
+					<a href='/administrator' class='profileLink nav-link border-0 active'>Family Members</a>
 					<a href='/reunions' class='profileLink nav-link'>Reunions</a>
-					<a href='/settings' class='profileLink nav-link'>Settings</a>
+					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
 				</nav>
 			</div>
 		</div>

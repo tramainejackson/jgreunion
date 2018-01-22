@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Reunion_dl;
+use App\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -65,10 +66,10 @@ class HomeController extends Controller
      */
     public function create()
     {
-		
 		$states = \App\State::all();
+		$descent_options = \App\Descent_option::all();
 
-        return view('admin.members.create', compact('states'));
+        return view('admin.members.create', compact('states', 'descent_options'));
     }
 	
 	/**
@@ -76,11 +77,32 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-		$states = \App\State::all();
+		$this->validate($request, [
+			'firstname' => 'required|max:30',
+			'lastname' => 'required|max:30',
+			'phone1' => 'max:999|min:0',
+			'phone2' => 'max:999|min:0',
+			'phone3' => 'max:9999|min:0',
+			'zip' => 'max:9999|min:0',
+		]);
+			
+		$member = new Reunion_dl();
+		$member->firstname = $request->firstname;
+		$member->lastname = $request->lastname;
+		$member->email = $request->email;
+		$member->address = $request->address;
+		$member->city = $request->city;
+		$member->state = $request->state;
+		$member->zip = $request->zip;
+		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
+		$member->age_group = $request->age_group;
+		$member->mail_preference = $request->mail_preference;
 
-        return view('admin.members.create', compact('states'));
+		if($member->save()) {
+			return redirect()->action('HomeController@edit', $member)->with('status', 'Member Created Successfully');
+		}		
     }
 	
 	/**
@@ -92,7 +114,62 @@ class HomeController extends Controller
     {
 		$states = \App\State::all();
 		$member = $reunion_dl;
+		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$siblings = explode('; ', $member->sibling);
+		$children = explode('; ', $member->child);
+		$family_members = Reunion_dl::where([
+			['family_id', $member->family_id],
+			['family_id', '<>', 'null']
+		])->get();
+		$potential_family_members = Reunion_dl::where([
+			['address', $member->address],
+			['city', $member->city],
+			['state', $member->state],
+			['family_id', 'null']
+		])->get();
+		$active_reunion = \App\Reunion::where('reunion_complete', 'N')->first();
+
+        return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children'));
+    }
+	
+	/**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Reunion_dl $reunion_dl)
+    {
+		$this->validate($request, [
+			'firstname' => 'required|max:30',
+			'lastname' => 'required|max:30',
+			'phone1' => 'max:999|min:0',
+			'phone2' => 'max:999|min:0',
+			'phone3' => 'max:9999|min:0',
+			'zip' => 'max:9999|min:0',
+		]);
+			
+		// dd($request);
 		
-        return view('admin.members.edit', compact('states', 'member'));
+		$member = $reunion_dl;
+		$member->firstname = $request->firstname;
+		$member->lastname = $request->lastname;
+		$member->email = $request->email;
+		$member->address = $request->address;
+		$member->city = $request->city;
+		$member->state = $request->state;
+		$member->zip = $request->zip;
+		$member->notes = $request->notes;
+		$member->mother = $request->mother;
+		$member->father = $request->father;
+		$member->spouse = $request->spouse;
+		$member->sibling = implode('; ', $request->siblings);
+		$member->child = implode('; ', $request->children);
+		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
+		$member->age_group = $request->age_group;
+		$member->mail_preference = $request->mail_preference;
+
+		if($member->save()) {
+			return redirect()->action('HomeController@edit', $member)->with('status', 'Member Updated Successfully');
+		}		
     }
 }

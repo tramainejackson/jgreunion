@@ -27,7 +27,6 @@
 			<div class="col-9">
 				<nav class="nav nav-pills justify-content-start py-3">
 					<a href='/profile' class='profileLink nav-link border-0'>My Profile</a>
-					<a href='/registrations' class='profileLink nav-link'>Registrations</a>
 					<a href='/administrator' class='profileLink nav-link'>Family Members</a>
 					<a href='/reunions' class='profileLink nav-link active'>Reunions</a>
 					<a href='/settings' class='profileLink nav-link'>Settings</a>
@@ -47,73 +46,80 @@
 						<li class="list-group-item list-group-item-action reunionItem">
 							<h2 class="" data-toggle="collapse" data-parent="#reunionAccordion" href="#reunionAccordion{{$loop->iteration}}" aria-expanded="true" aria-controls="reunionAccordion1">{{ $reunion->reunion_city . ' ' . $reunion->reunion_year }}</h2>
 							@if($reunion->has_site == 'Y')
-								{!! Form::open(['action' => ['ReunionController@update', 'reunion' => $reunion->id], 'method' => 'POST']) !!}
-									<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">
-										<div class="form-row my-3">
-											<div class="form-group col-4">
-												<label class="form-label" for="reunion_city">City</label>
-												<input type="text" name="reunion_city" class="form-control" value="{{ old('reunion_city') ? old('reunion_city') : $reunion->reunion_city }}" />
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="reunion_state">State</label>
-												<select class="form-control" name="reunion_state">
-													@foreach($states as $state)
-														<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('reunion_state') == $state->state_abb ? 'selected' : $reunion->reunion_state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
-													@endforeach
-												</select>
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="reunion_state">Year</label>
-												<select class="form-control" name="reunion_year">
-													@foreach($years as $year)
-														<option value="{{ $year->year_num }}" {{ old('reunion_year') && old('reunion_year') == $year->year_num ? 'selected' : $reunion->reunion_year == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
-													@endforeach
-												</select>
-											</div>
+								<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">
+									<div class="form-row my-3">
+										<div class="form-group col-4">
+											<label class="form-label" for="reunion_city">City</label>
+											<input type="text" class="form-control" value="{{ $reunion->reunion_city }}" disabled />
 										</div>
-										<div class="form-row my-3">
-											<div class="form-group col-4">
-												<label class="form-label" for="adult_price">Adult Price</label>
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text" id="basic-addon1">$</span>
-													</div>
-													<input type="number" name="adult_price" class="form-control" value="{{ old('adult_price') ? old('adult_price') : $reunion->adult_price }}" step="0.01" placeholder="Price For Adult 18-Older" />
-													<div class="input-group-append">
-														<span class="input-group-text" id="basic-addon1">Per Adult</span>
-													</div>
-												</div>
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="youth_price">Youth Price</label>
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text" id="basic-addon1">$</span>
-													</div>
-													<input type="number" name="youth_price" class="form-control" value="{{ old('youth_price') ? old('youth_price') : $reunion->youth_price }}" step="0.01" placeholder="Price For Youth 4-18" />
-													<div class="input-group-append">
-														<span class="input-group-text" id="basic-addon1">Per Youth</span>
-													</div>
-												</div>
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="child_price">Child Price</label>
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text" id="basic-addon1">$</span>
-													</div>
-													<input type="number" name="child_price" class="form-control" value="{{ old('child_price') ? old('child_price') : $reunion->child_price }}" aria-label="Username" aria-describedby="basic-addon1" step="0.01" placeholder="Price For Children 3-Under" />
-													<div class="input-group-append">
-														<span class="input-group-text" id="basic-addon1">Per Child</span>
-													</div>
-												</div>
-											</div>
+										<div class="form-group col-4">
+											<label class="form-label" for="reunion_state">State</label>
+											<select class="form-control" disabled>
+												@foreach($states as $state)
+													<option value="{{ $state->state_abb }}" {{ $reunion->reunion_state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
+												@endforeach
+											</select>
 										</div>
-										<div class="form-group">
-											{{ Form::submit('Update', ['class' => 'btn btn-primary form-control']) }}
+										<div class="form-group col-4">
+											<label class="form-label" for="reunion_state">Year</label>
+											<select class="form-control" disabled>
+												@foreach($years as $year)
+													<option value="{{ $year->year_num }}" {{ $reunion->reunion_year == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
+												@endforeach
+											</select>
 										</div>
 									</div>
-								{!! Form::close() !!}
+									<div class="form-row my-3">
+										<div class="form-group col-4">
+											<label class="form-label" for="adult_price">Adult Price</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">$</span>
+												</div>
+												<input type="number" class="form-control" value="{{ $reunion->adult_price }}" disabled />
+												<div class="input-group-append">
+													<span class="input-group-text" id="basic-addon1">Per Adult</span>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-4">
+											<label class="form-label" for="youth_price">Youth Price</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">$</span>
+												</div>
+												<input type="number" class="form-control" value="{{ $reunion->youth_price }}" disabled />
+												<div class="input-group-append">
+													<span class="input-group-text" id="basic-addon1">Per Youth</span>
+												</div>
+											</div>
+										</div>
+										<div class="form-group col-4">
+											<label class="form-label" for="child_price">Child Price</label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<span class="input-group-text" id="basic-addon1">$</span>
+												</div>
+												<input type="number" class="form-control" value="{{ $reunion->child_price }}" aria-label="Username" disabled />
+												<div class="input-group-append">
+													<span class="input-group-text" id="basic-addon1">Per Child</span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-row justify-content-around mb-3">
+										<button type="button" class="btn btn-primary col-4">Registrations <span class="badge badge-light">{{ $reunion->registrations->count() }}</span>
+										<span class="sr-only">total registrations</span>
+										</button>
+
+										<button type="button" class="btn btn-primary col-4">Committee Members <span class="badge badge-light">{{ $reunion->committee->count() }}</span>
+										<span class="sr-only">total committee members</span>
+										</button>
+									</div>
+									<div class="form-group">
+										<a href="/reunions/{{ $reunion->id }}/edit" class="btn btn-warning btn-lg">Edit Reunion</a>
+									</div>
+								</div>
 							@else
 								<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">
 									<h3 class="text-center">No Additional Information For This Reunion</h3>

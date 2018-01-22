@@ -82,9 +82,14 @@ class ReunionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Reunion $reunion)
     {
-        //
+		$states = State::all();
+		$years = Year::all();
+		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$titles = Committee_Title::all();
+		
+		return view('admin.reunions.edit', compact('reunion', 'states', 'years', 'members', 'titles'));
     }
 
     /**

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Registration;
 use App\Reunion;
+use App\Reunion_dl;
+use App\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -74,9 +76,12 @@ class RegistrationController extends Controller
      * @param  \App\registration  $registration
      * @return \Illuminate\Http\Response
      */
-    public function edit(registration $registration)
+    public function edit(Registration $registration)
     {
-        //
+		$states = State::all();
+		$family = Reunion_dl::where('family_id', $registration->reunion_dl->family_id)->get();
+		
+		return view('admin.registrations.edit', compact('registration', 'states', 'family'));
     }
 
     /**

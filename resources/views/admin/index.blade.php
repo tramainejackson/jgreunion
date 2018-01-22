@@ -37,41 +37,48 @@
 			</div>
 		</div>
 		<div class="row bg-light" id="distribution_list">
+			<div class="col-2 my-2">
+				<div class="">
+					<a href="/members/create" class="btn btn-info btn-lg">Create New Member</a>
+				</div>
+			</div>
 			<div class="col-12">
-				<table class="table table-striped table-hover">
-					<thead>
-						<tr>
-							<th>Firstname</th>
-							<th>Lastname</th>
-							<th>Address</th>
-							<th>City</th>
-							<th>State</th>
-							<th>Zip</th>
-							<th>Phone</th>
-							<th>Email</th>
-							<th>Preference</th>
-							<th>Notes</th>
-							<th>Edit</th>
-						</tr>
-					</thead>
-					<tbody>
-						@foreach($distribution_list as $member)
+				<div class="table-responsive">
+					<table class="table table-striped table-hover">
+						<thead>
 							<tr>
-								<td class="text-truncate">{{ $member->firstname }}</td>
-								<td class="text-truncate">{{ $member->lastname }}</td>
-								<td class="text-truncate">{{ $member->address }}</td>
-								<td class="text-truncate">{{ $member->city }}</td>
-								<td class="text-truncate">{{ $member->state }}</td>
-								<td class="text-truncate">{{ $member->zip }}</td>
-								<td class="text-truncate">{{ $member->phone }}</td>
-								<td class="text-truncate">{{ $member->email }}</td>
-								<td class="text-truncate">{{ $member->mail_preference }}</td>
-								<td class="text-truncate">{{ $member->notes != null ? 'Y' : 'N' }}</td>
-								<td class="text-truncate"><a href="#" class="btn btn-warning">Edit</a></td>
-							</tr>			
-						@endforeach
-					</tbody>
-				</table>
+								<th>Firstname</th>
+								<th>Lastname</th>
+								<th>Address</th>
+								<th>City</th>
+								<th>State</th>
+								<th>Zip</th>
+								<th>Phone</th>
+								<th>Email</th>
+								<th>Preference</th>
+								<th>Notes</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($distribution_list as $member)
+								<tr>
+									<td class="text-truncate">{{ $member->firstname }}</td>
+									<td class="text-truncate">{{ $member->lastname }}</td>
+									<td class="text-truncate">{{ $member->address }}</td>
+									<td class="text-truncate">{{ $member->city }}</td>
+									<td class="text-truncate">{{ $member->state }}</td>
+									<td class="text-truncate">{{ $member->zip }}</td>
+									<td class="text-truncate">{{ $member->phone }}</td>
+									<td class="text-truncate">{{ $member->email }}</td>
+									<td class="text-truncate">{{ $member->mail_preference }}</td>
+									<td class="text-truncate">{{ $member->notes != null ? 'Y' : 'N' }}</td>
+									<td class="text-truncate"><a href="/members/{{ $member->id }}" class="btn btn-warning">Edit</a></td>
+								</tr>			
+							@endforeach
+						</tbody>
+					</table>
+				</div>
 			</div>			
 		</div>
 	</div>

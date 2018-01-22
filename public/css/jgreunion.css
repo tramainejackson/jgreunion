@@ -749,13 +749,7 @@ div#page_header {
 	padding: 4% 0%;
 	font-family: 'Berkshire Swash', cursive;
 }
-label {
-  max-width: 45%;
-  width: 45%;
-  display: inline-block;
-  text-align: -webkit-auto;
-  font-size: 130%;
-}
+
 div#modal_adminPage label {
 	font-size: 115%
 }
@@ -1430,10 +1424,6 @@ span#fancy_cut_image img {
 #modal_adminPage input[type="text"], #modal_adminPage input[type="email"],#modal_adminPage input[type="number"] {
 	width: 50%;
 }
-input[type="text"], input[type="password"], input[type="email"], input[type="number"] {
-  border-radius: 5px;
-  width: 94%;
-}
 
 .indPost.reunionRegistration input, .indPost.reunionRegistration select {
     font-size: 125%;
@@ -1927,7 +1917,7 @@ div#navi {
   /* background: linear-gradient(rgb(66, 66, 66), rgb(66, 66, 66), rgb(66, 66, 66), #6C9F3E); */
   color: white;
   position: absolute;
-  padding: 8% 0% 0%;
+  /* padding: 8% 0% 0%; */
   z-index: 2;
   width: 100%;
   max-width: 100%;
@@ -2368,11 +2358,6 @@ p.confirmationP {
     margin: 0%;
     font-size: 115%;
     padding: 0.5% 0% 0% 30%;
-}
-span {
-    min-width: 25%;
-    display: inline-block;
-    font-size: 110%;
 }
 table.confirm_attendees {
     max-width: 50%;
@@ -3459,12 +3444,7 @@ button#takeNow_btn, #yes_music {
   width: 40%;
   padding: 2% 0%;
 }
-.page_header:first-of-type {
-	text-align: -webkit-center;
-	text-align: center;
-	width: 100%;
-	padding: 5% 0%;
-}
+
 #admin_login {
   right: 1%;
   bottom: 18%;
@@ -3749,15 +3729,6 @@ span.phone_par_span {
 span.phone_span {
     min-width: 0%;
     margin: 0% 0.5% 0% 0.5%;
-}
-div#family_account {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    max-width: 100%;
-    min-width: 15%;
-    text-align: -webkit-right;
-    text-align: right;
 }
 div#home_link {
     position: absolute;

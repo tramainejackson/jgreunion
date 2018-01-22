@@ -11,7 +11,7 @@ class registration extends Model
      */
     public function reunion_dl()
     {
-        return $this->belongsTo('App\Reunion_dl');
+        return $this->belongsTo('App\Reunion_dl', 'dl_id');
     }
 	
 	/**

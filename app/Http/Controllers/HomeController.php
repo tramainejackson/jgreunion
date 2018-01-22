@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reunion_dl;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -55,5 +56,43 @@ class HomeController extends Controller
 		$states = \App\State::all();
 
         return view('home', compact('user', 'userPhone1', 'rows', 'userPhone1', 'userPhone2', 'userPhone3', 'newReunionCheck', 'states'));
+    }
+	
+	/**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+		
+		$states = \App\State::all();
+
+        return view('admin.members.create', compact('states'));
+    }
+	
+	/**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function store()
+    {
+		$states = \App\State::all();
+
+        return view('admin.members.create', compact('states'));
+    }
+	
+	/**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Reunion_dl $reunion_dl)
+    {
+		$states = \App\State::all();
+		$member = $reunion_dl;
+		
+        return view('admin.members.edit', compact('states', 'member'));
     }
 }

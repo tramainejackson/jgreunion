@@ -37,3 +37,11 @@ Route::resource('/registrations', 'RegistrationController');
 Route::resource('/reunions', 'ReunionController');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/members/create', 'HomeController@create')->name('new_member');
+
+Route::post('/members', 'HomeController@store')->name('add_member');
+
+Route::put('/members/{reunion_dl}', 'HomeController@update')->name('update_member');
+
+Route::get('/members/{reunion_dl}', 'HomeController@edit')->name('edit_member');

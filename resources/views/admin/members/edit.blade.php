@@ -45,19 +45,17 @@
 					
 					@if($active_reunion != null)
 						@if($family_members->count() > 1)
-							<a href="{{ action('RegistrationController@update', ['registration' => $active_reunion->id ]) }}" class="btn btn-success btn-lg mw-100" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">Add All Household Members To {{ $active_reunion->reunion_city }} Reunion</a>
+							<a href="{{ action('RegistrationController@update', ['reunion' => $active_reunion->id ]) }}" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Family Already Registered For ' . $active_reunion->reunion_city . ' Reunion' : 'Add All Household Members To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
 						
-							<form id="one_click_registration" action="{{ action('RegistrationController@update', ['registration' => $active_reunion->id ]) }}" method="PATCH" style="display: none;">
-								{{ csrf_field() }}
+							{!! Form::open(['action' => ['RegistrationController@update', 'reunion' => $active_reunion->id], 'method' => 'PUT', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
 								<input type="text" name="reg_member" class="" value="{{ $member->id }}" hidden />
-							</form>
+							{!! Form::close() !!}
 						@else
-							<a href="{{ action('RegistrationController@update', ['registration' => $active_reunion->id ]) }}" class="btn btn-success btn-lg mw-100" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">Add Member To {{ $active_reunion->reunion_city }} Reunion</a>
+							<a href="{{ action('RegistrationController@update', ['reunion' => $active_reunion->id ]) }}" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Member Already Registered For ' . $active_reunion->reunion_city . ' Reunion'  : 'Add Member To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
 						
-							<form id="one_click_registration" action="{{ action('RegistrationController@update', ['registration' => $active_reunion->id ]) }}" method="PATCH" style="display: none;">
-								{{ csrf_field() }}
+							{!! Form::open(['action' => ['RegistrationController@update', 'reunion' => $active_reunion->id], 'method' => 'PUT', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
 								<input type="text" name="reg_member" class="" value="{{ $member->id }}" hidden />
-							</form>
+							{!! Form::close() !!}
 						@endif
 					@endif
 				</div>
@@ -116,9 +114,9 @@
 					<div class="form-group">
 						<label class="form-label" for="age_group">Age Group</label>
 						<select class="form-control custom-select" name="age_group">
-							<option value="adult" {{ old('age_group') && old('age_group') == 'M' ? 'selected' : '' }}>Adult</option>
-							<option value="youth" {{ old('age_group') && old('age_group') == 'E' ? 'selected' : '' }}>Youth</option>
-							<option value="child" {{ old('age_group') && old('age_group') == 'E' ? 'selected' : '' }}>Child</option>
+							<option value="adult" {{ $member->age_group == 'adult' ? 'selected' : '' }}>Adult</option>
+							<option value="youth" {{ $member->age_group == 'youth' ? 'selected' : '' }}>Youth</option>
+							<option value="child" {{ $member->age_group == 'child' ? 'selected' : '' }}>Child</option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -137,10 +135,10 @@
 							<h2 class="text-center">Family Tree</h2>
 						</div>
 						<div class="form-group text-center col-12">
-							<button type="button" class="w-25 mx-auto btn btn-outline-success my-2{{ $member->descent == 'jackson' ? ' btn-success  text-light active' : '' }}">
+							<button type="button" class="w-25 mx-auto btn btn-outline-success my-2 descentInput{{ $member->descent == 'jackson' ? ' btn-success text-light active' : '' }}">
 								<input type="checkbox" name="descent" value="jackson" hidden {{ $member->descent == 'Y' ? 'checked' : '' }} />Jackson
 							</button>
-							<button type="button" class="w-25 mx-auto btn btn-outline-success my-2{{ $member->descent == 'green' ? ' btn-success text-light active' : '' }}">
+							<button type="button" class="w-25 mx-auto btn btn-outline-success my-2 descentInput{{ $member->descent == 'green' ? ' btn-success text-light active' : '' }}">
 								<input type="checkbox" name="descent" value="green" hidden {{ $member->descent == 'green' ? 'checked' : '' }} />Green
 							</button>
 						</div>
@@ -173,68 +171,112 @@
 						</div>
 						<div class="form-group text-center col-12">
 							<label for="" class="form-label text-center d-block">Siblings</label>
-							<select class="custom-select w-50 mx-auto" name="siblings[]">
-								<option value="blank">--- Select A Sibling ---</option>
-								@foreach($siblings as $sibling)
+							@foreach($siblings as $sibling)
+								<select class="custom-select w-50 mx-auto" name="siblings[]">
+									<option value="blank">--- Select A Sibling ---</option>
 									@foreach($members as $option)
 										<option value="{{ $option->id }}" {{ $option->id == $sibling ? 'selected' : '' }}>{{ $option->firstname . ' ' . $option->lastname }}</option>
 									@endforeach
+								</select>
+							@endforeach
+						</div>
+
+						<!-- Blank row for adding a sibling member --> 
+						<div class="form-group text-center col-12 siblingRow hidden">
+							<select class="custom-select w-50 mx-auto" name="siblings[]">
+								<option value="blank">--- Select A Sibling ---</option>
+								@foreach($members as $option)
+									<option value="{{ $option->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>
 								@endforeach
 							</select>
-							<button type="button" class="w-50 mx-auto btn btn-outline-success my-2" >Add Another Sibling</button>
 						</div>
 						<div class="form-group text-center col-12">
+							<button type="button" class="w-50 mx-auto btn btn-outline-success addSiblingRow" >Add Another Sibling</button>
+						</div>
+						
+						<div class="form-group text-center col-12">
 							<label for="" class="form-label text-center d-block">Children</label>
-							<select class="custom-select w-50 mx-auto" name="children[]">
-								<option value="blank">--- Select A Child ---</option>
-								@foreach($children as $child)
+							@foreach($children as $child)
+								<select class="custom-select w-50 mx-auto" name="children[]">
+									<option value="blank">--- Select A Child ---</option>
 									@foreach($members as $option)
 										<option value="{{ $option->id }}" {{ $option->id == $child ? 'selected' : '' }}>{{ $option->firstname . ' ' . $option->lastname }}</option>
 									@endforeach
+								</select>
+							@endforeach
+						</div>
+						
+						<!-- Blank row for adding a child member --> 
+						<div class="form-group text-center col-12 childrenRow hidden">
+							<select class="custom-select w-50 mx-auto" name="children[]">
+								<option value="blank">--- Select A Child ---</option>
+								@foreach($members as $option)
+									<option value="{{ $option->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>
 								@endforeach
 							</select>
-							<button type="button" class="w-50 mx-auto btn btn-outline-success my-2" >Add Another Child</button>
+						</div>
+						<div class="form-group text-center col-12">
+							<button type="button" class="w-50 mx-auto btn btn-outline-success addChildrenRow" >Add Another Child</button>
 						</div>
 					</div>
-					<div class="form-block-header">
-						<h3 class="">Household Members
-						<button type="button" class="btn btn-outline-success mb-2 addHHMember">Add House Hold Member</button>
-						</h3>
-					</div>
-					@if($family_members->count() > 1)
-						@foreach($family_members as $family_member)
-							<div class="form-row">
-								<div class="form-group col-8">
-									<input class="form-control" value="{{ $family_member->firstname . ' ' . $family_member->lastname }}" disabled />
-									<input value="{{ $family_member->id }}" hidden />
-								</div>
-								<div class="">
-									<div class="form-group col-2">
-										<a href="#" class="btn btn-danger{{ $family_member->id == $member->id ? ' disabled' : '' }}">Remove</a>
-									</div>
-								</div>
-							</div>
-						@endforeach
-					@endif
-					
-					@if($potential_family_members->count() > 0)
+					<div class="houseHoldBlock">
 						<div class="form-block-header">
-							<h3 class="">Potential Household Members</h3>
+							<h3 class="">Household Members
+							<button type="button" class="btn btn-outline-success mb-2 addHHMember">Add Household Member</button>
+							</h3>
 						</div>
-						@foreach($potential_family_members as $potential_family_member)
-							<div class="form-row">
-								<div class="form-group col-8">
-									<input class="form-control" value="{{ $potential_family_member->firstname . ' ' . $potential_family_member->lastname }}" disabled />
-									<input value="{{ $potential_family_member->id }}" hidden />
-								</div>
-								<div class="">
-									<div class="form-group col-2">
-										<a href="#" class="btn btn-danger{{ $potential_family_member->id == $member->id ? ' disabled' : '' }}">Add To</a>
+						@if($family_members->count() > 1)
+							@foreach($family_members as $family_member)
+								<div class="form-row">
+									<div class="form-group col-8">
+										<input class="form-control" value="{{ $family_member->firstname . ' ' . $family_member->lastname }}" disabled />
+										<input value="{{ $family_member->id }}" hidden />
+									</div>
+									<div class="">
+										<div class="form-group col-2">
+											<a href="#" class="btn btn-danger{{ $family_member->id == $member->id ? ' disabled' : '' }}">Remove</a>
+										</div>
 									</div>
 								</div>
+							@endforeach
+						@endif
+						
+						<!-- Blank row for adding a household member --> 
+						<div class="form-row hhMemberRow hidden">
+							<div class="form-group col-7">
+								<select class="custom-select" name="houseMember[]">
+									<option value="blank">--- Select A Household Member ---</option>
+									@foreach($members as $option)
+										<option value="{{ $member->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>
+									@endforeach
+								</select>
 							</div>
-						@endforeach
-					@endif
+							<div class="form-group col-2">
+								<a href="" class="btn btn-danger d-block">Remove</a>
+							</div>
+						</div>
+						
+						@if($potential_family_members->count() > 0)
+							<div class="form-block-header">
+								<h3 class="">Potential Household Members</h3>
+							</div>
+							@foreach($potential_family_members as $potential_family_member)
+								@if($potential_family_member->id != $member->id)
+									<div class="form-row">
+										<div class="form-group col-8">
+											<input class="form-control" value="{{ $potential_family_member->firstname . ' ' . $potential_family_member->lastname }}" disabled />
+											<input value="{{ $potential_family_member->id }}" hidden />
+										</div>
+										<div class="">
+											<div class="form-group col-2">
+												<a href="#" class="btn btn-warning" onclick="event.preventDefault(); addToHouseHold({{$member->id . ',' . $potential_family_member->id}});">Add To Household</a>
+											</div>
+										</div>
+									</div>
+								@endif
+							@endforeach
+						@endif
+					</div>
 					<div class="form-group">
 						{{ Form::submit('Update Member', ['class' => 'btn btn-primary form-control']) }}
 					</div>

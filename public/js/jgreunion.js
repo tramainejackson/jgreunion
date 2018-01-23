@@ -1,6 +1,12 @@
 $(document).ready(function()
 {	
-//Common Variables
+
+	$.ajaxSetup({
+		headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')	},
+		cache: false
+	});
+
+	//Common Variables
 	var windowHeight = window.innerHeight;
 	var documentHeight = document.body.clientHeight;
 	var screenHeight = screen.height;
@@ -236,13 +242,30 @@ $(document).ready(function()
 			$(this).parent().parent().find("input").attr("disabled", true);
 		}
 	});
-//
+
+	// Toggle descent options
 	$("body").on("click", ".descentInput", function(e) {
 		e.preventDefault();
-		if(!$(this).hasClass("descentSelected")) {
-			$(this).addClass("descentSelected");
-			$(this).siblings().removeClass("descentSelected");
-		} 
+		$(this).addClass("active text-light").children().attr('checked', true);
+		$(this).siblings().removeClass('active text-light').children().removeAttr('checked');
+	});
+	
+	// Add Household Member Row
+	$('body').on('click', '.addHHMember', function() {
+		var hhMemberRow = $('.hhMemberRow').clone();
+		$(hhMemberRow).addClass('d-flex').insertBefore($('.hhMemberRow')).removeClass('hidden hhMemberRow').find('select').focus();
+	});
+	
+	// Add Child Member Row
+	$('body').on('click', '.addChildrenRow', function() {
+		var childrenRow = $('.childrenRow').clone();
+		$(childrenRow).addClass('d-flex').insertBefore($('.childrenRow')).removeClass('hidden childrenRow').find('select').focus();
+	});
+	
+	// Add Sibling Member Row
+	$('body').on('click', '.addSiblingRow', function() {
+		var siblingRow = $('.siblingRow').clone();
+		$(siblingRow).addClass('d-flex').insertBefore($('.siblingRow')).removeClass('hidden siblingRow').find('select').focus();
 	});
 	
 //Show current family member demographics for editing
@@ -1137,19 +1160,67 @@ $(document).ready(function()
 	});*/
 	
 });
-//Show gif images while ajax is loading
-	$(document).ajaxStart(function(){
-		$("#loading_image").fadeIn("slow");
+
+// Add individual member to household
+function addToHouseHold(dlID, memberID) {
+	event.preventDefault();
+	$.ajax({
+	  method: "PUT",
+	  url: "/members/" + memberID + "/add_house_hold",
+	  data: {houseMember:memberID, reunion_dl:dlID}
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var newData = $(data).find('.houseHoldBlock');
+		var currentHHBlock = $('.houseHoldBlock');
+		
+		$(currentHHBlock).fadeOut(function() {
+			$(newData).addClass('hidden');
+			$(newData).insertAfter('.familyTreeGroup').fadeIn(function() {
+				$(currentHHBlock).remove();				
+			});
+		});
 	});
-	$(document).ajaxComplete(function(){
-		$("#loading_image").fadeOut("slow");
-		$("#confirmed_modal").fadeIn();
-		setTimeout(function()
-		{
-			$("#confirmed_modal, #overlay_PhillyPage").fadeOut();
-			$("#confirmed_modal p").remove();
-		}, 7000);
+}
+
+// Remove individual member from household
+function removeFromHouseHold() {
+	event.preventDefault();
+	
+	$.ajax({
+	  method: "POST",
+	  url: "/contacts",
+	  data: $('#contact_add').serialize()
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var newData = $(data);
+		
+		$("#welcome_modal .modal-content").fadeOut(function() {
+			$("#welcome_modal .modal-content").html(newData);
+			$("#welcome_modal").modal('hide');
+			
+			setTimeout(function() {
+				$("#welcome_modal .modal-content").fadeIn(function() {
+				$("#welcome_modal").modal('show');
+					setTimeout(function() {
+						$("#welcome_modal").modal('toggle');
+						$(".modal-backdrop").remove();
+					}, 5000);
+				});
+			}, 500);
+		});
 	});
+}
+
 //Check for errors function
 	var errors;
 	function errorCheck(regName, regAdd, regPhone, regEmail, numAdults, adultName, youthName, childName) {

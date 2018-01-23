@@ -2,13 +2,20 @@
 		Jackson / Green Family Reunion
 ------------------------------------------------
 
+Update registration when a new member is added to a household and registration already completed
+Update registration edit page
+Add how many household memebers for registered members on reunions edit page
 Make something with Photoshop as a picture background for logged in pages
-Create a show page distribution list and registrations
 Update past reunions show page
 Update upcoming reunions page
 Create a settings page for admin
 Add popover on notes sections
+Add a footer
 Allow user to have a profile and be an admin
+Done: Create a show page for distribution list
+Done: Create a show page for registrations
+Done: Add function for Add Household Member button
+Done: Add function for Jackson and Green button
 Done: Add a button that allows admin to add family member from dl to new reunion registered
 Done: Add relationship for registrations and distribution_list
 Done: Create a create, edit and show page for reunions

@@ -76,7 +76,7 @@
 									<td class="text-truncate">{{ $member->email }}</td>
 									<td class="text-truncate">{{ $member->mail_preference }}</td>
 									<td class="text-truncate">{{ $member->notes != null ? 'Y' : 'N' }}</td>
-									<td class="text-truncate"><a href="/members/{{ $member->id }}" class="btn btn-warning">Edit</a></td>
+									<td class="text-truncate"><a href="/members/{{ $member->id }}/edit" class="btn btn-warning">Edit</a></td>
 								</tr>			
 							@endforeach
 						</tbody>

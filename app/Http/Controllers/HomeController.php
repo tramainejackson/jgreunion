@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Reunion_dl;
 use App\Registration;
+use App\Reunion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -99,7 +100,7 @@ class HomeController extends Controller
 		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
 		$member->age_group = $request->age_group;
 		$member->mail_preference = $request->mail_preference;
-
+// dd($member);
 		if($member->save()) {
 			return redirect()->action('HomeController@edit', $member)->with('status', 'Member Created Successfully');
 		}		
@@ -124,12 +125,16 @@ class HomeController extends Controller
 		$potential_family_members = Reunion_dl::where([
 			['address', $member->address],
 			['city', $member->city],
-			['state', $member->state],
-			['family_id', 'null']
+			['state', $member->state]
 		])->get();
-		$active_reunion = \App\Reunion::where('reunion_complete', 'N')->first();
-
-        return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children'));
+		$active_reunion = Reunion::where('reunion_complete', 'N')->first();
+		$registered_for_reunion = Registration::where([
+				['family_id', $member->family_id],
+				['family_id', '<>', 'null']
+			])
+			->orwhere('dl_id', $member->id)
+			->get();
+        return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
     }
 	
 	/**
@@ -147,8 +152,6 @@ class HomeController extends Controller
 			'phone3' => 'max:9999|min:0',
 			'zip' => 'max:9999|min:0',
 		]);
-			
-		// dd($request);
 		
 		$member = $reunion_dl;
 		$member->firstname = $request->firstname;
@@ -158,18 +161,101 @@ class HomeController extends Controller
 		$member->city = $request->city;
 		$member->state = $request->state;
 		$member->zip = $request->zip;
+		$member->descent = $request->descent;
 		$member->notes = $request->notes;
-		$member->mother = $request->mother;
-		$member->father = $request->father;
-		$member->spouse = $request->spouse;
-		$member->sibling = implode('; ', $request->siblings);
-		$member->child = implode('; ', $request->children);
+		$member->mother = $request->mother != 'blank' ? $request->mother : null;
+		$member->father = $request->father != 'blank' ? $request->father : null;
+		$member->spouse = $request->spouse != 'blank' ? $request->spouse : null;
+		$member->sibling = str_ireplace('; blank', '', implode('; ', $request->siblings)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->siblings)) : null;
+		$member->child = str_ireplace('; blank', '', implode('; ', $request->children)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->children)) : null;
+		$houseMembers = str_ireplace('; blank', '', implode('; ', $request->houseMember)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->houseMember)) : null;
 		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
 		$member->age_group = $request->age_group;
 		$member->mail_preference = $request->mail_preference;
+		
+		// If household members isn't empty then add a family ID
+		// to all the parties
+		if($houseMembers != null) {
+			$maxFamilyID = Reunion_dl::max('family_id');
+			$hhMembers = explode('; ', $houseMembers);
+			
+			if($member->family_id == null) {
+				$newFamilyID = $maxFamilyID++;
+				$member->family_id = $newFamilyID;
+				
+				foreach($hhMembers as $hhID) {
+					$hhMember = Reunion_dl::find($hhID);
+					$hhMember->family_id = $newFamilyID;
+					$hhMember->save();
+				}
+			} else {
+				foreach($hhMembers as $hhID) {
+					$hhMember = Reunion_dl::find($hhID);
+					
+					if($hhMember->family_id != $member->family_id) {
+						$hhMember->family_id = $member->family_id;
+						$hhMember->save();
+					}
+				}
+			}
+		}
 
 		if($member->save()) {
 			return redirect()->action('HomeController@edit', $member)->with('status', 'Member Updated Successfully');
 		}		
     }
+
+	/**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function add_house_hold(Request $request) {
+		$hhMember = $request->houseMember;
+		$member = Reunion_dl::find($request->reunion_dl);
+		
+		// If household members isn't empty then add a family ID
+		// to all the parties
+		if($hhMember != null) {
+			$maxFamilyID = Reunion_dl::max('family_id');
+			
+			if($member->family_id == null) {
+				$newFamilyID = $maxFamilyID++;
+				$member->family_id = $newFamilyID;
+				$hhMember = Reunion_dl::find($hhMember);
+				$hhMember->family_id = $newFamilyID;
+				$hhMember->save();
+			} else {
+				$hhMember = Reunion_dl::find($hhMember);
+				
+				if($hhMember->family_id != $member->family_id) {
+					$hhMember->family_id = $member->family_id;
+					$hhMember->save();
+				}
+			}
+		}
+		
+		$states = \App\State::all();
+		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$siblings = explode('; ', $member->sibling);
+		$children = explode('; ', $member->child);
+		$family_members = Reunion_dl::where([
+			['family_id', $member->family_id],
+			['family_id', '<>', 'null']
+		])->get();
+		$potential_family_members = Reunion_dl::where([
+			['address', $member->address],
+			['city', $member->city],
+			['state', $member->state]
+		])->get();
+		$active_reunion = Reunion::where('reunion_complete', 'N')->first();
+		$registered_for_reunion = Registration::where([
+				['family_id', $member->family_id],
+				['family_id', '<>', 'null']
+			])
+			->orwhere('dl_id', $member->id)
+			->get();
+			
+		return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
+	}
 }

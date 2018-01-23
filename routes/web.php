@@ -44,4 +44,6 @@ Route::post('/members', 'HomeController@store')->name('add_member');
 
 Route::put('/members/{reunion_dl}', 'HomeController@update')->name('update_member');
 
-Route::get('/members/{reunion_dl}', 'HomeController@edit')->name('edit_member');
+Route::get('/members/{reunion_dl}/edit', 'HomeController@edit')->name('edit_member');
+
+Route::put('/members/{reunion_dl}/add_house_hold', 'HomeController@add_house_hold')->name('add_house_hold');

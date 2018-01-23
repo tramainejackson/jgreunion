@@ -191,7 +191,7 @@
 								<span class="d-inline-block">{{ $loop->iteration }}.</span>
 							</div>
 							<div class="form-group col-7">
-								<select class="custom-select" name="dl_id[]">
+								<select class="custom-select" name="" disabled>
 									@foreach($members as $member)
 										<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 									@endforeach

@@ -179,7 +179,7 @@
 					</div>
 					<div class="form-block-header">
 						<h3 class="text-left">Registered Members
-							<button type="button" class="btn btn-outline-success mb-2 addCommitteeMember">Add Registration</button>
+							<a href="{{ action('RegistrationController@edit' , ['registration' => $member->id])}}" type="button" class="btn btn-outline-success mb-2">Add Registration</a>
 							<button type="button" class="btn btn-primary mb-2">Registrations <span class="badge badge-light">{{ $reunion->registrations->count() }}</span>
 							<span class="sr-only">total registrations</span>
 							</button>

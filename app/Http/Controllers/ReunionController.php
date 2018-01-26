@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Registration;
 use App\Reunion;
+use App\Reunion_committee;
 use App\Reunion_dl;
 use App\State;
 use App\Year;
@@ -62,7 +63,37 @@ class ReunionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		$reunion = new Reunion();
+		$reunion->reunion_city = $request->reunion_city;
+		$reunion->reunion_state = $request->reunion_state;
+		$reunion->reunion_year = $request->reunion_year;
+		$reunion->adult_price = $request->adult_price;
+		$reunion->youth_price = $request->youth_price;
+		$reunion->child_price = $request->child_price;
+		
+		if($reunion->save()) {
+			for($x=0; $x < count($request->member_title); $x++) {
+				// Create New Reunion Object
+				$committee_member = new Reunion_committee();
+				
+				// Get member from distro list
+				$member = Reunion_dl::find($request->dl_id[$x]);
+				
+				$committee_member->dl_id = $member->id;
+				$committee_member->reunion_id = $reunion->id;
+				$committee_member->member_name = $member->firstname . ' ' . $member->lastname;
+				$committee_member->member_title = $request->member_title[$x];
+				$committee_member->member_email = $member->email;
+				$committee_member->member_phone = $member->phone;
+				
+				if($committee_member->save()) {
+					
+				}
+			}
+			
+			return redirect()->action('ReunionController@edit', $reunion)->with('status', 'Reunion Updated Succssfully');
+		}
+
     }
 
     /**
@@ -99,9 +130,19 @@ class ReunionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Reunion $reunion)
     {
-        //
+		$reunion->reunion_complete = $request->reunion_complete;
+		$reunion->reunion_city = $request->reunion_city;
+		$reunion->reunion_state = $request->reunion_state;
+		$reunion->reunion_year = $request->reunion_year;
+		$reunion->adult_price = $request->adult_price;
+		$reunion->youth_price = $request->youth_price;
+		$reunion->child_price = $request->child_price;
+		
+		if($reunion->save()) {
+			return redirect()->action('ReunionController@edit', $reunion)->with('status', 'Reunion Updated Succssfully');
+		}
     }
 
     /**

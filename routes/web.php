@@ -18,10 +18,18 @@ Route::get('/', function () {
     return view('welcome', compact('images', 'reunions'));
 });
 
-Route::get('/past_reunion/{id}', function () {
-	$registrations = \App\Registration::all();
+Route::get('/past_reunion/{id}', function ($id) {
+	$registrations = \App\Registration::where('id', $id);
 	
     return view('past_reunion', compact('registrations'));
+});
+
+Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {
+	$registrations = \App\Registration::all();
+	$committee_members = $reunion->committee;
+	$events = $reunion->events;
+	
+    return view('upcoming_reunion', compact('registrations', 'committee_members', 'events'));
 });
 
 Route::get('/administrator', function () {

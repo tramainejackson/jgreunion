@@ -55,7 +55,7 @@
 	</div>
 	<div id="jgreunion_past_future">
 		<ul id="jgreunion_past_future_list">
-			<li><button id="upcoming_btn" class="past_future_btn">Upcoming Reunion 2018 - Charlotte</button></li>
+			<li><a href="/upcoming_reunion/19" id="upcoming_btn" class="past_future_btn">Upcoming Reunion 2018 - Charlotte</a></li>
 			<li><button id="past_btn" class="past_future_btn">Past Reunions</button>
 				<ul id="past_reunions">
 					@foreach($reunions as $pastReunion)

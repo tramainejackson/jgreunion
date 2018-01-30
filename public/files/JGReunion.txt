@@ -1,7 +1,7 @@
 ------------------------------------------------
 		Jackson / Green Family Reunion
 ------------------------------------------------
-
+PayPal JacksonGreen2016
 Update registration when a new member is added to a household and registration already completed
 Update registration edit page
 Add how many household memebers for registered members on reunions edit page
@@ -10,6 +10,7 @@ Update past reunions show page
 Update upcoming reunions page
 Create a settings page for admin
 Add popover on notes sections
+Add search feature
 Add a footer
 Allow user to have a profile and be an admin
 Done: Create a show page for distribution list

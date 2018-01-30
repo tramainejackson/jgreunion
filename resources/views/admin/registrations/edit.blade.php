@@ -54,16 +54,16 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="address">Address</label>
-						<input type="text" name="address" class="form-control" value="{{ $registration->reunion_dl->address }}" placeholder="Enter Address" />
+						<input type="text" name="address" class="form-control" value="{{ $registration->reunion_dl->address }}" placeholder="Enter Address" disabled />
 					</div>
 					<div class="form-row">
 						<div class="form-group col-4">
 							<label class="form-label" for="city">City</label>
-							<input type="text" name="city" class="form-control" value="{{ $registration->reunion_dl->city }}" placeholder="Enter City" />
+							<input type="text" name="city" class="form-control" value="{{ $registration->reunion_dl->city }}" placeholder="Enter City" disabled />
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label" for="state">State</label>
-							<select class="form-control" name="state">
+							<select class="form-control custom-select" name="state" disabled>
 								@foreach($states as $state)
 									<option value="{{ $state->state_abb }}" {{ $registration->reunion_dl->state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 								@endforeach
@@ -71,26 +71,26 @@
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label" for="zip">Zip</label>
-							<input type="number" name="zip" class="form-control" value="{{ $registration->reunion_dl->zip }}" placeholder="Enter Zip Code" />
+							<input type="number" name="zip" class="form-control" value="{{ $registration->reunion_dl->zip }}" placeholder="Enter Zip Code" disabled />
 						</div>
 					</div>
 					<div class="form-row">
 						<div class="form-group col-6">
 							<label class="form-label" for="email">Email</label>
-							<input type="text" name="email" class="form-control" value="{{ $registration->reunion_dl->email }}" placeholder="Enter Email Address" />
+							<input type="text" name="email" class="form-control" value="{{ $registration->reunion_dl->email }}" placeholder="Enter Email Address" disabled />
 						</div>
 						<div class="form-row col-6">
 							<label class="form-label col-12" for="city">Phone</label>
 							<div class="form-group col-3">
-								<input type="number" name="phone1" class="form-control" value="{{ old('phone1') ? old('phone1') : substr($registration->reunion_dl->phone, 0, 3) }}" placeholder="###" max="999" />
+								<input type="number" name="phone1" class="form-control" value="{{ old('phone1') ? old('phone1') : substr($registration->reunion_dl->phone, 0, 3) }}" placeholder="###" max="999" disabled />
 							</div>
 							<span>-</span>
 							<div class="form-group col-3">
-								<input type="number" name="phone2" class="form-control" value="{{ old('phone2') ? old('phone2') : substr($registration->reunion_dl->phone, 3, 3) }}" placeholder="###" max="999" />
+								<input type="number" name="phone2" class="form-control" value="{{ old('phone2') ? old('phone2') : substr($registration->reunion_dl->phone, 3, 3) }}" placeholder="###" max="999" disabled />
 							</div>
 							<span>-</span>
 							<div class="form-group col-5">
-								<input type="number" name="phone3" class="form-control" value="{{ old('phone3') ? old('phone3') : substr($registration->reunion_dl->phone, 6, 4) }}" placeholder="####" max="9999" />
+								<input type="number" name="phone3" class="form-control" value="{{ old('phone3') ? old('phone3') : substr($registration->reunion_dl->phone, 6, 4) }}" placeholder="####" max="9999" disabled />
 							</div>
 						</div>
 					</div>
@@ -100,15 +100,100 @@
 					<div class="form-row">
 						<div class="form-group col-4">
 							<label class="form-label text-danger" for="due_at_reg">Registration Amount</label>
-							<input type="number" name="due_at_reg" class="form-control" value="{{ $registration->due_at_reg }}" placeholder="Enter Registration Cost" step="0.01" />
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">$</span>
+								</div>
+								<input type="number" name="due_at_reg" class="form-control" value="{{ $registration->due_at_reg }}" placeholder="Enter Registration Cost" step="0.01" />
+							</div>
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label text-danger" for="total_amount_due">Due Amount</label>
-							<input type="number" name="total_amount_due" class="form-control" value="{{ $registration->total_amount_due }}" placeholder="Enter Due Cost" step="0.01" />
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">$</span>
+								</div>
+								<input type="number" name="total_amount_due" class="form-control" value="{{ $registration->total_amount_due }}" placeholder="Enter Due Cost" step="0.01" />
+							</div>
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label text-danger" for="total_amount_paid">Paid Amount</label>
-							<input type="number" name="total_amount_paid" class="form-control" value="{{ $registration->total_amount_paid }}" placeholder="Enter Amount Paid" step="0.01" />
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">$</span>
+								</div>
+								<input type="number" name="total_amount_paid" class="form-control" value="{{ $registration->total_amount_paid }}" placeholder="Enter Amount Paid" step="0.01" />
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<h3 class="">Shirt Sizes</h3>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-4 mb-0">
+							<label for="" class="form-label">Adults</label>
+						</div>
+						<div class="form-group col-4 mb-0">
+							<label for="" class="form-label">Youth</label>
+						</div>
+						<div class="form-group col-4 mb-0">
+							<label for="" class="form-label">Children</label>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-4">
+							@foreach($family as $family_reg)
+								@if($family_reg->age_group == 'adult')
+									<div class="my-1">
+										<input type="text" name="" class="form-control" value="{{ $family_reg->firstname }}" disabled />
+
+										<select class="custom-select form-control" name="shirt_sizes[]">
+											<option value="S" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
+											<option value="M" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
+											<option value="L" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
+											<option value="XL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
+											<option value="XXL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
+											<option value="XXXL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
+										</select>
+									</div>
+								@endif
+							@endforeach
+						</div>
+						<div class="form-group col-4">
+							@foreach($family as $family_reg)
+								@if($family_reg->age_group == 'youth')
+									<div class="my-1">
+										<input type="text" name="" class="form-control" value="{{ $family_reg->firstname }}" />
+										
+										<select class="custom-select form-control" name="shirt_sizes[]">
+											<option value="S">Small</option>
+											<option value="M">Medium</option>
+											<option value="L">Large</option>
+											<option value="XL">Extra Large</option>
+											<option value="XXL">2XL</option>
+											<option value="XXXL">3XL</option>
+										</select>
+									</div>
+								@endif
+							@endforeach
+						</div>
+						<div class="form-group col-4">
+							@foreach($family as $family_reg)
+								@if($family_reg->age_group == 'child')
+									<div class="my-1">
+										<input type="text" name="" class="form-control" value="{{ $family_reg->firstname }}" disabled />
+										
+										<select class="custom-select form-control" name="shirt_sizes[]">
+											<option value="S">Small</option>
+											<option value="M">Medium</option>
+											<option value="L">Large</option>
+											<option value="XL">Extra Large</option>
+											<option value="XXL">2XL</option>
+											<option value="XXXL">3XL</option>
+										</select>
+									</div>
+								@endif
+							@endforeach
 						</div>
 					</div>
 					<div class="form-group">

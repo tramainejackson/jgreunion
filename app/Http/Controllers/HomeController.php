@@ -211,28 +211,23 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function add_house_hold(Request $request) {
-		$hhMember = $request->houseMember;
 		$member = Reunion_dl::find($request->reunion_dl);
+		$hhMember = Reunion_dl::find($request->houseMember);
+		$maxFamilyID = Reunion_dl::max('family_id');
 		
 		// If household members isn't empty then add a family ID
 		// to all the parties
-		if($hhMember != null) {
-			$maxFamilyID = Reunion_dl::max('family_id');
+		if($member->family_id == null) {
+			$newFamilyID = $maxFamilyID + 1;
+			$member->family_id = $newFamilyID;
+			$hhMember->family_id = $newFamilyID;
 			
-			if($member->family_id == null) {
-				$newFamilyID = $maxFamilyID++;
-				$member->family_id = $newFamilyID;
-				$hhMember = Reunion_dl::find($hhMember);
-				$hhMember->family_id = $newFamilyID;
-				$hhMember->save();
-			} else {
-				$hhMember = Reunion_dl::find($hhMember);
-				
-				if($hhMember->family_id != $member->family_id) {
-					$hhMember->family_id = $member->family_id;
-					$hhMember->save();
-				}
+			if($hhMember->save()) {
+				$member->save();					
 			}
+		} else {
+			$hhMember->family_id = $member->family_id;
+			$hhMember->save();
 		}
 		
 		$states = \App\State::all();

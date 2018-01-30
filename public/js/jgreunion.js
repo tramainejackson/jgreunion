@@ -142,12 +142,6 @@ $(document).ready(function()
 		slide_show();
 	}, 7000);
 	
-//Go to philly page
-	$("body").on("click", "#upcoming_btn", function(e)
-	{
-		window.open("charlotte2018.php", "_self");
-	});
-	
 //Make non-selected descent button disabled on form send
 	$("body").on("click", "#submit_profile_update", function(e) {
 		//e.preventDefault();
@@ -1163,7 +1157,6 @@ $(document).ready(function()
 
 // Add individual member to household
 function addToHouseHold(dlID, memberID) {
-	event.preventDefault();
 	$.ajax({
 	  method: "PUT",
 	  url: "/members/" + memberID + "/add_house_hold",

@@ -45,16 +45,18 @@
 					
 					@if($active_reunion != null)
 						@if($family_members->count() > 1)
-							<a href="{{ action('RegistrationController@update', ['reunion' => $active_reunion->id ]) }}" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Family Already Registered For ' . $active_reunion->reunion_city . ' Reunion' : 'Add All Household Members To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
+							<a href="/registrations" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Family Already Registered For ' . $active_reunion->reunion_city . ' Reunion' : 'Add All Household Members To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
 						
-							{!! Form::open(['action' => ['RegistrationController@update', 'reunion' => $active_reunion->id], 'method' => 'PUT', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
+							{!! Form::open(['action' => 'RegistrationController@store', 'method' => 'POST', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
 								<input type="text" name="reg_member" class="" value="{{ $member->id }}" hidden />
+								<input type="text" name="reunion_id" class="" value="{{ $active_reunion->id }}" hidden />
 							{!! Form::close() !!}
 						@else
-							<a href="{{ action('RegistrationController@update', ['reunion' => $active_reunion->id ]) }}" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Member Already Registered For ' . $active_reunion->reunion_city . ' Reunion'  : 'Add Member To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
+							<a href="/registrations" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Member Already Registered For ' . $active_reunion->reunion_city . ' Reunion'  : 'Add Member To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
 						
-							{!! Form::open(['action' => ['RegistrationController@update', 'reunion' => $active_reunion->id], 'method' => 'PUT', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
+							{!! Form::open(['action' => 'RegistrationController@store', 'method' => 'POST', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
 								<input type="text" name="reg_member" class="" value="{{ $member->id }}" hidden />
+								<input type="text" name="reunion_id" class="" value="{{ $active_reunion->id }}" hidden />
 							{!! Form::close() !!}
 						@endif
 					@endif
@@ -86,7 +88,7 @@
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label" for="state">State</label>
-							<select class="form-control" name="state">
+							<select class="form-control custom-select" name="state">
 								@foreach($states as $state)
 									<option value="{{ $state->state_abb }}" {{ $member->state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 								@endforeach
@@ -121,7 +123,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="mail_preference">Mail Preference</label>
-						<select class="form-control" name="mail_preference">
+						<select class="form-control custom-select" name="mail_preference">
 							<option value="M" {{ $member->mail_preference == 'M' ? 'selected' : '' }}>Mail</option>
 							<option value="E" {{ $member->mail_preference == 'E' ? 'selected' : '' }}>Email</option>
 						</select>
@@ -255,8 +257,8 @@
 								<a href="" class="btn btn-danger d-block">Remove</a>
 							</div>
 						</div>
-						
-						@if($potential_family_members->count() > 0)
+
+						@if($potential_family_members->count() > $family_members->count())
 							<div class="form-block-header">
 								<h3 class="">Potential Household Members</h3>
 							</div>

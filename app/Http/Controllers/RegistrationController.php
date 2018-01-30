@@ -54,48 +54,8 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-		
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\registration  $registration
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-dd('Test');
-		$reunion = Reunion::find($id);
-        $registrations = Registration::where('reunion_id', $reunion->id)->get();
-		return view('admin.registrations.show', compact('registrations', 'reunion'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\registration  $registration
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Registration $registration)
-    {
-		$states = State::all();
-		$family = Reunion_dl::where('family_id', $registration->reunion_dl->family_id)->get();
-
-		return view('admin.registrations.edit', compact('registration', 'states', 'family'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\registration  $registration
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
 		$registration = new Registration();
-        $reunion = Reunion::find($id);
+        $reunion = Reunion::find($request->reunion_id);
         $member = Reunion_dl::find($request->reg_member);
 		$totalPrice = $reunion->adult_price;
 		$adults = $member->firstname;
@@ -137,7 +97,76 @@ dd('Test');
 		$registration->children_names = $children == '' ? null : $children;
 		
 		if($registration->save()) {
-			return redirect()->action('HomeController@index')->with('status', 'Registration Added Successfully');
+			return redirect()->action('RegistrationController@edit', $registration)->with('status', 'Registration Added Successfully');
+		}
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\registration  $registration
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+dd('Test');
+		$reunion = Reunion::find($id);
+        $registrations = Registration::where('reunion_id', $reunion->id)->get();
+		return view('admin.registrations.show', compact('registrations', 'reunion'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\registration  $registration
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Registration $registration)
+    {
+		$states = State::all();
+		$family = Reunion_dl::where('family_id', $registration->reunion_dl->family_id)->get();
+		
+		// Get all the shirt sizes
+		$shirtSizes = explode('; ', $registration->shirt_sizes);
+
+		// Get the count of each age group
+		$adultCount = count(explode('; ', $registration->adult_names));
+		$youthCount = count(explode('; ', $registration->youth_names));
+		$childCount = count(explode('; ', $registration->child_names));
+		
+		// Get the sizes of the shirts in reference to the amount
+		// of each age group
+		$adultSizes = array_slice($shirtSizes, 0, $adultCount);
+		$youthSizes = array_slice($shirtSizes, $adultCount, $youthCount);
+		$childrenSizes = array_slice($shirtSizes, ($adultCount + $youthCount));
+
+		return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\registration  $registration
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Registration $registration)
+    {
+		// dd($registration);
+		$registration->total_amount_due = $request->total_amount_due;
+		$registration->total_amount_paid = $request->total_amount_paid;
+		$registration->due_at_reg = $request->due_at_reg;
+		$registration->shirt_sizes = implode('; ', $request->shirt_sizes);
+		$registration->reg_notes = $request->reg_notes;
+
+		if($request->registree != $registration->dl_id) {
+			$member = Reunion_dl::find($request->registree);
+			$registration->registree_name = $member->firstname . ' ' . $member->lastname;
+			$registration->dl_id = $member->id;
+		}
+		
+		if($registration->save()) {
+			return redirect()->action('RegistrationController@edit', $registration)->with('status', 'Registration Updated Successfully');
 		}
     }
 

@@ -256,21 +256,11 @@ form#edit_adminUser_form,form#add_adminUser_form {
 [hidden] {
   position: absolute;
 }
-h1 {
-	margin: 0px;
-}
-h2 {
-  text-align: center;
-  font-size: 200%;
-  margin-top: 0%;
-  padding-top: 0%;
-  font-family: 'Josefin Slab', serif;
-}
+
 hr {
   border-width: 4px;
 }
 #reunion_page {
-	padding: 0 14%;
 	background: linear-gradient(90deg, rgb(55, 55, 55),black 15%, black 85%, rgb(55, 55, 55));
 }
 #jgreunion_page {
@@ -920,14 +910,6 @@ a#fb_link button {
     font-size: 110%;
     padding: 0% 0%;
 }
-.payment_option {
-    display: inline-block;
-    float: left;
-    width: 41.3%;
-    padding: 1% 2% 2%;
-    max-width: 45%;
-    margin: 0% 2% 5%;
-}
 div#electronic_payment_option, div#paper_payment_option {
     background-color: #6BF14A;
     border: double #4ED44E;
@@ -1021,12 +1003,6 @@ div#registrationReminderMsg p {
     padding: 0% 0% 7%;
     color: red;
     font-size: 125%;
-}
-div#registrationReminderMsg {
-    display: block;
-    width: 70%;
-    clear: both;
-    margin: 0% 15%;
 }
 span#registrationLink {
     min-width: inherit;

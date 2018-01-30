@@ -25,11 +25,14 @@ Route::get('/past_reunion/{id}', function ($id) {
 });
 
 Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {
-	$registrations = \App\Registration::all();
+	$registrations = \App\Registration::where('reunion_id', $reunion->id)->get();
 	$committee_members = $reunion->committee;
-	$events = $reunion->events;
+	$committee_president = $committee_members->where('member_title', 'president')->first()->reunion_dl;
+	$events = $reunion->events->groupBy('event_date');
 	
-    return view('upcoming_reunion', compact('registrations', 'committee_members', 'events'));
+	// dd($committee_members->where('member_title', 'president')->first()->reunion_dl);
+	
+    return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion'));
 });
 
 Route::get('/administrator', function () {

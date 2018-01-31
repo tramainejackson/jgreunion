@@ -41,9 +41,12 @@ class RegistrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Reunion $reunion)
     {
-        //
+		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$states = State::all();
+		
+        return view('admin.registrations.create', compact('reunion', 'members', 'states'));
     }
 
     /**
@@ -176,8 +179,8 @@ dd('Test');
      * @param  \App\registration  $registration
      * @return \Illuminate\Http\Response
      */
-    public function destroy(registration $registration)
+    public function destroy(Registration $registration)
     {
-        //
+        dd($registration);
     }
 }

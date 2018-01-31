@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Reunion_dl;
 use App\Registration;
 use App\Reunion;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -100,9 +101,26 @@ class HomeController extends Controller
 		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
 		$member->age_group = $request->age_group;
 		$member->mail_preference = $request->mail_preference;
-// dd($member);
+
 		if($member->save()) {
-			return redirect()->action('HomeController@edit', $member)->with('status', 'Member Created Successfully');
+			if(isset($request->reunion_id)) {
+				$reunion = Reunion::find($request->reunion_id);
+				
+				$registration = new Registration();
+				$totalPrice = $reunion->adult_price;
+				$registration->dl_id = $member->id;
+				$registration->reunion_id = $reunion->id;
+				$registration->registree_name = $member->firstname . ' ' . $member->lastname;
+				$registration->total_amount_due = $registration->due_at_reg = $totalPrice;
+				$registration->reg_date = Carbon::now();
+				$registration->adult_names = $member->firstname;
+				
+				if($registration->save()) {
+					return redirect()->action('HomeController@edit', $member)->with('status', 'Member and Registration Created Successfully');				
+				}
+			} else {
+				return redirect()->action('HomeController@edit', $member)->with('status', 'Member Created Successfully');				
+			}
 		}		
     }
 	

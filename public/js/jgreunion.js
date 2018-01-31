@@ -11,14 +11,72 @@ $(document).ready(function()
 	var documentHeight = document.body.clientHeight;
 	var screenHeight = screen.height;
 	
+	// Initialize Datetimepicker
+	$('.datetimepicker').datetimepicker({
+		timepicker:false,
+		format:'m/d/Y',
+		startDate:'2018/01/01'
+	});
+	
 	// Add new committee member row
 	$('body').on('click', '.addCommitteeMember', function() {
 		var newCommitteeRow = $('.committeeRow').clone();
 		
+		if($('.emptyCommittee').length > 0) {
+			$('.emptyCommittee').slideUp();
+		}
+		
+		$(newCommitteeRow).find('select').removeAttr('disabled');
 		$(newCommitteeRow).removeClass('committeeRow')
 			.removeAttr('hidden')
 			.insertBefore('.committeeRow');
 		$('.committeeRow').prev().find('select').focus();
+	});
+	
+	// Add new reunion event row
+	$('body').on('click', '.addReunionEvent', function() {
+		var newEventRow = $('.reunionEventRow').clone();
+		
+		if($('.emptyEvents').length > 0) {
+			$('.emptyEvents').slideUp();
+		}
+		
+		$(newEventRow).find('input, textarea').removeAttr('disabled');
+		$(newEventRow).removeClass('reunionEventRow')
+			.removeAttr('hidden')
+			.insertBefore('.reunionEventRow');
+		$('.reunionEventRow').prev()
+			.find('.datetimepicker')
+			.datetimepicker({
+				timepicker:false,
+				format:'m/d/Y',
+				value:'01/01/2018'
+			});
+	});
+
+	// Remove new committee member row
+	$('body').on('click', '.removeCommitteeMember', function(e) {
+		var committeeMemberRow = $(this).parent().parent();
+		$(committeeMemberRow).slideUp(function() {
+			$(committeeMemberRow).remove();
+		});
+	});
+	
+	
+	// Remove new event row
+	$('body').on('click', '.removeReunionEventRow', function(e) {
+		var eventRow = $(this).parent().parent();
+		$(eventRow).slideUp(function() {
+			$(eventRow).remove();
+		});
+	});
+	
+	// Remove new household member row
+	$('body').on('click', '.removeHHMember', function(e) {
+		var HHMemberRow = $(this).parent().parent();
+		$(HHMemberRow).slideUp(function() {
+			$(HHMemberRow).remove();
+		});
 	});
 	
 	// Button toggle switch
@@ -42,6 +100,16 @@ $(document).ready(function()
 				}
 			}
 		}	
+	});
+	
+	// Change href location when select option is changed
+	// on registration create page
+	$('body').on('change', '.createRegSelect', function(e) {
+		// Get Selected Member ID
+		var selectedMember = $(this).find('option:selected').val();
+		
+		// Change the link address
+		$('.createRegSelectLink').attr('href', '/members/'+ selectedMember +'/edit')
 	});
 	
 //Add button to users table

@@ -236,7 +236,7 @@
 									</div>
 									<div class="">
 										<div class="form-group col-2">
-											<a href="#" class="btn btn-danger{{ $family_member->id == $member->id ? ' disabled' : '' }}">Remove</a>
+											<a href="#" class="btn btn-danger{{ $family_member->id == $member->id ? ' disabled' : '' }}">Remove Household Member</a>
 										</div>
 									</div>
 								</div>
@@ -254,7 +254,7 @@
 								</select>
 							</div>
 							<div class="form-group col-2">
-								<a href="" class="btn btn-danger d-block">Remove</a>
+								<button type="button" class="btn btn-danger d-block removeHHMember">Remove</button>
 							</div>
 						</div>
 

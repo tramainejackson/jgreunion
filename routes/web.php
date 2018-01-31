@@ -52,6 +52,8 @@ Auth::routes();
 
 Route::resource('/registrations', 'RegistrationController');
 
+Route::get('/registrations/create/{reunion}', 'RegistrationController@create')->name('create_registration');
+
 Route::resource('/reunions', 'ReunionController');
 
 Route::get('/home', 'HomeController@index')->name('home');

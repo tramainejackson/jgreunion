@@ -44,18 +44,38 @@
 				<div class="">
 					<h2 class="text-left">Edit {{ ucwords($reunion->reunion_city) }} Reunion</h2>
 				</div>
-				{!! Form::open(['action' => ['ReunionController@update', 'reunion' => $reunion->id], 'method' => 'PUT']) !!}
-					<div class="form-group">
-						{{ Form::label('type', 'Reunion Complete', ['class' => 'd-block form-control-label']) }}
-								
-						<div class="btn-group">
-							<button type="button" class="btn{{ $reunion->reunion_complete == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
-								<input type="checkbox" name="reunion_complete" value="Y" hidden {{ $reunion->reunion_complete == 'Y' ? 'checked' : '' }} />Yes
-							</button>
-							<button type="button" class="btn px-3{{ $reunion->reunion_complete == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
-								<input type="checkbox" name="reunion_complete" value="N" hidden {{ $reunion->reunion_complete == 'N' ? 'checked' : '' }} />No
-							</button>
+				{!! Form::open(['action' => ['ReunionController@update', 'reunion' => $reunion->id], 'method' => 'PUT', 'files' => true]) !!}
+					<div class="form-row">
+						<div class="form-group col-4">
+							{{ Form::label('type', 'Reunion Complete', ['class' => 'd-block form-control-label']) }}
+									
+							<div class="btn-group">
+								<button type="button" class="btn{{ $reunion->reunion_complete == 'Y' ? ' btn-success active' : ' btn-secondary' }}" style="line-height:1.5">
+									<input type="checkbox" name="reunion_complete" value="Y" hidden {{ $reunion->reunion_complete == 'Y' ? 'checked' : '' }} />Yes
+								</button>
+								<button type="button" class="btn px-3{{ $reunion->reunion_complete == 'N' ? ' btn-danger active' : ' btn-secondary' }}" style="line-height:1.5">
+									<input type="checkbox" name="reunion_complete" value="N" hidden {{ $reunion->reunion_complete == 'N' ? 'checked' : '' }} />No
+								</button>
+							</div>
 						</div>
+						<div class="form-group col-4">
+							{{ Form::label('type', 'Paper Registration Form', ['class' => 'd-block form-control-label']) }}
+							
+							<div class="input-group">
+								<div class="custom-file">
+									<input type="file" name="paper_reg_form" class="custom-file-input" value="" />
+									<label class="custom-file-label" for="paper_reg_form">Choose Document</label>
+								</div>
+							</div>
+						</div>
+						
+						@if($reunion->registration_form != null)
+							<div class="form-group col-2">
+								{{ Form::label('type', '&nbsp;', ['class' => 'd-block form-control-label']) }}
+								
+								<a href="{{ asset('storage/' . str_ireplace('public/', '', $reunion->registration_form)) }}" class="btn btn-link btn-outline-info text-dark" download="{{ $reunion->reunion_year }}_Registration_Form">View Registration Form</a>
+							</div>
+						@endif
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="reunion_city">City</label>
@@ -63,7 +83,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="reunion_state">State</label>
-						<select class="form-control" name="reunion_state">
+						<select class="form-control custom-select" name="reunion_state">
 							@foreach($states as $state)
 								<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('reunion_state') == $state->state_abb ? 'selected' : $reunion->reunion_state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 							@endforeach
@@ -71,7 +91,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="reunion_state">Year</label>
-						<select class="form-control" name="reunion_year">
+						<select class="form-control custom-select" name="reunion_year">
 							@foreach($years as $year)
 								<option value="{{ $year->year_num }}" {{ old('reunion_year') && old('reunion_year') == $year->year_num ? 'selected' : $reunion->reunion_year == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
 							@endforeach
@@ -115,6 +135,8 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- Committee Members Section -->
 					<div class="form-block-header">
 						<h3 class="">Committee
 							<button type="button" class="btn btn-outline-success mb-2 addCommitteeMember">Add Committee Member</button>
@@ -128,15 +150,16 @@
 						<div class="form-row">
 							<div class="form-group col-4">
 								<label class="form-label" for="member_title">Committee Title</label>
-								<select class="form-control" name="member_title">
+								<select class="form-control custom-select" name="member_title[]">
 									@foreach($titles as $title)
 										<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : $committee_member->member_title == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
 									@endforeach
 								</select>
+								<input type="text" name="committee_member_id[]" class="hidden" value="{{ $committee_member->id }}" hidden />
 							</div>
 							<div class="form-group col-6">
 								<label class="form-label" for="dl_id">Member</label>
-								<select class="form-control" name="dl_id">
+								<select class="form-control custom-select" name="dl_id[]">
 									@foreach($members as $member)
 										<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $committee_member->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 									@endforeach
@@ -158,7 +181,7 @@
 					<div class="form-row committeeRow" hidden>
 						<div class="form-group col-4">
 							<label class="form-label" for="member_title">Committee Title</label>
-							<select class="form-control" name="member_title[]">
+							<select class="form-control" name="member_title[]" disabled>
 								@foreach($titles as $title)
 									<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
 								@endforeach
@@ -166,7 +189,7 @@
 						</div>
 						<div class="form-group col-6">
 							<label class="form-label" for="dl_id">Member</label>
-							<select class="form-control" name="dl_id[]">
+							<select class="form-control" name="dl_id[]" disabled>
 								@foreach($members as $member)
 									<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 								@endforeach
@@ -174,23 +197,81 @@
 						</div>
 						<div class="form-group col-2">
 							<label class="form-label" for="">&nbsp;</label>
-							<button type="button" class="btn btn-danger w-100">Remove</button>
+							<button type="button" class="btn btn-danger w-100 removeCommitteeMember">Remove</button>
 						</div>
 					</div>
+					
+					<!-- Reunion Events Section -->
+					<div class="form-block-header">
+						<h3 class="">Events
+							<button type="button" class="btn btn-outline-success mb-2 addReunionEvent">Add New Event</button>
+						</h3>
+					</div>
+					
+					@if($reunion->events->isEmpty())
+						<div class="form-row emptyEvents">
+							<h2 class="text-center">No Events Added Yet For This Reunion</h2>
+						</div>
+					@endif
+					
+					@foreach($reunion_events as $event)
+						@php $eventDate = new Carbon\Carbon($event->event_date); @endphp
+						<div class="form-row">
+							<div class="form-group col-3">
+								<label class="form-label" for="member_title">Event Date</label>
+								<input type="text" name="event_date[]" class="form-control datetimepicker" value="{{ $eventDate->format('m/d/Y') }}" placeholder="Select A Date" />
+								<input type="text" name="event_id[]" class="hidden" value="{{ $event->id }}" hidden />
+							</div>
+							<div class="form-group col-3">
+								<label class="form-label" for="member_title">Event Location</label>
+								<input type="text" name="event_location[]" class="form-control" placeholder="Enter The Event Location" value="{{ $event->event_location }}" />
+							</div>
+							<div class="form-group col-4">
+								<label class="form-label" for="dl_id">Description</label>
+								<textarea class="form-control" name="event_description[]" placeholder="Enter A Description of The Event" rows="1" >{{ $event->event_description }}</textarea>
+							</div>
+							<div class="form-group col-2">
+								<label class="form-label" for="">&nbsp;</label>
+								<button type="button" class="btn btn-danger w-100">Delete Event</button>
+							</div>
+						</div>
+					@endforeach
+					
+					<div class="form-row reunionEventRow" hidden>
+						<div class="form-group col-3">
+							<label class="form-label" for="member_title">Event Date</label>
+							<input type="text" name="event_date[]" class="form-control datetimepicker" disabled />
+						</div>
+						<div class="form-group col-3">
+							<label class="form-label" for="member_title">Event Location</label>
+							<input type="text" name="event_location[]" class="form-control" value="" placeholder="Enter The Event Location" disabled />
+						</div>
+						<div class="form-group col-4">
+							<label class="form-label" for="dl_id">Description</label>
+							<textarea class="form-control" name="event_description[]" placeholder="Enter A Description of The Event" rows="1" disabled></textarea>
+						</div>
+						<div class="form-group col-2">
+							<label class="form-label" for="">&nbsp;</label>
+							<button type="button" class="btn btn-danger w-100 removeReunionEventRow">Remove</button>
+						</div>
+					</div>
+					
+					<!-- Registered Members Section -->
 					<div class="form-block-header">
 						<h3 class="text-left">Registered Members
-							<a href="{{ action('RegistrationController@edit' , ['registration' => $member->id])}}" type="button" class="btn btn-outline-success mb-2">Add Registration</a>
+							<a href="{{ action('RegistrationController@create' , ['reunion' => $reunion->id]) }}" class="btn btn-outline-success mb-2">Add Registration</a>
 							<button type="button" class="btn btn-primary mb-2">Registrations <span class="badge badge-light">{{ $reunion->registrations->count() }}</span>
 							<span class="sr-only">total registrations</span>
 							</button>
 						</h3>
 					</div>
 					@foreach($reunion->registrations as $registration)
+						@php $family = \App\Reunion_dl::where('family_id', $registration->family_id)->get(); @endphp
 						<div class="form-row">
 							<div class="form-group col-1">
 								<span class="d-inline-block">{{ $loop->iteration }}.</span>
 							</div>
-							<div class="form-group col-7">
+							<div class="form-group col-5">
 								<select class="custom-select" name="" disabled>
 									@foreach($members as $member)
 										<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
@@ -198,28 +279,18 @@
 								</select>
 							</div>
 							<div class="form-group col-2">
+								<button type="button" class="btn btn-primary mb-2 w-100">Family Total <span class="badge badge-light">{{ $registration->family_id != null ? $family->count() : '1' }}</span>
+								<span class="sr-only">total household members</span>
+								</button>
+							</div>
+							<div class="form-group col-2">
 								<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning d-block">Edit</a>
 							</div>
 							<div class="form-group col-2">
-								<a href="" class="btn btn-danger d-block">Remove</a>
+								<button type="button" data-toggle="modal" data-target="#delete_registration" class="btn btn-danger d-block text-truncate">Delete Registration</button>
 							</div>
 						</div>
 					@endforeach
-					
-					<div class="form-row registreeeeRow" hidden>
-						<div class="form-group col-4">
-							<label class="form-label" for="registree">Member</label>
-							<select class="form-control" name="dl_id[]">
-								@foreach($members as $member)
-									<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
-								@endforeach
-							</select>
-						</div>
-						<div class="form-group col-2">
-							<label class="form-label" for="">&nbsp;</label>
-							<button type="button" class="btn btn-danger w-100">Remove</button>
-						</div>
-					</div>
 
 					@if($reunion->registrations->isEmpty())
 						<div class="form-row emptyRegistrations">
@@ -227,10 +298,11 @@
 						</div>
 					@endif
 					<div class="form-group">
-						{{ Form::submit('Update', ['class' => 'btn btn-primary form-control']) }}
+						{{ Form::submit('Update Reunion', ['class' => 'btn btn-primary form-control']) }}
 					</div>
 				{!! Form::close() !!}
 			</div>
 		</div>
+		@include('admin.delete_modal.delete_registration')
 	</div>
 @endsection

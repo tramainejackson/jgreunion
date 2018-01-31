@@ -10,13 +10,6 @@ $(document).ready(function()
 	var windowHeight = window.innerHeight;
 	var documentHeight = document.body.clientHeight;
 	var screenHeight = screen.height;
-		
-	//Make the body min height the same size as the window height 	
-	$(".container").css({minHeight:windowHeight+"px"});
-	$("#show_profiles").css({maxHeight:(windowHeight -(windowHeight * .35))+"px"});
-	
-	//Make all modals max-height 80% of the window
-	$("#confirmation_modal, #confirmed_modal, #registration_modal, #registered_modal, #all_registered_user, #phillyRegistrationForm, #errors_modal").css({maxHeight:(windowHeight * .80)+"px"});
 	
 	// Add new committee member row
 	$('body').on('click', '.addCommitteeMember', function() {
@@ -194,22 +187,7 @@ $(document).ready(function()
 		$("#add_admin_user input, #delete_admin_user input").val("").removeClass("error_border good_border");
 		$("#overlay_adminPage, #add_admin_user").fadeIn();
 	});
-//Bring up for to add new family member or a philly registration_modal
-	$("body").on("click", "#option1, #option2", function(e){
-		$(this).animate({margin:"-1% -1% 2%", padding:"3% 0%"});
-		if($(this).attr("id") == "option1")
-		{
-			$("#option2").slideUp(function(){
-				$($newUser_form).appendTo("#addEdit_users");
-			});
-		}
-		else
-		{
-			$("#option1").slideUp(function(){
-				$($newRegMember_form).appendTo("#addEdit_users");
-			});
-		}
-	});
+
 //Toggle registrations and member list views
 	/*$("body").on("click", "#admin_nav_registrations, #admin_nav_members", function(e)
 	{
@@ -744,48 +722,15 @@ $(document).ready(function()
 		$(body).animate({scrollTop:$(body).offset().top}, "slow");
 	});
 	
-//Show registration form
-	$("body").on("click", "#registrationFormSpan, #registrationLink", function(e)
-	{
-		$("#registration_modal, #overlay_PhillyPage").show("fast", function(event)
-		{
-			$("#registration_modal").animate({top:"1%"});
-			var tableInputWidth = $(".table_input").width();
-			$("#registrationFormTable th:not(#registrationFormTable th:first-of-type)").css({"width":tableInputWidth+"px"});
-			$("#name").focus();
-		});
-	});
-//Show who has registered
-	$("body").on("click", "#registeredUsersSpan", function(e)
-	{
-		$("#overlay_PhillyPage, #registered_modal").fadeIn();
-	});	
-//Bring up news letter
-	$("body").on("click","#newsLetterSpan", function(){
-		window.open("../files/Family_Reunion_Newsletter_2016.doc", "_blank");
-	});
-	
-//Bring up directions to the hotel
-	$("body").on("click", "#directions_link", function(e){
-		$("#overlay_PhillyPage").fadeIn();
-		$("#hotel_directions").appendTo("#modals_div").show(function(){
-			addDirections();
-		});
-	});
-	
 //Add total amounts to pay for registration
 	$("body").on("change", "#attending_adult, #attending_youth, #attending_children, #addt_tee_table input, #fancy_cut_table input", function(e)
 	{
 		var attendingNumA = $("#attending_adult").val();
 		var attendingNumY = $("#attending_youth").val();
 		var attendingNumC = $("#attending_children").val();
-		var addtTee = getAddtTeeCount("#addt_tee_table input");
-		var addtTeeGC = getAddtTeeCount("#fancy_cut_table input"); 
 		var totalAmountA = Number(attendingNumA * 100);
 		var totalAmountY = Number(attendingNumY * 75);
 		var totalAmountC = Number(attendingNumC * 20);
-		var totalAmountAddtTee = Number(addtTee * 15);
-		var totalAmountFC = Number(addtTeeGC * 5);
 		var totalDue = Number(totalAmountA + totalAmountY + totalAmountC + totalAmountAddtTee + totalAmountFC);
 		$("#total_adult").val(totalAmountA);
 		$("#total_youth").val(totalAmountY);
@@ -894,16 +839,6 @@ $(document).ready(function()
 		$("table#addtionalOptionsTable").toggleClass("addPadding");
 	});
 	
-//Cancel Registration Form
-	$("body").on("click", "#close_registered_modal, #overlay_PhillyPage", function(e)
-	{
-		$("#overlay_PhillyPage, #registration_modal, #registered_modal, #confirmation_modal").fadeOut(function(e){ 
-			$("#overlay_PhillyPage").css({"z-index":"5"});
-			$("#errors_modal_contentP").empty();
-			$("#errors_modal").hide();
-			$("#registration_modal input").removeClass("error_border");
-		});
-	});
 //Switch registration forms
 	$("body").on("click", "#switchToMember, #switchToReg", function(e) {
 		if($(this).attr("id") == "switchToReg") {

@@ -11,6 +11,13 @@
 |
 */
 
+Route::get('/reunion_registration', function () {
+	$images = \App\Images::where('id', '>', '5')->get();
+	$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
+	
+    return view('reunion_registration_form', compact('images', 'reunions'));
+});
+
 Route::get('/', function () {
 	$images = \App\Images::where('id', '>', '5')->get();
 	$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();

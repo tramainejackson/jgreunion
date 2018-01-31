@@ -15,7 +15,21 @@
 			<span id="registrationFormSpan">Click here to complete the registration.</span>
 		</button>
 	</div>
-	<div id="registration_modal"></div>
+	<div id="registration_modal" class="modal fade">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+				</div>
+				<div class="modal-body">
+					@include('reunion_registration_form')
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Button trigger modal -->
+	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registration_modal">
+	  Launch demo modal
+	</button>
 	<div id="reunion_page" class="container-fluid">
 		<div id="row">
 			<div class="col">
@@ -109,29 +123,32 @@
 				<!-- Contact/Committee information -->
 				<div class="row reunion_content" id="">
 					<h2 id="" class="col-12">Committee Information</h2>
-					<div id="col-12">
+					<div class="col-12">
 						<table id="" class="table">
-							<tr>
-								<th><u>Title</u></th>
-								<th><u>Name</u></th>
-								<th><u>Email Address</u></th>
-							</tr>
-							
-							@foreach($committee_members as $committee)
+							<thead>
 								<tr>
-									<td>{{ $committee->member_title }}</td>
-									<td>{{ $committee->member_name }}</td>
-									<td><i>{{ $committee->member_email }}</i></td>
+									<th><u>Title</u></th>
+									<th><u>Name</u></th>
+									<th><u>Email Address</u></th>
 								</tr>
-							@endforeach
-							
-							<tr>
-								<td>Web Designer</td>
-								<td>Tramaine Jackson</td>
-								<td><i>jackson.tramaine3@yahoo.com</i></td>
-							</tr>
+							</thead>
+							<tbody>
+								@foreach($committee_members as $committee)
+									<tr>
+										<td>{{ $committee->member_title }}</td>
+										<td>{{ $committee->member_name }}</td>
+										<td><i>{{ $committee->member_email }}</i></td>
+									</tr>
+								@endforeach
+								
+								<tr>
+									<td>Web Designer</td>
+									<td>Tramaine Jackson</td>
+									<td><i>jackson.tramaine3@yahoo.com</i></td>
+								</tr>
+							</tbody>
 						</table>
-						<a id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">
+						<a class="btn btn-link" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">
 							<button>Jackson/Green Facebook Page Click Here</button>
 						</a>	
 					</div>

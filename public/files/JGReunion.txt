@@ -11,7 +11,7 @@ Update past reunions show page
 Update upcoming reunions page
 Create a settings page for admin
 Add popover on notes sections
-Add search feature
+Add search feature on distribution list page
 Add a footer
 Allow user to have a profile and be an admin
 Done: Create a show page for distribution list

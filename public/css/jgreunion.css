@@ -110,55 +110,6 @@ padding: 0% 1.5% 0%;
 background: linear-gradient(rgb(66, 66, 66), rgb(66, 66, 66), rgb(66, 66, 66), #6C9F3E);
 position: relative;
 }
-div#overlay, div#overlay_adminPage, div#overlay_PhillyPage {
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  opacity: 0.8;
-  display: none;
-}
-div#modal {  
-  position: fixed;  
-  left: 25%;
-  width: 50%;
-  height: 70%;
-  top: -30%;
-  z-index: 6;
-  display: none;
-}
-div#registration_modal, #confirmation_modal {
-    position: absolute;
-    background-color: white;
-    left: 14%;
-    width: 71.6%;
-    padding: 0% 0% 0%;
-    border: solid 2px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 25px whitesmoke;
-    min-height: 14%;
-    top: -30%;
-    z-index: 6;
-    display: none;
-    overflow: inherit;
-}
-div#registered_modal {
-	display: none;
-	position: fixed;
-	z-index: 5;
-	top: 10%;
-	margin: 0% 25%;
-	padding: 0%;
-	max-width: 50%;
-	width: 50%;
-	max-height: 50%;
-	overflow: initial;
-	box-shadow: 0px 0px 10px whitesmoke;
-}
-div#registered_modal {}
 div#errors_modal {
     position: absolute;
     top: 0.55%;
@@ -169,47 +120,6 @@ div#errors_modal {
     box-shadow: 0px 0px 10px whitesmoke;
     display: none;
     overflow: auto;
-}
-div#modal_adminPage, div#modal_confirmation, div#modal_confirm_delete, div#modal_confirm_reg_delete, div.edit_admin_user_div {
-  position: fixed;
-  width: 50%;
-  margin: 1% 25%;
-  border-radius: 10px;
-  z-index: 6;
-  display: none;
-  overflow: visible;
-}
-#modal_confirm_another {
-    position: fixed;
-    background-color: green;
-    right: 3%;
-    width: 8.1%;
-    text-align: center;
-    height: 15%;
-    color: white;
-    padding: 1% 1%;
-    border-radius: 10px;
-    z-index: 6;
-    top: -10%;
-	display: none;
-}
-div#confirmed_modal {
-    position: absolute;
-    background-color: white;
-    top: 2%;
-    display: none;
-    left: 25%;
-    max-width: 45%;
-    font-size: 150%;
-    border-radius: 5px;
-    z-index: 6;
-    overflow: auto;
-    border: inset 2px green;
-}
-div#confirmed_modal h2 {
-    background-color: green;
-    color: white;
-    padding: 2% 0%;
 }
 p#successMessage {
     padding: 0% 11%;
@@ -705,6 +615,13 @@ div#login_form_input input.regInput {
 div#reg_form_input {
     margin: 0% 20% 2%;
 }
+.costPC, .costPA, .costPY {
+	background: transparent;
+    width: fit-content;
+    display: -webkit-inline-box;
+    display: inline-block;
+	border: none;
+}
 input#reg_form_btn, #login_submit_btn {
     padding: 1%;
     margin: 1% 0% 0%;
@@ -781,11 +698,6 @@ h2#payments_header {
 div#hotel_content p {
   margin: 2% 0%;
   font-size: 80%;
-}
-div#hotel_content dl {
-    margin: -3% 28% 0%;
-    width: 100%;
-    font-size: 90%;
 }
 dd#directions_link {
     text-decoration: underline;
@@ -2257,9 +2169,6 @@ h3#registrationDueAlert {
     color: white;
     padding-bottom: 0.5%;
 }
-form#registrationForm {
-    padding: 1.5% 11.5% 0%;
-}
 .costPP {
 	text-align: center;
 }
@@ -2390,10 +2299,6 @@ div#modal {
     text-align: center;
     padding: 5% 0%;
 }
-div#registration_modal, #confirmation_modal {
-    left: 5%;
-    width: 90%;
-}
 form#registrationForm {
     padding: 0% 3%;
 }
@@ -2425,9 +2330,6 @@ button.editFormBtn {
     background-color: goldenrod;
     border-color: darkgoldenrod;
     color: whitesmoke;
-}
-div#registration_modal, #confirmation_modal {
-    min-height: initial;
 }
 div#confirmed_modal {
     left: 5%;
@@ -3070,15 +2972,11 @@ input#change_img_btn {
 }
 }
 /*Coverage between smaller screens*/
-@media only screen and (min-width:768px) and (max-width:1023px) {
-div#modal {
-    height: 80%;
-    width: 80%;
-    left: 10%;
+@media only screen and (max-width:1400px) {
+.modal-dialog {
+    max-width: 700px; 
 }
-div#survey_div {
-  font-size: 115%;
-}
+
 button#takeNow_btn, button#takeLater_btn, #yes_music, #no_music {
   width: 40%;
   padding: 4% 0%;
@@ -3222,10 +3120,6 @@ form#registrationForm {
 }
 div#registration_form_content {
 	padding: 0% 10%;
-}
-#deleteUser_form input[type="text"], #deleteUser_form input[type="password"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="password"], #deleteReg_form input[type="email"], input[type="number"] {
-    width: 50%;
-    border-radius: 5px;
 }
 div#calculations, div#search_field_regs {
     width: 39.5%;
@@ -3445,11 +3339,6 @@ div#reunion_history {
 #family_tree_pic {
   width: 25%;
   right: 2%;
-}
-div#hotel_content dl {
-    margin: -3% 25% 0%;
-    width: 100%;
-    font-size: 90%;
 }
 div#directions1 h2, div#directions3 h2 {
     padding: 2% 23% 0%;
@@ -3821,10 +3710,6 @@ p.confirmationP {
 }
 table.confirm_attendees {
     font-size: 150%;
-}
-div#registration_modal, #confirmation_modal, #confirmed_modal {
-    left: 21%;
-    width: 60%;
 }
 div#hotel_content dl {
     margin: -3% 22% 0%;

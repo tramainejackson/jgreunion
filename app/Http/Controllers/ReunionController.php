@@ -276,4 +276,30 @@ class ReunionController extends Controller
     {
         //
     }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_event(Reunion_event $reunion_event)
+    {
+		if($reunion_event->delete()) {
+			return $reunion_event;
+		}
+    }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_committee_member(Reunion_committee $reunion_committee)
+    {
+		if($reunion_committee->delete()) {
+			return $reunion_committee;
+		}
+    }
 }

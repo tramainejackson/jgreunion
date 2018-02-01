@@ -28,6 +28,7 @@ div#allMembersPage::after {
 	z-index: -1;
 	opacity: 0.5;
 }
+
 .form-block-header h3 {
     border-bottom: 1px solid darkgray;
     margin-top: 50px;

@@ -167,7 +167,7 @@
 							</div>
 							<div class="form-group col-2">
 								<label class="form-label" for="">&nbsp;</label>
-								<button type="button" class="btn btn-danger w-100">Delete Member</button>
+								<button type="button" class="btn btn-danger w-100" onclick="event.preventDefault(); removeCommitteeMember({{ $committee_member->id }});">Delete Member</button>
 							</div>
 						</div>
 					@endforeach
@@ -232,7 +232,7 @@
 							</div>
 							<div class="form-group col-2">
 								<label class="form-label" for="">&nbsp;</label>
-								<button type="button" class="btn btn-danger w-100">Delete Event</button>
+								<button type="button" class="btn btn-danger w-100" onclick="event.preventDefault(); removeReunionEvent({{ $event->id }});">Delete Event</button>
 							</div>
 						</div>
 					@endforeach
@@ -266,10 +266,15 @@
 						</h3>
 					</div>
 					@foreach($reunion->registrations as $registration)
-						@php $family = \App\Reunion_dl::where('family_id', $registration->family_id)->get(); @endphp
+						@php 
+							$family = \App\Reunion_dl::where([
+								['family_id', $registration->family_id],
+								['family_id', '<>', null]
+							])->get(); @endphp
 						<div class="form-row">
 							<div class="form-group col-1">
 								<span class="d-inline-block">{{ $loop->iteration }}.</span>
+								<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
 							</div>
 							<div class="form-group col-5">
 								<select class="custom-select" name="" disabled>
@@ -287,8 +292,10 @@
 								<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning d-block">Edit</a>
 							</div>
 							<div class="form-group col-2">
-								<button type="button" data-toggle="modal" data-target="#delete_registration" class="btn btn-danger d-block text-truncate">Delete Registration</button>
+								<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger d-block text-truncate deleteRegistration">Delete Registration</button>
 							</div>
+							
+							@include('admin.delete_modal.delete_registration', ['registration' => $registration])
 						</div>
 					@endforeach
 
@@ -303,6 +310,6 @@
 				{!! Form::close() !!}
 			</div>
 		</div>
-		@include('admin.delete_modal.delete_registration')
+
 	</div>
 @endsection

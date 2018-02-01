@@ -127,7 +127,10 @@ dd('Test');
     public function edit(Registration $registration)
     {
 		$states = State::all();
-		$family = Reunion_dl::where('family_id', $registration->reunion_dl->family_id)->get();
+		$family = Reunion_dl::where([
+			['family_id', $registration->reunion_dl->family_id],
+			['family_id', '<>', null]
+		])->get();
 		
 		// Get all the shirt sizes
 		$shirtSizes = explode('; ', $registration->shirt_sizes);
@@ -181,6 +184,8 @@ dd('Test');
      */
     public function destroy(Registration $registration)
     {
-        dd($registration);
+        if($registration->delete()) {
+			return redirect()->back()->with('status', 'Registration Deleted Successfully');
+		}
     }
 }

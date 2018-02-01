@@ -1217,6 +1217,52 @@ function removeFromHouseHold() {
 	});
 }
 
+// Remove event from reunion
+function removeReunionEvent(reunion_event_id) {
+	event.preventDefault();
+	
+	$.ajax({
+	  method: "DELETE",
+	  url: "/reunion_events/" + reunion_event_id,
+	  data: {'reunion_event':reunion_event_id}
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var removeEventRow = $("input[name='event_id[]'][value='"+reunion_event_id+"']").parent().parent();
+		
+		$(removeEventRow).slideUp('slow', function() {
+			$(removeEventRow).remove();
+		});
+	});
+}
+
+// Remove committee member from reunion
+function removeCommitteeMember(reunion_committee_member_id) {
+	event.preventDefault();
+	
+	$.ajax({
+	  method: "DELETE",
+	  url: "/reunion_committee_members/" + reunion_committee_member_id,
+	  data: {'reunion_committee':reunion_committee_member_id}
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var removeCommitteeMemberRow = $("input[name='committee_member_id[]'][value='"+reunion_committee_member_id+"']").parent().parent();
+		
+		$(removeCommitteeMemberRow).slideUp('slow', function() {
+			$(removeCommitteeMemberRow).remove();
+		});
+	});
+}
+
 //Check for errors function
 	var errors;
 	function errorCheck(regName, regAdd, regPhone, regEmail, numAdults, adultName, youthName, childName) {

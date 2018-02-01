@@ -271,4 +271,92 @@ class HomeController extends Controller
 			
 		return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
 	}
+	
+	/**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_house_hold(Request $request) {
+		$member = Reunion_dl::find($request->reunion_dl);
+		$removeHH = Reunion_dl::find($request->remove_hh);
+		$familyID = $member->family_id;
+		$familyMembers = Reunion_dl::where([
+			['family_id', $familyID],
+			['family_id', '<>', null]
+		])->get();
+		
+		// If household members is equal to 2 then remove
+		// family ID from both users
+		if($familyMembers->count() <= 2) {
+			$removeHH->family_id = $member->family_id = null;
+			
+			if($removeHH->save()) {
+				if($member->save()) {
+					// Get active reunion
+					$reunion = Reunion::where('reunion_complete', 'N')->first();
+					
+					// Look for a family registration if reunion is active
+					if($reunion->registrations()->where('family_id', $familyID)->first()) {
+						$splitRegistration = $reunion->registrations()->where('family_id', $familyID)->first();
+						
+						// Create a new registration for the removed household member
+						$newRegistration = new Registration();
+						$totalPrice = $splitRegistration->reunion->adult_price;
+						$newRegistration->reunion_id = $splitRegistration->reunion->id;
+						$newRegistration->reg_date = $splitRegistration->reg_date;
+						$newRegistration->dl_id = $removeHH->id;
+						$newRegistration->registree_name = $removeHH->firstname . ' ' . $removeHH->lastname;
+						$newRegistration->total_amount_due = $newRegistration->due_at_reg = $totalPrice;
+						$newRegistration->adult_names = $removeHH->firstname;
+						$newRegistration->save();
+						
+						if($removeHH->age_group == 'adult') {
+							$removeFromAdult = $splitRegistration->adult_names;
+							$removeIndex = array_search($removeHH->firstname, $removeFromAdult);
+							$splitRegistration->adult_names = array_splice($removeFromAdult, $removeIndex, 1);
+							//Just find the index of the string and remove it than save it
+							$splitRegistration->save();
+						} elseif($removeHH->age_group == 'youth') {
+							$removeFromYouth = $splitRegistration->youth_names;
+							$removeIndex = array_search($removeHH->firstname, $removeFromYouth);
+							$splitRegistration->save();
+						} elseif($removeHH->age_group == 'child') {
+							$removeFromChildren = $splitRegistration->children_names;
+							$removeIndex = array_search($removeHH->firstname, $removeFromChildren);
+							$splitRegistration->save();
+						}
+					} else {
+						return 'False';
+					}
+				}					
+			}
+		} else {
+			$removeHH->family_id = null;
+			$removeHH->save();
+		}
+		
+		$states = \App\State::all();
+		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$siblings = explode('; ', $member->sibling);
+		$children = explode('; ', $member->child);
+		$family_members = Reunion_dl::where([
+			['family_id', $member->family_id],
+			['family_id', '<>', 'null']
+		])->get();
+		$potential_family_members = Reunion_dl::where([
+			['address', $member->address],
+			['city', $member->city],
+			['state', $member->state]
+		])->get();
+		$active_reunion = Reunion::where('reunion_complete', 'N')->first();
+		$registered_for_reunion = Registration::where([
+				['family_id', $member->family_id],
+				['family_id', '<>', 'null']
+			])
+			->orwhere('dl_id', $member->id)
+			->get();
+			
+		return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
+	}
 }

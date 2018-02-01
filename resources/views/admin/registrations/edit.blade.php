@@ -104,7 +104,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1">$</span>
 								</div>
-								<input type="number" name="due_at_reg" class="form-control" value="{{ $registration->due_at_reg }}" placeholder="Enter Registration Cost" step="0.01" />
+								<input type="number" name="due_at_reg" class="form-control" value="{{ $registration->due_at_reg > 0 ? $registration->due_at_reg : '' }}" placeholder="Enter Registration Cost" step="0.01" />
 							</div>
 						</div>
 						<div class="form-group col-4">
@@ -113,7 +113,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1">$</span>
 								</div>
-								<input type="number" name="total_amount_due" class="form-control" value="{{ $registration->total_amount_due }}" placeholder="Enter Due Cost" step="0.01" />
+								<input type="number" name="total_amount_due" class="form-control" value="{{ $registration->total_amount_due > 0 ? $registration->total_amount_due : '' }}" placeholder="Enter Due Cost" step="0.01" />
 							</div>
 						</div>
 						<div class="form-group col-4">
@@ -122,7 +122,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon1">$</span>
 								</div>
-								<input type="number" name="total_amount_paid" class="form-control" value="{{ $registration->total_amount_paid }}" placeholder="Enter Amount Paid" step="0.01" />
+								<input type="number" name="total_amount_paid" class="form-control" value="{{ $registration->total_amount_paid > 0 ? $registration->total_amount_paid : '' }}" placeholder="Enter Amount Paid" step="0.01" />
 							</div>
 						</div>
 					</div>
@@ -142,12 +142,11 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-4">
-							@foreach($family as $family_reg)
-								@if($family_reg->age_group == 'adult')
+							@foreach($adults as $family_reg)
+								@if($family_reg != '' || $family_reg != null)
 									<div class="my-1">
-										<input type="text" name="" class="form-control" value="{{ $family_reg->firstname }}" disabled />
-
-										<select class="custom-select form-control" name="shirt_sizes[]">
+										<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
+										<select class="custom-select form-control my-1" name="shirt_sizes[]">
 											<option value="S" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
 											<option value="M" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
 											<option value="L" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
@@ -160,36 +159,36 @@
 							@endforeach
 						</div>
 						<div class="form-group col-4">
-							@foreach($family as $family_reg)
-								@if($family_reg->age_group == 'youth')
+							@foreach($youths as $family_reg)
+								@if($family_reg != '' || $family_reg != null)
 									<div class="my-1">
-										<input type="text" name="" class="form-control" value="{{ $family_reg->firstname }}" />
-										
-										<select class="custom-select form-control" name="shirt_sizes[]">
-											<option value="S">Small</option>
-											<option value="M">Medium</option>
-											<option value="L">Large</option>
-											<option value="XL">Extra Large</option>
-											<option value="XXL">2XL</option>
-											<option value="XXXL">3XL</option>
+										<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
+											
+										<select class="custom-select form-control my-1" name="shirt_sizes[]">
+											<option value="S" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
+											<option value="M" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
+											<option value="L" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
+											<option value="XL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
+											<option value="XXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
+											<option value="XXXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
 										</select>
 									</div>
 								@endif
 							@endforeach
 						</div>
 						<div class="form-group col-4">
-							@foreach($family as $family_reg)
-								@if($family_reg->age_group == 'child')
+							@foreach($childs as $family_reg)
+								@if($family_reg != '' || $family_reg != null)
 									<div class="my-1">
-										<input type="text" name="" class="form-control" value="{{ $family_reg->firstname }}" disabled />
+										<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
 										
-										<select class="custom-select form-control" name="shirt_sizes[]">
-											<option value="S">Small</option>
-											<option value="M">Medium</option>
-											<option value="L">Large</option>
-											<option value="XL">Extra Large</option>
-											<option value="XXL">2XL</option>
-											<option value="XXXL">3XL</option>
+										<select class="custom-select form-control my-1" name="shirt_sizes[]">
+											<option value="S" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
+											<option value="M" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
+											<option value="L" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
+											<option value="XL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
+											<option value="XXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
+											<option value="XXXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
 										</select>
 									</div>
 								@endif

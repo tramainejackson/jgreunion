@@ -112,7 +112,7 @@ class RegistrationController extends Controller
      */
     public function show($id)
     {
-dd('Test');
+// dd('Test');
 		$reunion = Reunion::find($id);
         $registrations = Registration::where('reunion_id', $reunion->id)->get();
 		return view('admin.registrations.show', compact('registrations', 'reunion'));
@@ -136,17 +136,17 @@ dd('Test');
 		$shirtSizes = explode('; ', $registration->shirt_sizes);
 
 		// Get the count of each age group
-		$adultCount = count(explode('; ', $registration->adult_names));
-		$youthCount = count(explode('; ', $registration->youth_names));
-		$childCount = count(explode('; ', $registration->child_names));
+		$adults = explode('; ', $registration->adult_names);
+		$youths = explode('; ', $registration->youth_names);
+		$childs = explode('; ', $registration->child_names);
 		
 		// Get the sizes of the shirts in reference to the amount
 		// of each age group
-		$adultSizes = array_slice($shirtSizes, 0, $adultCount);
-		$youthSizes = array_slice($shirtSizes, $adultCount, $youthCount);
-		$childrenSizes = array_slice($shirtSizes, ($adultCount + $youthCount));
+		$adultSizes = array_slice($shirtSizes, 0, count($adults));
+		$youthSizes = array_slice($shirtSizes, count($adults), count($youths));
+		$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
 
-		return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes'));
+		return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes', 'adults', 'youths', 'childs'));
     }
 
     /**

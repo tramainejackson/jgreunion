@@ -1163,7 +1163,7 @@ function addToHouseHold(dlID, memberID) {
 	$.ajax({
 	  method: "PUT",
 	  url: "/members/" + memberID + "/add_house_hold",
-	  data: {houseMember:memberID, reunion_dl:dlID}
+	  data: {'houseMember':memberID, 'reunion_dl':dlID}
 	})
 	
 	.fail(function() {	
@@ -1184,13 +1184,13 @@ function addToHouseHold(dlID, memberID) {
 }
 
 // Remove individual member from household
-function removeFromHouseHold() {
+function removeFromHouseHold(dlID, memberID) {
 	event.preventDefault();
 	
 	$.ajax({
-	  method: "POST",
-	  url: "/contacts",
-	  data: $('#contact_add').serialize()
+	  method: "DELETE",
+	  url: "/members/" + memberID + "/remove_house_hold",
+	  data: {'remove_hh':memberID, 'reunion_dl':dlID}
 	})
 	
 	.fail(function() {	
@@ -1198,21 +1198,14 @@ function removeFromHouseHold() {
 	})
 	
 	.done(function(data) {
-		var newData = $(data);
+		var newData = $(data).find('.houseHoldBlock');
+		var currentHHBlock = $('.houseHoldBlock');
 		
-		$("#welcome_modal .modal-content").fadeOut(function() {
-			$("#welcome_modal .modal-content").html(newData);
-			$("#welcome_modal").modal('hide');
-			
-			setTimeout(function() {
-				$("#welcome_modal .modal-content").fadeIn(function() {
-				$("#welcome_modal").modal('show');
-					setTimeout(function() {
-						$("#welcome_modal").modal('toggle');
-						$(".modal-backdrop").remove();
-					}, 5000);
-				});
-			}, 500);
+		$(currentHHBlock).fadeOut(function() {
+			$(newData).addClass('hidden');
+			$(newData).insertAfter('.familyTreeGroup').fadeIn(function() {
+				$(currentHHBlock).remove();				
+			});
 		});
 	});
 }

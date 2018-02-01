@@ -6,6 +6,12 @@
 			</div>
 			<div class="modal-body">
 				<p class="">{{ $registration->id }}</p>
+				{!! Form::open(['action' => ['RegistrationController@destroy', 'registration' => $registration->id], 'method' => 'DELETE']) !!}
+				
+					<div class="form-group">
+						{{ Form::submit('Delete Registration', ['class' => 'btn btn-primary form-control']) }}
+					</div>
+				{!! Form::close() !!}
 			</div>
 			<div class="modal-footer">
 			</div>

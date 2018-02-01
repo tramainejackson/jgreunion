@@ -2988,13 +2988,6 @@ button#takeLater_btn, #no_music {
 button#takeNow_btn, #yes_music {
   left: 7%;
 }
-.page_header:first-of-type {
-font-size: 192%;
-text-align: -webkit-center;
-text-align: center;
-width: 100%;
-padding: 15% 0%;
-}
 div#navi {
 padding: 2% 0% 9%;
 }

@@ -20,7 +20,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('store');
     }
 
     /**
@@ -299,6 +299,8 @@ class HomeController extends Controller
 					// Look for a family registration if reunion is active
 					if($reunion->registrations()->where('family_id', $familyID)->first()) {
 						$splitRegistration = $reunion->registrations()->where('family_id', $familyID)->first();
+						$splitRegistration->family_id = null;
+						$splitRegistration->shirt_sizes = null;
 						
 						// Create a new registration for the removed household member
 						$newRegistration = new Registration();
@@ -312,10 +314,14 @@ class HomeController extends Controller
 						$newRegistration->save();
 						
 						if($removeHH->age_group == 'adult') {
-							$removeFromAdult = $splitRegistration->adult_names;
-							$removeIndex = array_search($removeHH->firstname, $removeFromAdult);
-							$splitRegistration->adult_names = array_splice($removeFromAdult, $removeIndex, 1);
-							//Just find the index of the string and remove it than save it
+							$removeFromAdult = str_ireplace(';', '', str_ireplace($removeHH->firstname, '', $splitRegistration->adult_names));
+							$splitRegistration->adult_names = $removeFromAdult != '' ? $removeFromAdult : null;
+							
+							if($removeHH->id == $splitRegistration->dl_id) {
+								$splitRegistration->registree_name = $member->firstname . ' ' . $member->lastname;
+								$splitRegistration->dl_id = $member->id;
+							}
+							
 							$splitRegistration->save();
 						} elseif($removeHH->age_group == 'youth') {
 							$removeFromYouth = $splitRegistration->youth_names;

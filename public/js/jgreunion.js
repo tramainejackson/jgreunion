@@ -790,113 +790,52 @@ $(document).ready(function()
 		$(body).animate({scrollTop:$(body).offset().top}, "slow");
 	});
 	
-//Add total amounts to pay for registration
-	$("body").on("change", "#attending_adult, #attending_youth, #attending_children, #addt_tee_table input, #fancy_cut_table input", function(e)
+	//Add total amounts to pay for registration
+	$("body").on("change", "#attending_adult, #attending_youth, #attending_children", function(e)
 	{
 		var attendingNumA = $("#attending_adult").val();
 		var attendingNumY = $("#attending_youth").val();
 		var attendingNumC = $("#attending_children").val();
-		var totalAmountA = Number(attendingNumA * 100);
-		var totalAmountY = Number(attendingNumY * 75);
-		var totalAmountC = Number(attendingNumC * 20);
-		var totalDue = Number(totalAmountA + totalAmountY + totalAmountC + totalAmountAddtTee + totalAmountFC);
+		var totalAmountA = Number(attendingNumA * $(".costPA").val());
+		var totalAmountY = Number(attendingNumY * $(".costPY").val());
+		var totalAmountC = Number(attendingNumC * $(".costPC").val());
+		var totalDue = Number(totalAmountA + totalAmountY + totalAmountC);
 		$("#total_adult").val(totalAmountA);
 		$("#total_youth").val(totalAmountY);
 		$("#total_children").val(totalAmountC);
 		$("#total_amount_due").val(totalDue);
 	});
 	
-//Add name rows for adults
-	$("body").on("change", "#attending_adult", function(e)
-	{
-		var attendingNumA = Number($("#attending_adult").val());
-		$(".attending_adult_row").remove();
-		var counter;
+	//Add name rows for adults
+	$("body").on("change", "#attending_adult", function(e) {
+		var count = $("#attending_adult").val();
 		
-		for(counter = 0; counter < attendingNumA; counter++)
-		{
-			var tableInputWidth = $(".table_input").width();
-			var addtRow  = "<tr class='attending_adult_row'><td></td><td></td>";
-				addtRow += "<td><input type='text' name='attending_adult_name[]' class='attending_adult_name' placeholder='Adult Name' /></td>"
-				addtRow += "<td><select name='shirt_size[]' class='shirt_size'>";
-				addtRow += "<option value='none' name='shirt_size_option'>T-Shirt Size</option>";
-				addtRow += "<option value='small' name='shirt_size_option'>Small</option>";
-				addtRow += "<option value='medium' name='shirt_size_option'>Medium</option>";
-				addtRow += "<option value='large' name='shirt_size_option'>Large</option>";
-				addtRow += "<option value='xl' name='shirt_size_option'>XL</option>";
-				addtRow += "<option value='xxl' name='shirt_size_option'>XXL</option>";
-				addtRow += "<option value='3xl' name='shirt_size_option'>3XL</option>";
-				addtRow += "<option value='4xl' name='shirt_size_option'>4XL</option>";
-				addtRow += "</select></td></tr>";
-			$(addtRow).insertAfter("#adult_row");
-			$(".attending_adult_row").show();
-			$(".attending_adult_name, .shirt_size").css({"width":tableInputWidth+"px"});
-		}
+		// Get hidden adult row
+		var newAdultRow = $("#attending_adult_row_default").clone();
+		$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
+		$(newAdultRow).insertBefore($("#attending_adult_row_default"));
 	});
 	
-//Add name rows for youths
+	//Add name rows for youths
 	$("body").on("change", "#attending_youth", function(e)
 	{
-		var attendingNumY = Number($("#attending_youth").val());
-		var counter;
-		$(".attending_youth_row").remove();
+		var count = $("#attending_youth").val();
 		
-		if(attendingNumY == 0){
-			var defaultRow = "<tr id='attending_youth_row_default' class='attending_youth_row'><td></td><td></td><td><input type='text' name='attending_youth_name[]' class='attending_youth_name' placeholder='Youth Name' value='Youth'/></td></tr>";
-			$(defaultRow).insertAfter("#youth_row");
-		}
-		
-		for(counter = 0; counter < attendingNumY; counter++)
-		{
-			var tableInputWidth = $(".table_input").width();
-			var addtRow  = "<tr class='attending_youth_row'><td></td><td></td>";
-				addtRow += "<td><input type='text' name='attending_youth_name[]' class='attending_youth_name' placeholder='Youth Name'/></td>";
-				addtRow += "<td><select name='shirt_size[]' class='shirt_size'>";
-				addtRow += "<option value='none' name='shirt_size_option'>T-Shirt Size</option>";
-				addtRow += "<option value='small' name='shirt_size_option'>Small</option>";
-				addtRow += "<option value='medium' name='shirt_size_option'>Medium</option>";
-				addtRow += "<option value='large' name='shirt_size_option'>Large</option>";
-				addtRow += "<option value='xl' name='shirt_size_option'>XL</option>";
-				addtRow += "<option value='xxl' name='shirt_size_option'>XXL</option>";
-				addtRow += "<option value='3xl' name='shirt_size_option'>3XL</option>";
-				addtRow += "<option value='4xl' name='shirt_size_option'>4XL</option>";
-				addtRow += "<option value='ksmall' name='shirt_size_option'>Kid - Small</option>";
-				addtRow += "<option value='kmedium' name='shirt_size_option'>Kid - Medium</option>";
-				addtRow += "<option value='klarge' name='shirt_size_option'>Kid - Large</option>";
-				addtRow += "</select></td></tr>";
-			$(addtRow).insertAfter("#youth_row");
-			$(".attending_youth_row").show();
-			$(".attending_youth_name, .shirt_size").css({"width":tableInputWidth+"px"});
-		}
+		// Get hidden youth row
+		var newAdultRow = $("#attending_youth_row_default").clone();
+		$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
+		$(newAdultRow).insertBefore($("#attending_youth_row_default"));
 	});
 	
-//Add name rows for children
+	//Add name rows for children
 	$("body").on("change", "#attending_children", function(e)
 	{
-		var attendingNumC = Number($("#attending_children").val());
-		var counter;
-		$(".attending_children_row").remove();
+		var count = $("#attending_children").val();
 		
-		if(attendingNumC == 0){
-			var defaultRow = "<tr id='attending_children_row_default' class='attending_children_row'><td></td><td></td><td><input type='text' name='attending_children_name[]' class='attending_children_name' placeholder='Child Name' value='Child' /></td></tr>";
-			$(defaultRow).insertAfter("#children_row");
-		}
-		
-		for(counter = 0; counter < attendingNumC; counter++)
-		{
-			var tableInputWidth = $(".table_input").width();
-			var addtRow  = "<tr class='attending_children_row'><td></td><td></td>";
-				addtRow += "<td><input type='text' name='attending_children_name[]' class='attending_children_name' placeholder='Child Name'/></td>";
-				addtRow += "<td><select name='shirt_size[]' class='shirt_size'>";
-				addtRow += "<option value='none' name='shirt_size_option'>T-Shirt Size</option>";
-				addtRow += "<option value='ksmall' name='shirt_size_option'>Kid - Small</option>";
-				addtRow += "<option value='kmedium' name='shirt_size_option'>Kid - Medium</option>";
-				addtRow += "<option value='klarge' name='shirt_size_option'>Kid - Large</option>";
-				addtRow += "</select></td></tr>";
-			$(addtRow).insertAfter("#children_row");
-			$(".attending_children_row").show();
-			$(".attending_children_name, .shirt_size").css({"width":tableInputWidth+"px"});
-		}
+		// Get hidden child row
+		var newAdultRow = $("#attending_children_row_default").clone();
+		$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
+		$(newAdultRow).insertBefore($("#attending_children_row_default"));
 	});
 	
 //Show additional options on registration form

@@ -20,7 +20,11 @@
 								<a href='/login' class='profileLink nav-link'>Login</a>
 							@else
 								<a href='/profile' class='profileLink nav-link'>My Profile</a>
-								<a href='/logout' class='profileLink nav-link'>Logout</a>
+								<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+					
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+									{{ csrf_field() }}
+								</form>
 							@endif
 						</nav>
 					</div>

@@ -21,7 +21,11 @@
 			<div class="col-3">
 				<nav class="nav nav-pills justify-content-center py-3">
 					<a href='/' class='profileLink nav-link'>Home</a>
-					<a href='/logout' class='profileLink nav-link'>Logout</a>
+					<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+					
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						{{ csrf_field() }}
+					</form>
 				</nav>
 			</div>
 			<div class="col-9">
@@ -40,18 +44,20 @@
 				</div>
 			</div>
 			<div class="col-8 membersForm">
-				<h1 class="mt-2 mb-4">Edit {{ $registration->registree_name }} ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})</h1>
+				<h1 class="mt-2 mb-4">Edit <a href="/members/{{ $registration->dl_id }}/edit" class="">{{ $registration->registree_name }}</a> ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})</h1>
 				
 				<!-- Update Form -->
 				{!! Form::open(['action' => ['RegistrationController@update', 'registration' => $registration->id], 'method' => 'PUT']) !!}
-					<div class="form-group">
-						<label class="form-label" for="registree">Registree</label>
-						<select class="custom-select form-control" name="registree">
-							@foreach($family as $family_member)
-								<option value="{{ $family_member->id }}" {{ $family_member->id == $registration->reunion_dl->id ? 'selected' : '' }}>{{ $family_member->firstname . ' ' . $family_member->lastname }}</option>
-							@endforeach
-						</select>
-					</div>
+					@if($registration->family_id != null)
+						<div class="form-group">
+							<label class="form-label" for="registree">Registree</label>
+							<select class="custom-select form-control" name="registree">
+								@foreach($family as $family_member)
+									<option value="{{ $family_member->id }}" {{ $family_member->id == $registration->reunion_dl->id ? 'selected' : '' }}>{{ $family_member->firstname . ' ' . $family_member->lastname }}</option>
+								@endforeach
+							</select>
+						</div>
+					@endif
 					<div class="form-group">
 						<label class="form-label" for="address">Address</label>
 						<input type="text" name="address" class="form-control" value="{{ $registration->reunion_dl->address }}" placeholder="Enter Address" disabled />

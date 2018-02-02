@@ -21,7 +21,7 @@ class RegistrationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('store');
     }
 	
     /**
@@ -57,50 +57,87 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-		$registration = new Registration();
-        $reunion = Reunion::find($request->reunion_id);
-        $member = Reunion_dl::find($request->reg_member);
-		$totalPrice = $reunion->adult_price;
-		$adults = $member->firstname;
-		$youth = '';
-		$children = '';
-        
-		// Get household members if exist
-		if($member->family_id != null) {
-			$registration->family_id = $member->family_id;
+		// dd($request);
+		
+		if(!Auth::check()) {
+			$this->validate($request, [
+				'firstname' => 'required|max:50',
+				'lastname' => 'required|max:50',
+				'address' => 'required|max:100',
+				'city' => 'required|max:100',
+				'zip' => 'required|max:9999|min:0',
+				'email' => 'email',
+				'phone1' => 'max:999|min:0',
+				'phone2' => 'max:999|min:0',
+				'phone3' => 'max:9999|min:0',
+			]);
+		
+			$registration = new Registration();
+			$registration->reunion_id = $request->reunion_id;
+			$registration->address = $request->address;
+			$registration->city = $request->city;
+			$registration->state = $request->state;
+			$registration->zip = $request->zip;
+			$registration->email = $request->email;
+			$registration->phone = $request->phone1 . $request->phone2 . $request->phone3;
+			$registration->phone = $registration->phone != '' ? $registration->phone : null;
+			$registration->registree_name = $request->firstname . ' ' . $request->lastname;
+			$registration->reg_date = Carbon::now();
+			// $registration->adult_names = $request;
+			// $registration->youth_names = $request == '' ? null : $request;
+			// $registration->children_names = $request == '' ? null : $request;
+			// $registration->total_amount_due = $request->due_at_reg = $totalPrice;
 			
-			$family_members = Reunion_dl::where([
-				['family_id', $member->family_id],
-				['family_id', '<>', 'null']
-			])->get();
+			if($registration->save()) {
+				return redirect()->back()->with('status', 'Registration Completed Successfully');
+			}
 			
-			foreach($family_members as $family_member) {
-				if($family_member->id != $member->id) {
-					if($family_member->age_group == 'adult') {
-						$adults .= '; ' . $family_member->firstname;
-						$totalPrice += $reunion->adult_price;
-					} elseif($family_member->age_group == 'youth') {
-						$youth .= '; ' . $family_member->firstname;
-						$totalPrice = $reunion->youth_price;
-					} elseif($family_member->age_group == 'child') {
-						$children .= '; ' . $family_member->firstname;
-						$totalPrice = $reunion->child_price;
+		} else {
+			$registration = new Registration();
+			$reunion = Reunion::find($request->reunion_id);
+			$member = Reunion_dl::find($request->reg_member);
+			$totalPrice = $reunion->adult_price;
+			$adults = $member->firstname;
+			$youth = '';
+			$children = '';
+			
+			// Get household members if exist
+			if($member->family_id != null) {
+				$registration->family_id = $member->family_id;
+				
+				$family_members = Reunion_dl::where([
+					['family_id', $member->family_id],
+					['family_id', '<>', 'null']
+				])->get();
+				
+				foreach($family_members as $family_member) {
+					if($family_member->id != $member->id) {
+						if($family_member->age_group == 'adult') {
+							$adults .= '; ' . $family_member->firstname;
+							$totalPrice += $reunion->adult_price;
+						} elseif($family_member->age_group == 'youth') {
+							$youth .= '; ' . $family_member->firstname;
+							$totalPrice = $reunion->youth_price;
+						} elseif($family_member->age_group == 'child') {
+							$children .= '; ' . $family_member->firstname;
+							$totalPrice = $reunion->child_price;
+						}
 					}
 				}
 			}
-		}
-		
-		$registration->dl_id = $member->id;
-		$registration->reunion_id = $reunion->id;
-		$registration->registree_name = $member->firstname . ' ' . $member->lastname;
-		$registration->total_amount_due = $registration->due_at_reg = $totalPrice;
-		$registration->reg_date = Carbon::now();
-		$registration->adult_names = $adults;
-		$registration->youth_names = $youth == '' ? null : $youth;
-		$registration->children_names = $children == '' ? null : $children;
-		
-		if($registration->save()) {
-			return redirect()->action('RegistrationController@edit', $registration)->with('status', 'Registration Added Successfully');
+			
+			$registration->dl_id = $member->id;
+			$registration->reunion_id = $reunion->id;
+			$registration->registree_name = $member->firstname . ' ' . $member->lastname;
+			$registration->total_amount_due = $registration->due_at_reg = $totalPrice;
+			$registration->reg_date = Carbon::now();
+			$registration->adult_names = $adults;
+			$registration->youth_names = $youth == '' ? null : $youth;
+			$registration->children_names = $children == '' ? null : $children;
+			
+			if($registration->save()) {
+				return redirect()->action('RegistrationController@edit', $registration)->with('status', 'Registration Added Successfully');
+			}
 		}
     }
 

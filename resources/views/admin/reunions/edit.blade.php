@@ -21,7 +21,11 @@
 			<div class="col-3">
 				<nav class="nav nav-pills justify-content-center py-3">
 					<a href='/' class='profileLink nav-link'>Home</a>
-					<a href='/logout' class='profileLink nav-link'>Logout</a>
+					<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+					
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						{{ csrf_field() }}
+					</form>
 				</nav>
 			</div>
 			<div class="col-9">
@@ -270,7 +274,8 @@
 							$family = \App\Reunion_dl::where([
 								['family_id', $registration->family_id],
 								['family_id', '<>', null]
-							])->get(); @endphp
+							])->get(); 
+						@endphp
 						<div class="form-row">
 							<div class="form-group col-1">
 								<span class="d-inline-block">{{ $loop->iteration }}.</span>

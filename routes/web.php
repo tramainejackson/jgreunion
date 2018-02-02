@@ -36,10 +36,11 @@ Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {
 	$committee_members = $reunion->committee;
 	$committee_president = $committee_members->where('member_title', 'president')->first()->reunion_dl;
 	$events = $reunion->events->groupBy('event_date');
+	$states = \App\State::all();
 	
 	// dd($committee_members->where('member_title', 'president')->first()->reunion_dl);
 	
-    return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion'));
+    return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion', 'states'));
 });
 
 Route::get('/administrator', function () {

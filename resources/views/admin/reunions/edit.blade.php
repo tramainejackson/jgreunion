@@ -281,13 +281,21 @@
 								<span class="d-inline-block">{{ $loop->iteration }}.</span>
 								<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
 							</div>
-							<div class="form-group col-5">
-								<select class="custom-select" name="" disabled>
-									@foreach($members as $member)
-										<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
-									@endforeach
-								</select>
-							</div>
+							@if($registration->dl_id == null)
+								<div class="form-group col-5">
+									<select class="custom-select" name="" disabled>
+										<option value="">{{ $registration->registree_name }}</option>
+									</select>
+								</div>
+							@else
+								<div class="form-group col-5">
+									<select class="custom-select" name="" disabled>
+										@foreach($members as $member)
+											<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
+										@endforeach
+									</select>
+								</div>
+							@endif
 							<div class="form-group col-2">
 								<button type="button" class="btn btn-primary mb-2 w-100">Family Total <span class="badge badge-light">{{ $registration->family_id != null ? $family->count() : '1' }}</span>
 								<span class="sr-only">total household members</span>

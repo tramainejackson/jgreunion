@@ -27,6 +27,6 @@ class reunion extends Model
      */
     public function registrations()
     {
-        return $this->hasMany('App\Registration');
+        return $this->hasMany('App\Registration', 'reunion_id');
     }
 }

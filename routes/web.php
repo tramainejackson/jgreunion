@@ -25,10 +25,10 @@ Route::get('/', function () {
     return view('welcome', compact('images', 'reunions'));
 });
 
-Route::get('/past_reunion/{id}', function ($id) {
-	$registrations = \App\Registration::where('id', $id);
+Route::get('/past_reunion/{reunion}', function (\App\Reunion $reunion) {
+	$registrations = \App\Registration::where('reunion_id', $reunion->id);
 	
-    return view('past_reunion', compact('registrations'));
+    return view('past_reunion', compact('registrations', 'reunion'));
 });
 
 Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {

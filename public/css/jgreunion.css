@@ -580,6 +580,9 @@ a.profileLink, a.homeLink {
 a.profileLink:first-of-type {
     border-right: solid 1.5px whitesmoke;
 }
+a.profileLink.adminLink {
+    border-right: solid 1.5px whitesmoke;
+}
 .indPost {
     border-bottom: solid 1px #c9c9c9;
 }

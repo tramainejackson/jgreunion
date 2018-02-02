@@ -44,7 +44,13 @@
 				</div>
 			</div>
 			<div class="col-8 membersForm">
-				<h1 class="mt-2 mb-4">Edit <a href="/members/{{ $registration->dl_id }}/edit" class="">{{ $registration->registree_name }}</a> ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})</h1>
+				<h1 class="mt-2 mb-4">Edit
+					@if($registration->dl_id != null)
+						<a href="/members/{{ $registration->dl_id }}/edit" class="">{{ $registration->registree_name }}</a> ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})
+					@else
+						{{ $registration->registree_name }} ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})
+					@endif
+				</h1>
 				
 				<!-- Update Form -->
 				{!! Form::open(['action' => ['RegistrationController@update', 'registration' => $registration->id], 'method' => 'PUT']) !!}
@@ -58,48 +64,93 @@
 							</select>
 						</div>
 					@endif
-					<div class="form-group">
-						<label class="form-label" for="address">Address</label>
-						<input type="text" name="address" class="form-control" value="{{ $registration->reunion_dl->address }}" placeholder="Enter Address" disabled />
-					</div>
-					<div class="form-row">
-						<div class="form-group col-4">
-							<label class="form-label" for="city">City</label>
-							<input type="text" name="city" class="form-control" value="{{ $registration->reunion_dl->city }}" placeholder="Enter City" disabled />
+					@if($registration->dl_id != null)
+						<div class="form-group">
+							<label class="form-label" for="address">Address</label>
+							<input type="text" name="address" class="form-control" value="{{ $registration->reunion_dl->address }}" placeholder="Enter Address" disabled />
 						</div>
-						<div class="form-group col-4">
-							<label class="form-label" for="state">State</label>
-							<select class="form-control custom-select" name="state" disabled>
-								@foreach($states as $state)
-									<option value="{{ $state->state_abb }}" {{ $registration->reunion_dl->state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
-								@endforeach
-							</select>
-						</div>
-						<div class="form-group col-4">
-							<label class="form-label" for="zip">Zip</label>
-							<input type="number" name="zip" class="form-control" value="{{ $registration->reunion_dl->zip }}" placeholder="Enter Zip Code" disabled />
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-6">
-							<label class="form-label" for="email">Email</label>
-							<input type="text" name="email" class="form-control" value="{{ $registration->reunion_dl->email }}" placeholder="Enter Email Address" disabled />
-						</div>
-						<div class="form-row col-6">
-							<label class="form-label col-12" for="city">Phone</label>
-							<div class="form-group col-3">
-								<input type="number" name="phone1" class="form-control" value="{{ old('phone1') ? old('phone1') : substr($registration->reunion_dl->phone, 0, 3) }}" placeholder="###" max="999" disabled />
+						<div class="form-row">
+							<div class="form-group col-4">
+								<label class="form-label" for="city">City</label>
+								<input type="text" name="city" class="form-control" value="{{ $registration->reunion_dl->city }}" placeholder="Enter City" disabled />
 							</div>
-							<span>-</span>
-							<div class="form-group col-3">
-								<input type="number" name="phone2" class="form-control" value="{{ old('phone2') ? old('phone2') : substr($registration->reunion_dl->phone, 3, 3) }}" placeholder="###" max="999" disabled />
+							<div class="form-group col-4">
+								<label class="form-label" for="state">State</label>
+								<select class="form-control custom-select" name="state" disabled>
+									@foreach($states as $state)
+										<option value="{{ $state->state_abb }}" {{ $registration->reunion_dl->state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
+									@endforeach
+								</select>
 							</div>
-							<span>-</span>
-							<div class="form-group col-5">
-								<input type="number" name="phone3" class="form-control" value="{{ old('phone3') ? old('phone3') : substr($registration->reunion_dl->phone, 6, 4) }}" placeholder="####" max="9999" disabled />
+							<div class="form-group col-4">
+								<label class="form-label" for="zip">Zip</label>
+								<input type="number" name="zip" class="form-control" value="{{ $registration->reunion_dl->zip }}" placeholder="Enter Zip Code" disabled />
 							</div>
 						</div>
-					</div>
+						<div class="form-row">
+							<div class="form-group col-6">
+								<label class="form-label" for="email">Email</label>
+								<input type="text" name="email" class="form-control" value="{{ $registration->reunion_dl->email }}" placeholder="Enter Email Address" disabled />
+							</div>
+							<div class="form-row col-6">
+								<label class="form-label col-12" for="city">Phone</label>
+								<div class="form-group col-3">
+									<input type="number" name="phone1" class="form-control" value="{{ old('phone1') ? old('phone1') : substr($registration->reunion_dl->phone, 0, 3) }}" placeholder="###" max="999" disabled />
+								</div>
+								<span>-</span>
+								<div class="form-group col-3">
+									<input type="number" name="phone2" class="form-control" value="{{ old('phone2') ? old('phone2') : substr($registration->reunion_dl->phone, 3, 3) }}" placeholder="###" max="999" disabled />
+								</div>
+								<span>-</span>
+								<div class="form-group col-5">
+									<input type="number" name="phone3" class="form-control" value="{{ old('phone3') ? old('phone3') : substr($registration->reunion_dl->phone, 6, 4) }}" placeholder="####" max="9999" disabled />
+								</div>
+							</div>
+						</div>
+					@else
+						<div class="form-group">
+							<label class="form-label" for="address">Address</label>
+							<input type="text" name="address" class="form-control" value="{{ $registration->address }}" placeholder="Enter Address" disabled />
+						</div>
+						<div class="form-row">
+							<div class="form-group col-4">
+								<label class="form-label" for="city">City</label>
+								<input type="text" name="city" class="form-control" value="{{ $registration->city }}" placeholder="Enter City" disabled />
+							</div>
+							<div class="form-group col-4">
+								<label class="form-label" for="state">State</label>
+								<select class="form-control custom-select" name="state" disabled>
+									@foreach($states as $state)
+										<option value="{{ $state->state_abb }}" {{ $registration->state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
+									@endforeach
+								</select>
+							</div>
+							<div class="form-group col-4">
+								<label class="form-label" for="zip">Zip</label>
+								<input type="number" name="zip" class="form-control" value="{{ $registration->zip }}" placeholder="Enter Zip Code" disabled />
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-6">
+								<label class="form-label" for="email">Email</label>
+								<input type="text" name="email" class="form-control" value="{{ $registration->email }}" placeholder="Enter Email Address" disabled />
+							</div>
+							<div class="form-row col-6">
+								<label class="form-label col-12" for="phone">Phone</label>
+								<div class="form-group col-3">
+									<input type="number" name="phone1" class="form-control" value="{{ old('phone1') ? old('phone1') : substr($registration->phone, 0, 3) }}" placeholder="###" max="999" disabled />
+								</div>
+								<span>-</span>
+								<div class="form-group col-3">
+									<input type="number" name="phone2" class="form-control" value="{{ old('phone2') ? old('phone2') : substr($registration->phone, 3, 3) }}" placeholder="###" max="999" disabled />
+								</div>
+								<span>-</span>
+								<div class="form-group col-5">
+									<input type="number" name="phone3" class="form-control" value="{{ old('phone3') ? old('phone3') : substr($registration->phone, 6, 4) }}" placeholder="####" max="9999" disabled />
+								</div>
+							</div>
+						</div>
+					@endif
 					<div class="form-block-header">
 						<h3 class="">Registration Information</h3>
 					</div>

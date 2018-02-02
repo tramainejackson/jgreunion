@@ -165,7 +165,7 @@ class RegistrationController extends Controller
     {
 		$states = State::all();
 		$family = Reunion_dl::where([
-			['family_id', $registration->reunion_dl->family_id],
+			['family_id', $registration->family_id],
 			['family_id', '<>', null]
 		])->get();
 		

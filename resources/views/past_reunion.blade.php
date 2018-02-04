@@ -43,9 +43,7 @@
 							<dd class="featuresList hotelContentInfo">Sofa-Bed</dd>
 							<dd class="featuresList hotelContentInfo">Rollway Bed/Cot</dd>
 							<dd class="featuresList hotelContentInfo">Electronic Check</dd>
-							<dd class="featuresList hotelContentInfo" id="directions_link">Click Here For Directions</dd>
 						</dl>
-						<a href="https://resweb.passkey.com/go/JGFR8416" target="_blank"><button>Book Room Here</button></a>
 					</div>
 					<div id="hotel_directions">
 						<div class="directionOptions" id="directions1">
@@ -83,7 +81,7 @@
 				<hr/>
 				<div class="reunion_content" id="activities_information">
 					<h2 id="activities_information_header">Activities</h2>
-					<div class="activities_content"><div class="activities_content_bgrd_skirt"></div>
+					<div class="activities_content p-3 mx-5">
 						<h2>Thursday, August 4<sup>th</sup></h2>
 						<ul>
 							<li>12PM - Reunion Check In Starts</li>
@@ -132,6 +130,13 @@
 								<th><u>Name</u></th>
 								<th><u>Email Address</u></th>
 							</tr>
+							@foreach($committee_members as $committee_member)
+								<tr>
+									<td>{{ ucwords(str_ireplace('_', ' ', $committee_member->member_title)) }}</td>
+									<td>{{ ucwords($committee_member->member_name) }}</td>
+									<td><i>{{ strtolower($committee_member->member_email) }}</i></td>
+								</tr>
+							@endforeach
 							<tr>
 								<td>President</td>
 								<td>Lorenzo Jackson Sr</td>
@@ -162,22 +167,19 @@
 								<td>Lavern Battle</td>
 								<td><i></i></td>
 							</tr>
-							<tr>
-								<td>Web Designer</td>
-								<td>Tramaine Jackson</td>
-								<td><i>jackson.tramaine3@yahoo.com</i></td>
-							</tr>
 						</table>	
 					</div>
 				</div>	
 			</div>
 		</div>
 	</div>
-	<div id="footer">
-		<p id="footer_info">
-			<span id="created_by">Created By: Tramaine Jackson</span>
-			<span id="created_date">Created Date: July 2015</span>
-			<span id="page_title">Title: Jackson/Green Reunion</span>
-		</p>
-	</div>
+	<footer>
+		<div class="container-fluid">
+			<div class="row">
+				<p class="col-4 text-center my-0 py-3">Created By: Tramaine Jackson</p>
+				<p class="col-4 text-center my-0 py-3">Created Date: July 2015</p>
+				<p class="col-4 text-center my-0 py-3">Title: Jackson/Green Reunion</p>
+			</div>
+		</div>
+	</footer>
 @endsection

@@ -657,7 +657,7 @@ input#reg_form_btn::after {
 	right: 0;
 	top: 0;
 }
-div#page_header, div#footer {
+div#page_header {
 text-align: center;
 }
 div#page_header {
@@ -1671,21 +1671,9 @@ button.yes_delete {
   padding: 10% 0%;
   color: white;
 }
-#footer {
+footer {
   background: linear-gradient(white 12%, black 40%, black);
   color: white;
-  bottom: 0px;
-  right: 0%;
-  width: 100%;
-}
-#footer_info {
-  margin: 0%;
-  padding: 2% 0%;
-  text-align: center;
-  font-size: 85%;
-}
-span#created_date {
-  padding: 0% 3%;
 }
 div#navi form {
 	position: relative;
@@ -2468,12 +2456,6 @@ a#fb_link button {
 }
 .payment_option h2 {
     margin-bottom: 3%;
-}
-#footer_info span {
-    min-width: 25%;
-    display: inline-block;
-    font-size: 115%;
-    padding: 1% 2%;
 }
 div#electronic_payment_option p:last-of-type {
     padding: 1% 0% 25%;

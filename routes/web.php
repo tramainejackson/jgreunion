@@ -27,8 +27,9 @@ Route::get('/', function () {
 
 Route::get('/past_reunion/{reunion}', function (\App\Reunion $reunion) {
 	$registrations = \App\Registration::where('reunion_id', $reunion->id);
+	$committee_members = $reunion->committee;
 	
-    return view('past_reunion', compact('registrations', 'reunion'));
+    return view('past_reunion', compact('registrations', 'reunion', 'committee_members'));
 });
 
 Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {

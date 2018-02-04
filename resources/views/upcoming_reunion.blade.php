@@ -27,7 +27,7 @@
 		</div>
 	</div>
 	
-	<div id="reunion_page" class="container-fluid">
+	<div id="reunion_page" class="container-fluid pb-4">
 		<div class="row">
 			<div class="col-2">
 				<div class="my-2">
@@ -199,12 +199,5 @@
 			</div>
 			<div class="col-2"></div>
 		</div>
-	</div>
-	<div id="footer">
-		<p id="footer_info">
-			<span id="created_by">Created By: Tramaine Jackson</span>
-			<span id="created_date">Created Date: July 2015</span>
-			<span id="page_title">Title: Jackson/Green Reunion</span>
-		</p>
 	</div>
 @endsection

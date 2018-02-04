@@ -1,4 +1,4 @@
-<div class="modal fade delete_registration{{ $loop->iteration }}" id="" tabindex="-1" role="dialog" aria-labelledby="deleteRegistrationModal" aria-hidden="true">
+<div class="modal fade delete_registration" id="" tabindex="-1" role="dialog" aria-labelledby="deleteRegistrationModal" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		{!! Form::open(['action' => ['RegistrationController@destroy', 'registration' => $registration->id], 'method' => 'DELETE']) !!}
 			<div class="modal-content">

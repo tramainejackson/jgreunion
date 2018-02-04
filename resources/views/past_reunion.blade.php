@@ -6,6 +6,30 @@
 		#reunion_page {
 			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset('storage/' . str_ireplace('public/', '', $reunion->picture)) }}');
 		}
+		
+		#contact_information_header, #hotel_information_header, #activities_information_header {
+			color: whitesmoke;
+			text-shadow: 2px 1px 10px darkgrey;
+		}
+	
+		.contactContent {
+			margin: 0% 2%;
+			padding: 1% 10%;
+			border-radius: 10px;
+			font-weight: bold;
+			font-size: 130%;
+		}
+		
+		#hotel_content {
+			background: white;
+			margin: 0%;
+		}
+		
+		div#hotel_content dl {
+			margin: 0%;
+			width: 100%;
+			font-size: 90%;
+		}
 	</style>
 @endsection
 
@@ -24,64 +48,40 @@
 			</div>
 		</div>
 		<div class="row mt-5">
-			<div class="col-8 mx-auto">
-				<div class="reunion_content" id="hotel_information">
+			<div class="col-11 col-lg-9 mx-auto">
+				<div class="pastReunionContent" id="hotel_information">
 					<h2 id="hotel_information_header">Hotel Information</h2>
-					<div id="hotel_content">
-						<img id="hotel_pic" src="/images/crowne-plaza-feasterville-trevose-2533231492-4x3.jpg"/>				
-						<p class="hotelContentInfo"><b>Address:</b> 4700 Street Rd, Feasterville-Trevose, PA 19053</p>
-						<p class="hotelContentInfo"><b>Phone:</b> 1-215-364-2000</p>	
-						<p class="hotelContentInfo"><b>Rooms:</b> $109/per night plus taxes for a standard room</p>
-						<p class="hotelContentInfo"><b>Additional Info:</b> Please call for any room upgrades.</p><br/>
-						<dl>
-							<dt class="featuresList hotelContentInfo"><b>Hotel Features:</b></dt>
-							<dd class="featuresList hotelContentInfo">Complimentary Wifi</dd>
-							<dd class="featuresList hotelContentInfo">Free Parking</dd>
-							<dd class="featuresList hotelContentInfo">Microwave/Refrigerator in guest room</dd>
-							<dd class="featuresList hotelContentInfo">Fitness Center</dd>
-							<dd class="featuresList hotelContentInfo">Swimming Pool</dd>
-							<dd class="featuresList hotelContentInfo">Sofa-Bed</dd>
-							<dd class="featuresList hotelContentInfo">Rollway Bed/Cot</dd>
-							<dd class="featuresList hotelContentInfo">Electronic Check</dd>
-						</dl>
-					</div>
-					<div id="hotel_directions">
-						<div class="directionOptions" id="directions1">
-							<h2>Philadelphia and South</h2>
-							<p>
-								Follow I-95 North to Street Road (Route 132 West) Exit #37. Turn left onto
-								Street Road and proceed five miles. The hotel will be on your left.
-							</p>
+					<div id="hotel_content" class="container-fluid">
+						<div class="row">
+							<div class="col-12 col-lg-3">
+								<img id="hotel_pic" src="/images/crowne-plaza-feasterville-trevose.jpg"/>
+							</div>
+							<div class="col-12 col-lg-9">
+								<p class="hotelContentInfo"><b>Address:</b> 4700 Street Rd, Feasterville-Trevose, PA 19053</p>
+								<p class="hotelContentInfo"><b>Phone:</b> 1-215-364-2000</p>	
+								<p class="hotelContentInfo"><b>Rooms:</b> $109/per night plus taxes for a standard room</p>
+								<p class="hotelContentInfo"><b>Additional Info:</b> Please call for any room upgrades.</p><br/>
+								<dl>
+									<dt class="featuresList hotelContentInfo"><b>Hotel Features:</b></dt>
+									<dd class="featuresList hotelContentInfo">Complimentary Wifi</dd>
+									<dd class="featuresList hotelContentInfo">Free Parking</dd>
+									<dd class="featuresList hotelContentInfo">Microwave/Refrigerator in guest room</dd>
+									<dd class="featuresList hotelContentInfo">Fitness Center</dd>
+									<dd class="featuresList hotelContentInfo">Swimming Pool</dd>
+									<dd class="featuresList hotelContentInfo">Sofa-Bed</dd>
+									<dd class="featuresList hotelContentInfo">Rollway Bed/Cot</dd>
+									<dd class="featuresList hotelContentInfo">Electronic Check</dd>
+								</dl>
+							</div>
 						</div>
-						<div class="directionOptions" id="directions2">
-							<h2>From Trenton/Lawrenceville/Princeton and North</h2>
-							<p>
-								Follow I-95 South to Street Road (Route 132 West) Exit #37. Turn left onto
-								Street Road and proceed five miles. The hotel will be on your left.
-							</p>
-						</div>
-						<div class="directionOptions" id="directions3">
-							<h2>From Pennsylvania Turnpike</h2>
-							<p>
-								PA Turnpike to Exit 351 and stay to right after toll to Route 1 South. Take first
-								exit for Street Road West RT 132 and proceed one mile. The hotel will be a 1/2 mile
-								on your left.
-							</p>
-						</div>
-						<div class="directionOptions" id="directions4">
-							<h2>From New York City and New England</h2>
-							<p>
-								Take I-95 South to New Jersey Turnpike South. Use Exit 6 of the NJ Turnpike for
-								the Pennsylvania Turnpike. Follow the directions from the PA Turnpike.
-							</p>
-						</div>
-						<button id="close_directions">Close</button>
 					</div>
 				</div>
+
 				<hr/>
-				<div class="reunion_content" id="activities_information">
+
+				<div class="pastReunionContent" id="activities_information">
 					<h2 id="activities_information_header">Activities</h2>
-					<div class="activities_content p-3 mx-5">
+					<div class="activities_content p-3 mx-md-5">
 						<h2>Thursday, August 4<sup>th</sup></h2>
 						<ul>
 							<li>12PM - Reunion Check In Starts</li>
@@ -120,11 +120,13 @@
 						</p>
 					</div>
 				</div>	
+				
 				<hr/>
-				<div class="reunion_content" id="contact_information">
+				
+				<div class="pastReunionContent" id="contact_information">
 					<h2 id="contact_information_header">Committee Information</h2>
-					<div id="contact_content">
-						<table id="contact_information_table">
+					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2">
+						<table id="contact_information_table" class="table table-responsive-sm text-center">
 							<tr>
 								<th><u>Title</u></th>
 								<th><u>Name</u></th>
@@ -160,7 +162,7 @@
 							<tr>
 								<td>Correspondence</td>
 								<td>Tawana Craig</td>
-								<td><i>tawanacraig69@gmail.com</i></td>
+								<td class="text-truncate"><i>tawanacraig69@gmail.com</i></td>
 							</tr>
 							<tr>
 								<td>Correspondence</td>

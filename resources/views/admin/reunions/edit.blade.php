@@ -305,10 +305,8 @@
 								<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning d-block">Edit</a>
 							</div>
 							<div class="form-group col-2">
-								<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger d-block text-truncate deleteRegistration">Delete Registration</button>
+								<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger d-block text-truncate deleteRegistration" onclick="removeRegistrationModal({{ $registration->id }});">Delete Registration</button>
 							</div>
-							
-							@include('admin.delete_modal.delete_registration', ['registration' => $registration])
 						</div>
 					@endforeach
 
@@ -323,6 +321,5 @@
 				{!! Form::close() !!}
 			</div>
 		</div>
-
 	</div>
 @endsection

@@ -40,14 +40,14 @@
 					<a class="btn btn-lg my-2 d-block" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">Jackson/Green Facebook Page Click Here</a>
 				</div>
 			</div>
-			<div class="col-8">
+			<div class="col-12 col-md-8">
 				<h1 class="text-center py-5 text-light display-3">Jackson/Green Family Reunion {{ $reunion->reunion_year }}</h1>
 			</div>
 			<div class="col-2"></div>
 		</div>
 		<div class="row">
-			<div class="col-2"></div>
-			<div class="col-8">
+			<div class="col-md-2"></div>
+			<div class="col-11 col-md-8 mx-auto">
 			
 				<!-- Hotel information -->
 				<div class="row reunion_content" id="hotel_information">
@@ -144,7 +144,7 @@
 					<div class="col-12 reunionInformationHeader py-1">
 						<h2 class="text-center text-light">Payment Information</h2>
 					</div>
-					<div id="paper_payment_option" class="payment_option col-5 my-3 mx-auto">
+					<div id="paper_payment_option" class="payment_option col-10 col-md-5 my-3 mx-auto">
 						<h2>Paper Payment</h2>
 						<p>Please make all checks payable to Jackson-Green Family Reunion. Checks can be sent to:</p>
 						<p id="checks_address"><span>Address:</span><span>{{ $committee_president->address }}</span><span>{{ $committee_president->city. ', ' . $committee_president->state . ' ' .$committee_president->zip }}</span></p>
@@ -152,7 +152,7 @@
 						<p class="paymentsFinePrint">*Any return checks will incur a $30 penalty fee</p>
 						<p>Click <a href="{{ asset('storage/' . str_ireplace('public/', '', $reunion->registration_form)) }}" download="{{ $reunion->reunion_year }}_Registration_Form">here</a> to download the registration form.</p>
 					</div>
-					<div id="electronic_payment_option" class="payment_option my-3 col-5 mx-auto">
+					<div id="electronic_payment_option" class="payment_option my-3 col-10 col-md-5 mx-auto">
 						<h2>Electronic Payment</h2>
 						<p>All electronic payments can be sent to administrator@jgreunion.com for anyone who already has a paypal account.</p>
 						<p>Click <a href="https://www.paypal.com" target="_blank">here</a> to go to paypal.</p>
@@ -197,7 +197,11 @@
 					@endif
 				</div>
 			</div>
-			<div class="col-2"></div>
+			<div class="col-md-2"></div>
 		</div>
 	</div>
+	
+	@if($errors->count() > 0)
+		<script>$('#registration_modal').modal('show');</script>
+	@endif
 @endsection

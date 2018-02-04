@@ -7,22 +7,37 @@
 		<div class="form-row">
 			<div class="form-group col-6">
 				<label for="name" class="form-label">Firstname:</label>
-				<input type="text" name="firstname" id="firstname" class="form-control" placeholder="Enter Firstname" />
+				<input type="text" name="firstname" id="firstname" class="form-control" value="{{ old('firstname') }}" placeholder="Enter Firstname" />
+				
+				@if($errors->has('firstname'))
+					<span class="text-danger">{{ $errors->first('lastname') }}</span>
+				@endif
 			</div>
 			<div class="form-group col-6">
 				<label for="name" class="form-label">Lastname:</label>
-				<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Lastname" />
+				<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Lastname" value="{{ old('lastname') }}" />
+				
+				@if($errors->has('lastname'))
+					<span class="text-danger">{{ $errors->first('lastname') }}</span>
+				@endif
 			</div>
-			
 		</div>
 		<div class="form-group">
 			<label for="address" class="form-label">Address:</label>
-			<input type="text" name="address" id="address" class="form-control" placeholder="Home Address" />
+			<input type="text" name="address" id="address" class="form-control" placeholder="Home Address" value="{{ old('address') }}" />
+			
+			@if($errors->has('address'))
+				<span class="text-danger">{{ $errors->first('address') }}</span>
+			@endif
 		</div>
 		<div class="form-row">
 			<div class="form-group col-4">
 				<label for="city" class="form-label">City:</label>
-				<input type="text" name="city" id="city" class="form-control" placeholder="Enter City" />
+				<input type="text" name="city" id="city" class="form-control" placeholder="Enter City" value="{{ old('city') }}" />
+			
+				@if($errors->has('city'))
+					<span class="text-danger">{{ $errors->first('city') }}</span>
+				@endif
 			</div>
 			<div class="form-group col-4">
 				<label for="state" class="form-label">State:</label>
@@ -34,24 +49,44 @@
 			</div>
 			<div class="form-group col-4">
 				<label for="zip" class="form-label">Zip:</label>
-				<input type="number" name="zip" id="zip" class="form-control" placeholder="Enter Zip Code" />
+				<input type="number" name="zip" id="zip" class="form-control" placeholder="Enter Zip Code" value="{{ old('zip') }}" />
+				
+				@if($errors->has('zip'))
+					<span class="text-danger">{{ $errors->first('zip') }}</span>
+				@endif
 			</div>
 		</div>
 		<div class="form-row">
 			<label for="phone" class="form-label col-12">Phone:</label>
 			<div class="form-group col-4">
-				<input type="number" name="phone1" id="phone" class="form-control" placeholder="###" />
+				<input type="number" name="phone1" id="phone" class="form-control" placeholder="###" value="{{ old('phone1') }}" />
+				
+				@if($errors->has('phone1'))
+					<span class="text-danger">{{ $errors->first('phone1') }}</span>
+				@endif
 			</div>
 			<div class="form-group col-4">
-				<input type="number" name="phone2" id="phone" class="form-control" placeholder="###" />
+				<input type="number" name="phone2" id="phone" class="form-control" placeholder="###" value="{{ old('phone2') }}" />
+				
+				@if($errors->has('phone1'))
+					<span class="text-danger">{{ $errors->first('phone3') }}</span>
+				@endif
 			</div>
 			<div class="form-group col-4">
-				<input type="number" name="phone3" id="phone" class="form-control" placeholder="####" />
+				<input type="number" name="phone3" id="phone" class="form-control" placeholder="####" value="{{ old('phone3') }}" />
+				
+				@if($errors->has('phone1'))
+					<span class="text-danger">{{ $errors->first('phone3') }}</span>
+				@endif
 			</div>
 		</div>			
 		<div class="form-group">
 			<label for="email" class="form-label">Email:</label>
-			<input type="email" name="email" id="email" class="form-control" placeholder="Email Address" />
+			<input type="email" name="email" id="email" class="form-control" placeholder="Email Address" value="{{ old('email') }}" />
+			
+			@if($errors->has('email'))
+				<span class="text-danger">{{ $errors->first('email') }}</span>
+			@endif
 		</div>
 
 		<div class="">
@@ -65,7 +100,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr id="adult_row" class="attending_adult_row">
+					<tr id="adult_row">
 						<td>Adults (Ages 16+)</td>
 						<td class="costPP">$<input type="number" name="" class="costPA" value="{{ $reunion->adult_price }}" disabled step="0.01" /></td>
 						<td><input type="number" name="attending_adult" id="attending_adult" class="form-control" min="0" value="0"/></td>
@@ -83,7 +118,7 @@
 						<td></td>
 						<td></td>
 						<td>
-							<input type="text" name="attending_adult_name[]" class="attending_adult_name form-control" placeholder="Enter Adult Name" value="" disabled />
+							<input type="text" name="attending_adult_name[]" class="attending_adult_name form-control" placeholder="Enter First Name" value="" disabled />
 						</td>
 						<td>
 							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>
@@ -98,7 +133,7 @@
 						</td>
 					</tr>
 					
-					<tr id="youth_row" class="attending_youth_row">
+					<tr id="youth_row">
 						<td>Youth (Ages 7-15)</td>
 						<td class="costPP">$<input type="number" name="" class="costPY" value="{{ $reunion->youth_price }}" disabled step="0.01" /></td>
 						<td><input type="number" name="attending_youth" id="attending_youth" class="form-control" min="0" value="0"/></td>
@@ -116,7 +151,7 @@
 						<td></td>
 						<td></td>
 						<td>
-							<input type="text" name="attending_youth_name[]" class="attending_youth_name form-control" placeholder="Enter Youth Name" value="" disabled />
+							<input type="text" name="attending_youth_name[]" class="attending_youth_name form-control" placeholder="Enter First Name" value="" disabled />
 						</td>
 						<td>
 							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>
@@ -149,7 +184,7 @@
 						<td></td>
 						<td></td>
 						<td>
-							<input type="text" name="attending_children_name[]" class="attending_children_name form-control" placeholder="Enter Child Name" value="" disabled />
+							<input type="text" name="attending_children_name[]" class="attending_children_name form-control" placeholder="Enter First Name" value="" disabled />
 						</td>
 						<td>
 							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>

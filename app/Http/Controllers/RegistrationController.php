@@ -83,10 +83,11 @@ class RegistrationController extends Controller
 			$registration->phone = $registration->phone != '' ? $registration->phone : null;
 			$registration->registree_name = $request->firstname . ' ' . $request->lastname;
 			$registration->reg_date = Carbon::now();
-			// $registration->adult_names = $request;
-			// $registration->youth_names = $request == '' ? null : $request;
-			// $registration->children_names = $request == '' ? null : $request;
-			// $registration->total_amount_due = $request->due_at_reg = $totalPrice;
+			$registration->shirt_sizes = isset($request->shirt_sizes) ? join('; ', $request->shirt_sizes) : null;
+			$registration->adult_names = isset($request->attending_adult_name) ? join('; ', $request->attending_adult_name) : null;
+			$registration->youth_names = isset($request->attending_youth_name) ? join('; ', $request->attending_youth_name) : null;
+			$registration->children_names = isset($request->attending_children_name) ? join('; ', $request->attending_children_name) : null;
+			$registration->total_amount_due = $registration->due_at_reg = $request->total_amount_due;
 			
 			if($registration->save()) {
 				return redirect()->back()->with('status', 'Registration Completed Successfully');

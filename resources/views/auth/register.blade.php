@@ -18,10 +18,10 @@
 							<a href="/" class="homeLink nav-link">Home</a>
 							
 							@if(!Auth::check())
-								<a href='/register' class='profileLink nav-link active'>Register</a>
+								<!-- <a href='/register' class='profileLink nav-link active'>Register</a> -->
 								<a href='/login' class='profileLink nav-link'>Login</a>
 							@else
-								<a href='/profile' class='profileLink nav-link'>My Profile</a>
+								<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
 								<a href='/logout' class='profileLink nav-link'>Logout</a>
 							@endif
 						</nav>

@@ -18,6 +18,15 @@ Route::get('/reunion_registration', function () {
     return view('reunion_registration_form', compact('images', 'reunions'));
 });
 
+Route::get('/delete_registration/{registration}', function (\App\Registration $registration) {
+	$family = \App\Reunion_dl::where([
+		['family_id', $registration->family_id],
+		['family_id', '<>', null]
+	])->get();
+	
+    return view('admin.delete_modal.delete_registration', compact('registration', 'family'));
+});
+
 Route::get('/', function () {
 	$images = \App\Images::where('id', '>', '5')->get();
 	$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
@@ -38,8 +47,6 @@ Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {
 	$committee_president = $committee_members->where('member_title', 'president')->first()->reunion_dl;
 	$events = $reunion->events->groupBy('event_date');
 	$states = \App\State::all();
-	
-	// dd($committee_members->where('member_title', 'president')->first()->reunion_dl);
 	
     return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion', 'states'));
 });

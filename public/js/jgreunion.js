@@ -228,19 +228,11 @@ $(document).ready(function()
 		var count = $("#attending_adult").val();
 		var totalNewRows = $('.attending_adult_row').not('#attending_adult_row_default');
 		
-		if(count < $(totalNewRows).length) {
-			if($(totalNewRows).length > 0) {
-				// Remove the current row
-				$(totalNewRows).last().slideUp(function() {
-					$(totalNewRows).last().remove();
-				});
-			} else {
-				// Remove the current row
-				$(totalNewRows).slideUp(function() {
-					$(totalNewRows).remove();
-				});				
-			}
-		} else {
+		// Remove new rows if any exist
+		$(totalNewRows).remove();
+		
+		// Adjust rows to amount entered
+		for(var x=0; x < count; x++) {
 			// Get hidden youth row and insert if before hidden default row
 			var newAdultRow = $("#attending_adult_row_default").clone();
 			$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
@@ -253,19 +245,11 @@ $(document).ready(function()
 		var count = $("#attending_youth").val();
 		var totalNewRows = $('.attending_youth_row').not('#attending_youth_row_default');
 		
-		if(count < $(totalNewRows).length) {
-			if($(totalNewRows).length > 0) {
-				// Remove the current row
-				$(totalNewRows).last().slideUp(function() {
-					$(totalNewRows).last().remove();
-				});
-			} else {
-				// Remove the current row
-				$(totalNewRows).slideUp(function() {
-					$(totalNewRows).remove();
-				});				
-			}
-		} else {
+		// Remove new rows if any exist
+		$(totalNewRows).remove();
+		
+		// Adjust rows to amount entered
+		for(var x=0; x < count; x++) {
 			// Get hidden youth row and insert if before hidden default row
 			var newAdultRow = $("#attending_youth_row_default").clone();
 			$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
@@ -278,19 +262,11 @@ $(document).ready(function()
 		var count = $("#attending_children").val();
 		var totalNewRows = $('.attending_children_row').not('#attending_children_row_default');
 		
-		if(count < $(totalNewRows).length) {
-			if($(totalNewRows).length > 0) {
-				// Remove the current row
-				$(totalNewRows).last().slideUp(function() {
-					$(totalNewRows).last().remove();
-				});
-			} else {
-				// Remove the current row
-				$(totalNewRows).slideUp(function() {
-					$(totalNewRows).remove();
-				});				
-			}
-		} else {
+		// Remove new rows if any exist
+		$(totalNewRows).remove();
+		
+		// Adjust rows to amount entered
+		for(var x=0; x < count; x++) {
 			// Get hidden youth row and insert if before hidden default row
 			var newAdultRow = $("#attending_children_row_default").clone();
 			$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');

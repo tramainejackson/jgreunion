@@ -28,8 +28,22 @@
 	</div>
 	
 	<div id="reunion_page" class="container-fluid pb-4">
+		<div class="row d-sm-none">
+			<button type="button" class="btn m-3" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile">Menu</button>
+		</div>
+		<div class="row collapse" id="upcoming_reunion_mobile">
+			<div class="col">
+				<nav class="">
+					<a href="/" class="btn btn-info btn-lg d-block my-2">Home</a>
+					
+					<button type="button" id="registrationFormBtn" class="btn btn-info btn-lg w-100 d-block" data-toggle="modal" data-target="#registration_modal">Registration Form</button>
+
+					<a class="btn btn-lg my-2 d-block" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">Jackson/Green Facebook Page Click Here</a>
+				</nav>
+			</div>
+		</div>
 		<div class="row">
-			<div class="col-2">
+			<div class="d-none d-sm-block col-sm-2">
 				<div class="my-2">
 					<a href="/" class="btn btn-info btn-lg d-block">Home</a>
 				</div>
@@ -40,10 +54,10 @@
 					<a class="btn btn-lg my-2 d-block" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">Jackson/Green Facebook Page Click Here</a>
 				</div>
 			</div>
-			<div class="col-12 col-md-8">
-				<h1 class="text-center py-5 text-light display-3">Jackson/Green Family Reunion {{ $reunion->reunion_year }}</h1>
+			<div class="col-12 col-sm-8">
+				<h1 class="text-center py-5 text-light display-sm-3 display-4">Jackson/Green Family Reunion {{ $reunion->reunion_year }}</h1>
 			</div>
-			<div class="col-2"></div>
+			<div class="d-none col-sm-2"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-2"></div>
@@ -109,7 +123,7 @@
 					<div class="col-12 reunionInformationHeader py-1">
 						<h2 id="" class="text-center text-light">Committee Information</h2>
 					</div>
-					<div class="col-12">
+					<div class="col-12 table-responsive">
 						<table id="" class="table table-hover">
 							<thead>
 								<tr>
@@ -144,7 +158,7 @@
 					<div class="col-12 reunionInformationHeader py-1">
 						<h2 class="text-center text-light">Payment Information</h2>
 					</div>
-					<div id="paper_payment_option" class="payment_option col-10 col-md-5 my-3 mx-auto">
+					<div id="paper_payment_option" class="payment_option col-11 col-sm-5 my-3 mx-auto">
 						<h2>Paper Payment</h2>
 						<p>Please make all checks payable to Jackson-Green Family Reunion. Checks can be sent to:</p>
 						<p id="checks_address"><span>Address:</span><span>{{ $committee_president->address }}</span><span>{{ $committee_president->city. ', ' . $committee_president->state . ' ' .$committee_president->zip }}</span></p>
@@ -152,7 +166,7 @@
 						<p class="paymentsFinePrint">*Any return checks will incur a $30 penalty fee</p>
 						<p>Click <a href="{{ asset('storage/' . str_ireplace('public/', '', $reunion->registration_form)) }}" download="{{ $reunion->reunion_year }}_Registration_Form">here</a> to download the registration form.</p>
 					</div>
-					<div id="electronic_payment_option" class="payment_option my-3 col-10 col-md-5 mx-auto">
+					<div id="electronic_payment_option" class="payment_option my-3 col-11 col-sm-5 mx-auto">
 						<h2>Electronic Payment</h2>
 						<p>All electronic payments can be sent to administrator@jgreunion.com for anyone who already has a paypal account.</p>
 						<p>Click <a href="https://www.paypal.com" target="_blank">here</a> to go to paypal.</p>

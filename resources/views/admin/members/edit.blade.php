@@ -45,7 +45,7 @@
 					
 					@if($active_reunion != null)
 						@if($family_members->count() > 1)
-							<a href="/registrations" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Family Already Registered For ' . $active_reunion->reunion_city . ' Reunion' : 'Add All Household Members To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
+							<a href="/registrations" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion->isNotEmpty() ? ' disabled' : '' }}" style="white-space: normal;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion->isNotEmpty() ? 'Family Already Registered For ' . $active_reunion->reunion_city . ' Reunion' : 'Add All Household Members To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
 						
 							{!! Form::open(['action' => 'RegistrationController@store', 'method' => 'POST', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
 								<input type="text" name="reg_member" class="" value="{{ $member->id }}" hidden />

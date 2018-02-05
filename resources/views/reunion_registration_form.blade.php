@@ -5,7 +5,7 @@
 			<input type="text" name="reunion_id" class="hidden" value="{{ $reunion->id }}" hidden />
 		</div>
 		<div class="form-row">
-			<div class="form-group col-6">
+			<div class="form-group col-12 col-sm-6">
 				<label for="name" class="form-label">Firstname:</label>
 				<input type="text" name="firstname" id="firstname" class="form-control" value="{{ old('firstname') }}" placeholder="Enter Firstname" />
 				
@@ -13,7 +13,7 @@
 					<span class="text-danger">{{ $errors->first('lastname') }}</span>
 				@endif
 			</div>
-			<div class="form-group col-6">
+			<div class="form-group col-12 col-sm-6">
 				<label for="name" class="form-label">Lastname:</label>
 				<input type="text" name="lastname" id="lastname" class="form-control" placeholder="Enter Lastname" value="{{ old('lastname') }}" />
 				
@@ -31,7 +31,7 @@
 			@endif
 		</div>
 		<div class="form-row">
-			<div class="form-group col-4">
+			<div class="form-group col-12 col-sm-4">
 				<label for="city" class="form-label">City:</label>
 				<input type="text" name="city" id="city" class="form-control" placeholder="Enter City" value="{{ old('city') }}" />
 			
@@ -39,7 +39,7 @@
 					<span class="text-danger">{{ $errors->first('city') }}</span>
 				@endif
 			</div>
-			<div class="form-group col-4">
+			<div class="form-group col-6 col-sm-4">
 				<label for="state" class="form-label">State:</label>
 				<select class="form-control custom-select" name="state">
 					@foreach($states as $state)
@@ -47,7 +47,7 @@
 					@endforeach
 				</select>
 			</div>
-			<div class="form-group col-4">
+			<div class="form-group col-6 col-sm-4">
 				<label for="zip" class="form-label">Zip:</label>
 				<input type="number" name="zip" id="zip" class="form-control" placeholder="Enter Zip Code" value="{{ old('zip') }}" />
 				
@@ -89,21 +89,31 @@
 			@endif
 		</div>
 
-		<div class="">
+		<div class="table-responsive">
 			<table class="table" id="registrationFormTable">
 				<thead>
 					<tr>
-						<th></th>
-						<th>Cost Per Person</th>
-						<th>Number Attending</th>
-						<th>Total Cost</th>
+						<th scope="col"></th>
+						<th scope="col" abbr="Cost PP">Cost Per Person</th>
+						<th scope="col">Number Attending</th>
+						<th scope="col">Total Cost</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr id="adult_row">
 						<td>Adults (Ages 16+)</td>
-						<td class="costPP">$<input type="number" name="" class="costPA" value="{{ $reunion->adult_price }}" disabled step="0.01" /></td>
-						<td><input type="number" name="attending_adult" id="attending_adult" class="form-control" min="0" value="0"/></td>
+						<td class="costPP">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon">$</span>
+								</div>
+								
+								<input type="number" name="" class="costPA form-control" value="{{ $reunion->adult_price }}" disabled step="0.01" />
+							</div>
+						</td>
+						<td>
+							<input type="number" name="attending_adult" id="attending_adult" class="form-control" min="0" value="0"/>
+						</td>
 						<td>
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -135,8 +145,18 @@
 					
 					<tr id="youth_row">
 						<td>Youth (Ages 7-15)</td>
-						<td class="costPP">$<input type="number" name="" class="costPY" value="{{ $reunion->youth_price }}" disabled step="0.01" /></td>
-						<td><input type="number" name="attending_youth" id="attending_youth" class="form-control" min="0" value="0"/></td>
+						<td class="costPP">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon">$</span>
+								</div>
+								
+								<input type="number" name="" class="costPY form-control" value="{{ $reunion->youth_price }}" disabled step="0.01" />
+							</div>
+						</td>
+						<td>
+							<input type="number" name="attending_youth" id="attending_youth" class="form-control" min="0" value="0"/>
+						</td>
 						<td>
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -168,7 +188,14 @@
 					
 					<tr id="children_row">
 						<td>Childeren (Ages 1-6)</td>
-						<td class="costPP">$<input type="number" name="" class="costPC" value="{{ $reunion->child_price }}" disabled step="0.01" /></td>
+						<td class="costPP">
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon">$</span>
+								</div>
+								
+								<input type="number" name="" class="costPC form-control" value="{{ $reunion->child_price }}" disabled step="0.01" /></td>
+							</div>
 						<td><input type="number" name="attending_children" id="attending_children" class="form-control" min="0" value="0"/></td>
 						<td>
 							<div class="input-group">

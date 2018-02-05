@@ -666,12 +666,8 @@ div#reg_form_input {
     margin: 0% 20% 2%;
 }
 .costPC, .costPA, .costPY {
-	background: transparent;
-    width: fit-content;
-    display: -webkit-inline-box;
-    display: inline-block;
-	border: none;
 }
+
 input#reg_form_btn, #login_submit_btn {
     padding: 1%;
     margin: 1% 0% 0%;
@@ -2076,7 +2072,7 @@ p.emptyInfo {
 }
 
 button#registrationFormBtn {
-	white-space: inherit;
+	white-space: normal;
 }
 button#registrationFormBtn span {
     font-size: 100%;
@@ -2172,47 +2168,85 @@ table#contact_information_table th {
 	}
 
 	h2.image_caption_header {
-		max-width: 75%;
+		max-width: 100%;
 	}
 
 	.page_header:first-of-type {
-		padding: 0%;
+		padding: 1% 0%;
 	}
 
 	div#registration_div_wrapper, div#login_div_wrapper {
 		padding: 3% 10%;
 	}
+	
+	.activities_content ul {
+		padding: 0%;
+	}
+	
+	#reunion_page h1.display-4 {
+		font-size: 325%;
+	}
 
+	ol {
+		padding-left: 5%;
+	}
+	
+	#family_tree_pic {
+		display: none;
+	}
+	
+	#reunion_history_pic {
+		max-width: 100%;
+		height: initial;
+		width: initial;
+		margin-right: 0%;
+		margin-bottom: 2%;
+	}
+
+	nav.nav {
+		display: none !important;
+	}
+	
 	div#navi {
 		padding: 2% 0% 9%;
 	}
+	
+	#upcoming_btn, #past_btn {
+		white-space: normal;
+	}
+	
 	#admin_login {
-	  padding: 2% 1%;
-	  width: 64%;
-	  right: 16%;
+		padding: 2% 1%;
+		width: 64%;
+		right: 16%;
 	}
+	
 	button#admin_login_btn {
-	  text-align: center;
-	  width: 100%;
-	  font-size: 120%;
-	  padding: 1.1% 2%;
+		text-align: center;
+		width: 100%;
+		font-size: 120%;
+		padding: 1.1% 2%;
 	}
+	
 	#admin_form {
-	  width: 35%;
-	  top: 69%;
-	  right: 29.5%;
+		width: 35%;
+		top: 69%;
+		right: 29.5%;
 	}
+	
 	input#submit_button {
-	  width: 100%;
-	  margin-top: 1.3%;
-	  border-radius: 5px;
-	  border: solid burlywood;
-	  background-color: bisque;
+		width: 100%;
+		margin-top: 1.3%;
+		border-radius: 5px;
+		border: solid burlywood;
+		background-color: bisque;
 	}
+	
 	div.showing_image {
-	width: 100%;
-	margin: 0% 0%;
+		width: 100%;
+		margin: 0% 0%;
 	}
+	
 	div#image_caption {
 		top: 1%;
 		left: initial;

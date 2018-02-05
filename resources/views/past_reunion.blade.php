@@ -125,8 +125,8 @@
 				
 				<div class="pastReunionContent" id="contact_information">
 					<h2 id="contact_information_header">Committee Information</h2>
-					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2">
-						<table id="contact_information_table" class="table table-responsive-sm text-center">
+					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2 table-responsive">
+						<table id="contact_information_table" class="table text-center">
 							<tr>
 								<th><u>Title</u></th>
 								<th><u>Name</u></th>

@@ -52,7 +52,7 @@
 			
 			<div id="family_account" class="mt-5">
 				<div class="page_header">
-					<h1 class="text-center display-3 my-5">Jackson &amp; Green Family Reunion</h1>
+					<h1 class="text-center display-md-3 display-4 my-5 px-2 px-md-0">Jackson &amp; Green Family Reunion</h1>
 				</div>
 			</div>
 			
@@ -118,7 +118,7 @@
 	</div>
 	<div id="reunion_descent" class="container-fluid">
 		<div class="row">
-			<div class="col-9 col-md-8 col-xl-7">
+			<div class="col-12 col-sm-8 col-xl-7">
 				<div id="jackson_descent" class="reunion_descent_info">
 					<h2 id="jackson_descent_header" class="descent_info">Jackson Line of Descent</h2>
 					<p>Rev. Sandy Jackson II and his wife Venus, had nine children and forty grandchildren come from their union.</p>
@@ -150,7 +150,7 @@
 					<p>It was from the union of Sandy Jackson (Rev. Sandy and Venus Jackson’s son) and Clander Green<br/>(Peter and Laura Green’s daughter) that brought the Jackson-Green families together.</p>
 				</div>						
 			</div>
-			<div class="col-3 col-md-4 col-xl-5 align-self-center">
+			<div class="col-0 col-sm-4 col-xl-5 align-self-center">
 				<img id="family_tree_pic" src="images/funkynewtree.jpg"/>
 			</div>
 		</div>

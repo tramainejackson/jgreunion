@@ -6,7 +6,8 @@ use App\Registration;
 use App\Reunion;
 use App\Reunion_dl;
 use App\State;
-use App\Mail\Registration;
+use App\Mail\Registration_Admin;
+use App\Mail\Registration_User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -85,14 +86,21 @@ class RegistrationController extends Controller
 			$registration->registree_name = $request->firstname . ' ' . $request->lastname;
 			$registration->reg_date = Carbon::now();
 			$registration->shirt_sizes = isset($request->shirt_sizes) ? join('; ', $request->shirt_sizes) : null;
-			$registration->adult_names = isset($request->attending_adult_name) ? join('; ', $request->attending_adult_name) : null;
+			
+			// If the adult name isn't entered then use the
+			// registree's first name
+			if($request->attending_adult < 1) {
+				$registration->adult_names = $registration->firstname;
+			} else {
+				$registration->adult_names = isset($request->attending_adult_name) ? join('; ', $request->attending_adult_name) : null;
+			}
 			$registration->youth_names = isset($request->attending_youth_name) ? join('; ', $request->attending_youth_name) : null;
 			$registration->children_names = isset($request->attending_children_name) ? join('; ', $request->attending_children_name) : null;
 			$registration->total_amount_due = $registration->due_at_reg = $request->total_amount_due;
 			
 			if($registration->save()) {
-				\Mail::to($registration->email)->send(new Registration_Admin($registration));
-				\Mail::to('lorenzodevonj@yahoo.com')->send(new Registration_User($registration));
+				\Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+				\Mail::to('lorenzodevonj@yahoo.com')->send(new Registration_User($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
 				
 				return redirect()->back()->with('status', 'Registration Completed Successfully');
 			}

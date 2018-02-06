@@ -123,11 +123,6 @@ $(document).ready(function()
 		$('.createRegSelectLink').attr('href', '/members/'+ selectedMember +'/edit')
 	});
 	
-	// Remove disabled cost amounts on form submit
-	$('body').on('submit', 'form[name="registration_form"]', function() {
-		$('input#total_adult, input#total_youth, input#total_children, input#total_amount_due').removeAttr('disabled');
-	});
-	
 	// Change the default number of attending adults to 1
 	$('#registration_modal').on('show.bs.modal', function() {
 		$('input#attending_adult').val('1').change();
@@ -363,6 +358,74 @@ $(document).ready(function()
 		}
 	});
 });
+
+// Check for empty boxes on registration form
+function emptyInputCheck() {
+	// event.preventDefault();
+	var errors = true;
+	
+	if($('.attending_adult_row').not('#attending_adult_row_default').length > 0) {
+		$('.attending_adult_row').not('#attending_adult_row_default').each(function(e) {
+			var thisName = $(this).find('input');
+			var thisShirt = $(this).find('select option:selected');
+			var thisSelect = $(this).find('select');
+			
+			if($(thisName).val() == '') {
+				$(thisName).addClass('error_border');
+				errors = false;
+			}
+			
+			if($(thisShirt).val() == 'blank') {
+				$(thisSelect).addClass('error_border');
+				errors = false;
+			}
+		});
+	}
+	
+	if($('.attending_youth_row').not('#attending_youth_row_default').length > 0) {
+		$('.attending_youth_row').not('#attending_youth_row_default').each(function(e) {
+			var thisName = $(this).find('input');
+			var thisShirt = $(this).find('select option:selected');
+			var thisSelect = $(this).find('select');
+			
+			if($(thisName).val() == '') {
+				$(thisName).addClass('error_border');
+				errors = false;
+			}
+			
+			if($(thisShirt).val() == 'blank') {
+				$(thisSelect).addClass('error_border');
+				errors = false;
+			}
+		});
+	}
+	
+	if($('.attending_children_row').not('#attending_children_row_default').length > 0) {
+		$('.attending_children_row').not('#attending_children_row_default').each(function(e) {
+			var thisName = $(this).find('input');
+			var thisShirt = $(this).find('select option:selected');
+			var thisSelect = $(this).find('select');
+			
+			if($(thisName).val() == '') {
+				$(thisName).addClass('error_border');
+				errors = false;
+			}
+			
+			if($(thisShirt).val() == 'blank') {
+				$(thisSelect).addClass('error_border');
+				errors = false;
+			}
+		});
+	}
+	
+	if(errors === false) {
+		return false;
+	} else {
+		$('input#total_adult, input#total_youth, input#total_children, input#total_amount_due').removeAttr('disabled');
+	
+		return true;
+	}
+}
 
 // Add individual member to household
 function addToHouseHold(dlID, memberID) {

@@ -1,5 +1,5 @@
 <div id="reunion_registration_form">
-	{!! Form::open(['action' => ['RegistrationController@store'], 'method' => 'POST', 'name' => 'registration_form']) !!}
+	{!! Form::open(['action' => ['RegistrationController@store'], 'method' => 'POST', 'name' => 'registration_form', 'onsubmit' => 'return emptyInputCheck();']) !!}
 	<form name="registrationForm" id="registrationForm">
 		<div class="form-row">
 			<input type="text" name="reunion_id" class="hidden" value="{{ $reunion->id }}" hidden />

@@ -80,7 +80,7 @@
 		<ul id="jgreunion_past_future_list" class="container-fluid py-3 m-0">
 			<li class="row pb-3">
 				<div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto">
-					<a href="/upcoming_reunion/19" id="upcoming_btn" class="btn btn-lg btn-link d-block">Upcoming Reunion 2018 - Charlotte</a>
+					<a href="/upcoming_reunion/{{ $newReunionCheck->count() > 0 ? $newReunionCheck->id : '#' }}" id="upcoming_btn" class="btn btn-lg btn-link d-block">Upcoming Reunion - {{ $newReunionCheck->count() > 0 ? ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year : 'No Reunion Set Yet' }}</a>
 				</div>
 
 				<div class="col-12 col-md-6 mx-auto">

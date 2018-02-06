@@ -30,8 +30,9 @@ Route::get('/delete_registration/{registration}', function (\App\Registration $r
 Route::get('/', function () {
 	$images = \App\Images::where('id', '>', '5')->get();
 	$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
+	$newReunionCheck = \App\Reunion::where('reunion_complete', 'N')->get()->last();
 	
-    return view('welcome', compact('images', 'reunions'));
+    return view('welcome', compact('images', 'reunions', 'newReunionCheck'));
 });
 
 Route::get('/past_reunion/{reunion}', function (\App\Reunion $reunion) {
@@ -44,9 +45,9 @@ Route::get('/past_reunion/{reunion}', function (\App\Reunion $reunion) {
 Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {
 	$registrations = \App\Registration::where('reunion_id', $reunion->id)->get();
 	$committee_members = $reunion->committee;
-	$committee_president = $committee_members->where('member_title', 'president')->first()->reunion_dl;
-	$events = $reunion->events->groupBy('event_date');
+	$committee_president = $committee_members->isNotEmpty() ? $committee_members->where('member_title', 'president')->first()->reunion_dl : $committee_members;
 	$states = \App\State::all();
+	$events = $reunion->events->groupBy('event_date');
 	
     return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion', 'states'));
 });

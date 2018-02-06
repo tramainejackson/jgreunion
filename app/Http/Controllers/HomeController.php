@@ -36,7 +36,7 @@ class HomeController extends Controller
 		$userPhone1 = substr($user["phone"], 0, 3);
 		$userPhone2 = substr($user["phone"], 3, 3);
 		$userPhone3 = substr($user["phone"], 6, 4);
-		$newReunionCheck = \App\Reunion::where('reunion_complete', 'N')->get();
+		$newReunionCheck = \App\Reunion::where('reunion_complete', 'N')->get()->last();
 		$states = \App\State::all();
 
         return view('home', compact('user', 'userPhone1', 'rows', 'userPhone1', 'userPhone2', 'userPhone3', 'newReunionCheck', 'states'));

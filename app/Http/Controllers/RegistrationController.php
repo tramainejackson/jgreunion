@@ -6,11 +6,12 @@ use App\Registration;
 use App\Reunion;
 use App\Reunion_dl;
 use App\State;
-use Carbon\Carbon;
+use App\Mail\Registration;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class RegistrationController extends Controller
 {
@@ -90,6 +91,9 @@ class RegistrationController extends Controller
 			$registration->total_amount_due = $registration->due_at_reg = $request->total_amount_due;
 			
 			if($registration->save()) {
+				\Mail::to($registration->email)->send(new Registration_Admin($registration));
+				\Mail::to('lorenzodevonj@yahoo.com')->send(new Registration_User($registration));
+				
 				return redirect()->back()->with('status', 'Registration Completed Successfully');
 			}
 			

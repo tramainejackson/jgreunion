@@ -405,6 +405,11 @@ div#profile_information input#submit_profile_update {
     color: black;
     background-color: floralwhite;
 }
+
+.spacer-sm {
+	border-bottom: solid 1px;
+    margin: 10px 20px;
+}
 .postDate .deletePost {
     font-size: 90%;
 }

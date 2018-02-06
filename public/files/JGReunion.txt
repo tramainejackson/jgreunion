@@ -2,7 +2,6 @@
 		Jackson / Green Family Reunion
 ------------------------------------------------
 PayPal JacksonGreen2016
-Double check IE responsiveness
 Figure out what to do with the responsive tables
 Add all fields in confirmation email after registration
 Update registration when a new member is added to a household and registration already completed
@@ -11,6 +10,7 @@ Add popover on notes sections
 Add search feature on distribution list page
 Add a footer
 Allow user to have a profile and be an admin
+Done: Double check IE responsiveness
 Done: Make something with Photoshop as a picture background for logged in pages
 Done: Update past reunions show page
 Done: Update upcoming reunions page

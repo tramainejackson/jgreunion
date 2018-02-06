@@ -91,7 +91,7 @@
 									<div class="row">
 										@foreach($events as $event)
 											@if($loop->first)
-												<div class="col-12">
+												<div class="col-12 my-3">
 													<h2 class="activitiesEventLocation d-inline">{{ $event->event_date }}</h2>
 												</div>
 											@endif
@@ -100,10 +100,9 @@
 												<div class="col-12">
 													<ul class="activitiesDescription col-12">
 											@endif
-												<li class=""></li>
 												<li class=""><b><em>Location:&nbsp;</em></b>{{ $event->event_location }}</li>
 												<li class=""><b><em>Event Description:&nbsp;</em></b>{{ $event->event_description }}</li>
-												<li class=""></li>
+												@if(!$loop->last)<li class="spacer-sm"></li>@endif
 											@if($loop->last)
 													</ul>
 												</div>
@@ -161,10 +160,21 @@
 					<div id="paper_payment_option" class="payment_option col-11 col-sm-5 my-3 mx-auto">
 						<h2>Paper Payment</h2>
 						<p>Please make all checks payable to Jackson-Green Family Reunion. Checks can be sent to:</p>
-						<p id="checks_address"><span>Address:</span><span>{{ $committee_president->address }}</span><span>{{ $committee_president->city. ', ' . $committee_president->state . ' ' .$committee_president->zip }}</span></p>
-						<p class="paymentsFinePrint">*Partial payments accepted</p>
-						<p class="paymentsFinePrint">*Any return checks will incur a $30 penalty fee</p>
-						<p>Click <a href="{{ asset('storage/' . str_ireplace('public/', '', $reunion->registration_form)) }}" download="{{ $reunion->reunion_year }}_Registration_Form">here</a> to download the registration form.</p>
+						
+						@if($committee_president->count() > 0)
+							<p id="checks_address">
+								<span>Address:</span>
+								<span>{{ $committee_president->address }}</span>
+								<span>{{ $committee_president->city. ', ' . $committee_president->state . ' ' .$committee_president->zip }}</span>
+							</p>
+							<p class="paymentsFinePrint">*Partial payments accepted</p>
+							<p class="paymentsFinePrint">*Any return checks will incur a $30 penalty fee</p>
+							<p>Click 
+								<a href="{{ asset('storage/' . str_ireplace('public/', '', $reunion->registration_form)) }}" download="{{ $reunion->reunion_year }}_Registration_Form">here</a> to download the registration form.
+							</p>
+						@else
+							<p class="text-danger" id="checks_address">Committee Members Not Completed Yet. Once Members Addedd, An Address Will Be Available</p>
+						@endif
 					</div>
 					<div id="electronic_payment_option" class="payment_option my-3 col-11 col-sm-5 mx-auto">
 						<h2>Electronic Payment</h2>

@@ -94,6 +94,7 @@ class RegistrationController extends Controller
 			} else {
 				$registration->adult_names = isset($request->attending_adult_name) ? join('; ', $request->attending_adult_name) : null;
 			}
+			
 			$registration->youth_names = isset($request->attending_youth_name) ? join('; ', $request->attending_youth_name) : null;
 			$registration->children_names = isset($request->attending_children_name) ? join('; ', $request->attending_children_name) : null;
 			$registration->total_amount_due = $registration->due_at_reg = $request->total_amount_due;

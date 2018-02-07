@@ -21,7 +21,7 @@ $(document).ready(function()
 			$(".errorMessage").fadeOut();
 		}, 6000);
 	}
-	
+
 	// Initialize Datetimepicker
 	$('.datetimepicker').datetimepicker({
 		timepicker:false,
@@ -161,12 +161,6 @@ $(document).ready(function()
 	{
 		slide_show();
 	}, 7000);
-	
-//Search button background color
-	$("#search_btn").focus(function()
-	{
-		$("#search_btn").css({"backgroundColor":"white"});
-	});
 
 //Remove disabled options for additional_tees and fancy cut 
 	$("body").on("change", "#additionalTeeOption, #fancyCutOption", function(e) {
@@ -348,16 +342,27 @@ $(document).ready(function()
 		$("#errors_modal").fadeOut(function(){ $("errors_modal_contentP").empty(); });
 	});
 	
-//Search option box
-	$("#search_btn").keyup(function(e){
-		if($("#admin_nav_registrations").hasClass("active")) {
-			startSearch("#registered_members_table");
-		}
-		else {
-			startSearch("#demo_list_table");
-		}
+	//Search option box
+	$(".memberFilter ").keyup(function(e){
+		startSearch($(".memberFilter ").val());
 	});
 });
+
+// Initialize Tooltip
+$(function() {
+	$('[data-toggle="tooltip"]').tooltip();
+})
+
+// Filter members with search input
+function startSearch(searchVal) {
+	var membersTable = $('table.table tbody tr');
+	
+	$(membersTable).each(function() {
+		if($(this).find('.nameSearch').text().substr(searchVal) != false) {
+			console.log('Yes');
+		}
+	});
+}
 
 // Check for empty boxes on registration form
 function emptyInputCheck() {

@@ -276,6 +276,14 @@
 								['family_id', '<>', null]
 							])->get(); 
 						@endphp
+						@php
+							$adults = $registration->adult_names != null || $registration->adult_names != '' ? explode('; ', $registration->adult_names) : null;
+
+							$youths = $registration->youth_names != null || $registration->youth_names != '' ? explode('; ', $registration->youth_names) : null;
+
+							$childs = $registration->children_names != null || $registration->children_names != '' ? explode('; ', $registration->children_names) : null;
+
+						@endphp
 						<div class="form-row">
 							<div class="form-group col-1">
 								<span class="d-inline-block">{{ $loop->iteration }}.</span>
@@ -297,7 +305,7 @@
 								</div>
 							@endif
 							<div class="form-group col-2">
-								<button type="button" class="btn btn-primary mb-2 w-100">Family Total <span class="badge badge-light">{{ $registration->family_id != null ? $family->count() : '1' }}</span>
+								<button type="button" class="btn btn-primary mb-2 w-100">Family Total <span class="badge badge-light">{{ $registration->family_id != null ? (count($adults) + count($youths) + count($childs)) : '1' }}</span>
 								<span class="sr-only">total household members</span>
 								</button>
 							</div>

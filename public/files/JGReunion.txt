@@ -2,13 +2,14 @@
 		Jackson / Green Family Reunion
 ------------------------------------------------
 PayPal JacksonGreen2016
-Figure out what to do with the responsive tables
 Update registration when a new member is added to a household and registration already completed
 Create a settings page for admin
-Add popover on notes sections
 Add search feature on distribution list page
 Add a footer
 Allow user to have a profile and be an admin
+Done: Allow additions of people to registration
+Done:Add tooltip on notes sections
+Done: Figure out what to do with the responsive tables (Added Double Scroll)
 Done: Add all fields in confirmation email after registration
 Done: Double check IE responsiveness
 Done: Make something with Photoshop as a picture background for logged in pages

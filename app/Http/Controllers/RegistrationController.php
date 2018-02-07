@@ -187,16 +187,16 @@ class RegistrationController extends Controller
 		$shirtSizes = explode('; ', $registration->shirt_sizes);
 
 		// Get the count of each age group
-		$adults = explode('; ', $registration->adult_names);
-		$youths = explode('; ', $registration->youth_names);
-		$childs = explode('; ', $registration->child_names);
+		$adults = $registration->adult_names != null || $registration->adult_names != '' ? explode('; ', $registration->adult_names) : null;
+		$youths = $registration->youth_names != null || $registration->youth_names != '' ? explode('; ', $registration->youth_names) : null;
+		$childs = $registration->children_names != null || $registration->children_names != '' ? explode('; ', $registration->children_names) : null;
 		
 		// Get the sizes of the shirts in reference to the amount
 		// of each age group
 		$adultSizes = array_slice($shirtSizes, 0, count($adults));
 		$youthSizes = array_slice($shirtSizes, count($adults), count($youths));
 		$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
-
+// dd($adultSizes);
 		return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes', 'adults', 'youths', 'childs'));
     }
 
@@ -237,6 +237,130 @@ class RegistrationController extends Controller
     {
         if($registration->delete()) {
 			return redirect()->back()->with('status', 'Registration Deleted Successfully');
+		}
+    }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\registration  $registration
+     * @return \Illuminate\Http\Response
+     */
+    public function add_registration_member(Request $request, Registration $registration)
+    {
+		// dd($request);
+		$this->validate($request, [
+			'firstname' => 'required|max:50',
+			'lastname' => 'required|max:50',
+		]);
+		
+		// Get all the shirt sizes
+		$shirtSizes = explode('; ', $registration->shirt_sizes);
+		
+		// Get the count of the adults and youths age group
+		// And get the sizes of the shirts in reference to
+		// the amount of each age group
+		$adults = $registration->adult_names != null || $registration->adult_names != '' ? explode('; ', $registration->adult_names) : null;
+		$adultSizes = array_slice($shirtSizes, 0, count($adults));
+		$youths = $registration->youth_names != null || $registration->youth_names != '' ? explode('; ', $registration->youth_names) : null;
+		$youthSizes = array_slice($shirtSizes, count($adults), count($youths));
+		$childs = $registration->children_names != null || $registration->children_names != '' ? explode('; ', $registration->children_names) : null;
+		$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
+		
+		// Add user to appropriate age group and their shirt size
+        if($request->age_group == 'adult') {
+			if(count(explode('; ', $registration->adult_names)) > 1) {
+				$registration->adult_names .= '; ' . $request->firstname;
+				array_push($adultSizes, $request->shirt_size);
+			} else {
+				if($adults != null) {
+					$registration->adult_names .= '; ' . $request->firstname;
+					array_push($adultSizes, $request->shirt_size);
+				} else {
+					$registration->adult_names = $request->firstname;
+					array_unshift($adultSizes, $request->shirt_size);
+				}
+			}
+			
+			$registration->shirt_sizes = implode('; ', array_merge($adultSizes, $youthSizes, $childrenSizes));
+		} elseif($request->age_group == 'youth') {
+			if(count(explode('; ', $registration->youth_names)) > 1) {
+				$registration->youth_names .= '; ' . $request->firstname;
+				array_push($youthSizes, $request->shirt_size);
+			} else {
+				if($registration->youth_names != null || $registration->youth_names != '') {
+					$registration->youth_names .= '; ' . $request->firstname;
+					array_push($youthSizes, $request->shirt_size);
+				} else {
+					$registration->youth_names = $request->firstname;
+					array_unshift($youthSizes, $request->shirt_size);
+				}
+			}
+			
+			$registration->shirt_sizes = implode('; ', array_merge($adultSizes, $youthSizes, $childrenSizes));
+		} elseif($request->age_group == 'child') {
+			$registration->shirt_sizes .= '; ' . $request->shirt_size;
+			
+			if(count(explode('; ', $registration->children_names)) > 1) {
+				$registration->children_names .= '; ' . $request->firstname;
+			} else {
+				if($registration->children_names != null || $registration->children_names != '') {
+					$registration->children_names .= '; ' . $request->firstname;
+				} else {
+					$registration->children_names = $request->firstname;
+				}
+			}
+		}
+		
+		// Adjust registration price to reflect the amount of 
+		// people in the registration
+		$adultCost = $adults != null ? $registration->reunion->adult_price * count($adults) : 0;
+		$youthCost = $youths != null ? $registration->reunion->youth_price * count($youths) : 0;
+		$childrenCost = $childs != null ? $registration->reunion->child_price * count($childs) : 0;
+		$registration->due_at_reg = $adultCost + $youthCost + $childrenCost;
+		$registration->total_amount_due = $registration->due_at_reg - $registration->total_amount_paid;
+		
+		// Add user to member distribution list
+		$member = new Reunion_dl();
+		$member->firstname = $request->firstname;
+		$member->lastname = $request->lastname;
+		$member->age_group = $request->age_group;
+		$maxFamilyID = Reunion_dl::max('family_id');
+		
+		// If household members isn't empty then add a family ID
+		// to all the parties
+		if($registration->reunion_dl->family_id == null) {
+			$newFamilyID = $maxFamilyID + 1;
+			$member->family_id = $newFamilyID;
+			$registration->reunion_dl->family_id = $newFamilyID;
+			
+			if($registration->reunion_dl->save()) {}
+		} else {
+			$member->family_id = $registration->reunion_dl->family_id;
+		}
+		
+		// If registered member is in distribution list then add their home information
+		// Else if are not added to distribution list add their home info from registration
+		if($registration->reunion_dl) {
+			$member->email = $registration->reunion_dl->email;
+			$member->address = $registration->reunion_dl->address;
+			$member->city = $registration->reunion_dl->city;
+			$member->state = $registration->reunion_dl->state;
+			$member->zip = $registration->reunion_dl->zip;
+			$member->phone = $registration->reunion_dl->phone;
+		} else {
+			$member->email = $registration->email;
+			$member->address = $registration->address;
+			$member->city = $registration->city;
+			$member->state = $registration->state;
+			$member->zip = $registration->zip;
+			$member->phone = $registration->phone;
+		}
+		
+		if($registration->save()) {
+			if($member->save()) {
+				return redirect()->back()->with('status', 'New Member Added to Registration Successfully');
+			}
 		}
     }
 }

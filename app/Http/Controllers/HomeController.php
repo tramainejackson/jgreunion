@@ -121,7 +121,7 @@ class HomeController extends Controller
 			} else {
 				return redirect()->action('HomeController@edit', $member)->with('status', 'Member Created Successfully');				
 			}
-		}		
+		}	
     }
 	
 	/**

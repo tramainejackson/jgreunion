@@ -98,6 +98,8 @@ Route::get('/members/{reunion_dl}/edit', 'HomeController@edit')->name('edit_memb
 
 Route::put('/members/{reunion_dl}/add_house_hold', 'HomeController@add_house_hold')->name('add_house_hold');
 
+Route::put('/registrations/{registration}/add_registration_member', 'RegistrationController@add_registration_member')->name('add_registration_member');
+
 Route::delete('/members/{reunion_dl}/remove_house_hold', 'HomeController@remove_house_hold')->name('remove_house_hold');
 
 Route::delete('/reunion_events/{reunion_event}', 'ReunionController@remove_event')->name('remove_event');

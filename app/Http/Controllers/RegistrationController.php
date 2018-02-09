@@ -74,36 +74,51 @@ class RegistrationController extends Controller
 				'phone3' => 'max:9999|min:0',
 			]);
 		
+			// Create New Member
+			$member = new Reunion_dl();
+
+			// Create New Registration
 			$registration = new Registration();
 			$registration->reunion_id = $request->reunion_id;
-			$registration->address = $request->address;
-			$registration->city = $request->city;
-			$registration->state = $request->state;
-			$registration->zip = $request->zip;
-			$registration->email = $request->email;
-			$registration->phone = $request->phone1 . $request->phone2 . $request->phone3;
-			$registration->phone = $registration->phone != '' ? $registration->phone : null;
+			$registration->address = $member->address = $request->address;
+			$registration->city = $member->city =  $request->city;
+			$registration->state = $member->state =  $request->state;
+			$registration->zip = $member->zip =  $request->zip;
+			$registration->email = $member->email =  $request->email;
+			$registration->phone =  $request->phone1 . $request->phone2 . $request->phone3;
+			$registration->phone = $member->phone =  $registration->phone != '' ? $registration->phone : null;
 			$registration->registree_name = $request->firstname . ' ' . $request->lastname;
 			$registration->reg_date = Carbon::now();
 			$registration->shirt_sizes = isset($request->shirt_sizes) ? join('; ', $request->shirt_sizes) : null;
+			$member->firstname = $request->firstname;
+			$member->lastname = $request->lastname;
+			$member->age_group = $request->age_group;
 			
 			// If the adult name isn't entered then use the
 			// registree's first name
-			if($request->attending_adult < 1) {
-				$registration->adult_names = $registration->firstname;
+			if($request->attending_adult <= 1) {
+				$registration->adult_names = $request->firstname;
 			} else {
-				$registration->adult_names = isset($request->attending_adult_name) ? join('; ', $request->attending_adult_name) : null;
+				$registration->adult_names = $request->firstname;
+				
+				foreach($request->attending_adult_name as $adultName) {
+					$registration->adult_names .= '; ' . $adultName;
+				}
 			}
 			
 			$registration->youth_names = isset($request->attending_youth_name) ? join('; ', $request->attending_youth_name) : null;
 			$registration->children_names = isset($request->attending_children_name) ? join('; ', $request->attending_children_name) : null;
 			$registration->total_amount_due = $registration->due_at_reg = $request->total_amount_due;
 			
-			if($registration->save()) {
-				\Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
-				\Mail::to('lorenzodevonj@yahoo.com')->send(new Registration_User($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+			if($member->save()) {
+				$registration->dl_id = $member->id;
 				
-				return redirect()->back()->with('status', 'Registration Completed Successfully');
+				if($registration->save()) {
+					\Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+					\Mail::to('lorenzodevonj@yahoo.com')->send(new Registration_User($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+					
+					return redirect()->back()->with('status', 'Registration Completed Successfully');
+				}
 			}
 			
 		} else {

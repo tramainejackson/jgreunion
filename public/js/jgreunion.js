@@ -112,7 +112,7 @@ $(document).ready(function()
 			}
 		}	
 	});
-	
+
 	// Change href location when select option is changed
 	// on registration create page
 	$('body').on('change', '.createRegSelect', function(e) {
@@ -466,6 +466,13 @@ function emptyInputCheck() {
 	if(errors === false) {
 		return false;
 	} else {
+		// Remove Registration Modal First
+		$('#registration_modal').modal('hide').ready(function() {
+			// Bring up loading modal when form is submitted on registration page
+			$('.loadingSpinner').find('p').text('Submitting Registration Information');
+			$('.loadingSpinner').modal('show');
+		});
+		
 		$('input#total_adult, input#total_youth, input#total_children, input#total_amount_due').removeAttr('disabled');
 	
 		return true;

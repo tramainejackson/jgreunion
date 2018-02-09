@@ -165,7 +165,6 @@ class HomeController extends Controller
 			'phone3' => 'max:9999|min:0',
 			'zip' => 'max:9999|min:0',
 		]);
-		
 		$member = $reunion_dl;
 		$member->firstname = $request->firstname;
 		$member->lastname = $request->lastname;
@@ -185,6 +184,7 @@ class HomeController extends Controller
 		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
 		$member->age_group = $request->age_group;
 		$member->mail_preference = $request->mail_preference;
+		// dd($member);
 		
 		// If household members isn't empty then add a family ID
 		// to all the parties
@@ -193,7 +193,7 @@ class HomeController extends Controller
 			$hhMembers = explode('; ', $houseMembers);
 			
 			if($member->family_id == null) {
-				$newFamilyID = $maxFamilyID++;
+				$newFamilyID = $maxFamilyID + 1;
 				$member->family_id = $newFamilyID;
 				
 				foreach($hhMembers as $hhID) {

@@ -240,7 +240,7 @@
 								<select class="custom-select" name="houseMember[]">
 									<option value="blank">--- Select A Household Member ---</option>
 									@foreach($members as $option)
-										<option value="{{ $member->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>
+										<option value="{{ $option->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>
 									@endforeach
 								</select>
 							</div>

@@ -149,7 +149,9 @@
 							</button>
 						</h3>
 					</div>
-					
+					<div class="form-row">
+						<span class="text-muted col-12">*Select From Listed Family Members</span>
+					</div>
 					@foreach($reunion->committee as $committee_member)
 						<div class="form-row">
 							<div class="form-group col-4">

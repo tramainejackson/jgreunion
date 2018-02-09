@@ -177,6 +177,7 @@ class RegistrationController extends Controller
      */
     public function edit(Registration $registration)
     {
+		$all_members = Reunion_dl::orderby('firstname', 'asc')->get();
 		$states = State::all();
 		$family = Reunion_dl::where([
 			['family_id', $registration->family_id],
@@ -196,8 +197,8 @@ class RegistrationController extends Controller
 		$adultSizes = array_slice($shirtSizes, 0, count($adults));
 		$youthSizes = array_slice($shirtSizes, count($adults), count($youths));
 		$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
-// dd($adultSizes);
-		return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes', 'adults', 'youths', 'childs'));
+
+		return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes', 'adults', 'youths', 'childs', 'all_members'));
     }
 
     /**
@@ -248,7 +249,7 @@ class RegistrationController extends Controller
      */
     public function add_registration_member(Request $request, Registration $registration)
     {
-		// dd($request);
+		dd($request);
 		$this->validate($request, [
 			'firstname' => 'required|max:50',
 			'lastname' => 'required|max:50',
@@ -363,4 +364,66 @@ class RegistrationController extends Controller
 			}
 		}
     }
+	
+	/**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\registration  $registration
+     * @return \Illuminate\Http\Response
+     */
+    public function remove_ind_member($registration, $remove_ind_member)
+    {
+		$registration = Registration::find($registration);
+		$adults = explode('; ', $registration->adult_names);
+		$youths = explode('; ', $registration->youth_names);
+		$childs = explode('; ', $registration->children_names);
+		$shirtSizes = explode('; ', $registration->shirt_sizes);
+		$adultSizes = array_slice($shirtSizes, 0, count($adults));
+		$youthSizes = array_slice($shirtSizes, count($adults), count($youths));
+		$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
+		$removeIndex = 0;
+		$all_members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$states = State::all();
+		$family = Reunion_dl::where([
+			['family_id', $registration->family_id],
+			['family_id', '<>', null]
+		])->get();
+
+		if(substr_count($remove_ind_member, 'adult') > 0) {
+			$removeIndex = (int)(str_ireplace('adult', '', $remove_ind_member) - 1);
+			
+			unset($adults[$removeIndex]);
+			unset($adultSizes[$removeIndex]);
+
+			$registration->adult_names = implode('; ', $adults);
+		} elseif(substr_count($remove_ind_member, 'youth') > 0) {
+			$removeIndex = (int)(str_ireplace('youth', '', $remove_ind_member) - 1);
+			
+			unset($youths[$removeIndex]);
+			unset($youthSizes[$removeIndex]);
+
+			$registration->youth_names = implode('; ', $youths);
+		} elseif(substr_count($remove_ind_member, 'child') > 0) {
+			$removeIndex = (int)(str_ireplace('child', '', $remove_ind_member) - 1);
+			
+			unset($childs[$removeIndex]);
+			unset($childrenSizes[$removeIndex]);
+
+			$registration->children_names = implode('; ', $childs);
+		}
+		
+		// Adjust registration price to reflect the amount of 
+		// people in the registration
+		$adultCost = $adults != null ? $registration->reunion->adult_price * count($adults) : 0;
+		$youthCost = $youths != null ? $registration->reunion->youth_price * count($youths) : 0;
+		$childrenCost = $childs != null ? $registration->reunion->child_price * count($childs) : 0;
+		$registration->due_at_reg = $adultCost + $youthCost + $childrenCost;
+		$registration->total_amount_due = $registration->due_at_reg - $registration->total_amount_paid;
+		
+		$registration->shirt_sizes = implode('; ', array_merge($adultSizes, $youthSizes, $childrenSizes));
+
+		if($registration->save()) {
+			return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes', 'adults', 'youths', 'childs', 'all_members'))->with('status', 'Member removed from registration successful');
+		}
+	}
 }

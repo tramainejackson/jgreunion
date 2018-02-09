@@ -105,3 +105,5 @@ Route::delete('/members/{reunion_dl}/remove_house_hold', 'HomeController@remove_
 Route::delete('/reunion_events/{reunion_event}', 'ReunionController@remove_event')->name('remove_event');
 
 Route::delete('/reunion_committee_members/{reunion_committee}', 'ReunionController@remove_committee_member')->name('remove_committee_member');
+
+Route::delete('/remove_reg_member/{registration}/{remove_ind_member}', 'RegistrationController@remove_ind_member')->name('remove_ind_member');

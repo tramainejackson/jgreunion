@@ -263,6 +263,21 @@ $(document).ready(function()
 		}
 	});
 	
+	//
+	$('body').on('click', '#accordion .card h3', function(e) {
+		var showingDiv = $(this).parent().parent().find('.collapse.show');
+		var hiddenDiv = $(this).parent().parent().find('.collapse').not('.show');
+		
+		console.log(showingDiv);
+		console.log(hiddenDiv);
+		
+		// if($(accordionDiv)) {
+			
+		// } else {
+			
+		// }
+	});
+	
 //Change color of input text when changed
 	$("body").on("change", "form#edit_adminUser_form input", function(e) {
 		var names = nameCheck($("form#edit_adminUser_form input:nth-of-type(1)"), $("form#edit_adminUser_form input:nth-of-type(2)"));
@@ -354,14 +369,32 @@ $(function() {
 })
 
 // Filter members with search input
+// Check text to see if it matches the search criteria being entered
 function startSearch(searchVal) {
 	var membersTable = $('table.table tbody tr');
+	var searchCriteria = searchVal.toLowerCase();
+	var foundResults = 0;
+	$(membersTable).removeClass("matches");
+	$('.noSearchResults').remove();
 	
-	$(membersTable).each(function() {
-		if($(this).find('.nameSearch').text().substr(searchVal) != false) {
-			console.log('Yes');
+	if(searchCriteria != "") {
+		$(membersTable).each(function(event){
+			var dataString = $(this).find('.nameSearch').text().toLowerCase();
+			
+			if(dataString.includes(searchCriteria)) {
+				$(this).addClass("matches");
+				$(this).show();
+				foundResults++;
+			} else if(!dataString.includes(searchCriteria)) {
+				$(this).hide();
+			}
+		});
+		
+		// If all rows are hidden, then add a row saying no results found
+		if(foundResults == 0) {
+			$('<tr class="noSearchResults"><td>No Results Found</td></tr>').appendTo($('table.table tbody'));
 		}
-	});
+	}
 }
 
 // Check for empty boxes on registration form
@@ -551,6 +584,32 @@ function removeRegistrationModal(regID) {
 
 		$('.delete_registration').on('hidden.bs.modal', function (e) {
 			$(this).remove();
+		});
+	});
+}
+
+// Remove member from registration
+function remove_from_reg(reg_id, remove_ind) {
+	$.ajax({
+	  method: "DELETE",
+	  url: "/remove_reg_member/" + reg_id + "/" + remove_ind,
+	  data: {'remove_ind_member':remove_ind, 'reg_id':reg_id}
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		var currentShirtsDiv = $('.shirtSizesDiv');
+		var newShirtsDiv = $(data).find('.shirtSizesDiv');
+		
+		$(currentShirtsDiv).fadeOut(function() {
+			$(newShirtsDiv).addClass('hidden');
+			$(newShirtsDiv).insertAfter(currentShirtsDiv).fadeIn(function() {
+				$(currentShirtsDiv).remove();				
+				$(newShirtsDiv).removeClass('hidden');				
+			});
 		});
 	});
 }

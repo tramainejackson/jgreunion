@@ -156,108 +156,130 @@
 							<button type="button" class="btn btn-outline-success mb-2" data-toggle="modal" data-target="#add_reg_members_form">Add Member To Registration</button>
 						</h3>
 					</div>
-					<div class="form-row">
-						<div class="form-group col-4">
-							<label class="form-label text-danger" for="due_at_reg">Registration Amount</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1">$</span>
+					<div class="shirtSizesDiv">
+						<div class="form-row">
+							<div class="form-group col-4">
+								<label class="form-label text-danger" for="due_at_reg">Registration Amount</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">$</span>
+									</div>
+									<input type="number" name="due_at_reg" class="form-control" value="{{ $registration->due_at_reg > 0 ? $registration->due_at_reg : '' }}" placeholder="Enter Registration Cost" step="0.01" />
 								</div>
-								<input type="number" name="due_at_reg" class="form-control" value="{{ $registration->due_at_reg > 0 ? $registration->due_at_reg : '' }}" placeholder="Enter Registration Cost" step="0.01" />
+							</div>
+							<div class="form-group col-4">
+								<label class="form-label text-danger" for="total_amount_due">Due Amount</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">$</span>
+									</div>
+									<input type="number" name="total_amount_due" class="form-control" value="{{ $registration->total_amount_due > 0 ? $registration->total_amount_due : '' }}" placeholder="Enter Due Cost" step="0.01" />
+								</div>
+							</div>
+							<div class="form-group col-4">
+								<label class="form-label text-danger" for="total_amount_paid">Paid Amount</label>
+								<div class="input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text" id="basic-addon1">$</span>
+									</div>
+									<input type="number" name="total_amount_paid" class="form-control" value="{{ $registration->total_amount_paid > 0 ? $registration->total_amount_paid : '' }}" placeholder="Enter Amount Paid" step="0.01" />
+								</div>
 							</div>
 						</div>
-						<div class="form-group col-4">
-							<label class="form-label text-danger" for="total_amount_due">Due Amount</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1">$</span>
-								</div>
-								<input type="number" name="total_amount_due" class="form-control" value="{{ $registration->total_amount_due > 0 ? $registration->total_amount_due : '' }}" placeholder="Enter Due Cost" step="0.01" />
+						<div class="form-group">
+							<h3 class="">Shirt Sizes</h3>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-4 mb-0">
+								<label for="" class="form-label">Adults</label>
+							</div>
+							<div class="form-group col-4 mb-0">
+								<label for="" class="form-label">Youth</label>
+							</div>
+							<div class="form-group col-4 mb-0">
+								<label for="" class="form-label">Children</label>
 							</div>
 						</div>
-						<div class="form-group col-4">
-							<label class="form-label text-danger" for="total_amount_paid">Paid Amount</label>
-							<div class="input-group">
-								<div class="input-group-prepend">
-									<span class="input-group-text" id="basic-addon1">$</span>
-								</div>
-								<input type="number" name="total_amount_paid" class="form-control" value="{{ $registration->total_amount_paid > 0 ? $registration->total_amount_paid : '' }}" placeholder="Enter Amount Paid" step="0.01" />
+						<div class="form-row" id="shirt_sizes_div">
+							<div class="form-group col-4">
+								@if($adults != null)
+									@foreach($adults as $family_reg)
+										@if($family_reg != '' || $family_reg != null)
+											<div class="my-1">
+												<div class="input-group">
+													<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
+													<div class="input-group-append">
+														<button class="btn btn-outline-danger removeRegIndividualBtn{{ $family_reg == $registration->reunion_dl->firstname ? ' disabled' : '' }}" type="button" onclick="remove_from_reg('{{ $registration->id }}', 'adult{{ $loop->iteration }}')" {{ $family_reg == $registration->reunion_dl->firstname ? ' disabled' : '' }}>Remove</button>
+													</div>
+												</div>
+
+												<select class="custom-select form-control my-1" name="shirt_sizes[]">
+													<option value="S" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
+													<option value="M" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
+													<option value="L" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
+													<option value="XL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
+													<option value="XXL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
+													<option value="XXXL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
+												</select>
+											</div>
+										@endif
+									@endforeach
+								@endif
 							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<h3 class="">Shirt Sizes</h3>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-4 mb-0">
-							<label for="" class="form-label">Adults</label>
-						</div>
-						<div class="form-group col-4 mb-0">
-							<label for="" class="form-label">Youth</label>
-						</div>
-						<div class="form-group col-4 mb-0">
-							<label for="" class="form-label">Children</label>
-						</div>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-4">
-							@if($adults != null)
-								@foreach($adults as $family_reg)
-									@if($family_reg != '' || $family_reg != null)
-										<div class="my-1">
-											<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
-											<select class="custom-select form-control my-1" name="shirt_sizes[]">
-												<option value="S" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
-												<option value="M" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
-												<option value="L" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
-												<option value="XL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
-												<option value="XXL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
-												<option value="XXXL" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
-											</select>
-										</div>
-									@endif
-								@endforeach
-							@endif
-						</div>
-						<div class="form-group col-4">
-							@if($youths != null)
-								@foreach($youths as $family_reg)
-									@if($family_reg != '' || $family_reg != null)
-										<div class="my-1">
-											<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
+							<div class="form-group col-4">
+								@if($youths != null)
+									@foreach($youths as $family_reg)
+										@if($family_reg != '' || $family_reg != null)
+											<div class="my-1">
+												<input type="text" name="remove_reg_individual" class="hidden" value="youth{{ $loop->iteration }}" hidden />
 												
-											<select class="custom-select form-control my-1" name="shirt_sizes[]">
-												<option value="S" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
-												<option value="M" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
-												<option value="L" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
-												<option value="XL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
-												<option value="XXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
-												<option value="XXXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
-											</select>
-										</div>
-									@endif
-								@endforeach
-							@endif
-						</div>
-						<div class="form-group col-4">
-							@if($childs != null)
-								@foreach($childs as $family_reg)
-									@if($family_reg != '' || $family_reg != null)
-										<div class="my-1">
-											<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
-											
-											<select class="custom-select form-control my-1" name="shirt_sizes[]">
-												<option value="S" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
-												<option value="M" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
-												<option value="L" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
-												<option value="XL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
-												<option value="XXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
-												<option value="XXXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
-											</select>
-										</div>
-									@endif
-								@endforeach
-							@endif
+												<div class="input-group">
+													<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
+													<div class="input-group-append">
+														<button class="btn btn-outline-danger removeRegIndividualBtn" type="button" onclick="remove_from_reg('{{ $registration->id }}', 'youth{{ $loop->iteration }}')">Remove</button>
+													</div>
+												</div>
+													
+												<select class="custom-select form-control my-1" name="shirt_sizes[]">
+													<option value="S" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
+													<option value="M" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
+													<option value="L" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
+													<option value="XL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
+													<option value="XXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
+													<option value="XXXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
+												</select>
+											</div>
+										@endif
+									@endforeach
+								@endif
+							</div>
+							<div class="form-group col-4">
+								@if($childs != null)
+									@foreach($childs as $family_reg)
+										@if($family_reg != '' || $family_reg != null)
+											<div class="my-1">
+												<div class="input-group">
+													<input type="text" name="remove_reg_individual" class="hidden" value="child{{ $loop->iteration }}" hidden />
+													
+													<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
+													<div class="input-group-append">
+														<button class="btn btn-outline-danger removeRegIndividualBtn" type="button" onclick="remove_from_reg('{{ $registration->id }}', 'child{{ $loop->iteration }}')">Remove</button>
+													</div>
+												</div>
+												
+												<select class="custom-select form-control my-1" name="shirt_sizes[]">
+													<option value="S" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
+													<option value="M" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
+													<option value="L" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
+													<option value="XL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
+													<option value="XXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
+													<option value="XXXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
+												</select>
+											</div>
+										@endif
+									@endforeach
+								@endif
+							</div>
 						</div>
 					</div>
 					<div class="form-group">
@@ -278,39 +300,67 @@
 								<h2 class="">Add Member To Registration</h2>
 							</div>
 							<div class="modal-body">
-								<div class="form-row">
-									<div class="form-group col-6">
-										<label for="" class="form-label">Firstname</label>
-										<input type="text" name="firstname" class="form-control" value="" placeholder="Enter Firstname" />
+								<div id="accordion">
+									<div class="card">
+										<div class="card-header">
+											<h3 class="col-12"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Select From Added Members</h3>
+										</div>
+										<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+											<div class="card-body">
+												<div class="form-group">
+													<label class="form-label" for="dl_id">Member</label>
+													<select class="form-control custom-select" name="dl_id[]">
+														@foreach($all_members as $thisMember)
+															<option value="{{ $thisMember->id }}">{{ $thisMember->firstname . ' ' . $thisMember->lastname }}</option>
+														@endforeach
+													</select>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="form-group col-6">
-										<label for="" class="form-label">Lastname</label>
-										<input type="text" name="lastname" class="form-control" value="" placeholder="Enter Lastname" />
-									</div>
-								</div>
-								<div class="form-row">
-									<div class="form-group col-6">
-										<label for="" class="form-label">Age Group</label>
-										<select class="form-control custom-select" name="age_group">
-											<option value="adult">Adult</option>
-											<option value="youth">Youth</option>
-											<option value="child">Child</option>
-										</select>
-									</div>
-									<div class="form-group col-6">
-										<label for="" class="form-label">Shirt Size</label>
-										<select name="shirt_size" class="shirt_size custom-select form-control">
-											<option value="S" selected>Small</option>
-											<option value="M">Medium</option>
-											<option value="L" >Large</option>
-											<option value="XL">XL</option>
-											<option value="XXL">XXL</option>
-											<option value="XXXL">3XL</option>
-										</select>
+									<div class="card">
+										<div class="card-header">
+											<h3 class="col-12"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Add New Member</h3>
+										</div>
+										<div id="collapseTwo" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+											<div class="card-body">
+												<div class="form-row">
+													<div class="form-group col-6">
+														<label for="" class="form-label">Firstname</label>
+														<input type="text" name="firstname" class="form-control" value="" placeholder="Enter Firstname" disabled />
+													</div>
+													<div class="form-group col-6">
+														<label for="" class="form-label">Lastname</label>
+														<input type="text" name="lastname" class="form-control" value="" placeholder="Enter Lastname"disabled />
+													</div>
+												</div>
+												<div class="form-row">
+													<div class="form-group col-6">
+														<label for="" class="form-label">Age Group</label>
+														<select class="form-control custom-select" name="age_group" disabled>
+															<option value="adult">Adult</option>
+															<option value="youth">Youth</option>
+															<option value="child">Child</option>
+														</select>
+													</div>
+													<div class="form-group col-6">
+														<label for="" class="form-label">Shirt Size</label>
+														<select name="shirt_size" class="shirt_size custom-select form-control" disabled>
+															<option value="S" selected>Small</option>
+															<option value="M">Medium</option>
+															<option value="L" >Large</option>
+															<option value="XL">XL</option>
+															<option value="XXL">XXL</option>
+															<option value="XXXL">3XL</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="modal-body">
+							<div class="modal-footer">
 								<div class="form-group">
 									{{ Form::submit('Add To Registration', ['class' => 'btn btn-primary form-control']) }}
 								</div>

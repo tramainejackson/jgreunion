@@ -302,16 +302,23 @@
 							<div class="modal-body">
 								<div id="accordion">
 									<div class="card">
-										<div class="card-header">
+										<div class="card-header" style="background: linear-gradient(to bottom right, aquamarine, black); color: whitesmoke;">
 											<h3 class="col-12"  data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Select From Added Members</h3>
 										</div>
 										<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 											<div class="card-body">
 												<div class="form-group">
 													<label class="form-label" for="dl_id">Member</label>
-													<select class="form-control custom-select" name="dl_id[]">
+													<select class="form-control custom-select" name="dl_id">
 														@foreach($all_members as $thisMember)
-															<option value="{{ $thisMember->id }}">{{ $thisMember->firstname . ' ' . $thisMember->lastname }}</option>
+															@php
+																$thisReg = $thisMember->registrations()->where([
+																	['reunion_id', '=', $registration->reunion_id],
+																	['dl_id', '=', $thisMember->id]
+																])->first();
+															@endphp
+															
+															<option value="{{ $thisMember->id }}" class="{{ $thisReg != null ? $thisReg->dl_id == $thisMember->id ? 'text-danger' : '' : '' }}" {{ $thisReg != null ? $thisReg->dl_id == $thisMember->id ? 'disabled' : '' : '' }}>{{ $thisMember->firstname . ' ' . $thisMember->lastname }}{{ $thisReg != null ? $thisReg->dl_id == $thisMember->id ? ' - member already registered' : '' : '' }}</option>
 														@endforeach
 													</select>
 												</div>
@@ -319,10 +326,10 @@
 										</div>
 									</div>
 									<div class="card">
-										<div class="card-header">
+										<div class="card-header" style="background: linear-gradient(to bottom right, #f7ff7f, black); color: whitesmoke;">
 											<h3 class="col-12"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Add New Member</h3>
 										</div>
-										<div id="collapseTwo" class="collapse hide" aria-labelledby="headingOne" data-parent="#accordion">
+										<div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 											<div class="card-body">
 												<div class="form-row">
 													<div class="form-group col-6">
@@ -362,7 +369,7 @@
 							</div>
 							<div class="modal-footer">
 								<div class="form-group">
-									{{ Form::submit('Add To Registration', ['class' => 'btn btn-primary form-control']) }}
+									{{ Form::submit('Add To Registration', ['class' => 'btn btn-primary btn-lg form-control']) }}
 								</div>
 							</div>
 						{!! Form::close() !!}

@@ -265,17 +265,24 @@ $(document).ready(function()
 	
 	//
 	$('body').on('click', '#accordion .card h3', function(e) {
-		var showingDiv = $(this).parent().parent().find('.collapse.show');
-		var hiddenDiv = $(this).parent().parent().find('.collapse').not('.show');
+		var headerOne = $('#collapseOne');
+		var headerTwo = $('#collapseTwo');
 		
-		console.log(showingDiv);
-		console.log(hiddenDiv);
+		$(headerOne).on('hide.bs.collapse', function () {
+			$(this).find('select').attr('disabled', true);
+		});
 		
-		// if($(accordionDiv)) {
-			
-		// } else {
-			
-		// }
+		$(headerOne).on('show.bs.collapse', function () {
+			$(this).find('select').removeAttr('disabled');
+		});
+		
+		$(headerTwo).on('hide.bs.collapse', function () {
+			$(this).find('input').attr('disabled', true);
+		});
+		
+		$(headerTwo).on('show.bs.collapse', function () {
+			$(this).find('input, select').removeAttr('disabled');
+		});
 	});
 	
 //Change color of input text when changed

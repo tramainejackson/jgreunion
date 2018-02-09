@@ -15,4 +15,12 @@ class reunion_dl extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+	
+	/**
+     * Get the committee members for the reunion.
+     */
+    public function registrations()
+    {
+        return $this->hasMany('App\Registration', 'dl_id');
+    }
 }

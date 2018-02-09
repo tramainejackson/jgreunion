@@ -49,7 +49,14 @@
 						<select class="custom-select form-control createRegSelect">
 							<option value="#" selected disabled>----- Select A User From Members List -----</option>
 							@foreach($members as $member)
-								<option value="{{ $member->id }}">{{ $member->firstname . ' ' . $member->lastname }}</option>
+								@php
+									$thisReg = $member->registrations()->where([
+										['reunion_id', '=', $reunion->id],
+										['dl_id', '=', $member->id]
+									])->first();
+								@endphp
+								
+								<option value="{{ $member->id }}" class="{{ $thisReg != null ? $thisReg->dl_id == $member->id ? 'text-danger' : '' : '' }}" {{ $thisReg != null ? $thisReg->dl_id == $member->id ? 'disabled' : '' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}{{ $thisReg != null ? $thisReg->dl_id == $member->id ? ' - member already registered' : '' : '' }}</option>
 							@endforeach
 						</select>
 					</div>

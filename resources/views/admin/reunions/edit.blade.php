@@ -41,7 +41,7 @@
 			<div class="col-2 my-2">
 				<div class="">
 					<a href="/reunions" class="btn btn-info btn-lg">All Reunions</a>
-					<a href="/reunions/create" class="btn btn-info btn-lg my-2">New Reunion</a>
+					<!-- <a href="/reunions/create" class="btn btn-info btn-lg my-2">New Reunion</a> -->
 				</div>
 			</div>
 			<div class="col-8 my-2">
@@ -272,12 +272,6 @@
 						</h3>
 					</div>
 					@foreach($reunion->registrations as $registration)
-						@php 
-							$family = \App\Reunion_dl::where([
-								['family_id', $registration->family_id],
-								['family_id', '<>', null]
-							])->get(); 
-						@endphp
 						@php
 							$adults = $registration->adult_names != null || $registration->adult_names != '' ? explode('; ', $registration->adult_names) : null;
 
@@ -286,40 +280,41 @@
 							$childs = $registration->children_names != null || $registration->children_names != '' ? explode('; ', $registration->children_names) : null;
 
 						@endphp
-						<div class="form-row">
-							<div class="form-group col-1">
-								<span class="d-inline-block">{{ $loop->iteration }}.</span>
-								<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
-							</div>
-							@if($registration->dl_id == null)
-								<div class="form-group col-5">
-									<select class="custom-select" name="" disabled>
-										<option value="">{{ $registration->registree_name }}</option>
-									</select>
+						@if($registration->parent_reg == null)
+							<div class="form-row">
+								<div class="form-group col-1">
+									<span class="d-inline-block">{{ $loop->iteration }}.</span>
+									<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
 								</div>
-							@else
-								<div class="form-group col-5">
-									<select class="custom-select" name="" disabled>
-										@foreach($members as $member)
-											<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
-										@endforeach
-									</select>
+								@if($registration->dl_id == null)
+									<div class="form-group col-5">
+										<select class="custom-select" name="" disabled>
+											<option value="">{{ $registration->registree_name }}</option>
+										</select>
+									</div>
+								@else
+									<div class="form-group col-5">
+										<select class="custom-select" name="" disabled>
+											@foreach($members as $member)
+												<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
+											@endforeach
+										</select>
+									</div>
+								@endif
+								<div class="form-group col-2">
+									<button type="button" class="btn btn-primary mb-2 w-100">Family Total <span class="badge badge-light">{{ (count($adults) + count($youths) + count($childs)) }}</span>
+									<span class="sr-only">total household members</span>
+									</button>
 								</div>
-							@endif
-							<div class="form-group col-2">
-								<button type="button" class="btn btn-primary mb-2 w-100">Family Total <span class="badge badge-light">{{ $registration->family_id != null ? (count($adults) + count($youths) + count($childs)) : '1' }}</span>
-								<span class="sr-only">total household members</span>
-								</button>
+								<div class="form-group col-2">
+									<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning d-block">Edit</a>
+								</div>
+								<div class="form-group col-2">
+									<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger d-block text-truncate deleteRegistration" onclick="removeRegistrationModal({{ $registration->id }});">Delete Registration</button>
+								</div>
 							</div>
-							<div class="form-group col-2">
-								<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning d-block">Edit</a>
-							</div>
-							<div class="form-group col-2">
-								<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger d-block text-truncate deleteRegistration" onclick="removeRegistrationModal({{ $registration->id }});">Delete Registration</button>
-							</div>
-						</div>
+						@endif
 					@endforeach
-
 					@if($reunion->registrations->isEmpty())
 						<div class="form-row emptyRegistrations">
 							<h2 class="text-left col-10">No Members Registered Yet</h2>

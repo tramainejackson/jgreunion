@@ -34,12 +34,12 @@
 			</div>
 		</div>
 		<div class="row bg-light">
-			<div class="col-2 my-2">
+			<!-- <div class="col-2 my-2">
 				<div class="">
 					<a href="/reunions/create" class="btn btn-info btn-lg">Create New Reunion</a>
 				</div>
-			</div>
-			<div class="col-8 my-2">
+			</div> -->
+			<div class="col-8 mx-auto my-2">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-info">All Reunions</li>
 					@foreach($reunions as $reunion)

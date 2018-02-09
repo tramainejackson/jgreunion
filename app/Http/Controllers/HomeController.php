@@ -146,12 +146,7 @@ class HomeController extends Controller
 			['state', $member->state]
 		])->get();
 		$active_reunion = Reunion::where('reunion_complete', 'N')->first();
-		$registered_for_reunion = Registration::where([
-				['family_id', $member->family_id],
-				['family_id', '<>', 'null']
-			])
-			->orwhere('dl_id', $member->id)
-			->get();
+		$registered_for_reunion = Registration::where('dl_id', $member->id)->get()->first();
         return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
     }
 	
@@ -230,44 +225,47 @@ class HomeController extends Controller
      */
     public function add_house_hold(Request $request) {
 		$member = Reunion_dl::find($request->reunion_dl);
-		$hhMember = Reunion_dl::find($request->houseMember);
+		$addingMember = Reunion_dl::find($request->houseMember);
 		$maxFamilyID = Reunion_dl::max('family_id');
-		
+
 		// If household members isn't empty then add a family ID
 		// to all the parties
 		if($member->family_id == null) {
 			$newFamilyID = $maxFamilyID + 1;
 			$member->family_id = $newFamilyID;
-			$hhMember->family_id = $newFamilyID;
+			$addingMember->family_id = $newFamilyID;
 			
-			if($hhMember->save()) {
+			if($addingMember->save()) {
 				$member->save();					
 			}
 		} else {
-			$hhMember->family_id = $member->family_id;
-			$hhMember->save();
+			$addingMember->family_id = $member->family_id;
+			$addingMember->save();
 		}
 		
 		$states = \App\State::all();
 		$members = Reunion_dl::orderby('firstname', 'asc')->get();
 		$siblings = explode('; ', $member->sibling);
 		$children = explode('; ', $member->child);
+		$active_reunion = Reunion::where('reunion_complete', 'N')->first();
+
 		$family_members = Reunion_dl::where([
 			['family_id', $member->family_id],
 			['family_id', '<>', 'null']
 		])->get();
+
 		$potential_family_members = Reunion_dl::where([
 			['address', $member->address],
 			['city', $member->city],
 			['state', $member->state]
 		])->get();
-		$active_reunion = Reunion::where('reunion_complete', 'N')->first();
+
 		$registered_for_reunion = Registration::where([
-				['family_id', $member->family_id],
-				['family_id', '<>', 'null']
-			])
-			->orwhere('dl_id', $member->id)
-			->get();
+			['family_id', $member->family_id],
+			['family_id', '<>', 'null']
+		])
+		->orwhere('dl_id', $member->id)
+		->get();
 			
 		return view('admin.members.edit', compact('states', 'family_members', 'member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
 	}
@@ -292,50 +290,7 @@ class HomeController extends Controller
 			$removeHH->family_id = $member->family_id = null;
 			
 			if($removeHH->save()) {
-				if($member->save()) {
-					// Get active reunion
-					$reunion = Reunion::where('reunion_complete', 'N')->first();
-					
-					// Look for a family registration if reunion is active
-					if($reunion->registrations()->where('family_id', $familyID)->first()) {
-						$splitRegistration = $reunion->registrations()->where('family_id', $familyID)->first();
-						$splitRegistration->family_id = null;
-						$splitRegistration->shirt_sizes = null;
-						
-						// Create a new registration for the removed household member
-						$newRegistration = new Registration();
-						$totalPrice = $splitRegistration->reunion->adult_price;
-						$newRegistration->reunion_id = $splitRegistration->reunion->id;
-						$newRegistration->reg_date = $splitRegistration->reg_date;
-						$newRegistration->dl_id = $removeHH->id;
-						$newRegistration->registree_name = $removeHH->firstname . ' ' . $removeHH->lastname;
-						$newRegistration->total_amount_due = $newRegistration->due_at_reg = $totalPrice;
-						$newRegistration->adult_names = $removeHH->firstname;
-						$newRegistration->save();
-						
-						if($removeHH->age_group == 'adult') {
-							$removeFromAdult = str_ireplace(';', '', str_ireplace($removeHH->firstname, '', $splitRegistration->adult_names));
-							$splitRegistration->adult_names = $removeFromAdult != '' ? $removeFromAdult : null;
-							
-							if($removeHH->id == $splitRegistration->dl_id) {
-								$splitRegistration->registree_name = $member->firstname . ' ' . $member->lastname;
-								$splitRegistration->dl_id = $member->id;
-							}
-							
-							$splitRegistration->save();
-						} elseif($removeHH->age_group == 'youth') {
-							$removeFromYouth = $splitRegistration->youth_names;
-							$removeIndex = array_search($removeHH->firstname, $removeFromYouth);
-							$splitRegistration->save();
-						} elseif($removeHH->age_group == 'child') {
-							$removeFromChildren = $splitRegistration->children_names;
-							$removeIndex = array_search($removeHH->firstname, $removeFromChildren);
-							$splitRegistration->save();
-						}
-					} else {
-						return 'False';
-					}
-				}					
+				if($member->save()) {}					
 			}
 		} else {
 			$removeHH->family_id = null;

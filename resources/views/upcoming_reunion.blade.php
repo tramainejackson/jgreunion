@@ -6,6 +6,35 @@
 		#reunion_page {
 			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset('storage/' . str_ireplace('public/', '', $reunion->picture)) }}');
 		}
+		
+		@media only screen and (max-width:576px) {
+			#reunion_page {
+				background: none;
+			}
+			
+			#reunion_page::after {
+				content: "";
+				position: fixed;
+				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset('storage/' . str_ireplace('public/', '', $reunion->picture)) }}');
+				background-size: cover;
+				background-attachment: fixed;
+				background-position: center center;
+				background-repeat: no-repeat;
+			    top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				z-index: -10;
+			}
+			
+			.activities_content:nth-of-type(2) {
+				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('/images/cookout.jpg');
+				background-size: cover !important;
+				background-attachment: fixed !important;
+				background-position: center center !important;
+				background-repeat: no-repeat !important;
+			}
+		}
 	</style>
 @endsection
 
@@ -76,7 +105,7 @@
 				<hr/>
 				
 				<!-- Activities information -->
-				<div class="row reunion_content" id="activities_information">
+				<div class="row reunion_content" id="activities_information" style="position: relative;">
 					<div class="col-12 reunionInformationHeader py-1">
 						<h2 id="" class="text-center text-light">Activities</h2>
 					</div>

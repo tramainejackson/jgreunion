@@ -201,9 +201,14 @@
 							</p>
 							<p class="paymentsFinePrint">*Partial payments accepted</p>
 							<p class="paymentsFinePrint">*Any return checks will incur a $30 penalty fee</p>
-							<p>Click 
-								<a href="{{ asset('storage/' . str_ireplace('public/', '', $reunion->registration_form)) }}" download="{{ $reunion->reunion_year }}_Registration_Form">here</a> to download the registration form.
-							</p>
+							
+							@if($reunion->registration_form != null)
+								<p>Click 
+									<a href="{{ asset('storage/' . str_ireplace('public/', '', $reunion->registration_form)) }}" download="{{ $reunion->reunion_year }}_Registration_Form">here</a> to download the registration form.
+								</p>
+							@else
+								<p class="">Paper Registration Form Has Not Been Uploaded Yet</p>
+							@endif
 						@else
 							<p class="text-danger" id="checks_address">Committee Members Not Completed Yet. Once Members Addedd, An Address Will Be Available</p>
 						@endif

@@ -98,7 +98,7 @@
 						<h2 id="" class="text-center text-light">Hotel Information</h2>
 					</div>
 					<div class="col-12">
-						<p class="text-center emptyInfo mt-3">Hotel Information Will Be Added Soon. Please Check Back At A Later Date</p>
+						<p class="text-center emptyInfo mt-3">Hotel Information Will Be Added Soon. Please Check Back At A Later Date.</p>
 					</div>
 				</div>
 				
@@ -119,9 +119,12 @@
 								<div class="activitiesEvent container-fluid">
 									<div class="row">
 										@foreach($events as $event)
+											@php
+												$eventDate = new Carbon\Carbon($event->event_date);
+											@endphp
 											@if($loop->first)
 												<div class="col-12 my-3">
-													<h2 class="activitiesEventLocation d-inline">{{ $event->event_date }}</h2>
+													<h2 class="activitiesEventLocation d-inline">{{ $eventDate->format('m/d/Y') }}</h2>
 												</div>
 											@endif
 													
@@ -211,7 +214,7 @@
 						<p>Click <a href="https://www.paypal.com" target="_blank">here</a> to go to paypal.</p>
 					</div>
 					<div class="col-12" id="registrationReminderMsg">
-						<p>Please do not send any payment without completing the registration form first. You can click <span id="registrationLink" data-toggle="modal" data-target="#registration_modal">here</span> to complete your registration for the upcoming reunion.</p>
+						<p>Please do not send any payment without completing the registration form first. You can click <span id="registrationLink" class="d-none d-sm-inline" data-toggle="modal" data-target="#registration_modal">here</span><a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationLink" class="d-sm-none d-inline" >here</a> to complete your registration for the upcoming reunion.</p>
 					</div>
 				</div>
 				

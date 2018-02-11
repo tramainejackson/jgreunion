@@ -864,9 +864,11 @@ button#close_directions {
     margin: 5% 39%;
     width: 20%;
 }
+
 #activities_information {
 	padding-bottom: 2%;
 }
+
 a#fb_link {
 	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('/images/facebook-icon.jpg');
     background-size: 100% 100% !important;
@@ -876,19 +878,24 @@ a#fb_link {
 	text-shadow: 3px -1px 7px #2d2d2d;
 	color: floralwhite;
 }
+
 .payment_option p {
     margin: 0;
     font-size: 110%;
     padding: 0% 0%;
 }
+
 div#electronic_payment_option, div#paper_payment_option {
-    background-color: #6BF14A;
-    border: double #4ED44E;
+    background-color: #351C09;
+    border: double #974c39;
     border-radius: 10px;
+    color: whitesmoke;
 }
+
 div#electronic_payment_option p {
     padding: 1% 0% 5%;
 }
+
 div#electronic_payment_option p:last-of-type {
     padding: 0% 0%;
 }
@@ -975,7 +982,7 @@ div#registrationReminderMsg p {
     color: red;
     font-size: 125%;
 }
-span#registrationLink {
+span#registrationLink, a#registrationLink {
     min-width: inherit;
     display: initial;
     font-size: 115%;

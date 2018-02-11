@@ -197,21 +197,6 @@ $(document).ready(function()
 		$(siblingRow).addClass('d-flex').insertBefore($('.siblingRow')).removeClass('hidden siblingRow').find('select').focus();
 	});
 	
-	//Add total amounts to pay for registration
-	$("body").on("change", "#attending_adult, #attending_youth, #attending_children", function(e) {
-		var attendingNumA = $("#attending_adult").val();
-		var attendingNumY = $("#attending_youth").val();
-		var attendingNumC = $("#attending_children").val();
-		var totalAmountA = Number(attendingNumA * $(".costPA").val());
-		var totalAmountY = Number(attendingNumY * $(".costPY").val());
-		var totalAmountC = Number(attendingNumC * $(".costPC").val());
-		var totalDue = Number(totalAmountA + totalAmountY + totalAmountC);
-		$("#total_adult").val(totalAmountA);
-		$("#total_youth").val(totalAmountY);
-		$("#total_children").val(totalAmountC);
-		$("#total_amount_due").val(totalDue);
-	});
-	
 	//Add name rows for adults
 	$("body").on("change", "#attending_adult", function(e) {
 		var count = $("#attending_adult").val();
@@ -334,8 +319,7 @@ $(document).ready(function()
 	});
 	
 //Add scroll to the top button
-	$(window).scroll(function()
-	{
+	$(window).scroll(function()	{
 		var containerHeight = $("#container").innerHeight();
 		var containerHeight90 = (Number(window.pageYOffset) + Number(window.innerHeight));
 		if(window.pageYOffset >= 300) {

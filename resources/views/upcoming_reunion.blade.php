@@ -65,7 +65,7 @@
 				<nav class="">
 					<a href="/" class="btn btn-info btn-lg d-block my-2">Home</a>
 					
-					<button type="button" id="registrationFormBtn" class="btn btn-info btn-lg w-100 d-block" data-toggle="modal" data-target="#registration_modal">Registration Form</button>
+					<a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationFormLink" class="btn btn-info btn-lg w-100 d-block">Registration Form</a>
 
 					<a class="btn btn-lg my-2 d-block" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">Jackson/Green Facebook Page Click Here</a>
 				</nav>
@@ -256,5 +256,21 @@
 	
 	@if($errors->count() > 0)
 		<script>$('#registration_modal').modal('show');</script>
+		<script>
+			//Add total amounts to pay for registration
+			$("body").on("change", "#attending_adult, #attending_youth, #attending_children", function(e) {
+				var attendingNumA = $("#attending_adult").val();
+				var attendingNumY = $("#attending_youth").val();
+				var attendingNumC = $("#attending_children").val();
+				var totalAmountA = Number(attendingNumA * $(".costPA").val());
+				var totalAmountY = Number(attendingNumY * $(".costPY").val());
+				var totalAmountC = Number(attendingNumC * $(".costPC").val());
+				var totalDue = Number(totalAmountA + totalAmountY + totalAmountC);
+				$("#total_adult").val(totalAmountA);
+				$("#total_youth").val(totalAmountY);
+				$("#total_children").val(totalAmountC);
+				$("#total_amount_due").val(totalDue);
+			});
+		</script>
 	@endif
 @endsection

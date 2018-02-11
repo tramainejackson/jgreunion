@@ -72,6 +72,12 @@ Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {
     return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion', 'states'));
 });
 
+Route::get('/upcoming_reunion/{reunion}/registration_form', function (\App\Reunion $reunion) {
+	$states = \App\State::all();
+	
+    return view('upcoming_reunion_reg_form', compact('reunion', 'states'));
+});
+
 Route::get('/administrator', function () {
 	$distribution_list = \App\Reunion_dl::orderby('lastname', 'asc')->orderby('address', 'asc')->get();
 	

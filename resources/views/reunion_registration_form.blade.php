@@ -10,7 +10,7 @@
 				<input type="text" name="firstname" id="firstname" class="form-control" value="{{ old('firstname') }}" placeholder="Enter Firstname" />
 				
 				@if($errors->has('firstname'))
-					<span class="text-danger">{{ $errors->first('lastname') }}</span>
+					<span class="text-danger">{{ $errors->first('firstname') }}</span>
 				@endif
 			</div>
 			<div class="form-group col-12 col-sm-6">

@@ -5,7 +5,6 @@ PayPal JacksonGreen2016
 Create a settings page for admin
 Make all other reunion registrations inactive when new reunion created
 Create a confirmation modal when making new reunion and when completing a reunion
-Math is off on the on click registration 
 Add a footer
 Allow user to have a profile and be an admin
 Done: Fix mobile registration form and background on activities divs

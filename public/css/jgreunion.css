@@ -2574,7 +2574,6 @@ table#contact_information_table th {
 		min-width: 50%;
 		font-size: 105%;
 		padding: 1.5% 1%;
-		margin: 3% 25%;
 	}
 	div.message {
 		position: absolute;
@@ -2863,7 +2862,6 @@ table#contact_information_table th {
 		margin: 0% -0.4% 0% -2%;
 	}
 	div#family_account {
-		position: absolute;
 		top: 10px;
 		right: 10px;
 		max-width: 100%;

@@ -84,10 +84,8 @@ class HomeController extends Controller
 		$this->validate($request, [
 			'firstname' => 'required|max:30',
 			'lastname' => 'required|max:30',
-			'phone1' => 'max:999|min:0',
-			'phone2' => 'max:999|min:0',
-			'phone3' => 'max:9999|min:0',
-			'zip' => 'max:9999|min:0',
+			'phone' => 'nullable|numeric',
+			'zip' => 'nullable|max:99999|min:0',
 		]);
 			
 		$member = new Reunion_dl();
@@ -98,7 +96,7 @@ class HomeController extends Controller
 		$member->city = $request->city;
 		$member->state = $request->state;
 		$member->zip = $request->zip;
-		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
+		$member->phone = $request->phone;
 		$member->age_group = $request->age_group;
 		$member->mail_preference = $request->mail_preference;
 
@@ -160,10 +158,8 @@ class HomeController extends Controller
 		$this->validate($request, [
 			'firstname' => 'required|max:30',
 			'lastname' => 'required|max:30',
-			'phone1' => 'max:999|min:0',
-			'phone2' => 'max:999|min:0',
-			'phone3' => 'max:9999|min:0',
-			'zip' => 'max:9999|min:0',
+			'phone' => 'present|numeric',
+			'zip' => 'present|max:9999|min:0',
 		]);
 		$member = $reunion_dl;
 		$member->firstname = $request->firstname;
@@ -181,7 +177,7 @@ class HomeController extends Controller
 		$member->sibling = str_ireplace('; blank', '', implode('; ', $request->siblings)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->siblings)) : null;
 		$member->child = str_ireplace('; blank', '', implode('; ', $request->children)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->children)) : null;
 		$houseMembers = str_ireplace('; blank', '', implode('; ', $request->houseMember)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->houseMember)) : null;
-		$member->phone = $request->phone1 . $request->phone2 . $request->phone3;
+		$member->phone = $request->phone;
 		$member->age_group = $request->age_group;
 		$member->mail_preference = $request->mail_preference;
 		// dd($member);

@@ -68,10 +68,8 @@ class RegistrationController extends Controller
 				'address' => 'required|max:100',
 				'city' => 'required|max:100',
 				'zip' => 'required|max:9999|min:0',
-				'email' => 'email',
-				'phone1' => 'max:999|min:0',
-				'phone2' => 'max:999|min:0',
-				'phone3' => 'max:9999|min:0',
+				'email' => 'present|email',
+				'phone' => 'present|numeric',
 			]);
 		
 			// Create New Member
@@ -85,7 +83,7 @@ class RegistrationController extends Controller
 			$registration->state = $member->state =  $request->state;
 			$registration->zip = $member->zip =  $request->zip;
 			$registration->email = $member->email =  $request->email;
-			$registration->phone =  $request->phone1 . $request->phone2 . $request->phone3;
+			$registration->phone =  $request->phone;
 			$registration->phone = $member->phone =  $registration->phone != '' ? $registration->phone : null;
 			$registration->registree_name = $request->firstname . ' ' . $request->lastname;
 			$registration->reg_date = Carbon::now();
@@ -496,9 +494,9 @@ class RegistrationController extends Controller
 		
 		// Adjust registration price to reflect the amount of 
 		// people in the registration
-		$adultCost = $adults != null ? $registration->reunion->adult_price * count($adults) : 0;
-		$youthCost = $youths != null ? $registration->reunion->youth_price * count($youths) : 0;
-		$childrenCost = $childs != null ? $registration->reunion->child_price * count($childs) : 0;
+		$adultCost = $registration->adult_names != null ? $registration->reunion->adult_price * count(explode('; ', $registration->adult_names)) : 0;
+		$youthCost = $registration->youth_names != null ? $registration->reunion->youth_price * count(explode('; ', $registration->youth_names)) : 0;
+		$childrenCost = $registration->children_names != null ? $registration->reunion->child_price * count(explode('; ', $registration->children_names) ): 0;
 		$registration->due_at_reg = $adultCost + $youthCost + $childrenCost;
 		$registration->total_amount_due = $registration->due_at_reg - $registration->total_amount_paid;
 		$registration->shirt_sizes = implode('; ', array_merge($adultSizes, $youthSizes, $childrenSizes));

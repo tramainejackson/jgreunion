@@ -90,19 +90,9 @@
 							<input type="number" name="zip" class="form-control" value="{{ $member->zip }}" placeholder="Enter Zip Code" />
 						</div>
 					</div>
-					<div class="form-row">
-						<label class="form-label col-12" for="phone">Phone</label>
-						<div class="form-group col-2">
-							<input type="number" name="phone1" class="form-control" value="{{ substr($member->phone, 0, 3) }}" placeholder="###" max="999" />
-						</div>
-						<span>-</span>
-						<div class="form-group col-2">
-							<input type="number" name="phone2" class="form-control" value="{{ substr($member->phone, 3, 3) }}" placeholder="###" max="999" />
-						</div>
-						<span>-</span>
-						<div class="form-group col-3">
-							<input type="number" name="phone3" class="form-control" value="{{ substr($member->phone, 6, 4) }}" placeholder="####" max="9999" />
-						</div>
+					<div class="form-group">
+						<label class="form-label" for="phone">Phone</label>
+						<input type="text" name="phone" class="form-control" value="{{ $member->phone }}" placeholder="Enter Phone Number" />
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="age_group">Age Group</label>

@@ -659,6 +659,11 @@ a.profileLink.adminLink {
   height: 100%;
   opacity: 0.3;
 }*/
+
+div#registered_members_information ul ul {
+    padding: 0px 15px;
+}
+
 div#contact_content p {
   margin: 4px;
 }

@@ -92,19 +92,9 @@
 								<label class="form-label" for="email">Email</label>
 								<input type="text" name="email" class="form-control" value="{{ $registration->reunion_dl->email }}" placeholder="Enter Email Address" disabled />
 							</div>
-							<div class="form-row col-6">
-								<label class="form-label col-12" for="city">Phone</label>
-								<div class="form-group col-3">
-									<input type="number" name="phone1" class="form-control" value="{{ old('phone1') ? old('phone1') : substr($registration->reunion_dl->phone, 0, 3) }}" placeholder="###" max="999" disabled />
-								</div>
-								<span>-</span>
-								<div class="form-group col-3">
-									<input type="number" name="phone2" class="form-control" value="{{ old('phone2') ? old('phone2') : substr($registration->reunion_dl->phone, 3, 3) }}" placeholder="###" max="999" disabled />
-								</div>
-								<span>-</span>
-								<div class="form-group col-5">
-									<input type="number" name="phone3" class="form-control" value="{{ old('phone3') ? old('phone3') : substr($registration->reunion_dl->phone, 6, 4) }}" placeholder="####" max="9999" disabled />
-								</div>
+							<div class="form-group col-6">
+								<label class="form-label" for="phone">Phone</label>
+								<input type="number" name="phone" class="form-control" value="{{ old('phone') ? old('phone1') : substr($registration->reunion_dl->phone, 0, 3) }}" placeholder="No Phone Number Entered" disabled />
 							</div>
 						</div>
 					@else

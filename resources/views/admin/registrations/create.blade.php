@@ -21,14 +21,18 @@
 			<div class="col-3">
 				<nav class="nav nav-pills justify-content-center py-3">
 					<a href='/' class='profileLink nav-link'>Home</a>
-					<a href='/logout' class='profileLink nav-link'>Logout</a>
+					<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+					
+					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+						{{ csrf_field() }}
+					</form>
 				</nav>
 			</div>
 			<div class="col-9">
 				<nav class="nav nav-pills justify-content-start py-3">
 					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
-					<a href='/administrator' class='profileLink nav-link border-0'>Family Members</a>
-					<a href='/reunions' class='profileLink nav-link active'>Reunions</a>
+					<a href="/administrator" class="profileLink nav-link border-0">Family Members</a>
+					<a href="/reunions" class="profileLink nav-link active">Reunions</a>
 					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
 				</nav>
 			</div>
@@ -117,19 +121,9 @@
 							<input type="number" name="zip" class="form-control" max="99999" value="{{  old('zip') }}" placeholder="Enter Zip Code" />
 						</div>
 					</div>
-					<div class="form-row">
-						<label class="form-label col-12" for="city">Phone</label>
-						<div class="form-group col-2">
-							<input type="number" name="phone1" class="form-control" value="{{  old('phone1') }}" placeholder="###" max="999" />
-						</div>
-						<span>-</span>
-						<div class="form-group col-2">
-							<input type="number" name="phone2" class="form-control" value="{{  old('phone2') }}" placeholder="###" max="999" />
-						</div>
-						<span>-</span>
-						<div class="form-group col-3">
-							<input type="number" name="phone3" class="form-control" value="{{  old('phone3') }}" placeholder="####" max="9999" />
-						</div>
+					<div class="form-group">
+						<label class="form-label" for="city">Phone</label>
+						<input type="number" name="phone" class="form-control" value="{{  old('phone') }}" placeholder="##########" />
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="mail_preference">Mail Preference</label>

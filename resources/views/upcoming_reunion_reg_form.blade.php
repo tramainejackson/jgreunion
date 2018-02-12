@@ -140,30 +140,14 @@
 								@endif
 							</div>
 						</div>
-						<div class="form-row">
-							<label for="phone" class="form-label col-12">Phone:</label>
-							<div class="form-group col-4">
-								<input type="number" name="phone1" id="phone" class="form-control" placeholder="###" value="{{ old('phone1') }}" max="999" />
-								
-								@if($errors->has('phone1'))
-									<span class="text-danger">{{ $errors->first('phone1') }}</span>
-								@endif
-							</div>
-							<div class="form-group col-4">
-								<input type="number" name="phone2" id="phone" class="form-control" placeholder="###" value="{{ old('phone2') }}" max="999" />
-								
-								@if($errors->has('phone1'))
-									<span class="text-danger">{{ $errors->first('phone3') }}</span>
-								@endif
-							</div>
-							<div class="form-group col-4">
-								<input type="number" name="phone3" id="phone" class="form-control" placeholder="####" value="{{ old('phone3') }}" max="9999" />
-								
-								@if($errors->has('phone1'))
-									<span class="text-danger">{{ $errors->first('phone3') }}</span>
-								@endif
-							</div>
-						</div>			
+						<div class="form-group">
+							<label for="phone" class="form-label">Phone:</label>
+							<input type="text" name="phone" id="phone" class="form-control" placeholder="###" value="{{ old('phone') }}" />
+							
+							@if($errors->has('phone'))
+								<span class="text-danger">{{ $errors->first('phone') }}. No special charactions required</span>
+							@endif
+						</div>
 						<div class="form-group">
 							<label for="email" class="form-label">Email:</label>
 							<input type="email" name="email" id="email" class="form-control" placeholder="Email Address" value="{{ old('email') }}" />

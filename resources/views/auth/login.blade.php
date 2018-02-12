@@ -37,6 +37,7 @@
 		<div id="login_div_wrapper">
 			<div id="login_div">
 				<h2 id="reg_form_header">Login</h2>
+				
 				<div id="login_form_input">
 					<form class="form-horizontal" method="POST" action="{{ route('login') }}">
 						{{ csrf_field() }}

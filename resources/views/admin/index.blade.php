@@ -16,8 +16,6 @@
 
 @section('content')
 	<div class="container-fluid" id="profilePage">
-		<div id="overlay"></div>
-		<div id="modal"></div>
 		<div class="row">
 			<div class="col-12">
 				<div class="jumbotron jumbotron-fluid">
@@ -39,8 +37,8 @@
 			<div class="col-9">
 				<nav class="nav nav-pills justify-content-start py-3">
 					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
-					<a href="/administrator" class="profileLink nav-link border-0 active">Family Members</a>
-					<a href="/reunions" class="profileLink nav-link">Reunions</a>
+					<a href="/administrator" class="profileLink nav-link border-0">Family Members</a>
+					<a href="/reunions" class="profileLink nav-link active">Reunions</a>
 					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
 				</nav>
 			</div>

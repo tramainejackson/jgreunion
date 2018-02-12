@@ -158,8 +158,11 @@ class HomeController extends Controller
 		$this->validate($request, [
 			'firstname' => 'required|max:30',
 			'lastname' => 'required|max:30',
-			'phone' => 'present|numeric',
-			'zip' => 'present|max:9999|min:0',
+			'email' => 'nullable',
+			'address' => 'nullable',
+			'city' => 'nullable',
+			'phone' => 'nullable|numeric',
+			'zip' => 'nullable|max:99999|min:0|numeric',
 		]);
 		$member = $reunion_dl;
 		$member->firstname = $request->firstname;

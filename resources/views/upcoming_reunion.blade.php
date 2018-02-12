@@ -58,7 +58,7 @@
 	
 	<div id="reunion_page" class="container-fluid pb-4">
 		<div class="row d-sm-none">
-			<button type="button" class="btn m-3" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile">Menu</button>
+			<button type="button" class="btn btn-dark btn-lg m-3" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile">Menu</button>
 		</div>
 		<div class="row collapse" id="upcoming_reunion_mobile">
 			<div class="col">

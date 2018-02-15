@@ -189,8 +189,14 @@ form#edit_adminUser_form,form#add_adminUser_form {
 #edit_admin_user_header,#add_admin_user_header {
 	border-bottom: solid 2px;
 }
+
 [hidden] {
   position: absolute;
+}
+
+span.hotelInfoLabel {
+    min-width: auto;
+    font-weight: 600;
 }
 
 hr {
@@ -987,6 +993,11 @@ div#registrationReminderMsg p {
     color: red;
     font-size: 125%;
 }
+
+#hotel_information {
+	font-size: 130%;
+}
+
 span#registrationLink, a#registrationLink {
     min-width: inherit;
     display: initial;
@@ -2422,10 +2433,16 @@ table#contact_information_table th {
 	div#navi {
 	  padding: 2% 5% 21%;
 	}
+	
 	.page_header:first-of-type {
 	  text-align: -webkit-center;
 	  text-align: center;
 	}
+	
+	.page_header:first-of-type h1 {
+	  font-size: 160%;
+	}
+	
 	#admin_login {
 	  padding: 2.1% 1%;
 	  width: 50%;

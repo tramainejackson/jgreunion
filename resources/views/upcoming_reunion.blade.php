@@ -57,7 +57,7 @@
 	</div>
 	
 	<div id="reunion_page" class="container-fluid pb-4">
-		<div class="row d-sm-none">
+		<div class="row d-xl-none">
 			<button type="button" class="btn btn-dark btn-lg m-3" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile">Menu</button>
 		</div>
 		<div class="row collapse" id="upcoming_reunion_mobile">
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="d-none d-sm-block col-sm-2">
+			<div class="d-none d-xl-block col-xl-2">
 				<div class="my-2">
 					<a href="/" class="btn btn-info btn-lg d-block">Home</a>
 				</div>
@@ -89,22 +89,47 @@
 					<a class="btn btn-lg my-2 d-block" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">Jackson/Green Facebook Page Click Here</a>
 				</div>
 			</div>
-			<div class="col-12 col-sm-8">
-				<h1 class="text-center py-5 text-light display-sm-3 display-4">Jackson/Green Family Reunion {{ $reunion->reunion_year }}</h1>
+			<div class="col-12 col-xl-8">
+				<h1 class="text-center py-5 text-light display-xl-3 display-4">Jackson/Green Family Reunion {{ $reunion->reunion_year }}</h1>
 			</div>
-			<div class="d-none col-sm-2"></div>
+			<div class="d-none col-xl-2"></div>
 		</div>
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-11 col-md-8 mx-auto">
+			<div class="col-11 col-xl-8 mx-auto">
 			
 				<!-- Hotel information -->
 				<div class="row reunion_content" id="hotel_information">
 					<div class="col-12 reunionInformationHeader py-1">
 						<h2 id="" class="text-center text-light">Hotel Information</h2>
 					</div>
+					<div class="col-12 col-xl-4 my-1">
+						<img src="{{ asset('storage//reunion_background/charlotte_hotel.jpg') }}" class="mw-100" />
+					</div>
+					<div class="col-12 col-xl-8">
+						<p class="my-1"><span class="hotelInfoLabel">Hotel:</span> Sheraton Charlotte Hotel</p>
+						<p class="my-1"><span class="hotelInfoLabel">Location:</span> 555 South McDowell Street, South Tower, Charlotte, NC, 28204</p>
+						<p class="my-1"><span class="hotelInfoLabel">Room:</span> $128/per night (not including taxes and fees)</p>
+						<p class="my-1"><span class="hotelInfoLabel">Contact:</span> (704) 372-4100</p>
+					</div>
 					<div class="col-12">
-						<p class="text-center emptyInfo mt-3">Hotel Information Will Be Added Soon. Please Check Back At A Later Date.</p>
+						<div class="form-block-header mb-xl-3">
+							<h3 class="text-center">Hotel Amenities</h2>							
+						</div>
+						<div class="">
+							<ul class="list-unstyled px-1">
+								<li class="">1. Indoor/Outdoor Pools</li>
+								<li class="">2. Onsite dining - Social Bar & Kitchen, Evoke Restaurant, Craft City Social Club and City Lights Rooftop</li>
+								<li class="">3. 24-hour in-room dining</li>
+								<li class="">4. Sheraton Fitness Center is complimentary for all hotel guests and open 24/7</li>
+								<li class="">5. Parking: Valet Parking: $25 per night / Self Parking: $20 per night</li>
+								<li class="">6. High Speed Internet Access in all guestrooms ($10.95 / daily) </li>
+								<li class="">7. Complimentary wireless Internet in lobby</li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-12 text-center">
+						<a href="https://www.starwoodmeeting.com/events/start.action?id=1710311975&key=273CEDE2" class="btn btn-warning btn-lg" target="_blank">Book Hotel Room</a>
 					</div>
 				</div>
 				
@@ -195,7 +220,7 @@
 					<div class="col-12 reunionInformationHeader py-1">
 						<h2 class="text-center text-light">Payment Information</h2>
 					</div>
-					<div id="paper_payment_option" class="payment_option col-11 col-sm-5 my-3 mx-auto">
+					<div id="paper_payment_option" class="payment_option col-11 col-xl-5 my-3 mx-auto">
 						<h2>Paper Payment</h2>
 						<p>Please make all checks payable to Jackson-Green Family Reunion. Checks can be sent to:</p>
 						
@@ -219,10 +244,10 @@
 							<p class="text-danger" id="checks_address">Committee Members Not Completed Yet. Once Members Addedd, An Address Will Be Available</p>
 						@endif
 					</div>
-					<div id="electronic_payment_option" class="payment_option my-3 col-11 col-sm-5 mx-auto">
+					<div id="electronic_payment_option" class="payment_option my-3 col-11 col-xl-5 mx-auto">
 						<h2>Electronic Payment</h2>
 						<p>All electronic payments can be sent to administrator@jgreunion.com for anyone who already has a paypal account.</p>
-						<p>Click <a href="https://www.paypal.com" target="_blank">here</a> to go to paypal.</p>
+						<p>Click <a href=" https://www.paypal.com/pools/c/810J07gu0f" target="_blank">here</a> to go to paypal.</p>
 					</div>
 					<div class="col-12" id="registrationReminderMsg">
 						<p>Please do not send any payment without completing the registration form first. You can click <span id="registrationLink" class="d-none d-sm-inline" data-toggle="modal" data-target="#registration_modal">here</span><a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationLink" class="d-sm-none d-inline" >here</a> to complete your registration for the upcoming reunion.</p>

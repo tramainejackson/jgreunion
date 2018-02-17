@@ -15,7 +15,12 @@ class CreateReunionEventsTable extends Migration
     {
         Schema::create('reunion_events', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('reunion_id')->nullable();
+            $table->string('event_description', 255)->nullable();
+            $table->string('event_location', 255)->nullable();
+            $table->date('event_date')->nullable();
             $table->timestamps();
+			$table->softDeletes();
         });
     }
 

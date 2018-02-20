@@ -114,7 +114,7 @@ class HomeController extends Controller
 				$registration->adult_names = $member->firstname;
 				
 				if($registration->save()) {
-					return redirect()->action('HomeController@edit', $member)->with('status', 'Member and Registration Created Successfully');				
+					return redirect()->action('RegistrationController@edit', $registration)->with('status', 'Member and Registration Created Successfully');				
 				}
 			} else {
 				return redirect()->action('HomeController@edit', $member)->with('status', 'Member Created Successfully');				

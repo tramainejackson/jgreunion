@@ -94,7 +94,7 @@
 							</div>
 							<div class="form-group col-6">
 								<label class="form-label" for="phone">Phone</label>
-								<input type="number" name="phone" class="form-control" value="{{ old('phone') ? old('phone1') : substr($registration->reunion_dl->phone, 0, 3) }}" placeholder="No Phone Number Entered" disabled />
+								<input type="number" name="phone" class="form-control" value="{{ old('phone') ? old('phone1') : $registration->reunion_dl->phone }}" placeholder="No Phone Number Entered" disabled />
 							</div>
 						</div>
 					@else

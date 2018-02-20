@@ -122,7 +122,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="form-label" for="city">Phone</label>
+						<label class="form-label" for="phone">Phone</label>
 						<input type="number" name="phone" class="form-control" value="{{  old('phone') }}" placeholder="##########" />
 					</div>
 					<div class="form-group">

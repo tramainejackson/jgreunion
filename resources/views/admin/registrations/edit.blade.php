@@ -94,7 +94,7 @@
 							</div>
 							<div class="form-group col-6">
 								<label class="form-label" for="phone">Phone</label>
-								<input type="number" name="phone" class="form-control" value="{{ old('phone') ? old('phone1') : $registration->reunion_dl->phone }}" placeholder="No Phone Number Entered" disabled />
+								<input type="number" name="phone" class="form-control" value="{{ old('phone') ? old('phone') : $registration->reunion_dl->phone }}" placeholder="No Phone Number Entered" disabled />
 							</div>
 						</div>
 					@else
@@ -128,15 +128,7 @@
 							<div class="form-row col-6">
 								<label class="form-label col-12" for="phone">Phone</label>
 								<div class="form-group col-3">
-									<input type="number" name="phone1" class="form-control" value="{{ old('phone1') ? old('phone1') : substr($registration->phone, 0, 3) }}" placeholder="###" max="999" disabled />
-								</div>
-								<span>-</span>
-								<div class="form-group col-3">
-									<input type="number" name="phone2" class="form-control" value="{{ old('phone2') ? old('phone2') : substr($registration->phone, 3, 3) }}" placeholder="###" max="999" disabled />
-								</div>
-								<span>-</span>
-								<div class="form-group col-5">
-									<input type="number" name="phone3" class="form-control" value="{{ old('phone3') ? old('phone3') : substr($registration->phone, 6, 4) }}" placeholder="####" max="9999" disabled />
+									<input type="number" name="phone" class="form-control" value="{{ old('phone') ? old('phone') : $registration->phone }}" placeholder="###" disabled />
 								</div>
 							</div>
 						</div>
@@ -231,12 +223,12 @@
 												</div>
 													
 												<select class="custom-select form-control my-1" name="shirt_sizes[]">
-													<option value="S" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
-													<option value="M" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
-													<option value="L" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
-													<option value="XL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
-													<option value="XXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
-													<option value="XXXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
+													<option value="S" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Youth XSmall</option>
+													<option value="M" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Youth Small</option>
+													<option value="L" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Youth Medium</option>
+													<option value="XL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Youth Large</option>
+													<option value="XXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>Adult Small</option>
+													<option value="XXXL" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>Adult Large</option>
 												</select>
 											</div>
 										@endif
@@ -258,12 +250,12 @@
 												</div>
 												
 												<select class="custom-select form-control my-1" name="shirt_sizes[]">
-													<option value="S" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
-													<option value="M" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
-													<option value="L" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
-													<option value="XL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>Extra Large</option>
-													<option value="XXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>2XL</option>
-													<option value="XXXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>3XL</option>
+													<option value="S" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>12 Months</option>
+													<option value="M" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>2T</option>
+													<option value="L" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>3T</option>
+													<option value="XL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XL' ?  'selected' : '' : '' }}>4T</option>
+													<option value="XXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXL' ?  'selected' : '' : '' }}>5T</option>
+													<option value="XXXL" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'XXXL' ?  'selected' : '' : '' }}>6</option>
 												</select>
 											</div>
 										@endif
@@ -364,6 +356,32 @@
 							</div>
 						{!! Form::close() !!}
 					</div>
+					<script>
+						$('body').on('change', '#add_reg_members_form [name="age_group"]', function() {
+							if($('[name="age_group"]').val() == 'adult') {
+								$('#add_reg_members_form select[name="shirt_size"] option').eq(0).text('Small');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(1).text('Medium');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(2).text('Large');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(3).text('XL');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(4).text('XXL');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(5).text('3XL');
+							} else if($('[name="age_group"]').val() == 'youth') {
+								$('#add_reg_members_form select[name="shirt_size"] option').eq(0).text('Youth XSmall');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(1).text('Youth Small');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(2).text('Youth Medium');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(3).text('Youth Large');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(4).text('Adult Small');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(5).text('Adult Medium');
+							} else if($('[name="age_group"]').val() == 'child') {
+								$('#add_reg_members_form select[name="shirt_size"] option').eq(0).text('12 Months');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(1).text('2T');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(2).text('3T');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(3).text('4T');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(4).text('5T');
+								$('#add_reg_members_form [name="shirt_size"] option').eq(5).text('6');
+							}
+						});
+					</script>
 				</div>
 			</div>
 		</div>	

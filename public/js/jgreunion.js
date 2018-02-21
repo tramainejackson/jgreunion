@@ -211,6 +211,7 @@ $(document).ready(function()
 			var newAdultRow = $("#attending_adult_row_default").clone();
 			$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
 			$(newAdultRow).insertBefore($("#attending_adult_row_default"));
+			$('.attending_adult_name').first().val($('input#firstname').val());
 		}
 	});
 	

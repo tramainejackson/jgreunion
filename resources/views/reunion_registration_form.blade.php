@@ -160,12 +160,12 @@
 						<td>
 							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>
 								<option value="blank" selected>----- Select A Shirt Size -----</option>
-								<option value="S">Small</option>
-								<option value="M">Medium</option>
-								<option value="L" >Large</option>
-								<option value="XL">XL</option>
-								<option value="XXL">XXL</option>
-								<option value="XXXL">3XL</option>
+								<option value="S">Youth XSmall</option>
+								<option value="M">Youth Small</option>
+								<option value="L" >Youth Medium</option>
+								<option value="XL">Youth Large</option>
+								<option value="XXL">Adult Small</option>
+								<option value="XXXL">Adult Medium</option>
 							</select>
 						</td>
 					</tr>
@@ -200,12 +200,12 @@
 						<td>
 							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>
 								<option value="blank" selected>----- Select A Shirt Size -----</option>
-								<option value="S">Small</option>
-								<option value="M">Medium</option>
-								<option value="L" >Large</option>
-								<option value="XL">XL</option>
-								<option value="XXL">XXL</option>
-								<option value="XXXL">3XL</option>
+								<option value="S">12 Months</option>
+								<option value="M">2T</option>
+								<option value="L" >3T</option>
+								<option value="XL">4T</option>
+								<option value="XXL">5T</option>
+								<option value="XXXL">6</option>
 							</select>
 						</td>
 					</tr>
@@ -232,4 +232,10 @@
 			</table>
 		</div>
 	{!! Form::close() !!}
+	<script>
+		$('body').on('change', '#firstname', function(e) {
+			console.log($(this).val());
+			$('.attending_adult_name').first().val($(this).val());
+		});
+	</script>
 </div>

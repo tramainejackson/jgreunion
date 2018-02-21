@@ -266,11 +266,12 @@
 					<div class="form-block-header">
 						<h3 class="text-left">Registered Members
 							<a href="{{ action('RegistrationController@create' , ['reunion' => $reunion->id]) }}" class="btn btn-outline-success mb-2">Add Registration</a>
-							<button type="button" class="btn btn-primary mb-2">Registrations <span class="badge badge-light">{{ $reunion->registrations->count() }}</span>
+							<button type="button" class="btn btn-primary mb-2">Registrations <span class="badge badge-light">{{ $totalRegistrations->count() }}</span>
 							<span class="sr-only">total registrations</span>
 							</button>
 						</h3>
 					</div>
+					@php $loopCount = 0; @endphp
 					@foreach($reunion->registrations as $registration)
 						@php
 							$adults = $registration->adult_names != null || $registration->adult_names != '' ? explode('; ', $registration->adult_names) : null;
@@ -278,12 +279,12 @@
 							$youths = $registration->youth_names != null || $registration->youth_names != '' ? explode('; ', $registration->youth_names) : null;
 
 							$childs = $registration->children_names != null || $registration->children_names != '' ? explode('; ', $registration->children_names) : null;
-
 						@endphp
 						@if($registration->parent_reg == null)
+							@php $loopCount++; @endphp
 							<div class="form-row">
 								<div class="form-group col-1">
-									<span class="d-inline-block">{{ $loop->iteration }}.</span>
+									<span class="d-inline-block">{{ $loopCount }}.</span>
 									<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
 								</div>
 								@if($registration->dl_id == null)

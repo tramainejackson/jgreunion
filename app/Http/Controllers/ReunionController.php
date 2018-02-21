@@ -121,8 +121,9 @@ class ReunionController extends Controller
 		$members = Reunion_dl::orderby('firstname', 'asc')->get();
 		$titles = Committee_Title::all();
 		$reunion_events = $reunion->events()->orderBy('event_date')->get();
+		$totalRegistrations = $reunion->registrations()->where('parent_reg', null);
 		
-		return view('admin.reunions.edit', compact('reunion', 'reunion_events', 'states', 'years', 'members', 'titles'));
+		return view('admin.reunions.edit', compact('reunion', 'reunion_events', 'states', 'years', 'members', 'titles', 'totalRegistrations'));
     }
 
     /**

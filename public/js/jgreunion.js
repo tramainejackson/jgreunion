@@ -399,14 +399,18 @@ function emptyInputCheck() {
 			var thisName = $(this).find('input');
 			var thisShirt = $(this).find('select option:selected');
 			var thisSelect = $(this).find('select');
+			var selectError = "<span class='d-block text-center text-danger'>Select A Shirt Size</span>";
+			var inputError = "<span class='d-block text-center text-danger'>Enter A Name</span>";
 			
 			if($(thisName).val() == '') {
 				$(thisName).addClass('error_border');
+				$(inputError).insertAfter(thisName);
 				errors = false;
 			}
 			
 			if($(thisShirt).val() == 'blank') {
 				$(thisSelect).addClass('error_border');
+				$(selectError).insertAfter(thisSelect);
 				errors = false;
 			}
 		});

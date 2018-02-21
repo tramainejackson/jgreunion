@@ -11,25 +11,25 @@
 |
 */
 
-// Route::get('/test_email/{registration}', function (App\Registration $registration) {
-	// $reunion = $registration->reunion;
-	// $totalYouths = $totalAdults = $totalChildren = 10;
-	// // Get all the shirt sizes
-	// $shirtSizes = explode('; ', $registration->shirt_sizes);
+Route::get('/test_email/{registration}', function (App\Registration $registration) {
+	$reunion = $registration->reunion;
+	$totalYouths = $totalAdults = $totalChildren = 10;
+	// Get all the shirt sizes
+	$shirtSizes = explode('; ', $registration->shirt_sizes);
 	
-	// // Get the count of each age group
-	// $adults = explode('; ', $registration->adult_names);
-	// $youths = explode('; ', $registration->youth_names);
-	// $childs = explode('; ', $registration->child_names);
+	// Get the count of each age group
+	$adults = explode('; ', $registration->adult_names);
+	$youths = explode('; ', $registration->youth_names);
+	$childs = explode('; ', $registration->child_names);
 	
-	// // Get the sizes of the shirts in reference to the amount
-	// // of each age group
-	// $adultSizes = array_slice($shirtSizes, 0, count($adults));
-	// $youthSizes = array_slice($shirtSizes, count($adults), count($youths));
-	// $childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
+	// Get the sizes of the shirts in reference to the amount
+	// of each age group
+	$adultSizes = array_slice($shirtSizes, 0, count($adults));
+	$youthSizes = array_slice($shirtSizes, count($adults), count($youths));
+	$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
 	
-    // return view('emails.new_message', compact('reunion', 'registration', 'totalYouths', 'totalAdults', 'totalChildren', 'adultSizes', 'youthSizes', 'childrenSizes'));
-// });
+    return view('emails.new_message', compact('reunion', 'registration', 'totalYouths', 'totalAdults', 'totalChildren', 'adultSizes', 'youthSizes', 'childrenSizes'));
+});
 
 Route::get('/reunion_registration', function () {
 	$images = \App\Images::where('id', '>', '5')->get();

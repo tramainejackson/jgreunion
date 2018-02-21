@@ -59,7 +59,7 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-		// dd($request);
+		// dd($registration);
 		
 		if(!Auth::check()) {
 			$this->validate($request, [
@@ -97,10 +97,14 @@ class RegistrationController extends Controller
 			if($request->attending_adult <= 1) {
 				$registration->adult_names = $request->firstname;
 			} else {
-				$registration->adult_names = $request->firstname;
+				$registration->adult_names = '';
 				
-				foreach($request->attending_adult_name as $adultName) {
-					$registration->adult_names .= '; ' . $adultName;
+				foreach($request->attending_adult_name as $index => $adultName) {
+					if($index == 0) {
+						$registration->adult_names .= $adultName;
+					} else {
+						$registration->adult_names .= '; ' . $adultName;
+					}
 				}
 			}
 			

@@ -71,16 +71,24 @@
 		}
 		
 		@media (max-width: 576px) {
-			ul, p {
-				font-size: 100%;
+			ul {
+				font-size: 100% !important;
+				padding: 35px 10px !important;
 			}
 			
-			p, h3 {
-				margin: 35px 0px 20px;
+			p {
+				margin: 10px 0px 10px !important;
+				font-size: 100% !important;
+				padding: 5px 10px !important;
 			}
 			
+			h2 { 
+				font-size: 115% !important;
+				padding: 20px 10px !important;
+			}
 			h3 {
-				font-size: 125%;
+				font-size: 125% !important;
+				margin: 10px 0px 10px !important;
 			}
 		}
 	</style>

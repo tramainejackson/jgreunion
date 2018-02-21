@@ -298,6 +298,11 @@
 						$("#total_children").val(totalAmountC);
 						$("#total_amount_due").val(totalDue);
 					});
+					
+					// Add registree name to the first name field
+					$('body').on('change', '#firstname', function(e) {
+						$('.attending_adult_row').first().find('.attending_adult_name ').val($(this).val());
+					});
 				</script>
 			</div>
 		</div>

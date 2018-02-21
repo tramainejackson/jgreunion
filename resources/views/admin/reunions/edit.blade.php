@@ -50,7 +50,7 @@
 				</div>
 				{!! Form::open(['action' => ['ReunionController@update', 'reunion' => $reunion->id], 'method' => 'PUT', 'files' => true]) !!}
 					<div class="form-row">
-						<div class="form-group col-4">
+						<!-- <div class="form-group col-4">
 							{{ Form::label('type', 'Reunion Complete', ['class' => 'd-block form-control-label']) }}
 									
 							<div class="btn-group">
@@ -61,7 +61,7 @@
 									<input type="checkbox" name="reunion_complete" value="N" hidden {{ $reunion->reunion_complete == 'N' ? 'checked' : '' }} />No
 								</button>
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group col-4">
 							{{ Form::label('type', 'Paper Registration Form', ['class' => 'd-block form-control-label']) }}
 							

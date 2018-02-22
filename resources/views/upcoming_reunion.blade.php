@@ -269,18 +269,31 @@
 					@else
 						<div class="col-12">
 							<ul class="list-unstyled mt-4">
+								@php
+									function ucname($string) {
+										$string =ucwords(strtolower($string));
+
+										foreach (array('-', '\'') as $delimiter) {
+										  if (strpos($string, $delimiter)!==false) {
+											$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
+										  }
+										}
+										return $string;
+									}
+								@endphp
+								@php $loopCount = 0; @endphp
 								@foreach($registrations as $registration)
-									<li class="">{{ $loop->iteration . '. ' . $registration->registree_name }}</li>
-									@if($registration->family_id != null)
-										@php 
-											$family_members = \App\Reunion_dl::where('family_id', $registration->family_id)->get();
-										@endphp
-										<li class="">
-											<ul class="list-unstyled">
-												@foreach($family_members as $family_member)
-													<li class="">{{ $family_member->firstname }}</li>
-												@endforeach
-											</ul>
+									@if($registration->parent_reg == null)
+										@php $loopCount++; @endphp
+										<li class="">{{ $loop->iteration . '. ' . ucname($registration->registree_name) }}
+											@if($registration->children_reg)
+												<ul class="ml-4">
+													@foreach($registration->children_reg as $reg_member)
+														@php $firstname = explode(" ", $reg_member->registree_name); @endphp
+														<li class="">{{ ucwords(strtolower($firstname[0])) }}</li>
+													@endforeach
+												</ul>
+											@endif
 										</li>
 									@endif
 								@endforeach

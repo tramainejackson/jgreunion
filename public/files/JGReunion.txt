@@ -9,6 +9,10 @@ Update past reunions show page
 Update upcoming reunions page
 Create a settings page for admin
 Add popover on notes sections
+Make all other reunion registrations inactive when new reunion created
+Create a confirmation modal when making new reunion and when completing a reunion
+Create a button that checks for duplicates
+Add a footer
 Allow user to have a profile and be an admin
 Add relationship for registrations and distribution_list
 Done: Create a create, edit and show page for reunions

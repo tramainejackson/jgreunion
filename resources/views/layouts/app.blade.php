@@ -38,7 +38,7 @@
 		<div class="modal fade loadingSpinner">
 			<div class="loader"></div>
 			<div class="">
-				<p class="text-white d-table mx-auto"></p>
+				<p class="text-white d-table mx-auto display-3"></p>
 			</div>
 		</div>
         @yield('content')

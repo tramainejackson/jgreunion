@@ -18,10 +18,10 @@
 							<a href="/" class="homeLink nav-link">Home</a>
 							
 							@if(!Auth::check())
-								<a href='/registration' class='profileLink nav-link'>Register</a>
+								<!-- <a href='/register' class='profileLink nav-link'>Register</a> -->
 								<a href='/login' class='profileLink nav-link active'>Login</a>
 							@else
-								<a href='/profile' class='profileLink nav-link'>My Profile</a>
+								<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
 								<a href='/logout' class='profileLink nav-link'>Logout</a>
 							@endif
 						</nav>
@@ -37,6 +37,7 @@
 		<div id="login_div_wrapper">
 			<div id="login_div">
 				<h2 id="reg_form_header">Login</h2>
+				
 				<div id="login_form_input">
 					<form class="form-horizontal" method="POST" action="{{ route('login') }}">
 						{{ csrf_field() }}

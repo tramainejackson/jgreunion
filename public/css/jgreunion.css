@@ -10,6 +10,11 @@ button:focus {
 button:hover {
 	cursor: pointer;
 }
+
+.hidden {
+	display: none;
+}
+
 div#allMembersPage::after {
 	content: "";
 	position: absolute;
@@ -23,11 +28,17 @@ div#allMembersPage::after {
 	z-index: -1;
 	opacity: 0.5;
 }
+
 .form-block-header h3 {
     border-bottom: 1px solid darkgray;
     margin-top: 50px;
     margin-bottom: 10px;
 }
+
+.reunionInformationHeader {
+    background: #974c39;
+}
+
 div#charlottePage::after {
 	content: "";
 	position: absolute;
@@ -93,10 +104,18 @@ div#charlottePage::after {
 }
 .jumbotron-fluid {
 	margin: 0px -15px;
-	background: url(/images/jg5.jpg);
-	background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
+	background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0)), url(../storage/reunion_background/dark_texture_background.jpg);
+    background-size: cover !important;
+	background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+	background-attachment: fixed !important;
+}
+
+.jumbotron-fluid h1 {
+    font-size: 200%;
+    color: floralwhite;
+    text-shadow: 3px 1px 0px darkgreen;
 }
 
 #profilePage.container #navi, #allMembersPage #navi,
@@ -105,55 +124,6 @@ padding: 0% 1.5% 0%;
 background: linear-gradient(rgb(66, 66, 66), rgb(66, 66, 66), rgb(66, 66, 66), #6C9F3E);
 position: relative;
 }
-div#overlay, div#overlay_adminPage, div#overlay_PhillyPage {
-  height: 100%;
-  width: 100%;
-  background-color: black;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  opacity: 0.8;
-  display: none;
-}
-div#modal {  
-  position: fixed;  
-  left: 25%;
-  width: 50%;
-  height: 70%;
-  top: -30%;
-  z-index: 6;
-  display: none;
-}
-div#registration_modal, #confirmation_modal {
-    position: absolute;
-    background-color: white;
-    left: 14%;
-    width: 71.6%;
-    padding: 0% 0% 0%;
-    border: solid 2px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 25px whitesmoke;
-    min-height: 14%;
-    top: -30%;
-    z-index: 6;
-    display: none;
-    overflow: inherit;
-}
-div#registered_modal {
-	display: none;
-	position: fixed;
-	z-index: 5;
-	top: 10%;
-	margin: 0% 25%;
-	padding: 0%;
-	max-width: 50%;
-	width: 50%;
-	max-height: 50%;
-	overflow: initial;
-	box-shadow: 0px 0px 10px whitesmoke;
-}
-div#registered_modal {}
 div#errors_modal {
     position: absolute;
     top: 0.55%;
@@ -165,46 +135,17 @@ div#errors_modal {
     display: none;
     overflow: auto;
 }
-div#modal_adminPage, div#modal_confirmation, div#modal_confirm_delete, div#modal_confirm_reg_delete, div.edit_admin_user_div {
-  position: fixed;
-  width: 50%;
-  margin: 1% 25%;
-  border-radius: 10px;
-  z-index: 6;
-  display: none;
-  overflow: visible;
-}
-#modal_confirm_another {
-    position: fixed;
-    background-color: green;
-    right: 3%;
-    width: 8.1%;
-    text-align: center;
-    height: 15%;
-    color: white;
-    padding: 1% 1%;
-    border-radius: 10px;
-    z-index: 6;
-    top: -10%;
-	display: none;
-}
-div#confirmed_modal {
+h2.flashMessage {
     position: absolute;
-    background-color: white;
-    top: 2%;
-    display: none;
-    left: 25%;
-    max-width: 45%;
-    font-size: 150%;
+    z-index: 10;
+    top: 20px;
+    margin: 20px;
+    color: whitesmoke;
+    background: linear-gradient(to bottom right, rgba(0, 100, 0, 0.35), #007400, rgba(0, 100, 0, 0.35));
+    border: none;
     border-radius: 5px;
-    z-index: 6;
-    overflow: auto;
-    border: inset 2px green;
-}
-div#confirmed_modal h2 {
-    background-color: green;
-    color: white;
-    padding: 2% 0%;
+    opacity: 1;
+    padding: 30px;
 }
 p#successMessage {
     padding: 0% 11%;
@@ -248,25 +189,25 @@ form#edit_adminUser_form,form#add_adminUser_form {
 #edit_admin_user_header,#add_admin_user_header {
 	border-bottom: solid 2px;
 }
+
 [hidden] {
   position: absolute;
 }
-h1 {
-	margin: 0px;
+
+span.hotelInfoLabel {
+    min-width: auto;
+    font-weight: 600;
 }
-h2 {
-  text-align: center;
-  font-size: 200%;
-  margin-top: 0%;
-  padding-top: 0%;
-  font-family: 'Josefin Slab', serif;
-}
+
 hr {
   border-width: 4px;
 }
 #reunion_page {
-	padding: 0 14%;
 	background: linear-gradient(90deg, rgb(55, 55, 55),black 15%, black 85%, rgb(55, 55, 55));
+	background-attachment: fixed !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
 }
 #jgreunion_page {
   background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0), white);
@@ -276,7 +217,22 @@ hr {
   /* min-height: 400px; */
   /* max-height: 405px; */
 }
-div#jgreunion_page::after {content: "";position: absolute;top: 0;right: 0;left: 0;bottom: 0px;background: rgba(0,0,0,0.60);z-index: 0;}
+
+#family_tree_pic {
+	max-width: 100%;
+}
+
+div#jgreunion_page::after {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0px;
+	background: rgba(0,0,0,0.60);
+	z-index: 0;
+}
+
 .error_border {
     border-color: red;
 }
@@ -455,6 +411,11 @@ div#profile_information input#submit_profile_update {
     color: black;
     background-color: floralwhite;
 }
+
+.spacer-sm {
+	border-bottom: solid 1px;
+    margin: 10px 20px;
+}
 .postDate .deletePost {
     font-size: 90%;
 }
@@ -557,6 +518,28 @@ div#profile_information input.profileInputFather {
 	max-width: 50%;
 	margin-left: 5%;
 }
+
+.loader {
+	border-top: 16px solid blue;
+	border-bottom: 16px solid blue;
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	-webkit-animation: spin 2s linear infinite; /* Safari */
+	animation: spin 2s linear infinite;
+	margin: 100px auto;
+}
+
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
 span.separator {
     min-width: 0%;
     font-size: 100%;
@@ -661,6 +644,9 @@ a.profileLink, a.homeLink {
 a.profileLink:first-of-type {
     border-right: solid 1.5px whitesmoke;
 }
+a.profileLink.adminLink {
+    border-right: solid 1.5px whitesmoke;
+}
 .indPost {
     border-bottom: solid 1px #c9c9c9;
 }
@@ -679,13 +665,20 @@ a.profileLink:first-of-type {
   height: 100%;
   opacity: 0.3;
 }*/
+
+div#registered_members_information ul ul {
+    padding: 0px 15px;
+}
+
 div#contact_content p {
   margin: 4px;
 }
+
 div#registration_div_wrapper, div#login_div_wrapper {
-position: relative;
-padding: 3% 25%;
+	position: relative;
+	padding: 3% 10%;
 }
+
 h2#reg_form_header {
     text-align: -webkit-center;
     text-align: center;
@@ -710,6 +703,9 @@ div#login_form_input input.regInput {
 div#reg_form_input {
     margin: 0% 20% 2%;
 }
+.costPC, .costPA, .costPY {
+}
+
 input#reg_form_btn, #login_submit_btn {
     padding: 1%;
     margin: 1% 0% 0%;
@@ -728,7 +724,7 @@ input#reg_form_btn::after {
 	right: 0;
 	top: 0;
 }
-div#page_header, div#footer {
+div#page_header {
 text-align: center;
 }
 div#page_header {
@@ -786,11 +782,6 @@ h2#payments_header {
 div#hotel_content p {
   margin: 2% 0%;
   font-size: 80%;
-}
-div#hotel_content dl {
-    margin: -3% 28% 0%;
-    width: 100%;
-    font-size: 90%;
 }
 dd#directions_link {
     text-decoration: underline;
@@ -884,53 +875,38 @@ button#close_directions {
     margin: 5% 39%;
     width: 20%;
 }
+
 #activities_information {
 	padding-bottom: 2%;
 }
+
 a#fb_link {
-    margin: 0% 0% 0% 0%;
-    text-decoration: none;
-    border-radius: 5px;
-    background-image: url("../images/facebook-icon.jpg");
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
-    padding: 3% 0% 0% 0%;
+	background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('/images/facebook-icon.jpg');
+    background-size: 100% 100% !important;
+    background-repeat: no-repeat !important;
+    white-space: inherit;
+	border-radius: 0.3rem;
+	text-shadow: 3px -1px 7px #2d2d2d;
+	color: floralwhite;
 }
-a#fb_link button {
-    font-size: 150%;
-    display: inherit;
-    border: none;
-    padding: 0%;
-    color: black;
-    width: 100%;
-    font-weight: 600;
-    font-family: 'Josefin Slab', serif;
-    background-color: initial;
-    background-color: transparent;
-    text-align: -webkit-center;
-    text-align: center;
-}
+
 .payment_option p {
     margin: 0;
     font-size: 110%;
     padding: 0% 0%;
 }
-.payment_option {
-    display: inline-block;
-    float: left;
-    width: 41.3%;
-    padding: 1% 2% 2%;
-    max-width: 45%;
-    margin: 0% 2% 5%;
-}
+
 div#electronic_payment_option, div#paper_payment_option {
-    background-color: #6BF14A;
-    border: double #4ED44E;
+    background-color: #351C09;
+    border: double #974c39;
     border-radius: 10px;
+    color: whitesmoke;
 }
+
 div#electronic_payment_option p {
     padding: 1% 0% 5%;
 }
+
 div#electronic_payment_option p:last-of-type {
     padding: 0% 0%;
 }
@@ -1017,13 +993,12 @@ div#registrationReminderMsg p {
     color: red;
     font-size: 125%;
 }
-div#registrationReminderMsg {
-    display: block;
-    width: 70%;
-    clear: both;
-    margin: 0% 15%;
+
+#hotel_information {
+	font-size: 130%;
 }
-span#registrationLink {
+
+span#registrationLink, a#registrationLink {
     min-width: inherit;
     display: initial;
     font-size: 115%;
@@ -1032,72 +1007,37 @@ span#registrationLink {
     cursor: pointer;
 }
 .activities_content {
-  min-width: 86%;
-  max-width: 45%;
-  margin: 1% 5%;
-  min-height: 200px;
-  opacity: 0.8;
-  font-size: 130%;
-  padding: 0% 2% 1%;
-  border-radius: 10px;
-  position: relative;
+	min-height: 300px;
+	opacity: 0.9;
+	font-size: 130%;
+	border-radius: 10px;
+	background-size: 100% 100% !important;
+	background-repeat: no-repeat !important;
+	background-attachment: fixed !important;
+	background-position: center center !important;
+	color: white;
 }
 .activities_content:nth-of-type(1) {
-  background-image: url("../images/picnic_bgrd.jpg");
-  background-size: 100% 100%;
-  min-height: 300px;
-  background-repeat: no-repeat;
-  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)),url("../images/picnic_bgrd.jpg");
+}
+.activities_content:nth-of-type(2) {
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../images/cookout.jpg");
+}
+.activities_content:nth-of-type(3) {
+    background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../images/banquet_hall.jpg");
+}
+.activities_content:nth-of-type(4) {
+  background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../images/goodby02.jpg");
+}
+.activities_content:nth-of-type(4) p {
+  padding: 0% 33%;
 }
 .activities_content ul {
     padding: 0% 31%;
     list-style: none;
 }
-.activities_content:nth-of-type(2) {
-  background-image: url("../images/cookout.jpg");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  color: white;
-  opacity: 0.9;
-}
-.activities_content:nth-of-type(2) p {
-  padding: 0%;
-}
-.activities_content:nth-of-type(2) dl {
-  padding: 0%;
-}
-.activities_content:nth-of-type(3) {
-    background-image: url("../images/banquet_hall.jpg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    color: white;
-}
-.activities_content:nth-of-type(3) P {
-  font-weight: 600;
-  margin-top: -1%;
-}
-.activities_content:nth-of-type(4) {
-  background-image: url("../images/goodby02.jpg");
-  background-repeat: no-repeat;
-  background-size: 25% 100%;
-  color: black;
-  height: 300px;
-  border: solid;
-}
-.activities_content:nth-of-type(4) p {
-  padding: 0% 33%;
-}
-.activities_content_bgrd_skirt {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-}
-.activities_content *:not(.activities_content_bgrd_skirt) {
-    position: relative;
+h2.activitiesEventLocation {
+    border-bottom: solid 1px;
 }
 #suggestions {
 	padding-bottom: 2%;
@@ -1436,12 +1376,7 @@ span#fancy_cut_image img {
     border-radius: 5px;
     border: inset 2.5px;
 }
-textarea {
-    width: 49.5%;
-    border-radius: 7px;
-    margin: 2% 0% 0% 0%;
-    border: inset 2px;
-}
+
 #admin_nav, #admin_nav ul, #admin_nav ul li, #admin_nav ul li a {
   margin: 0;
   padding: 0;
@@ -1815,21 +1750,9 @@ button.yes_delete {
   padding: 10% 0%;
   color: white;
 }
-#footer {
+footer {
   background: linear-gradient(white 12%, black 40%, black);
   color: white;
-  bottom: 0px;
-  right: 0%;
-  width: 100%;
-}
-#footer_info {
-  margin: 0%;
-  padding: 2% 0%;
-  text-align: center;
-  font-size: 85%;
-}
-span#created_date {
-  padding: 0% 3%;
 }
 div#navi form {
 	position: relative;
@@ -1879,7 +1802,7 @@ h2.image_caption_header {
   position: absolute;
   left: 2%;
   top: 4%;
-  max-width: 35%;
+  max-width: 75%;
   z-index: 2;
   border: solid 2px;
   border-radius: 5px;
@@ -1928,10 +1851,14 @@ div#navi.registerPageNavi, div#navi.loginPageNavi {
 }
 .page_header {
 }
+
 .page_header:first-of-type {
-  font-size: 192%;
-  text-align: center;
-  font-family: 'Pinyon Script', cursive;
+	font-family: 'Pinyon Script', cursive;font-size: 155%;
+	font-size: 192%;
+	text-align: -webkit-center;
+	text-align: center;
+	width: 100%;
+	padding: 0%;
 }
 h1#option1, h1#option2 {
 	background-color: gray;
@@ -1959,7 +1886,7 @@ input#submit_button {
   border: outset 3px burlywood;
   background-color: bisque;
 }
-div#jgreunion_past_future {
+/*div#jgreunion_past_future {
   position: relative;
   background-color: white;
   padding: 3% 2% 2%;
@@ -1983,15 +1910,6 @@ div#jgreunion_past_future {
 }
 #past_btn:hover {
 	background-color: rgb(255, 248, 240);
-}
-#upcoming_btn, #past_btn {
-  text-decoration: none;
-  color: black;
-  width: 100%;
-  display: inline-block;
-  height: 100%;
-  padding: 5% 0%;
-  font-family: 'Josefin Slab', serif;
 }
 button#past_btn {
     text-align: center;
@@ -2028,7 +1946,7 @@ ul#past_reunions li {
 }
 ul#past_reunions a {
     color: blue;
-}
+}*/
 div#reunion_history {
   background: linear-gradient(white, rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), rgb(108, 159, 62), white);
   padding: 1.5% 15% 1% 1%;
@@ -2068,96 +1986,10 @@ span#paypal_email {
 div#reunion_descent p:last-of-type {
     margin-bottom: 0;
 }
-#family_tree_pic {
-  width: 23%;
-  right: 6%;
-  height: 100%;
-  position: absolute;
-}
-#music_player {
-	position: fixed;
-	top: 0.5%;
-    left: 1%;
-}
-#no_music{
-position: absolute;
-  right: 15%;
-  bottom: 10%;
-  font-size: 150%;
-  width: 30%;
-  background-color: rgb(255, 71, 71);
-  border-radius: 10px;
-  border: outset gray;
-  color: white;
-  font-family: 'Josefin Slab', serif;
-}
-#yes_music {
-  position: absolute;
-  bottom: 10%;
-  left: 15%;
-  font-size: 150%;
-  width: 30%;
-  border: outset gray;
-  color: white;
-  border-radius: 10px;
-  background-color: rgb(77, 171, 77);
-  font-family: 'Josefin Slab', serif;
-}
+
 #jackson_descent, #green_descent {
-  padding: 0% 6.2%;
 }
-button#takeLater_btn {
-  position: absolute;
-  right: 15%;
-  bottom: 10%;
-  font-size: 150%;
-  width: 30%;
-  background-color: rgb(255, 71, 71);
-  border-radius: 10px;
-  border: outset gray;
-  color: white;
-  font-family: 'Josefin Slab', serif;
-}
-button#takeNow_btn {
-  position: absolute;
-  bottom: 10%;
-  left: 15%;
-  font-size: 150%;
-  width: 30%;
-  border: outset gray;
-  color: white;
-  border-radius: 10px;
-  background-color: rgb(77, 171, 77);
-  font-family: 'Josefin Slab', serif;
-}
-span#takeNow_span {
-  color: rgb(77, 171, 77);
-  text-transform: uppercase;
-}
-span#takeLater_span {
-  color: rgb(255, 71, 71);
-  text-transform: uppercase;
-}
-div#survey_div {  
-  margin: 3% 2%;
-  padding: 5% 13% 0%;
-  border-radius: 10px; 
-  position: relative;
-  background-color: white;
-  box-shadow: 0px 0px 20px black;
-}
-div#backgrd_watermark {
-	position: absolute;
-	background-image: url("../images/family_tree.jpeg");
-	background-position: center center;
-	background-size: 100% 100%;
-	background-repeat: no-repeat;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	opacity: 0.05;
-}
+
 #survey_div h1{
 	text-align: center;
 }
@@ -2244,7 +2076,7 @@ select#fancyCutOption,#additionalTeeOption {
     border-radius: 5px;
     border: inset 2px;
 }
-.attending_adult_row, .attending_youth_row, .attending_children_row, #attending_children_row_default, #attending_youth_row_default {
+#attending_children_row_default, #attending_youth_row_default, #attending_adult_row_default {
 	display:none;
 }
 .addtionalOptionsRow {
@@ -2281,37 +2113,21 @@ h3#registrationDueAlert {
     color: white;
     padding-bottom: 0.5%;
 }
-form#registrationForm {
-    padding: 1.5% 11.5% 0%;
-}
 .costPP {
 	text-align: center;
 }
+
+p.emptyInfo {
+	font-size: 175%;
+}
+
 button#registrationFormBtn {
-    position: fixed;
-    top: 0%;
-    right: 1.3%;
-    min-height: 15%;
-    /* max-height: 20%; */
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    background-color: #A1927A;
-    color: white;
-    border: solid 2px white;
-    font-family: 'Josefin Slab', serif;
-    font-size: 120%;
-    width: 11%;
-    box-shadow: initial;
-    z-index: 2;
-    padding: 0;
+	white-space: normal;
 }
 button#registrationFormBtn span {
     font-size: 100%;
     max-width: 100%;
     padding: 10px 10px;
-}
-span#registrationFormSpan,span#registeredUsersSpan {
-    border-bottom: solid white 2px;
 }
 button#registrationFormBtn span:hover {
     text-decoration: underline;
@@ -2394,2045 +2210,1649 @@ button#confirmFormBtn, button.editFormBtn {
 table#contact_information_table th {
     text-align: left;
 }
-/*Smartphones portrait*/
-@media only screen and (min-width:320px) and (max-width:767px) {
-body {
-    margin: 0 auto;
-}
-div#scroll_to_top {
-    min-height: 9%;
-    min-width: 9%;
-}
-	
-div#modal {
-  left: 4%;
-  width: 92%;
-  height: 85%;
-  top: -5%;
-}
-#survey_div h1 {
-    text-align: center;
-    padding: 5% 0%;
-}
-div#registration_modal, #confirmation_modal {
-    left: 5%;
-    width: 90%;
-}
-form#registrationForm {
-    padding: 0% 3%;
-}
-label {
-    max-width: 60%;
-    width: 60%;
-    min-width: 45%;
-    display: inline-block;
-    text-align: -webkit-auto;
-    font-size: 130%;
-}
-input[type='number'] {
-    width: 75%;
-}
-input[type="text"], input[type="password"], input[type="email"], input[type="number"],textarea {
-    max-width: 100%;
-    width: 90%;
-    margin: 0.5% 0%;
-}
-button#confirmFormBtn, button.editFormBtn {
-    display: -webkit-inline-box;
-    width: 80%;
-    font-size: 130%;
-    border-radius: 5px;
-    padding: 1% 0%;
-}
-button.editFormBtn {
-    margin: 0% 10% 2%;
-    background-color: goldenrod;
-    border-color: darkgoldenrod;
-    color: whitesmoke;
-}
-div#registration_modal, #confirmation_modal {
-    min-height: initial;
-}
-div#confirmed_modal {
-    left: 5%;
-    max-width: 90%;
-}
-button#confirmFormBtn {
-    margin: 0% 0% 7% 10%;
-    background-color: green;
-    border-color: darkgreen;
-    color: white;
-}
-p.confirmationP {
-    padding: 0.5% 0% 0% 0%;
-    min-width: 40%;
-}
-table.confirm_attendees {
-    max-width: 90%;
-    min-width: 70%;
-    margin: 7% 15%;
-    font-size: 125%;
-}
-#past_btn {
-	padding: 9% 0%;
-}
-button#takeLater_btn, #no_music {
-  right: 15%;
-  bottom: 5%;
-  width: 70%;
-  padding: 3% 0%;
-}
-button#takeNow_btn, #yes_music {
-  padding: 3% 0%;
-  bottom: 20%;
-  left: 15%;
-  font-size: 150%;
-  width: 70%;
-}
-button#addtionalOptionsBtn {
-    width: 80%;
-    margin: 2% 10%;
-}
-input#submitRegistration {
-    right: 55%;
-    width: 40%;
-    padding: 1% 0%;
-}
-div#navi {
-padding: 10% 0%;
-}
-.page_header:first-of-type {
-text-align: -webkit-center;
-text-align: center;
-font-size: 150%;
-width: 100%;
-padding: 11% 0%;
-}
-#admin_login {
-  padding: 2.1% 1%;
-  width: 50%;
-  right: 25%;
-  bottom: 4%;
-}
-button#admin_login_btn {
-  text-align: -webkit-center;
-  text-align: center;
-  width: 100%;
-  padding: 4% 0%;
-  font-size: 110%;
-}
-#admin_form {
-    width: 60%;
-    bottom: 2%;
-    left: 0px;
-    right: initial;
-    top: initial;
-    margin: 0% 20%;
-}
-input#submit_button {
-    width: 91.5%;
-    margin-top: 0.5%;
-}
-div.showing_image {
-width: 100%;
-margin: 0% 0%;
-}
-div#image_caption {
-  top: 1%;
-  left: 1%;
-}
-ul#jgreunion_past_future_list > li {
-  width: 92%;
-  margin: 3% 4%;
-  position: relative;
-}
-ul#past_reunions {
-  padding: 1% 3.2% 1%;
-  width: inherit;
-}
-#reunion_history_pic {
-  height: 10em;
-  width: 10em;
-}
-div#reunion_history {
-  padding: 1.5% 6% 1%;
-}
-#family_tree_pic {
-  display: none;
-}
-span#last_updated {
-  display: none;
-}
-div#page_header {
-  padding: 0% 1%;
-  font-size: 150%;
-}
-#reunion_page {
-  padding: 0 1%;
-}
-#form_information img {
-  min-height: 400px;
-  height: 400px;
-}
-#hotel_pic {
-  height: 210px;
-  width: 100%;
-  margin: 0% 0% 5% 0%;
-}
-table#contact_information_table td:first-of-type, table#contact_information_table th:first-of-type {
-    display: none;
-}
-button#registrationFormBtn {
-    display: none;
-}
-.activities_content {
-  min-height: 600px;
-}
-.activities_content:nth-of-type(4) {
-  background-size: 100% 70%;
-  background-position: center bottom;
-}
-.activities_content:nth-of-type(4) p {
-    padding: 0% 15%;
-}
-#contact_content {
-  padding: 1% 1%;
-}
-div#contact_content p {
-  margin: 4px;
-  text-align: -webkit-center;
-  text-align: center;
-}
-#hotel_content button {
-    font-size: 115%;
-    margin: 5% 0% 0%;
-    max-width: 100%;
-    min-width: 100%;
-}
-a#fb_link {
-    margin: 0% 0% 0% 0%;
-    padding: 0% 0% 0%;
-    text-decoration: none;
-    border-radius: 5px;
-    background-image: url("../images/facebook-icon.jpg");
-    background-size: 35% 100%;
-    background-repeat: no-repeat;
-    padding: 5% 0%;
-}
-a#fb_link button {
-    padding: 0% 0% 0% 30%;
-}
-#contact_information_table {
-    margin: 2% 10% 10%;
-    width: 80%;
-    text-align: -webkit-center;
-    text-align: center;
-}
-.payment_option {
-	width: initial;
-	max-width: initial;
-	font-size: 105%;
-}
-.payment_option h2 {
-    margin-bottom: 3%;
-}
-#footer_info span {
-    min-width: 25%;
-    display: inline-block;
-    font-size: 115%;
-    padding: 1% 2%;
-}
-div#electronic_payment_option p:last-of-type {
-    padding: 1% 0% 25%;
-}
-.activities_content ul {
-    padding: 0% 15%;
-}
-div#hotel_content dl {
-    margin: -4% 0% 0%;
-}
-div.directionOptions {
-    max-width: 98%;
-    min-width: 75%;
-    width: 98%;
-    padding: 0.5%;
-}
-div#paper_payment_option p.paymentsFinePrint {
-    margin: 0% 0%;
-}
-table#contact_information_table th {
-    text-align: -webkit-center;
-    text-align: center;
-}
-button#submitRegistration {
-    right: 12%;
-}
-div#errors_modal {
-    top: 16%;
-    width: 50%;
-    left: 25%;
-}
-h1#confirmationFormHeader {
-    padding: 1.5% 0%;
-    margin: 0% 0% 2%;
-}
-#confirmationForm {
-	padding: 0% 10%;
-}
-#confirmationForm span {
-	max-width: 50%;
-	min-width: 40%;
-}
-#deleteUser_form input[type="text"], #deleteUser_form input[type="password"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="password"], #deleteReg_form input[type="email"], input[type="number"] {
-    width: 30%;
-}
-div#modal_delete_reg_content label {
-    font-size: 100%;
-    padding: 0.4% 0%;
-}
-textarea {
-    width: 29%;
-}
-button.yes_delete, button.no_delete {
-    width: 92%;
-    margin: 4%;
-}
-div#calculations, div#search_field_regs {
-    width: 39%;
-}
-#coming_soon_message p {
-    left: 10%;
-    margin: 0%;
-    padding: 10% 0% 0%;
-    font-size: 150%;
-    width: 80%;
-    top: -50%;
-}
-.nextReunion {
-    padding: 15% 0% 0%;
-    top: -25%;
-}
-.slideShowImage {
-min-height: 300px;
-max-height: 300px;
-border-radius: 10px;
-box-shadow: 0px 0px 10px black;
-max-width: 100%;
-width: 100%;
-margin: 0% 0%;
-}
-a.profileLink, a.homeLink {
-    font-size: 140%;
-    color: white;
-    text-decoration: none;
-}
-div#family_account {
-    max-width: 100%;
-    min-width: 50%;
-}
-div#registration_div_wrapper, div#login_div_wrapper {
-    position: relative;
-    padding: 3% 5%;
-}
-h2#reg_form_header {
-    margin: 4% 10%;
-}
-div#reg_form_input, div#login_form_input {
-    margin: 0% 10% 0%;
-}
-div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
-    max-width: 47.8%;
-}
-input#reg_form_btn, #login_submit_btn {
-    min-width: 50%;
-    font-size: 105%;
-    padding: 1.5% 1%;
-    margin: 3% 25%;
-}
-div.message {
-    position: absolute;
-    background-color: #02d002;
-    color: white;
-    opacity: 0.9;
-    max-width: 10%;
-    left: 20px;
-    top: 10px;
-    z-index: 1;
-    border-radius: 3px;
-    box-shadow: 0px 0px 10px darkgray;
-}
-div.message ul {
-    width: 90%;
-    max-width: 100%;
-    padding: 0% 0% 0% 10%;
-}
-div.errors {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    background-color: darkred;
-    color: wheat;
-    z-index: 1;
-    opacity: 0.9;
-    border-radius: 3px;
-    box-shadow: 0px 0px 10px darkgray;
-    max-width: 20%;
-}
-.errors ul {
-    padding: 0% 10% 0%;
-    max-width: 94%;
-}
-p.profileInfo {
-    margin: 0;
-    display: -webkit-inline-box;
-    display: inline-block;
-}
-div#profile_header, div.profile_info_div {
-    margin-left: 25.5%;
-}
-div.profile_info_div {
-    font-size: 115%;
-}
-div#profile_header, div#post_header_div {
-    padding-top: 3%;
-    padding-bottom: 2%;
-}
-h2.postHeader, div.indPost {
-	text-align: -webkit-left;
-	text-align: left;
-	padding: 1.5% 2%;
-	max-width: 100%;
-}
-.profilePhoto, .profileHeader {
-    float: left;
-}
-.profilePhoto{
-    margin: 0% 3% 0% 0%;
-}
-h3.profileHeaderName {
-    margin: 0.5% 0% 0%;
-}
-h3.profileHeaderName a {
-    text-decoration: underline;
-    color: #3ca4ff;
-}
-.postPhoto {
-    clear: both;
-    padding: 1% 0%;
-    max-width: 100%;
-}
-.postPhoto img {
-    max-width: 200px;
-    max-height: 200px;
-    float: left;
-    margin: 1% 0.5%;
-    border: solid 1.5px;
-    box-shadow: 0px 0px 10px;
-}
-.postComment {
-    clear: both;
-    padding: 2% 0% 1%;
-}
-div.postDate {
-    display: table;
-    width: 100%;
-}
-.sectionDiv {
-    padding: 0.3% 0%;
-}
-h2#profile_header_name {
-    text-align: -webkit-left;
-    text-align: left;
-    margin-bottom: 0.5%;
-}
-div#profile_information input,div#profile_information select {
-    display: -webkit-inline-box;
-    display: inline-block;
-    width: 60%;
-    border: none;
-    font-size: 90%;
-    font-family: 'Josefin Slab', serif;
-}
-div#profile_information input.profileInputGreenBtn,
-div#profile_information input.profileInputJacksonBtn,
-div#profile_information input.profileInputBtn {
-    width: 25%;
-    padding: 1% 0%;
-    text-align: -webkit-center;
-    text-align: center;
-    background-color: darkgrey;
-    color: white;
-    border: solid 1px black;
-}
-input.profileInput.profileSiblingInput {
-    margin: 0% 0% 0% -1%;
-}
-input.profileInput.profileInputChildren {
-    margin: 0% 0% 0% -1%;
-}
-div#profile_information input#submit_profile_update {
-    position: absolute;
-    top: 4%;
-    right: 2%;
-    max-width: 12%;
-    border-radius: 10px;
-    padding: 1% 0%;
-    border: outset 2px #45955e;
-    box-shadow: 0.5px 0.5px 5px #1c1c1c;
-}
-.postBtn {
-    position: absolute;
-    top: 3.5%;
-    right: 2%;
-    max-width: 12%;
-    min-width: 10%;
-    border-radius: 10px;
-    padding: 1% 0%;
-    font-size: 100%;
-    border: outset 2px #45955e;
-    box-shadow: 0.5px 0.5px 5px #1c1c1c;
-    text-align: -webkit-center;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    background-color: floralwhite;
-    font-family: 'Josefin Slab', serif;
-}
-.allPostBtn {
-    position: absolute;
-    top: 3.5%;
-    right: 13%;
-    max-width: 12%;
-    min-width: 10%;
-    border-radius: 10px;
-    padding: 1% 0%;
-    border: outset 2px #45955e;
-    box-shadow: 0.5px 0.5px 5px #1c1c1c;
-    text-align: -webkit-center;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    background-color: floralwhite;
-}
-.postDate .deletePost {
-    font-size: 90%;
-}
-.postDate .deletePost a {
-    text-decoration: none;
-    color: darkred;
-    text-shadow: 4px 5px darkgray;
-}
-span.inputTitle.descentTitle {
-    padding: 0% 0% 3%;
-}
-div.header_div h3 {
-    margin: 0px;
-    background-color: beige;
-    padding: 0.5% 0% 0% 0.5%;
-}
-div.header_div {
-    margin: 2.5% 0%;
-    position: relative;
-}
-img.profilePicture {
-    max-width: 120px;
-    max-height: 120px;
-    height: 75px;
-    width: 75px;
-}
-div#profile_information input:focus, div#profile_information select:focus {
-    outline: none;
-}
-div#profile_information input.profileNameInput1 {
-    max-width: 12%;
-    margin: 0% 0% 0% -1%;
-}
-div#profile_information input.profileNameInput2 {
-    width: 50%;
-}
-input.profileInput.profileInputSpouse {
-    margin: 0% 0% 0% -1%;
-    max-width: 50%;
-}
-div#profile_information input.profileInputAddress {
-    width: 25%;
-    margin: 0% 0% 0% -0.8%;
-}
-div#profile_information input.profileInputCity {
-    width: 15%;
-}
-div#profile_information select.profileInputState {
-    max-width: 8%;
-}
-div#profile_information input.profileInputZip {
-    width: 10%;
-}
-div#profile_information input.profileInputPhone1,
-div#profile_information input.profileInputPhone2,
-div#profile_information input.profileInputPhone3 {
-    width: 6%;
-}
-input.profileInput.profileInputDOB {
-    margin: 0% 0% 0% -1%;
-}
-div#profile_information input.profileInputPhone3 {
-    width: initial !important;
-}
-div#profile_information input.profileInputGreenBtn {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	/* border-right: solid 0.5px black; */
-	margin: 0% 0% 0% -1%;
-}
-span.visibleHeaderSpan {
-    font-size: 80%;
-    min-width: initial;
-    position: absolute;
-    right: 5%;
-    top: 25%;
-}
-div#profile_information input.visibleCheckBox {
-    width: initial;
-    position: absolute;
-    right: 0px;
-    top: 15%;
-}
-.descentDiv {
-	display: inline;
-}
-div#profile_information input.profileInputJacksonBtn {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	/* border-left: solid 0.5px black; */
-}
-div#profile_information input.profileInput.descentSelected {
-    background-color: darkgreen;
-}
-div#profile_information input.profileInputMother {
-	width: 10%;
-	margin: 0% 0% 0% -1%;
-}
-div#profile_information input.profileInputFather {
-	max-width: 50%;
-	margin-left: 5%;
-}
-span.separator {
-    min-width: 0%;
-    font-size: 100%;
-}
-span.phone_par_span {
-    min-width: 0%;
-    margin: 0% -0.4% 0% -2%;
-}
-div#family_account {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    max-width: 100%;
-    min-width: 15%;
-    text-align: -webkit-right;
-    text-align: right;
-}
-div#home_link {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    max-width: 100%;
-    min-width: 15%;
-    text-align: -webkit-left;
-    text-align: left;
-}
-div#profile_information {
-    position: relative;
-    max-width: 50%;
-    width: 50%;
-    display: -webkit-inline-box;
-    display: inline-block;
-    float: left;
-}
-div#post_information {
-    display: -webkit-inline-box;
-    display: inline-block;
-    max-width: 50%;
-    width: 50%;
-    float: right;
-    min-height: 890px;
-    max-height: 890px;
-    overflow: auto;
-    background-color: #dddddd;
-    position: relative;
-}
-.newPost {
-    padding: 2% 5%;
-}
-div#profile_photo {
-    width: 25%;
-    position: relative;
-    display: table;
-    table-layout: fixed;
-    float: left;
-}
-img#profile_photo {
-    position: relative;
-    max-width: 100%;
-    padding: 10% 3% 0%;
-    width: 200px;
-    height: 200px;
-}
-input#change_img_btn {
-    width: 200px !important;
-    position: absolute;
-    bottom: 0%;
-    left: 0;
-    margin: 0% 0% 0% 3%;
-    padding: 2% 0%;
-    opacity: 0.85;
-    background-color: #62aa62;
-    border: none;
-    color: white;
-    font-size: 100%;
-}
-}
+
 /*Coverage between smaller screens*/
-@media only screen and (min-width:768px) and (max-width:1023px) {
-div#modal {
-    height: 80%;
-    width: 80%;
-    left: 10%;
-}
-div#survey_div {
-  font-size: 115%;
-}
-button#takeNow_btn, button#takeLater_btn, #yes_music, #no_music {
-  width: 40%;
-  padding: 4% 0%;
-  bottom: 7%;
-}
-button#takeLater_btn, #no_music {
-  right: 7%;
-}
-button#takeNow_btn, #yes_music {
-  left: 7%;
-}
-.page_header:first-of-type {
-font-size: 192%;
-text-align: -webkit-center;
-text-align: center;
-width: 100%;
-padding: 15% 0%;
-}
-div#navi {
-padding: 2% 0% 9%;
-}
-#admin_login {
-  padding: 2% 1%;
-  width: 64%;
-  right: 16%;
-}
-button#admin_login_btn {
-  text-align: center;
-  width: 100%;
-  font-size: 120%;
-  padding: 1.1% 2%;
-}
-#admin_form {
-  width: 35%;
-  top: 69%;
-  right: 29.5%;
-}
-input#submit_button {
-  width: 100%;
-  margin-top: 1.3%;
-  border-radius: 5px;
-  border: solid burlywood;
-  background-color: bisque;
-}
-div.showing_image {
-width: 100%;
-margin: 0% 0%;
-}
-div#image_caption {
-    top: 1%;
-    left: initial;
-    width: 70%;
-    margin: 0% 14%;
-}
-#jackson_descent, #green_descent {
-  padding: 0% 25%;
-}
-div#jackson_descent h2, div#green_descent h2 {
-  text-align: left;
-}
-div#reunion_history {
-  padding: 1.5% 6% 1%;
-}
-input[type="text"], input[type="password"] {
-  width: 98%;
-}
-ul#jgreunion_past_future_list > li {
-  width: 55%;
-  margin: 1% 22%;
-}
-ul#past_reunions {
-  padding: 1% 22.6% 1%;
-}
-.payment_option {
-    width: initial;
-    max-width: initial;
-    font-size: 105%;
-}
-div#paper_payment_option p.paymentsFinePrint {
-    margin: 0%;
-}
-div#electronic_payment_option p:last-of-type {
-    padding: 0% 0% 20%;
-}
-a#fb_link {
-    margin: 0% 0% 0% 0%;
-    padding: 3% 0%;
-}
-#contact_content {
-    margin: 0% 2%;
-    padding: 1% 0%;
-}
-#contact_information_table {
-    width: 100%;
-    margin: 2% 0% 10% 0%;
-    text-align: -webkit-center;
-    text-align: center;
-}
-table#contact_information_table th {
-    text-align: -webkit-center;
-    text-align: center;
-}
-a#fb_link button {
-    font-size: 150%;
-    font-weight: 600;
-    display: inherit;
-    max-width: 100%;
-    border: none;
-    padding: 0%;
-    width: 100%;
-}
-#hotel_pic {
-    float: left;
-    height: 210px;
-    width: 100%;
-    margin: 0% 0% 2%;
-}
-div#hotel_content dl {
-    margin: -4% 0% 0%;
-    width: 100%;
-}
-button#submitRegistration {
-    right: 15%;
-}
-div#errors_modal {
-    z-index: 6;
-    border: solid 2px;
-}
-button#confirmFormBtn, button.editFormBtn {
-    width: 60%;
-    padding: 1% 0%;
-}
-button#confirmFormBtn {
-	margin: 1% 20%;
-}
-button.editFormBtn {
-	margin: 1% 20%;
-}
-form#registrationForm {
-    padding: 0% 1%;
-}
-div#registration_form_content {
-	padding: 0% 10%;
-}
-#deleteUser_form input[type="text"], #deleteUser_form input[type="password"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="password"], #deleteReg_form input[type="email"], input[type="number"] {
-    width: 50%;
-    border-radius: 5px;
-}
-div#calculations, div#search_field_regs {
-    width: 39.5%;
-}
-#coming_soon_message p {
-top: -25%;
-}
-h2.nextReunion {
+@media only screen and (max-width:575px) {
+	.modal-dialog {
+		max-width: 500px; 
+	}
+
+	h2.image_caption_header {
+		max-width: 100%;
+	}
+
+	.page_header:first-of-type {
+		padding: 1% 0%;
+	}
+
+	div#registration_div_wrapper, div#login_div_wrapper {
+		padding: 3% 10%;
+	}
 	
-margin: 4% 0%;
-}
-}
-/*Coverage between smaller screen*/
-@media only screen and (min-width:1024px) and (max-width:1279px) {
-div#modal {
-  font-size: 115%;
-  height: 50%;
-  border-radius: 10px;
-}
-button#takeLater_btn, #no_music {
-  right: 7%;
-  font-size: 150%;
-  padding: 3% 1%;
-  width: 40%;
-}
-button#takeNow_btn, #yes_music {
-  left: 7%;
-  font-size: 150%;
-  padding: 3% 1%;
-  width: 40%;
-}
-div.showing_image {
-width: 100%;
-margin: 0% 0%;
-}
-div#image_caption {
-  top: 1%;
-  left: initial%;
-}
-div#reunion_history {
-  padding: 1.5% 6% 1%;
-  font-size: 130%;
-}
-div#jackson_descent h2, #green_descent h2 {
-  text-align: -webkit-left;
-}
-#jackson_descent, #green_descent {
-  padding: 0% 28% 0% 6%;
-  font-size: 115%;
-}
-#family_tree_pic {
-  right: 4%;
-}
-#contact_content {
-  padding: 1% 8%;
-  font-size: 130%;
-}
-#payments_content {
-  padding: 15% 14% 1%;
-}
-img#paypal_icon {
-  left: 24%;
-}
-.page_header:first-of-type {
-font-size: 155%;
-width: 100%;
-padding: 9% 0%;
-text-align: -webkit-center;
-text-align: center;
-}
-ul#jgreunion_past_future_list > li {
-  width: 40%;
-  margin: 1% 4%;
-  position: relative;
-}
-ul#past_reunions {
-   padding: 1% 30.2% 1%;
-}
-div#navi {
-padding: 3.5% 0% 3%;
-width: 100%;
-}
-#admin_login {
-  top: 5%;
-  width: 12%;
-}
-#admin_form {
-  width: 13.6%;
-  top: 10%;
-  right: 1%;
-}
-input[type="text"], input[type="password"] {
-  width: 94%;
-  border-radius: 5px;
-}
-#hotel_content button {
-    margin: 5% 20% 0%;
-}
-.payment_option {
-    display: inline-block;
-    float: left;
-    width: 91%;
-    padding: 1% 2% 2%;
-    max-width: 95%;
-    margin: 0% 2% 5%;
-}
-a#fb_link {
-    margin: 0% 0% 0% 0%;
-}
-input#submitRegistration {
-    right: 10%;
-}
-div#survey_div {
-    height: 50%;
-}
-button#admin_login_btn {
-    font-size: 130%;
-    padding: 20% 0%;
-}
-input[type="number"] {
-}
-div#hotel_content dl {
-    margin: -4% 0% 0%;
-    width: 100%;
-    font-size: 90%;
-}
-#hotel_pic {
-    width: 100%;
-    margin: 0% 0% 2%;
-}
-div#electronic_payment_option p:last-of-type {
-    padding: 0% 0% 10%;
-}
-div#paper_payment_option p.paymentsFinePrint {
-    margin: 0% 0%;
-}
-button#submitRegistration {
-    right: 11%;
-}
-#contact_information_table {
-    text-align:-webkit-center;
-    text-align: center;
-}
-table#contact_information_table th {
-    text-align:-webkit-center;
-    text-align: middle;
-}
-div#errors_modal {
-    z-index: 6;
-    background-color: white;
-    box-shadow: 0px 0px 10px whitesmoke;
-    border: solid 2px;
-}
-form#registrationForm {
-    padding: 0% 3.5%;
-}
-div#registration_form_content {
-	padding: 0% 15%;
-}
-#deleteUser_form input[type="text"], #deleteUser_form input[type="password"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="password"], #deleteReg_form input[type="email"], input[type="number"] {
-    width: 50%;
-    border-radius: 5px;
-}
-div#profile_information {
-    position: relative;
-    max-width: 50%;
-    width: 0%;
-    display: -webkit-inline-box;
-    display: inline-block;
-    float: left;
-}
-}
-/*Coverage between larger screen*/
-@media only screen and (min-width:1280px) and (max-width:1449px) {
-div#modal {
-  font-size: 125%;
-}
-
-div#navi {
-    /* width: 99%; */
-}
-div#errors_modal {
-   width: 13%;
-}
-button#takeLater_btn, #no_music {
-  right: 7%;
-  width: 40%;
-  padding: 2% 0%;
-}
-button#takeNow_btn, #yes_music {
-  left: 7%;
-  width: 40%;
-  padding: 2% 0%;
-}
-
-#admin_login {
-  right: 1%;
-  bottom: 18%;
-}
-button#admin_login_btn {
-  font-size: 110%;
-}
-#admin_form {
-  width: 10%;
-  right: 0.5%;
-}
-div#reunion_history {
-  padding: 1.5% 6% 1%;
-  font-size: 150%;
-}
-#reunion_descent {
-  font-size: 140%;
-}
-#jackson_descent, #green_descent {
-  padding: 0% 30% 0% 6%;
-}
-#family_tree_pic {
-  width: 25%;
-  right: 2%;
-}
-div#hotel_content dl {
-    margin: -3% 25% 0%;
-    width: 100%;
-    font-size: 90%;
-}
-div#directions1 h2, div#directions3 h2 {
-    padding: 2% 23% 0%;
-}
-div#directions4 h2 {
-	padding: 2% 5% 0%;
-}
-div#electronic_payment_option p:last-of-type {
-    padding: 0% 0% 25%;
-}
-table#contact_information_table th {
-    text-align: middle;
-}
-#deleteUser_form input[type="text"], #deleteUser_form input[type="number"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="number"], #deleteReg_form input[type="email"] {
-    width: 50%;
-    border-radius: 5px;
-}
-button.closeBtn {
-    position: absolute;
-    top: -2%;
-    left: -2.7%;
-    border-radius: 50%;
-    padding: 15px;
-    background-image: url("../images/x.png");
-    background-size: 100% 100%;
-    background-position: center center;
-}
-div#profile_information {
-    max-width: 60%;
-    width: 60%;
-}
-div#post_information {
-    max-width: 40%;
-    width: 40%;
-}
-div.message {
-    min-width: 10%;
-    max-width: 15%;
-    padding: 0% 2% 0%;
-}
-div#profile_information input, div#profile_information select {
-    display: -webkit-inline-box;
-    display: inline-block;
-    width: 60%;
-    border: none;
-    font-size: 100%;
-    font-family: 'Josefin Slab', serif;
-}
-input.profileInput.profileInputDOB {
-    margin: 0% 0% 0% -1%;
-}
-input#change_img_btn {
-	max-width: 100%;
-	width: 99% !important;
-	margin: 0% 0% 2% 3.2%;
-	position: absolute;
-	bottom: 0%;
-	left: 0;
-	border: none;
-}
-div#profile_header, div.profile_info_div {
-    margin-left: 30%;
-}
-.postBtn {
-    right: 2%;
-    max-width: 15%;
-    min-width: 15%;
-}
-.allPostBtn {
-    right: 20%;
-    max-width: 15%;
-    min-width: 15%;
-}
-div.message {
-position: absolute;
-background-color: #11ce11;
-left: 20px;
-top: 10px;
-z-index: 1;
-max-width: 15%;
-min-width: 10%;
-border-radius: 3px;
-box-shadow: 0px 0px 10px darkgray;
-}
-div.errors {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    background-color: darkred;
-    z-index: 1;
-    border-radius: 3px;
-    box-shadow: 0px 0px 10px darkgray;
-}
-div.profile_info_div {
-    font-size: 115%;
-}
-div#profile_header, div#post_header_div {
-    padding-top: 3%;
-    padding-bottom: 2%;
-}
-h2.postHeader, div.indPost {
-text-align: -webkit-left;
-text-align: left;
-padding: 1.5% 3%;
-max-width: 100%;
-}
-
-.indPost.reunionRegistration input, .indPost.reunionRegistration select {
-    font-size: 125%;
-    padding: 0.5%;
-    margin: 0.5% 0%;
-}
-
-.indPost.reunionRegistration select {
-    width: 95.5%;
-    border-radius: 5px;
-    border: inset 2.5px;
-}
-
-.indPost.reunionRegistration .phone3, .indPost.reunionRegistration .phone4 {
-    max-width: 27.6%;
-}
-h2#all_post_header.postHeader {
+	.activities_content ul {
+		padding: 0%;
+	}
 	
-padding: 0% 45% 0% 3%;
-}
-.profilePhoto, .profileHeader {
-    float: left;
-}
-.profilePhoto{
-    margin: 0% 7% 0% 0%;
-}
-.profileHeader {
-    float: left;
-}
-.postPhoto {
-    clear: both;
-    padding: 1% 0%;
-    max-width: 100%;
-}
-.postPhoto img {
-    max-width: 200px;
-    max-height: 200px;
-    float: left;
-    margin: 1% 0.5%;
-    border: solid 1.5px;
-    box-shadow: 0px 0px 10px;
-}
-.postComment {
-    clear: both;
-    padding-top: 1%;
-}
-h2#profile_header_name {
-    text-align: -webkit-left;
-    text-align: left;
-    margin-bottom: 0.5%;
-}
-div#profile_information input.profileInputGreenBtn, 
-div#profile_information input.profileInputJacksonBtn,
-div#profile_information input.profileInputSpouseBtn,
-div#profile_information input.profileInputFriendBtn {
-    width: 15%;
-    padding: 1% 0%;
-    text-align: -webkit-center;
-    text-align: center;
-    background-color: darkgrey;
-    color: white;
-    border: solid 1px black;
-}
-div#profile_information input#submit_profile_update {
-    position: absolute;
-    top: 4%;
-    right: 2%;
-    max-width: 12%;
-    border-radius: 10px;
-    padding: 1% 0%;
-    border: outset 2px #45955e;
-    box-shadow: 0.5px 0.5px 5px #1c1c1c;
-}
-.postDate .deletePost {
-    font-size: 90%;
-}
-.postDate .deletePost a {
-    text-decoration: none;
-    color: darkred;
-    text-shadow: 4px 5px darkgray;
-}
-img.profilePicture {
-    max-width: 120px;
-    max-height: 120px;
-    height: 75px;
-    width: 75px;
-}
-div#profile_information input:focus, div#profile_information select:focus {
-    outline: none;
-}
-div#profile_information input.profileNameInput1 {
-    max-width: 12%;
-    margin: 0% 0% 0% -1%;
-}
-div#profile_information input.profileNameInput2 {
-    width: 50%;
-}
-div#profile_information input.profileInputAddress {
-    width: 25%;
-    margin: 0% 0% 0% -0.8%;
-}
-div#profile_information input.profileInputCity {
-    width: 20%;
-}
-div#profile_information select.profileInputState {
-    max-width: 9%;
-}
-div#profile_information input.profileInputZip {
-    width: 15%;
-}
-div#profile_information input.profileInputPhone1,
-div#profile_information input.profileInputPhone2,
-div#profile_information input.profileInputPhone3 {
-    width: 8%;
-}
-div#profile_information input.profileInputGreenBtn {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	/* border-right: solid 0.5px black; */
-	margin: 0% 0% 0% -1%;
-}
-.descentDiv {
-	display: inline;
-}
-div#profile_information input.profileInputJacksonBtn {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	/* border-left: solid 0.5px black; */
-}
-div#profile_information input.profileInputMother {
-	width: 14%;
-	margin: 0% 0% 0% -1%;
-}
-div#profile_information input.profileInputFather {
-	max-width: 50%;
-	margin-left: 5%;
-}
-span.separator {
-    min-width: 0%;
-    font-size: 100%;
-}
-span.phone_par_span {
-    min-width: 0%;
-    margin: 0% -0% 0% -2.8%;
+	#reunion_page h1.display-4 {
+		font-size: 325%;
+	}
+
+	ol {
+		padding-left: 5%;
+	}
+	
+	#family_tree_pic {
+		display: none;
+	}
+	
+	#reunion_history_pic {
+		max-width: 100%;
+		height: initial;
+		width: initial;
+		margin-right: 0%;
+		margin-bottom: 2%;
+	}
+
+	nav.nav {
+		display: none !important;
+	}
+	
+	div#navi {
+		padding: 2% 0% 9%;
+	}
+	
+	#upcoming_btn, #past_btn {
+		white-space: normal;
+	}
+	
+	#admin_login {
+		padding: 2% 1%;
+		width: 64%;
+		right: 16%;
+	}
+	
+	button#admin_login_btn {
+		text-align: center;
+		width: 100%;
+		font-size: 120%;
+		padding: 1.1% 2%;
+	}
+	
+	#admin_form {
+		width: 35%;
+		top: 69%;
+		right: 29.5%;
+	}
+	
+	input#submit_button {
+		width: 100%;
+		margin-top: 1.3%;
+		border-radius: 5px;
+		border: solid burlywood;
+		background-color: bisque;
+	}
+	
+	div.showing_image {
+		width: 100%;
+		margin: 0% 0%;
+	}
+	
+	div#image_caption {
+		top: 1%;
+		left: initial;
+		width: 70%;
+		margin: 0% 14%;
+	}
+	
+	div#reunion_history {
+	  padding: 1.5% 6% 1%;
+	}
+	
+	ul#jgreunion_past_future_list > li {
+	}
+	
+	ul#past_reunions {
+	}
+	
+	.payment_option {
+		width: initial;
+		max-width: initial;
+		font-size: 105%;
+	}
+	div#paper_payment_option p.paymentsFinePrint {
+		margin: 0%;
+	}
+	div#electronic_payment_option p:last-of-type {
+		padding: 0% 0% 20%;
+	}
+	a#fb_link {
+		margin: 0% 0% 0% 0%;
+		padding: 3% 0%;
+		border-radius: 0.5rem;
+	}
+	#contact_content {
+		margin: 0% 2%;
+		padding: 1% 0%;
+	}
+	#contact_information_table {
+		width: 100%;
+		margin: 2% 0% 10% 0%;
+		text-align: -webkit-center;
+		text-align: center;
+	}
+	table#contact_information_table th {
+		text-align: -webkit-center;
+		text-align: center;
+	}
+	a#fb_link button {
+		font-size: 150%;
+		font-weight: 600;
+		display: inherit;
+		max-width: 100%;
+		border: none;
+		padding: 0%;
+		width: 100%;
+	}
+	#hotel_pic {
+		float: left;
+		height: 210px;
+		width: 100%;
+		margin: 0% 0% 2%;
+	}
+	div#hotel_content dl {
+		margin: -4% 0% 0%;
+		width: 100%;
+	}
+	button#submitRegistration {
+		right: 15%;
+	}
+	div#errors_modal {
+		z-index: 6;
+		border: solid 2px;
+	}
+	button#confirmFormBtn, button.editFormBtn {
+		width: 60%;
+		padding: 1% 0%;
+	}
+	button#confirmFormBtn {
+		margin: 1% 20%;
+	}
+	button.editFormBtn {
+		margin: 1% 20%;
+	}
+	form#registrationForm {
+		padding: 0% 1%;
+	}
+	div#registration_form_content {
+		padding: 0% 10%;
+	}
+	div#calculations, div#search_field_regs {
+		width: 39.5%;
+	}
+	#coming_soon_message p {
+	top: -25%;
+	}
+	h2.nextReunion {
+		
+	margin: 4% 0%;
+	}
 }
 
-span.phone_span {
-    min-width: 0%;
-    margin: 0% 0.5% 0% 0.5%;
-}
-div#home_link {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    max-width: 100%;
-    min-width: 15%;
-    text-align: -webkit-left;
-    text-align: left;
+@media only screen and (min-width:576px) {
+	.modal-dialog {
+		max-width: 500px;
+	}
 }
 
-a#profile_registration {
-}
-.newPost {
-    padding: 2% 5%;
-}
-div#profile_photo {
-    width: 25%;
-    position: relative;
-    display: table;
-    table-layout: fixed;
-    float: left;
-}
-img#profile_photo {
-    position: relative;
-    max-width: 100%;
-    max-height: 20%;
-    padding: 10% 3% 0%;
-    width: 200px;
-    height: 200px;
-}
-div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
-	max-width: 48%;
-}
-div#reg_form_input input.regInput {
-    width: 98%;
-}
-}
-/*Even Larger Screens*/
-@media only screen and (min-width:1450px) {
-#admin_login {
-    padding: 1%;
-    width: 9%;
-    right: 1%;
-    top: 15px;
-}
-button#admin_login_btn {
-  border: none;
-  background-color: bisque;
-  font-family: 'Josefin Slab', serif;
-  font-size: 120%;
-}
-#admin_form {
-  position: absolute;
-  width: 12.6%;
-  top: 20%;
-  right: 1%;
-}
-#navi form {
-  margin-left: initial;
-}
-input[type="text"], input[type="password"] {
-  border-radius: 5px;
-  width: 94%;
-}
-div#reg_form_input input.regInput {
-    width: 98.8%;
-}
-div#reg_form_input input.regInput.regFNInput,div#reg_form_input input.regInput.regLNInput {
-    /* max-width: 49%; */
-}
-input#submit_button {
-  width: 97%;
-  margin-top: 1%;
-}
-button#takeNow_btn, button#takeLater_btn, #yes_music, #no_music {
-  font-size: 200%;
-  padding: 2% 0%;
-}
-div#navi {
-  padding: 0%;
-}
-.page_header:first-of-type {
-  font-size: 250%;
-  text-align: -webkit-center;
-  text-align: center;
-  width: 100%;
-}
-div#survey_div p {
-  font-size: 150%;
-}
-#upcoming_btn, #past_btn {
-  padding: 5% 0%;
-}
-#jackson_descent, #green_descent {
-  font-size: 140%;
-}
-div#reunion_history {
-  font-size: 150%;
-}
-h2#reg_form_header {
-    /* font-size: 125%; */
-}
-#pastReunion_overlay h2 {
-  margin: 20% 32% 0%;
-}
-ul#past_reunions {
-    padding: 2% 0%;
-    width: 99.1%;
-    text-align: -webkit-auto;
-    text-align: center;
-}
-span {
-    font-size: 150%;
-}
-p.confirmationP {
-    font-size: 150%;
-}
-table.confirm_attendees {
-    font-size: 150%;
-}
-div#registration_modal, #confirmation_modal, #confirmed_modal {
-    left: 21%;
-    width: 60%;
-}
-div#hotel_content dl {
-    margin: -3% 22% 0%;
-    width: 100%;
-    font-size: 90%;
-}
-div#directions1 h2, div#directions3 h2 {
-    padding: 2% 0% 0%;
-}
-#contact_information_table {
-    width: 100%;
-    margin: 2% 0% 10% 15%;
-}
-div#electronic_payment_option p:last-of-type {
-    padding: 0% 0% 30%;
-}
-#deleteUser_form input[type="text"], #deleteUser_form input[type="number"], #deleteUser_form input[type="email"], #deleteUser_form select, #deleteReg_form input[type="text"], #deleteReg_form input[type="number"], #deleteReg_form input[type="email"], input[type="number"] {
-    width: 94%;
-    border-radius: 5px;
-}
-button.closeBtn {
-    position: absolute;
-    top: -2%;
-    left: -1.7%;
-    border-radius: 50%;
-    padding: 15px;
-    background-image: url("../images/x.png");
-    background-size: 100% 100%;
-    background-position: center center;
-}
-}
 /*Smartphones portrait*/
 @media only screen and (min-device-width:320px) and (max-device-width:768px) {
-div#modal {
-    height: 80%;
-    width: 80%;
-    left: 10%;
+	div#modal {
+		height: 80%;
+		width: 80%;
+		left: 10%;
+	}
+	#past_btn {
+		padding: 9% 0%;
+	}
+	input#submit_button {
+		width: 95%;
+	}
+	button#takeLater_btn, #no_music {
+	  right: 15%;
+	  bottom: 10%;
+	  width: 70%;
+	  padding: 3% 0%;
+	}
+	button#takeNow_btn, #yes_music {
+	  padding: 3% 0%;
+	  bottom: 23%;
+	  left: 15%;
+	  font-size: 150%;
+	  width: 70%;
+	}
+	div#navi {
+	  padding: 2% 5% 21%;
+	}
+	
+	.page_header:first-of-type {
+	  text-align: -webkit-center;
+	  text-align: center;
+	}
+	
+	.page_header:first-of-type h1 {
+	  font-size: 160%;
+	}
+	
+	#admin_login {
+	  padding: 2.1% 1%;
+	  width: 50%;
+	  right: 25%;
+	  bottom: 4%;
+	}
+	button#admin_login_btn {
+	  text-align: -webkit-center;
+	  text-align: center;
+	  width: 100%;
+	  padding: 4% 0%;
+	  font-size: 110%;
+	}
+	#admin_form {
+	  width: 50%;
+	  bottom: 4%;
+	  right: 25%;
+	  top: initial;
+	}
+	input[type="text"], input[type="password"] {
+	  width: 90%;
+	}
+	div.showing_image {
+	  width: 99%;
+	  margin: 0% 0.5%;
+	}
+	div#image_caption {
+	  top: 1%;
+	  left: 1%;
+	}
+	ul#jgreunion_past_future_list > li {
+	  width: 92%;
+	  margin: 3% 4%;
+	  position: relative;
+	}
+	ul#past_reunions {
+	  padding: 1% 3.2% 1%;
+	}
+	
+	#reunion_history_pic {
+	}
+	
+	div#reunion_history {
+	  padding: 1.5% 6% 1%;
+	  font-size: 120%;
+	}
+	#reunion_descent {
+	  font-size: 120%;
+	}
+	#family_tree_pic {
+	  display: none;
+	}
+	span#last_updated {
+	  display: none;
+	}
+	div#page_header {
+	  padding: 0% 1%;
+	  font-size: 150%;
+	}
+	#reunion_page {
+	  padding: 0 1%;
+	}
+	#form_information img {
+	  min-height: 400px;
+	  height: 400px;
+	}
+	#hotel_pic {
+	  height: 210px;
+	  width: 100%;
+	  margin-right: 3%;
+	}
+	.activities_content {
+	  min-height: 600px;
+	}
+	.activities_content:nth-of-type(4) {
+	  background-size: 100% 73%;
+	  background-position: center bottom;
+	}
+	#contact_content {
+	  padding: 1% 1%;
+	}
+	div#contact_content p {
+	  margin: 4px;
+	  text-align: -webkit-center;
+	  text-align: center;
+	}
+	
+	a#fb_link img {
+	  width: 150px;
+	}
+	#fbImage_text {
+	  right: 2%;
+	  top: 24%;
+	}
+	div#navi,#profilePage.container #navi {
+		padding: 10% 5%;
+	}
+	#coming_soon_message p {
+		left: 10%;
+		margin: 0%;
+		padding: 10% 0% 0%;
+		font-size: 150%;
+		width: 80%;
+		top: -50%;
+	}
+	.nextReunion {
+		padding: 15% 0% 0%;
+		top: -25%;
+	}
+	.slideShowImage {
+		min-height: 300px;
+		max-height: 300px;
+		border-radius: 10px;
+		box-shadow: 0px 0px 10px black;
+		max-width: 94%;
+		width: 94%;
+		margin: 0% 3%;
+	}
+	a.profileLink, a.homeLink {
+		font-size: 140%;
+		color: white;
+		text-decoration: none;
+	}
+	div#family_account {
+		max-width: 100%;
+		min-width: 50%;
+	}
+	div#registration_div_wrapper, div#login_div_wrapper {
+		position: relative;
+		padding: 3% 5%;
+		background: inherit;
+	}
+	div#registration_div, div#login_div {
+		margin: 0% 0% 20%;
+	}
+	h2#reg_form_header {
+		margin: 4% 10%;
+	}
+	div#reg_form_input, div#login_form_input {
+		margin: 0% 10% 0%;
+	}
+	div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
+		max-width: 47.75%;
+	}
+	input#reg_form_btn, #login_submit_btn {
+		min-width: 50%;
+		font-size: 105%;
+		padding: 1.5% 1%;
+	}
+	div.message {
+		position: absolute;
+		background-color: #02d002;
+		color: white;
+		opacity: 0.9;
+		max-width: 10%;
+		left: 20px;
+		top: 10px;
+		z-index: 1;
+		border-radius: 3px;
+		box-shadow: 0px 0px 10px darkgray;
+	}
+	div.message ul {
+		width: 90%;
+		max-width: 100%;
+		padding: 0% 0% 0% 10%;
+	}
+	div.errors {
+		position: absolute;
+		right: 20px;
+		top: 10px;
+		background-color: darkred;
+		color: wheat;
+		z-index: 1;
+		opacity: 0.9;
+		border-radius: 3px;
+		box-shadow: 0px 0px 10px darkgray;
+		max-width: 20%;
+	}
+	.errors ul {
+		padding: 0% 10% 0%;
+		max-width: 94%;
+	}
+	p.profileInfo {
+		margin: 0;
+		display: -webkit-inline-box;
+		display: inline-block;
+	}
+	div#profile_header, div.profile_info_div {
+		margin-left: 2%;
+	}
+	div.profile_info_div {
+		font-size: 115%;
+	}
+	div#profile_header {display: none;}
+	div#post_header_div {
+		padding-top: 3%;
+		padding-bottom: 2%;
+	}
+	h2.postHeader, div.indPost {
+		text-align: -webkit-left;
+		text-align: left;
+		padding: 1.5% 2%;
+		max-width: 100%;
+	}
+	.profilePhoto, .profileHeader {
+		float: left;
+	}
+	.profilePhoto{
+		margin: 0% 3% 0% 0%;
+	}
+	h3.profileHeaderName {
+		margin: 0.5% 0% 0%;
+	}
+	h3.profileHeaderName a {
+		text-decoration: underline;
+		color: #3ca4ff;
+	}
+	.postPhoto {
+		clear: both;
+		padding: 1% 0%;
+		max-width: 100%;
+	}
+	.postPhoto img {
+		max-width: 200px;
+		max-height: 200px;
+		float: left;
+		margin: 1% 0.5%;
+		border: solid 1.5px;
+		box-shadow: 0px 0px 10px;
+	}
+	.postComment {
+		clear: both;
+		padding: 2% 0% 1%;
+	}
+	div.postDate {
+		display: table;
+		width: 100%;
+	}
+	.sectionDiv {
+		padding: 0.3% 0%;
+	}
+	span {
+		min-width: 35%;
+		display: inline-block;
+		font-size: 130%;
+	}
+	h2#profile_header_name {
+		text-align: -webkit-left;
+		text-align: left;
+		margin-bottom: 0.5%;
+	}
+	div#profile_information input,div#profile_information select {
+		display: -webkit-inline-box;
+		display: inline-block;
+		width: 60%;
+		border: none;
+		font-size: 110%;
+		font-family: 'Josefin Slab', serif;
+	}
+	div#profile_information input.profileInputGreenBtn,
+	div#profile_information input.profileInputJacksonBtn,
+	div#profile_information input.profileInputBtn {
+		width: 25%;
+		padding: 1% 0%;
+		text-align: -webkit-center;
+		text-align: center;
+		background-color: darkgrey;
+		color: white;
+		border: solid 1px black;
+	}
+	input.profileInput.profileSiblingInput {
+		margin: 0% 0% 0% -1%;
+	}
+	input.profileInput.profileInputChildren {
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input#submit_profile_update {
+		position: absolute;
+		top: 2%;
+		right: 2%;
+		max-width: 30%;
+		border-radius: 10px;
+		padding: 2% 0%;
+		border: outset 2px #45955e;
+		box-shadow: 0.5px 0.5px 5px #1c1c1c;
+		font-size: 140%;
+	}
+	.postBtn {
+		position: absolute;
+		top: 3.5%;
+		right: 2%;
+		max-width: 12%;
+		min-width: 10%;
+		border-radius: 10px;
+		padding: 1% 0%;
+		font-size: 100%;
+		border: outset 2px #45955e;
+		box-shadow: 0.5px 0.5px 5px #1c1c1c;
+		text-align: -webkit-center;
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		background-color: floralwhite;
+		font-family: 'Josefin Slab', serif;
+	}
+	.allPostBtn {
+		position: absolute;
+		top: 3.5%;
+		right: 13%;
+		max-width: 12%;
+		min-width: 10%;
+		border-radius: 10px;
+		padding: 1% 0%;
+		border: outset 2px #45955e;
+		box-shadow: 0.5px 0.5px 5px #1c1c1c;
+		text-align: -webkit-center;
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		background-color: floralwhite;
+	}
+	.postDate .deletePost {
+		font-size: 90%;
+	}
+	.postDate .deletePost a {
+		text-decoration: none;
+		color: darkred;
+		text-shadow: 4px 5px darkgray;
+	}
+	span.inputTitle.descentTitle {
+		padding: 0% 0% 3%;
+	}
+	div.header_div h3 {
+		margin: 0px;
+		background-color: beige;
+		padding: 0.5% 0% 0% 0.5%;
+	}
+	div.header_div {
+		margin: 2.5% 0%;
+		position: relative;
+		font-size: 125%;
+	}
+	img.profilePicture {
+		max-width: 120px;
+		max-height: 120px;
+		height: 75px;
+		width: 75px;
+	}
+	div#profile_information input:focus, div#profile_information select:focus {
+		outline: none;
+	}
+	div#profile_information input.profileNameInput1 {
+		max-width: 30%;
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input.profileNameInput2 {
+		width: initial;
+		max-width: 25%;
+	}
+	input.profileInput.profileInputSpouse {
+		margin: 0% 0% 0% -1%;
+		max-width: 50%;
+	}
+	div#profile_information input.profileInputAddress {
+		width: 25%;
+		margin: 0% 0% 0% -0.8%;
+	}
+	div#profile_information input.profileInputCity {
+		width: 15%;
+	}
+	div#profile_information select.profileInputState {
+		max-width: 8%;
+	}
+	div#profile_information input.profileInputZip {
+		width: 10%;
+	}
+	div#profile_information input.profileInputPhone1,
+	div#profile_information input.profileInputPhone2,
+	div#profile_information input.profileInputPhone3 {
+		width: 10%;
+	}
+	input.profileInput.profileInputDOB {
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input.profileInputPhone3 {
+		width: initial !important;
+		max-width: 20%;
+	}
+	div#profile_information input.profileInputGreenBtn {
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+		/* border-right: solid 0.5px black; */
+		margin: 0% 0% 0% -1%;
+	}
+	span.visibleHeaderSpan {
+		font-size: 80%;
+		min-width: initial;
+		position: absolute;
+		right: 5%;
+		top: 25%;
+	}
+	div#profile_information input.visibleCheckBox {
+		width: initial;
+		position: absolute;
+		right: 0px;
+		top: 15%;
+	}
+	.descentDiv {
+		display: inline;
+	}
+	div#profile_information input.profileInputJacksonBtn {
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		/* border-left: solid 0.5px black; */
+	}
+	div#profile_information input.profileInput.descentSelected {
+		background-color: darkgreen;
+	}
+	div#profile_information input.profileInputMother {
+		width: initial;
+		margin: 0% 0% 0% -1%;
+		max-width: 25%;
+	}
+	div#profile_information input.profileInputFather {
+		max-width: 25%;
+		margin-left: 5%;
+	}
+	span.separator {
+		min-width: 0%;
+		font-size: 100%;
+	}
+	span.phone_par_span {
+		min-width: 0%;
+		margin: 0% -0.4% 0% -2%;
+	}
+	div#family_account {
+		top: 10px;
+		right: 10px;
+		max-width: 100%;
+		min-width: 45%;
+		text-align: -webkit-right;
+		text-align: right;
+	}
+	div#home_link {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		max-width: 100%;
+		min-width: 15%;
+		text-align: -webkit-left;
+		text-align: left;
+	}
+	div#profile_information {
+		position: relative;
+		max-width: 100%;
+		width: inherit;
+		display: -webkit-inline-box;
+		display: inline-block;
+		float: none;
+		padding: 0% 2%;
+	}
+	div#post_information {
+		display: -webkit-inline-box;
+		display: inline-block;
+		max-width: 50%;
+		width: 50%;
+		float: none;
+		min-height: 890px;
+		max-height: 890px;
+		overflow: auto;
+		background-color: #dddddd;
+		position: relative;
+	}
+	.newPost {
+		padding: 2% 5%;
+	}
+	
+	div#profile_photo {
+		width: 58%;
+		position: relative;
+		display: table;
+		float: none;
+	}
+	
+	img#profile_photo {
+		position: relative;
+		max-width: 100%;
+		padding: 10% 3% 0%;
+		width: 200px;
+		height: 200px;
+	}
+	
+	input#change_img_btn {
+		width: 200px !important;
+		position: absolute;
+		bottom: 0%;
+		left: 0;
+		margin: 0% 0% 0% 3%;
+		padding: 2% 0%;
+		opacity: 0.85;
+		background-color: #62aa62;
+		border: none;
+		color: white;
+		font-size: 100%;
+	}
 }
-#past_btn {
-	padding: 9% 0%;
+
+/*Smartphones portrait*/
+@media only screen and (min-width:767px) {
+	body {
+		margin: 0 auto;
+	}
+	
+	.page_header:first-of-type {
+		text-align: -webkit-center;
+		text-align: center;
+		font-size: 150%;
+	}
+	
+	.modal-dialog {
+		max-width: 650px;
+	}
+
+	div#scroll_to_top {
+		min-height: 9%;
+		min-width: 9%;
+	}
+		
+	div#modal {
+	  left: 4%;
+	  width: 92%;
+	  height: 85%;
+	  top: -5%;
+	}
+	
+	h2.image_caption_header {
+		margin: 2% 0% 0% 0%;
+		max-width: 100%;
+	}
+	
+	div#navi {
+		padding-top: 1%;
+	}
+
+	#admin_login {
+	  padding: 2.1% 1%;
+	  width: 50%;
+	  right: 25%;
+	  bottom: 4%;
+	}
+	
+	button#admin_login_btn {
+	  text-align: -webkit-center;
+	  text-align: center;
+	  width: 100%;
+	  padding: 4% 0%;
+	  font-size: 110%;
+	}
+	#admin_form {
+		width: 60%;
+		bottom: 2%;
+		left: 0px;
+		right: initial;
+		top: initial;
+		margin: 0% 20%;
+	}
+	input#submit_button {
+		width: 91.5%;
+		margin-top: 0.5%;
+	}
+	div.showing_image {
+	width: 100%;
+	margin: 0% 0%;
+	}
+	div#image_caption {
+	  top: 1%;
+	  left: 1%;
+	}
+	ul#jgreunion_past_future_list > li {
+	  width: 92%;
+	  margin: 3% 4%;
+	  position: relative;
+	}
+	ul#past_reunions {
+	  padding: 1% 3.2% 1%;
+	  width: inherit;
+	}
+	#reunion_history_pic {
+	  height: 10em;
+	  width: 10em;
+	}
+	div#reunion_history {
+	  padding: 1.5% 6% 1%;
+	}
+
+	span#last_updated {
+	  display: none;
+	}
+	div#page_header {
+	  padding: 0% 1%;
+	  font-size: 150%;
+	}
+	#reunion_page {
+	  padding: 0 1%;
+	}
+	
+	#form_information img {
+	  min-height: 400px;
+	  height: 400px;
+	}
+	#hotel_pic {
+	  height: 210px;
+	  width: 100%;
+	  margin: 0% 0% 5% 0%;
+	}
+	
+	button#registrationFormBtn {
+		display: none;
+	}
+	.activities_content {
+	  min-height: 600px;
+	}
+	.activities_content:nth-of-type(4) {
+	  background-size: 100% 70%;
+	  background-position: center bottom;
+	}
+	.activities_content:nth-of-type(4) p {
+		padding: 0% 15%;
+	}
+	#contact_content {
+	  padding: 1% 1%;
+	}
+	div#contact_content p {
+	  margin: 4px;
+	  text-align: -webkit-center;
+	  text-align: center;
+	}
+	#hotel_content button {
+		font-size: 115%;
+		margin: 5% 0% 0%;
+		max-width: 100%;
+		min-width: 100%;
+	}
+	a#fb_link {
+		margin: 0% 0% 0% 0%;
+		padding: 0% 0% 0%;
+		text-decoration: none;
+		border-radius: 5px;
+		background-image: url("../images/facebook-icon.jpg");
+		background-size: 35% 100%;
+		background-repeat: no-repeat;
+		padding: 5% 0%;
+	}
+	a#fb_link button {
+		padding: 0% 0% 0% 30%;
+	}
+	
+	.payment_option {
+		width: initial;
+		max-width: initial;
+		font-size: 105%;
+	}
+	.payment_option h2 {
+		margin-bottom: 3%;
+	}
+	div#electronic_payment_option p:last-of-type {
+		padding: 1% 0% 25%;
+	}
+	.activities_content ul {
+		padding: 0% 15%;
+	}
+	div#hotel_content dl {
+		margin: -4% 0% 0%;
+	}
+	div.directionOptions {
+		max-width: 98%;
+		min-width: 75%;
+		width: 98%;
+		padding: 0.5%;
+	}
+	div#paper_payment_option p.paymentsFinePrint {
+		margin: 0% 0%;
+	}
+	table#contact_information_table th {
+		text-align: -webkit-center;
+		text-align: center;
+	}
+	button#submitRegistration {
+		right: 12%;
+	}
+	div#errors_modal {
+		top: 16%;
+		width: 50%;
+		left: 25%;
+	}
+	h1#confirmationFormHeader {
+		padding: 1.5% 0%;
+		margin: 0% 0% 2%;
+	}
+	#confirmationForm {
+		padding: 0% 10%;
+	}
+	#confirmationForm span {
+		max-width: 50%;
+		min-width: 40%;
+	}
+	
+	div#calculations, div#search_field_regs {
+		width: 39%;
+	}
+
+	.nextReunion {
+		padding: 15% 0% 0%;
+		top: -25%;
+	}
+	
+	.slideShowImage {
+		min-height: 300px;
+		max-height: 300px;
+		border-radius: 10px;
+		box-shadow: 0px 0px 10px black;
+		max-width: 100%;
+		width: 100%;
+		margin: 0% 0%;
+	}
+	a.profileLink, a.homeLink {
+		font-size: 140%;
+		color: white;
+		text-decoration: none;
+	}
+	div#family_account {
+		max-width: 100%;
+		min-width: 50%;
+	}
+	div#registration_div_wrapper, div#login_div_wrapper {
+		position: relative;
+		padding: 3% 5%;
+	}
+	h2#reg_form_header {
+		margin: 4% 10%;
+	}
+	
+	div#reg_form_input, div#login_form_input {
+		margin: 0% 10% 0%;
+	}
+	
+	div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
+		max-width: 47.8%;
+	}
+	
+	input#reg_form_btn, #login_submit_btn {
+	}
+
+	p.profileInfo {
+		margin: 0;
+		display: -webkit-inline-box;
+		display: inline-block;
+	}
+	
+	div#profile_header, div.profile_info_div {
+		margin-left: 25.5%;
+	}
+	
+	div.profile_info_div {
+		font-size: 115%;
+	}
+	
+	div#profile_header, div#post_header_div {
+		padding-top: 3%;
+		padding-bottom: 2%;
+	}
+	
+	h2.postHeader, div.indPost {
+		text-align: -webkit-left;
+		text-align: left;
+		padding: 1.5% 2%;
+		max-width: 100%;
+	}
+	.profilePhoto, .profileHeader {
+		float: left;
+	}
+	.profilePhoto{
+		margin: 0% 3% 0% 0%;
+	}
+	h3.profileHeaderName {
+		margin: 0.5% 0% 0%;
+	}
+	h3.profileHeaderName a {
+		text-decoration: underline;
+		color: #3ca4ff;
+	}
+	.postPhoto {
+		clear: both;
+		padding: 1% 0%;
+		max-width: 100%;
+	}
+	.postPhoto img {
+		max-width: 200px;
+		max-height: 200px;
+		float: left;
+		margin: 1% 0.5%;
+		border: solid 1.5px;
+		box-shadow: 0px 0px 10px;
+	}
+	.postComment {
+		clear: both;
+		padding: 2% 0% 1%;
+	}
+	div.postDate {
+		display: table;
+		width: 100%;
+	}
+	.sectionDiv {
+		padding: 0.3% 0%;
+	}
+	h2#profile_header_name {
+		text-align: -webkit-left;
+		text-align: left;
+		margin-bottom: 0.5%;
+	}
+	div#profile_information input,div#profile_information select {
+		display: -webkit-inline-box;
+		display: inline-block;
+		width: 60%;
+		border: none;
+		font-size: 90%;
+		font-family: 'Josefin Slab', serif;
+	}
+	div#profile_information input.profileInputGreenBtn,
+	div#profile_information input.profileInputJacksonBtn,
+	div#profile_information input.profileInputBtn {
+		width: 25%;
+		padding: 1% 0%;
+		text-align: -webkit-center;
+		text-align: center;
+		background-color: darkgrey;
+		color: white;
+		border: solid 1px black;
+	}
+	input.profileInput.profileSiblingInput {
+		margin: 0% 0% 0% -1%;
+	}
+	input.profileInput.profileInputChildren {
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input#submit_profile_update {
+		position: absolute;
+		top: 4%;
+		right: 2%;
+		max-width: 12%;
+		border-radius: 10px;
+		padding: 1% 0%;
+		border: outset 2px #45955e;
+		box-shadow: 0.5px 0.5px 5px #1c1c1c;
+	}
+	.postBtn {
+		position: absolute;
+		top: 3.5%;
+		right: 2%;
+		max-width: 12%;
+		min-width: 10%;
+		border-radius: 10px;
+		padding: 1% 0%;
+		font-size: 100%;
+		border: outset 2px #45955e;
+		box-shadow: 0.5px 0.5px 5px #1c1c1c;
+		text-align: -webkit-center;
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		background-color: floralwhite;
+		font-family: 'Josefin Slab', serif;
+	}
+	.allPostBtn {
+		position: absolute;
+		top: 3.5%;
+		right: 13%;
+		max-width: 12%;
+		min-width: 10%;
+		border-radius: 10px;
+		padding: 1% 0%;
+		border: outset 2px #45955e;
+		box-shadow: 0.5px 0.5px 5px #1c1c1c;
+		text-align: -webkit-center;
+		text-align: center;
+		text-decoration: none;
+		color: black;
+		background-color: floralwhite;
+	}
+	.postDate .deletePost {
+		font-size: 90%;
+	}
+	.postDate .deletePost a {
+		text-decoration: none;
+		color: darkred;
+		text-shadow: 4px 5px darkgray;
+	}
+	span.inputTitle.descentTitle {
+		padding: 0% 0% 3%;
+	}
+	div.header_div h3 {
+		margin: 0px;
+		background-color: beige;
+		padding: 0.5% 0% 0% 0.5%;
+	}
+	div.header_div {
+		margin: 2.5% 0%;
+		position: relative;
+	}
+	img.profilePicture {
+		max-width: 120px;
+		max-height: 120px;
+		height: 75px;
+		width: 75px;
+	}
+	div#profile_information input:focus, div#profile_information select:focus {
+		outline: none;
+	}
+	div#profile_information input.profileNameInput1 {
+		max-width: 12%;
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input.profileNameInput2 {
+		width: 50%;
+	}
+	input.profileInput.profileInputSpouse {
+		margin: 0% 0% 0% -1%;
+		max-width: 50%;
+	}
+	div#profile_information input.profileInputAddress {
+		width: 25%;
+		margin: 0% 0% 0% -0.8%;
+	}
+	div#profile_information input.profileInputCity {
+		width: 15%;
+	}
+	div#profile_information select.profileInputState {
+		max-width: 8%;
+	}
+	div#profile_information input.profileInputZip {
+		width: 10%;
+	}
+	div#profile_information input.profileInputPhone1,
+	div#profile_information input.profileInputPhone2,
+	div#profile_information input.profileInputPhone3 {
+		width: 6%;
+	}
+	input.profileInput.profileInputDOB {
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input.profileInputPhone3 {
+		width: initial !important;
+	}
+	div#profile_information input.profileInputGreenBtn {
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+		/* border-right: solid 0.5px black; */
+		margin: 0% 0% 0% -1%;
+	}
+	span.visibleHeaderSpan {
+		font-size: 80%;
+		min-width: initial;
+		position: absolute;
+		right: 5%;
+		top: 25%;
+	}
+	div#profile_information input.visibleCheckBox {
+		width: initial;
+		position: absolute;
+		right: 0px;
+		top: 15%;
+	}
+	.descentDiv {
+		display: inline;
+	}
+	div#profile_information input.profileInputJacksonBtn {
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		/* border-left: solid 0.5px black; */
+	}
+	div#profile_information input.profileInput.descentSelected {
+		background-color: darkgreen;
+	}
+	div#profile_information input.profileInputMother {
+		width: 10%;
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input.profileInputFather {
+		max-width: 50%;
+		margin-left: 5%;
+	}
+	span.separator {
+		min-width: 0%;
+		font-size: 100%;
+	}
+	span.phone_par_span {
+		min-width: 0%;
+		margin: 0% -0.4% 0% -2%;
+	}
+	div#family_account {
+	}
+	
+	div#home_link {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		max-width: 100%;
+		min-width: 15%;
+		text-align: -webkit-left;
+		text-align: left;
+	}
+	
+	div#profile_information {
+		position: relative;
+		max-width: 50%;
+		width: 50%;
+		display: -webkit-inline-box;
+		display: inline-block;
+		float: left;
+	}
+	div#post_information {
+		display: -webkit-inline-box;
+		display: inline-block;
+		max-width: 50%;
+		width: 50%;
+		float: right;
+		min-height: 890px;
+		max-height: 890px;
+		overflow: auto;
+		background-color: #dddddd;
+		position: relative;
+	}
+	.newPost {
+		padding: 2% 5%;
+	}
+	div#profile_photo {
+		width: 25%;
+		position: relative;
+		display: table;
+		table-layout: fixed;
+		float: left;
+	}
+	img#profile_photo {
+		position: relative;
+		max-width: 100%;
+		padding: 10% 3% 0%;
+		width: 200px;
+		height: 200px;
+	}
+	
+	input#change_img_btn {
+		width: 200px !important;
+		position: absolute;
+		bottom: 0%;
+		left: 0;
+		margin: 0% 0% 0% 3%;
+		padding: 2% 0%;
+		opacity: 0.85;
+		background-color: #62aa62;
+		border: none;
+		color: white;
+		font-size: 100%;
+	}
 }
-input#submit_button {
-    width: 95%;
+
+/*Smartphones portrait*/
+@media only screen and (min-width:991px) {
+	.modal-dialog {
+		max-width: 700px; 
+	}
 }
-button#takeLater_btn, #no_music {
-  right: 15%;
-  bottom: 10%;
-  width: 70%;
-  padding: 3% 0%;
-}
-button#takeNow_btn, #yes_music {
-  padding: 3% 0%;
-  bottom: 23%;
-  left: 15%;
-  font-size: 150%;
-  width: 70%;
-}
-div#navi {
-  padding: 2% 5% 21%;
-}
-.page_header:first-of-type {
-  text-align: -webkit-center;
-  text-align: center;
-}
-#admin_login {
-  padding: 2.1% 1%;
-  width: 50%;
-  right: 25%;
-  bottom: 4%;
-}
-button#admin_login_btn {
-  text-align: -webkit-center;
-  text-align: center;
-  width: 100%;
-  padding: 4% 0%;
-  font-size: 110%;
-}
-#admin_form {
-  width: 50%;
-  bottom: 4%;
-  right: 25%;
-  top: initial;
-}
-input[type="text"], input[type="password"] {
-  width: 90%;
-}
-div.showing_image {
-  width: 99%;
-  margin: 0% 0.5%;
-}
-div#image_caption {
-  top: 1%;
-  left: 1%;
-}
-ul#jgreunion_past_future_list > li {
-  width: 92%;
-  margin: 3% 4%;
-  position: relative;
-}
-ul#past_reunions {
-  padding: 1% 3.2% 1%;
-}
-#reunion_history_pic {
-  height: 10em;
-  width: 10em;
-}
-div#reunion_history {
-  padding: 1.5% 6% 1%;
-  font-size: 120%;
-  background: transparent;
-}
-#reunion_descent {
-  font-size: 120%;
-}
-#family_tree_pic {
-  display: none;
-}
-span#last_updated {
-  display: none;
-}
-div#page_header {
-  padding: 0% 1%;
-  font-size: 150%;
-}
-#reunion_page {
-  padding: 0 1%;
-}
-#form_information img {
-  min-height: 400px;
-  height: 400px;
-}
-#hotel_pic {
-  height: 210px;
-  width: 100%;
-  margin-right: 3%;
-}
-.activities_content {
-  min-height: 600px;
-}
-.activities_content:nth-of-type(4) {
-  background-size: 100% 73%;
-  background-position: center bottom;
-}
-#contact_content {
-  padding: 1% 1%;
-}
-div#contact_content p {
-  margin: 4px;
-  text-align: -webkit-center;
-  text-align: center;
-}
-a#fb_link {
-  width: 95%;
-  margin: 3% 2.5% 1%;
-}
-a#fb_link img {
-  width: 150px;
-}
-#fbImage_text {
-  right: 2%;
-  top: 24%;
-}
-div#navi,#profilePage.container #navi {
-    padding: 10% 5%;
-}
-#coming_soon_message p {
-    left: 10%;
-    margin: 0%;
-    padding: 10% 0% 0%;
-    font-size: 150%;
-    width: 80%;
-    top: -50%;
-}
-.nextReunion {
-    padding: 15% 0% 0%;
-    top: -25%;
-}
-.slideShowImage {
-    min-height: 300px;
-    max-height: 300px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px black;
-    max-width: 94%;
-    width: 94%;
-    margin: 0% 3%;
-}
-a.profileLink, a.homeLink {
-    font-size: 140%;
-    color: white;
-    text-decoration: none;
-}
-div#family_account {
-    max-width: 100%;
-    min-width: 50%;
-}
-div#registration_div_wrapper, div#login_div_wrapper {
-    position: relative;
-    padding: 3% 5%;
-    background: inherit;
-}
-div#registration_div, div#login_div {
-    margin: 0% 0% 20%;
-}
-h2#reg_form_header {
-    margin: 4% 10%;
-}
-div#reg_form_input, div#login_form_input {
-    margin: 0% 10% 0%;
-}
-div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
-    max-width: 47.75%;
-}
-input#reg_form_btn, #login_submit_btn {
-    min-width: 50%;
-    font-size: 105%;
-    padding: 1.5% 1%;
-    margin: 3% 25%;
-}
-div.message {
-    position: absolute;
-    background-color: #02d002;
-    color: white;
-    opacity: 0.9;
-    max-width: 10%;
-    left: 20px;
-    top: 10px;
-    z-index: 1;
-    border-radius: 3px;
-    box-shadow: 0px 0px 10px darkgray;
-}
-div.message ul {
-    width: 90%;
-    max-width: 100%;
-    padding: 0% 0% 0% 10%;
-}
-div.errors {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    background-color: darkred;
-    color: wheat;
-    z-index: 1;
-    opacity: 0.9;
-    border-radius: 3px;
-    box-shadow: 0px 0px 10px darkgray;
-    max-width: 20%;
-}
-.errors ul {
-    padding: 0% 10% 0%;
-    max-width: 94%;
-}
-p.profileInfo {
-    margin: 0;
-    display: -webkit-inline-box;
-    display: inline-block;
-}
-div#profile_header, div.profile_info_div {
-    margin-left: 2%;
-}
-div.profile_info_div {
-    font-size: 115%;
-}
-div#profile_header {display: none;}
-div#post_header_div {
-    padding-top: 3%;
-    padding-bottom: 2%;
-}
-h2.postHeader, div.indPost {
+
+@media only screen and (min-width:1200px) {
+	div#modal {
+	  font-size: 125%;
+	}
+
+	div#navi {
+		/* width: 99%; */
+	}
+	div#errors_modal {
+	   width: 13%;
+	}
+	button#takeLater_btn, #no_music {
+	  right: 7%;
+	  width: 40%;
+	  padding: 2% 0%;
+	}
+	button#takeNow_btn, #yes_music {
+	  left: 7%;
+	  width: 40%;
+	  padding: 2% 0%;
+	}
+
+	#admin_login {
+	  right: 1%;
+	  bottom: 18%;
+	}
+	button#admin_login_btn {
+	  font-size: 110%;
+	}
+	#admin_form {
+	  width: 10%;
+	  right: 0.5%;
+	}
+	div#reunion_history {
+	  padding: 1.5% 6% 1%;
+	  font-size: 150%;
+	}
+	#reunion_descent {
+	  font-size: 140%;
+	}
+	#jackson_descent, #green_descent {
+	}
+	
+	#family_tree_pic {
+	}
+	
+	div#directions1 h2, div#directions3 h2 {
+		padding: 2% 23% 0%;
+	}
+	div#directions4 h2 {
+		padding: 2% 5% 0%;
+	}
+	
+	div#electronic_payment_option p:last-of-type {
+		padding: 0% 0% 25%;
+	}
+	table#contact_information_table th {
+		text-align: middle;
+	}
+	
+	button.closeBtn {
+		position: absolute;
+		top: -2%;
+		left: -2.7%;
+		border-radius: 50%;
+		padding: 15px;
+		background-image: url("../images/x.png");
+		background-size: 100% 100%;
+		background-position: center center;
+	}
+	
+	div#profile_information {
+		max-width: 60%;
+		width: 60%;
+	}
+	div#post_information {
+		max-width: 40%;
+		width: 40%;
+	}
+	div.message {
+		min-width: 10%;
+		max-width: 15%;
+		padding: 0% 2% 0%;
+	}
+	div#profile_information input, div#profile_information select {
+		display: -webkit-inline-box;
+		display: inline-block;
+		width: 60%;
+		border: none;
+		font-size: 100%;
+		font-family: 'Josefin Slab', serif;
+	}
+	input.profileInput.profileInputDOB {
+		margin: 0% 0% 0% -1%;
+	}
+	input#change_img_btn {
+		max-width: 100%;
+		width: 99% !important;
+		margin: 0% 0% 2% 3.2%;
+		position: absolute;
+		bottom: 0%;
+		left: 0;
+		border: none;
+	}
+	div#profile_header, div.profile_info_div {
+		margin-left: 30%;
+	}
+	.postBtn {
+		right: 2%;
+		max-width: 15%;
+		min-width: 15%;
+	}
+	.allPostBtn {
+		right: 20%;
+		max-width: 15%;
+		min-width: 15%;
+	}
+	div.message {
+	position: absolute;
+	background-color: #11ce11;
+	left: 20px;
+	top: 10px;
+	z-index: 1;
+	max-width: 15%;
+	min-width: 10%;
+	border-radius: 3px;
+	box-shadow: 0px 0px 10px darkgray;
+	}
+	div.errors {
+		position: absolute;
+		right: 20px;
+		top: 10px;
+		background-color: darkred;
+		z-index: 1;
+		border-radius: 3px;
+		box-shadow: 0px 0px 10px darkgray;
+	}
+	div.profile_info_div {
+		font-size: 115%;
+	}
+	div#profile_header, div#post_header_div {
+		padding-top: 3%;
+		padding-bottom: 2%;
+	}
+	h2.postHeader, div.indPost {
 	text-align: -webkit-left;
 	text-align: left;
-	padding: 1.5% 2%;
+	padding: 1.5% 3%;
 	max-width: 100%;
-}
-.profilePhoto, .profileHeader {
-    float: left;
-}
-.profilePhoto{
-    margin: 0% 3% 0% 0%;
-}
-h3.profileHeaderName {
-    margin: 0.5% 0% 0%;
-}
-h3.profileHeaderName a {
-    text-decoration: underline;
-    color: #3ca4ff;
-}
-.postPhoto {
-    clear: both;
-    padding: 1% 0%;
-    max-width: 100%;
-}
-.postPhoto img {
-    max-width: 200px;
-    max-height: 200px;
-    float: left;
-    margin: 1% 0.5%;
-    border: solid 1.5px;
-    box-shadow: 0px 0px 10px;
-}
-.postComment {
-    clear: both;
-    padding: 2% 0% 1%;
-}
-div.postDate {
-    display: table;
-    width: 100%;
-}
-.sectionDiv {
-    padding: 0.3% 0%;
-}
-span {
-    min-width: 35%;
-    display: inline-block;
-    font-size: 130%;
-}
-h2#profile_header_name {
-    text-align: -webkit-left;
-    text-align: left;
-    margin-bottom: 0.5%;
-}
-div#profile_information input,div#profile_information select {
-    display: -webkit-inline-box;
-    display: inline-block;
-    width: 60%;
-    border: none;
-    font-size: 110%;
-    font-family: 'Josefin Slab', serif;
-}
-div#profile_information input.profileInputGreenBtn,
-div#profile_information input.profileInputJacksonBtn,
-div#profile_information input.profileInputBtn {
-    width: 25%;
-    padding: 1% 0%;
-    text-align: -webkit-center;
-    text-align: center;
-    background-color: darkgrey;
-    color: white;
-    border: solid 1px black;
-}
-input.profileInput.profileSiblingInput {
-    margin: 0% 0% 0% -1%;
-}
-input.profileInput.profileInputChildren {
-    margin: 0% 0% 0% -1%;
-}
-div#profile_information input#submit_profile_update {
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    max-width: 30%;
-    border-radius: 10px;
-    padding: 2% 0%;
-    border: outset 2px #45955e;
-    box-shadow: 0.5px 0.5px 5px #1c1c1c;
-    font-size: 140%;
-}
-.postBtn {
-    position: absolute;
-    top: 3.5%;
-    right: 2%;
-    max-width: 12%;
-    min-width: 10%;
-    border-radius: 10px;
-    padding: 1% 0%;
-    font-size: 100%;
-    border: outset 2px #45955e;
-    box-shadow: 0.5px 0.5px 5px #1c1c1c;
-    text-align: -webkit-center;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    background-color: floralwhite;
-    font-family: 'Josefin Slab', serif;
-}
-.allPostBtn {
-    position: absolute;
-    top: 3.5%;
-    right: 13%;
-    max-width: 12%;
-    min-width: 10%;
-    border-radius: 10px;
-    padding: 1% 0%;
-    border: outset 2px #45955e;
-    box-shadow: 0.5px 0.5px 5px #1c1c1c;
-    text-align: -webkit-center;
-    text-align: center;
-    text-decoration: none;
-    color: black;
-    background-color: floralwhite;
-}
-.postDate .deletePost {
-    font-size: 90%;
-}
-.postDate .deletePost a {
-    text-decoration: none;
-    color: darkred;
-    text-shadow: 4px 5px darkgray;
-}
-span.inputTitle.descentTitle {
-    padding: 0% 0% 3%;
-}
-div.header_div h3 {
-    margin: 0px;
-    background-color: beige;
-    padding: 0.5% 0% 0% 0.5%;
-}
-div.header_div {
-    margin: 2.5% 0%;
-    position: relative;
-    font-size: 125%;
-}
-img.profilePicture {
-    max-width: 120px;
-    max-height: 120px;
-    height: 75px;
-    width: 75px;
-}
-div#profile_information input:focus, div#profile_information select:focus {
-    outline: none;
-}
-div#profile_information input.profileNameInput1 {
-    max-width: 30%;
-    margin: 0% 0% 0% -1%;
-}
-div#profile_information input.profileNameInput2 {
-    width: initial;
-    max-width: 25%;
-}
-input.profileInput.profileInputSpouse {
-    margin: 0% 0% 0% -1%;
-    max-width: 50%;
-}
-div#profile_information input.profileInputAddress {
-    width: 25%;
-    margin: 0% 0% 0% -0.8%;
-}
-div#profile_information input.profileInputCity {
-    width: 15%;
-}
-div#profile_information select.profileInputState {
-    max-width: 8%;
-}
-div#profile_information input.profileInputZip {
-    width: 10%;
-}
-div#profile_information input.profileInputPhone1,
-div#profile_information input.profileInputPhone2,
-div#profile_information input.profileInputPhone3 {
-    width: 10%;
-}
-input.profileInput.profileInputDOB {
-    margin: 0% 0% 0% -1%;
-}
-div#profile_information input.profileInputPhone3 {
-    width: initial !important;
-    max-width: 20%;
-}
-div#profile_information input.profileInputGreenBtn {
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-	/* border-right: solid 0.5px black; */
-	margin: 0% 0% 0% -1%;
-}
-span.visibleHeaderSpan {
-    font-size: 80%;
-    min-width: initial;
-    position: absolute;
-    right: 5%;
-    top: 25%;
-}
-div#profile_information input.visibleCheckBox {
-    width: initial;
-    position: absolute;
-    right: 0px;
-    top: 15%;
-}
-.descentDiv {
-	display: inline;
-}
-div#profile_information input.profileInputJacksonBtn {
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
-	/* border-left: solid 0.5px black; */
-}
-div#profile_information input.profileInput.descentSelected {
-    background-color: darkgreen;
-}
-div#profile_information input.profileInputMother {
-	width: initial;
-	margin: 0% 0% 0% -1%;
-	max-width: 25%;
-}
-div#profile_information input.profileInputFather {
-	max-width: 25%;
-	margin-left: 5%;
-}
-span.separator {
-    min-width: 0%;
-    font-size: 100%;
-}
-span.phone_par_span {
-    min-width: 0%;
-    margin: 0% -0.4% 0% -2%;
-}
-div#family_account {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    max-width: 100%;
-    min-width: 45%;
-    text-align: -webkit-right;
-    text-align: right;
-}
-div#home_link {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    max-width: 100%;
-    min-width: 15%;
-    text-align: -webkit-left;
-    text-align: left;
-}
-div#profile_information {
-    position: relative;
-    max-width: 100%;
-    width: inherit;
-    display: -webkit-inline-box;
-    display: inline-block;
-    float: none;
-    padding: 0% 2%;
-}
-div#post_information {
-    display: -webkit-inline-box;
-    display: inline-block;
-    max-width: 50%;
-    width: 50%;
-    float: none;
-    min-height: 890px;
-    max-height: 890px;
-    overflow: auto;
-    background-color: #dddddd;
-    position: relative;
-}
-.newPost {
-    padding: 2% 5%;
-}
-div#profile_photo {
-    width: 58%;
-    position: relative;
-    display: table;
-    float: none;
-}
-img#profile_photo {
-    position: relative;
-    max-width: 100%;
-    padding: 10% 3% 0%;
-    width: 200px;
-    height: 200px;
-}
-input#change_img_btn {
-    width: 200px !important;
-    position: absolute;
-    bottom: 0%;
-    left: 0;
-    margin: 0% 0% 0% 3%;
-    padding: 2% 0%;
-    opacity: 0.85;
-    background-color: #62aa62;
-    border: none;
-    color: white;
-    font-size: 100%;
-}
-}
-/*Smaller length screens*/
-@media only screen and (max-height:699px) {
-}
-/*Normal length screens*/
-@media only screen and (min-height:700px) and (max-height:800px) {
-}
-/*Longer length screens*/
-@media only screen and (min-height:905px) {
+	}
+
+	.indPost.reunionRegistration input, .indPost.reunionRegistration select {
+		font-size: 125%;
+		padding: 0.5%;
+		margin: 0.5% 0%;
+	}
+
+	.indPost.reunionRegistration select {
+		width: 95.5%;
+		border-radius: 5px;
+		border: inset 2.5px;
+	}
+
+	.indPost.reunionRegistration .phone3, .indPost.reunionRegistration .phone4 {
+		max-width: 27.6%;
+	}
+	h2#all_post_header.postHeader {
+		
+	padding: 0% 45% 0% 3%;
+	}
+	.profilePhoto, .profileHeader {
+		float: left;
+	}
+	.profilePhoto{
+		margin: 0% 7% 0% 0%;
+	}
+	.profileHeader {
+		float: left;
+	}
+	.postPhoto {
+		clear: both;
+		padding: 1% 0%;
+		max-width: 100%;
+	}
+	.postPhoto img {
+		max-width: 200px;
+		max-height: 200px;
+		float: left;
+		margin: 1% 0.5%;
+		border: solid 1.5px;
+		box-shadow: 0px 0px 10px;
+	}
+	.postComment {
+		clear: both;
+		padding-top: 1%;
+	}
+	h2#profile_header_name {
+		text-align: -webkit-left;
+		text-align: left;
+		margin-bottom: 0.5%;
+	}
+	div#profile_information input.profileInputGreenBtn, 
+	div#profile_information input.profileInputJacksonBtn,
+	div#profile_information input.profileInputSpouseBtn,
+	div#profile_information input.profileInputFriendBtn {
+		width: 15%;
+		padding: 1% 0%;
+		text-align: -webkit-center;
+		text-align: center;
+		background-color: darkgrey;
+		color: white;
+		border: solid 1px black;
+	}
+	div#profile_information input#submit_profile_update {
+		position: absolute;
+		top: 4%;
+		right: 2%;
+		max-width: 12%;
+		border-radius: 10px;
+		padding: 1% 0%;
+		border: outset 2px #45955e;
+		box-shadow: 0.5px 0.5px 5px #1c1c1c;
+	}
+	.postDate .deletePost {
+		font-size: 90%;
+	}
+	.postDate .deletePost a {
+		text-decoration: none;
+		color: darkred;
+		text-shadow: 4px 5px darkgray;
+	}
+	img.profilePicture {
+		max-width: 120px;
+		max-height: 120px;
+		height: 75px;
+		width: 75px;
+	}
+	div#profile_information input:focus, div#profile_information select:focus {
+		outline: none;
+	}
+	div#profile_information input.profileNameInput1 {
+		max-width: 12%;
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input.profileNameInput2 {
+		width: 50%;
+	}
+	div#profile_information input.profileInputAddress {
+		width: 25%;
+		margin: 0% 0% 0% -0.8%;
+	}
+	div#profile_information input.profileInputCity {
+		width: 20%;
+	}
+	div#profile_information select.profileInputState {
+		max-width: 9%;
+	}
+	div#profile_information input.profileInputZip {
+		width: 15%;
+	}
+	div#profile_information input.profileInputPhone1,
+	div#profile_information input.profileInputPhone2,
+	div#profile_information input.profileInputPhone3 {
+		width: 8%;
+	}
+	div#profile_information input.profileInputGreenBtn {
+		border-top-left-radius: 5px;
+		border-bottom-left-radius: 5px;
+		/* border-right: solid 0.5px black; */
+		margin: 0% 0% 0% -1%;
+	}
+	.descentDiv {
+		display: inline;
+	}
+	div#profile_information input.profileInputJacksonBtn {
+		border-top-right-radius: 5px;
+		border-bottom-right-radius: 5px;
+		/* border-left: solid 0.5px black; */
+	}
+	div#profile_information input.profileInputMother {
+		width: 14%;
+		margin: 0% 0% 0% -1%;
+	}
+	div#profile_information input.profileInputFather {
+		max-width: 50%;
+		margin-left: 5%;
+	}
+	span.separator {
+		min-width: 0%;
+		font-size: 100%;
+	}
+	span.phone_par_span {
+		min-width: 0%;
+		margin: 0% -0% 0% -2.8%;
+	}
+
+	span.phone_span {
+		min-width: 0%;
+		margin: 0% 0.5% 0% 0.5%;
+	}
+	div#home_link {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		max-width: 100%;
+		min-width: 15%;
+		text-align: -webkit-left;
+		text-align: left;
+	}
+
+	a#profile_registration {
+	}
+	.newPost {
+		padding: 2% 5%;
+	}
+	div#profile_photo {
+		width: 25%;
+		position: relative;
+		display: table;
+		table-layout: fixed;
+		float: left;
+	}
+	img#profile_photo {
+		position: relative;
+		max-width: 100%;
+		max-height: 20%;
+		padding: 10% 3% 0%;
+		width: 200px;
+		height: 200px;
+	}
+	div#reg_form_input input.regInput.regFNInput, div#reg_form_input input.regInput.regLNInput {
+		max-width: 48%;
+	}
+	div#reg_form_input input.regInput {
+		width: 98%;
+	}
 	
+	.modal-dialog {
+		max-width: 1000px; 
+	}
 }

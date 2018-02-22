@@ -26,11 +26,10 @@
 			</div>
 			<div class="col-9">
 				<nav class="nav nav-pills justify-content-start py-3">
-					<a href='/profile' class='profileLink nav-link border-0'>My Profile</a>
-					<a href='/registrations' class='profileLink nav-link'>Registrations</a>
-					<a href='/administrator' class='profileLink nav-link'>Family Members</a>
+					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
+					<a href='/administrator' class='profileLink nav-link border-0'>Family Members</a>
 					<a href='/reunions' class='profileLink nav-link active'>Reunions</a>
-					<a href='/settings' class='profileLink nav-link'>Settings</a>
+					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
 				</nav>
 			</div>
 		</div>

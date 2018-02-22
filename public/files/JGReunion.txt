@@ -4,6 +4,7 @@
 Create a settings page for admin
 Make all other reunion registrations inactive when new reunion created
 Create a confirmation modal when making new reunion and when completing a reunion
+Create a button that checks for duplicates
 Add a footer
 Allow user to have a profile and be an admin
 Done: Change default adult name to registree first name

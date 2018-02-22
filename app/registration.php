@@ -31,4 +31,12 @@ class registration extends Model
     {
         return $this->belongsTo('App\Reunion');
     }
+	
+	/**
+     * Get the additional members on this registration.
+     */
+    public function children_reg()
+    {
+        return $this->hasMany('\App\Registration', 'parent_reg');
+    }
 }

@@ -15,10 +15,6 @@ class CreateProfileUploadsTable extends Migration
     {
         Schema::create('profile_uploads', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->nullable();
-            $table->string('photo_name', 50)->nullable();
-            $table->string('photo_suffix', 4)->nullable();
-            $table->string('photo_caption', 255)->nullable();
             $table->timestamps();
         });
     }

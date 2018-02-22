@@ -86,19 +86,11 @@
 						<div class="form-group col-4">
 							<label class="form-label" for="zip">Zip Code</label>
 							<input type="number" name="zip" class="form-control" max="99999" value="{{  old('zip') }}" placeholder="Enter Zip Code" />
-							
-							@if($errors->has('zip'))
-								<span class="text-danger">{{ $errors->first('zip') }}</span>
-							@endif
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="city">Phone</label>
-						<input type="text" name="phone" class="form-control" value="{{  old('phone') }}" placeholder="Enter Phone Number" />
-						
-						@if($errors->has('phone'))
-							<span class="text-danger">{{ $errors->first('phone') }}</span>
-						@endif
+						<input type="text" name="phone" class="form-control" value="{{  old('phone') }}" placeholder="##########" />
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="age_group">Age Group</label>

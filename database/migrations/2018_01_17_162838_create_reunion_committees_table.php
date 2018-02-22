@@ -15,12 +15,6 @@ class CreateReunionCommitteesTable extends Migration
     {
         Schema::create('reunion_committees', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('dl_id')->nullable();
-            $table->integer('reunion_id')->nullable();
-            $table->string('member_name', 50)->nullable();
-            $table->string('member_title', 50)->nullable();
-            $table->string('member_email', 100)->nullable();
-            $table->string('member_phone', 15)->nullable();
             $table->timestamps();
         });
     }

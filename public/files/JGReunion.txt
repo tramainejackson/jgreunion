@@ -1,19 +1,37 @@
 ------------------------------------------------
 		Jackson / Green Family Reunion
 ------------------------------------------------
-
-Make something with Photoshop as a picture background for logged in pages
-Create a show page distribution list and registrations
-Add a button that allows admin to add family member from dl to new reunion registered
-Update past reunions show page
-Update upcoming reunions page
 Create a settings page for admin
-Add popover on notes sections
 Make all other reunion registrations inactive when new reunion created
 Create a confirmation modal when making new reunion and when completing a reunion
 Create a button that checks for duplicates
 Add a footer
 Allow user to have a profile and be an admin
-Add relationship for registrations and distribution_list
+Done: Change default adult name to registree first name
+Done: Add t-shirt sizes for youth and children
+Done: PayPal JacksonGreen2016 (not in use)
+Done: Fix mobile registration form and background on activities divs
+Done: Update registration when a new member is added to a household and registration already completed
+Done: Add search feature on distribution list page
+Done: Allow additions of people to registration
+Done:Add tooltip on notes sections
+Done: Figure out what to do with the responsive tables (Added Double Scroll)
+Done: Add all fields in confirmation email after registration
+Done: Double check IE responsiveness
+Done: Make something with Photoshop as a picture background for logged in pages
+Done: Update past reunions show page
+Done: Update upcoming reunions page
+Done: Allow deletions on all form where needed
+Done: Fix date on reunion edit page when value coming from DB
+Done: Add option for uploading paper registration form on reunion create page
+Done: Add Events options on reunion edit page
+Done: Add how many household memebers for registered members on reunions edit page
+Done: Update registration edit page
+Done: Create a show page for distribution list
+Done: Create a show page for registrations
+Done: Add function for Add Household Member button
+Done: Add function for Jackson and Green button
+Done: Add a button that allows admin to add family member from dl to new reunion registered
+Done: Add relationship for registrations and distribution_list
 Done: Create a create, edit and show page for reunions
 export HTTP_PROXY="http://155.247.166.25:8080"

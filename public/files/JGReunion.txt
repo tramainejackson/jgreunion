@@ -1,6 +1,7 @@
 ------------------------------------------------
 		Jackson / Green Family Reunion
 ------------------------------------------------
+Fix slideshow on home page
 Create a settings page for admin
 Make all other reunion registrations inactive when new reunion created
 Create a confirmation modal when making new reunion and when completing a reunion

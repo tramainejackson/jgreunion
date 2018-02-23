@@ -68,10 +68,10 @@
 			@foreach($images as $image)
 				@if($image->id == 6)
 					<div class='image_div showing_image' style='background-image:url("{{ $image->image_root }}/{{ $image->image_name }}.{{ $image->image_suffix}}");'>
-					<img class='slideShowImage' src='placeholder.jpg' /></div>
+					<img class='slideShowImage' src='{{ asset("/images/placeholder.jpg") }}' /></div>
 				@else
 					<div class='image_div' style='background-image:url("{{ $image->image_root }}/{{ $image->image_name }}.{{ $image->image_suffix }}");'>
-					echo "<img class='slideShowImage' src='placeholder.jpg' /></div>
+					<img class='slideShowImage' src='{{ asset("/images/placeholder.jpg") }}' /></div>
 				@endif
 			@endforeach
 		</div>

@@ -754,6 +754,11 @@ div#modal_adminPage label {
   width: 50%;
   margin: 3% 16%;
 }
+
+#registered_members_information_ul {
+	font-size: 150%;
+}
+
 .reunion_content {
 	background-color: white;
 	position: relative;

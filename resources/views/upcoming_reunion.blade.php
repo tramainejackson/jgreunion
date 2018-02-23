@@ -267,8 +267,8 @@
 							<p class="text-center emptyInfo mt-3">No Family Member Have Registered Yet</p>
 						</div>
 					@else
-						<div class="col-12">
-							<ul class="list-unstyled mt-4">
+						<div class="col-8 col-sm-4 mx-auto">
+							<ol class="mt-4" id="registered_members_information_ul">
 								@php
 									function ucname($string) {
 										$string =ucwords(strtolower($string));
@@ -285,9 +285,9 @@
 								@foreach($registrations as $registration)
 									@if($registration->parent_reg == null)
 										@php $loopCount++; @endphp
-										<li class="">{{ $loop->iteration . '. ' . ucname($registration->registree_name) }}
+										<li class="">{{ ucname($registration->registree_name) }}
 											@if($registration->children_reg)
-												<ul class="ml-4">
+												<ul class="">
 													@foreach($registration->children_reg as $reg_member)
 														@php $firstname = explode(" ", $reg_member->registree_name); @endphp
 														<li class="">{{ ucwords(strtolower($firstname[0])) }}</li>
@@ -297,7 +297,7 @@
 										</li>
 									@endif
 								@endforeach
-							</ul>
+							</ol>
 						</div>
 					@endif
 				</div>

@@ -96,7 +96,7 @@
 							</div>
 						</td>
 						<td>
-							<input type="number" name="attending_adult" id="attending_adult" class="form-control" min="0" value="0"/>
+							<input type="number" name="attending_adult" id="attending_adult" class="form-control" min="1" value="0"/>
 						</td>
 						<td>
 							<div class="input-group">

@@ -167,7 +167,7 @@
 								<div class="d-flex align-items-center mb-1">
 									<h4 class="w-75 m-0">Adults (Ages 16+)</h4>
 									<div class="w-25">
-										<input type="number" name="attending_adult" id="attending_adult" class="form-control d-inline" min="0" value="0"/>
+										<input type="number" name="attending_adult" id="attending_adult" class="form-control d-inline" min="1" value="0"/>
 									</div>
 								</div>
 								

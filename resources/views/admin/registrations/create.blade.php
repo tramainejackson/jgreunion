@@ -44,6 +44,9 @@
 				</div>
 			</div>
 			<div class="col-8 membersForm">
+				<div class="pt-2 pb-4">
+					<h1 class="text-center">{{ $reunion->reunion_city }} Registration Form</h1>
+				</div>
 				<div class="form-block-header mt-3">
 					<h3 class="mt-2 mb-4">Add A Family Member From List</h3>
 				</div>

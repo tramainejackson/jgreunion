@@ -249,9 +249,15 @@
 						<p>All electronic payments can be sent to administrator@jgreunion.com for anyone who already has a paypal account.</p>
 						<p>Click <a href=" https://www.paypal.com/pools/c/810J07gu0f" target="_blank">here</a> to go to paypal.</p>
 					</div>
-					<div class="col-12" id="registrationReminderMsg">
-						<p>Please do not send any payment without completing the registration form first. You can click <span id="registrationLink" class="d-none d-sm-inline" data-toggle="modal" data-target="#registration_modal">here</span><a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationLink" class="d-sm-none d-inline" >here</a> to complete your registration for the upcoming reunion.</p>
-					</div>
+					@if(!Auth::check())
+						<div class="col-12" id="registrationReminderMsg">
+							<p>Please do not send any payment without completing the registration form first. You can click <span id="registrationLink" class="d-none d-sm-inline" data-toggle="modal" data-target="#registration_modal">here</span><a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationLink" class="d-sm-none d-inline" >here</a> to complete your registration for the upcoming reunion.</p>
+						</div>
+					@else
+						<div class="col-12" id="registrationReminderMsg">
+							<p class="text-center">You are currently logged in as an admin. Please select <a href="/registrations/create/{{$reunion->id}}" id="registrationLink" class="d-inline" >here</a> to complete the registration for someone else.</p>
+						</div>
+					@endif
 				</div>
 				
 				<hr/>

@@ -70,7 +70,8 @@
 							</div>
 						</div>
 
-						<div class="form-group">
+						<!-- Remember me not working -->
+						<!-- <div class="form-group">
 							<div class="">
 								<div class="checkbox">
 									<label>
@@ -78,7 +79,7 @@
 									</label>
 								</div>
 							</div>
-						</div>
+						</div> -->
 
 						<div class="form-group">
 							<a class="btn btn-info" href="{{ route('password.request') }}">

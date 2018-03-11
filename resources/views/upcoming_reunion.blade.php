@@ -221,8 +221,10 @@
 						<h2 class="text-center text-light">Payment Information</h2>
 					</div>
 					<div id="paper_payment_option" class="payment_option col-11 col-xl-5 my-3 mx-auto">
-						<h2>Paper Payment</h2>
-						<p>Please make all checks payable to Jackson-Green Family Reunion. Checks can be sent to:</p>
+						@if($committee_president->count() > 0)
+							<h2>Paper Payment</h2>
+							<p>Please make all checks payable to {{ $committee_president->firstname . ' ' . $committee_president->lastname }}. Checks can be sent to:</p>
+						@endif
 						
 						@if($committee_president->count() > 0)
 							<p id="checks_address">

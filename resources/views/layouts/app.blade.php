@@ -21,9 +21,6 @@
 	@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
 		<link href="/css/myIEcss.css" rel="stylesheet">
 	@endif
-	
-	<!-- Scripts -->
-	@yield('scripts')
 
 	<!--[if lte IE 9]> <script>window.open("oldBrowser/index.php", "_self");</script> <![endif]-->
 </head>
@@ -43,5 +40,7 @@
 		</div>
         @yield('content')
     </div>
+	<!-- Scripts -->
+	@yield('scripts')
 </body>
 </html>

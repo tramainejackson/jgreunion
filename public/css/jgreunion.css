@@ -2,7 +2,7 @@ body {
   margin: 0px;
   position: relative;
   background-color: black;
-  font-family: 'Josefin Slab', serif;
+  font-family: 'Josefin Slab', serif !important;
 }
 button:focus {
 	outline:0 !important;
@@ -210,27 +210,18 @@ hr {
     background-size: cover !important;
 }
 #jgreunion_page {
-  background: linear-gradient(rgb(0, 0, 0), rgb(0, 0, 0), white);
-  padding: 0% 0% 0%;
-  position: relative;
-  margin-bottom: 0px;
-  /* min-height: 400px; */
-  /* max-height: 405px; */
+  background: linear-gradient(black, #00ff14, black);
+  min-height: 400px;
+  max-height: 475px;
+}
+
+.carousel-inner {
+    min-height: 400px;
+	max-height: 400px;
 }
 
 #family_tree_pic {
 	max-width: 100%;
-}
-
-div#jgreunion_page::after {
-	content: "";
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0px;
-	background: rgba(0,0,0,0.60);
-	z-index: 0;
 }
 
 .error_border {
@@ -1801,19 +1792,11 @@ div#image_caption {
 	margin: 0% 14%;
 }  
 h2.image_caption_header {
-  padding: 0.5% 1%;
-  margin: 0%;
   color: white;
-  position: absolute;
-  left: 2%;
-  top: 4%;
-  max-width: 75%;
-  z-index: 2;
   border: solid 2px;
   border-radius: 5px;
   background: rgba(58, 58, 21, 0.5);
   box-shadow: 0px 0px 5px black;
-  display: none;
 }
 button#stop_slideshow {
   display: block;
@@ -2984,8 +2967,8 @@ table#contact_information_table th {
 	}
 	
 	h2.image_caption_header {
-		margin: 2% 0% 0% 0%;
-		max-width: 100%;
+		/* margin: 2% 0% 0% 0%; */
+		/* max-width: 100%; */
 	}
 	
 	div#navi {

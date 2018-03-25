@@ -2,7 +2,8 @@
 
 @section('styles')
 	@include('function.bootstrap_css')
-	<style>
+	<link href="/css/mdb.min.css" rel="stylesheet">
+	<style>		
 		#upcoming_btn, #past_btn {
 			padding: 5% 0%;
 			background: radial-gradient(green, green, darkgreen);
@@ -15,76 +16,105 @@
 			border-radius: 5px;
 			color: whitesmoke;
 		}
+		
+		nav {
+			position: absolute;
+			right: 0;
+			margin: 1% 2%;
+			z-index: 10;
+		}
+	
+		.view, .view .mask, .carousel-item.active {
+			max-height: -webkit-fill-available;
+		}
+		
+		.carousel-inner {
+			min-height: 400px;
+			max-height: -webkit-fill-available;
+		}
+		
+		.carousel-caption {
+			max-width: 40%;
+			left: 30%;
+		}
+
+		.view img, .view video {
+			max-height: -webkit-fill-available;
+			margin: 0 auto;
+		}
 	</style>
 @endsection
 
 @section('scripts')
 	@include('function.bootstrap_js')
+	<script src="{{ asset('/js/mdb.js') }}"></script>
 @endsection
 
 @section('content')
 	<div id="jgreunion_page">
-		<div id="navi">
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col">
-						<nav class="nav nav-pills justify-content-end">
-							@if(!Auth::check())
-								<!-- <a href='/register' class='profileLink nav-link'>Register</a> -->
-								<a href='/login' class='profileLink nav-link'>Login</a>
-							@else
-								@if(Auth::user()->administrator == 'N')
-									<a href='/profile' class='profileLink nav-link'>My Profile</a>
-								@else
-									<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
-									<a href='/administrator' class='profileLink adminLink nav-link'>Admin</a>
-								@endif
-								<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
-					
-								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-									{{ csrf_field() }}
-								</form>
-							@endif
-						</nav>
-					</div>
-				</div>
-			</div>
+		<!--Carousel Wrapper-->
+		<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="">			
+			<!--Slides-->
+			<div class="carousel-inner" role="listbox">
+				<nav class="nav nav-pills justify-content-end">
+					@if(!Auth::check())
+						<!-- <a href='/register' class='profileLink nav-link'>Register</a> -->
+						<a href='/login' class='profileLink nav-link'>Login</a>
+					@else
+						@if(Auth::user()->administrator == 'N')
+							<a href='/profile' class='profileLink nav-link'>My Profile</a>
+						@else
+							<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
+							<a href='/administrator' class='profileLink adminLink nav-link'>Admin</a>
+						@endif
+						<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
 			
-			<div id="family_account" class="mt-5">
-				<div class="page_header">
-					<h1 class="text-center display-md-3 display-4 my-5 px-2 px-md-0">Jackson &amp; Green Family Reunion</h1>
-				</div>
-			</div>
+						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+							{{ csrf_field() }}
+						</form>
+					@endif
+				</nav>
 			
-			@foreach($images as $image)
-				@if($image->id == 6)
-					<h2 class='showing_image image_caption_header'>{{ $image->image_description }}</h2>
-				@else
-					<h2 class='image_caption_header'>{{ $image->image_description }}</h2>							
-				@endif
-			@endforeach
+				@foreach($images as $image)
+					@if($image->id >= 6)
+						<!--Slides-->
+						<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
+							<div class="view">
+								<img class="d-block mw-100" src="{{ $image->image_root }}/{{ $image->image_name }}.{{ $image->image_suffix}}" alt="First slide" />
+								<div class="mask rgba-black-light"></div>
+							</div>
+							<div class="carousel-caption">
+								<h2 class='image_caption_header'>{{ $image->image_description }}</h2>
+							</div>
+						</div>
+						<!--/Slides-->
+					@else
+					@endif
+				@endforeach
+			</div>
+			<!--/.Slides-->
+			<!--Controls-->
+			<a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="sr-only">Previous</span>
+			</a>
+			<a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="sr-only">Next</span>
+			</a>
+			<!--/.Controls-->
 		</div>
-		<div id="image_slide_show">
-			@foreach($images as $image)
-				@if($image->id == 6)
-					<div class='image_div showing_image' style='background-image:url("{{ $image->image_root }}/{{ $image->image_name }}.{{ $image->image_suffix}}");'>
-					<img class='slideShowImage' src='{{ asset("/images/placeholder.jpg") }}' /></div>
-				@else
-					<div class='image_div' style='background-image:url("{{ $image->image_root }}/{{ $image->image_name }}.{{ $image->image_suffix }}");'>
-					<img class='slideShowImage' src='{{ asset("/images/placeholder.jpg") }}' /></div>
-				@endif
-			@endforeach
-		</div>
+		<!--/.Carousel Wrapper-->
 	</div>
 	<div id="jgreunion_past_future" class="bg-white">
 		<ul id="jgreunion_past_future_list" class="container-fluid py-3 m-0">
 			<li class="row pb-3">
 				<div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto">
-					<a href="/upcoming_reunion/{{ $newReunionCheck->count() > 0 ? $newReunionCheck->id : '#' }}" id="upcoming_btn" class="btn btn-lg btn-link d-block">Upcoming Reunion - {{ $newReunionCheck->count() > 0 ? ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year : 'No Reunion Set Yet' }}</a>
+					<a href="/upcoming_reunion/{{ $newReunionCheck->count() > 0 ? $newReunionCheck->id : '#' }}" id="upcoming_btn" class="btn btn-lg d-block mt-2">Upcoming Reunion - {{ $newReunionCheck->count() > 0 ? ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year : 'No Reunion Set Yet' }}</a>
 				</div>
 
 				<div class="col-12 col-md-6 mx-auto">
-					<button id="past_btn" class="collapsed btn btn-lg w-100" type="button" data-toggle="collapse" data-target="#past_reunions" aria-expanded="false" aria-controls="collapseExample">Past Reunions</button>
+					<button id="past_btn" class="collapsed btn btn-lg w-100 m-0 mt-2" type="button" data-toggle="collapse" data-target="#past_reunions" aria-expanded="false" aria-controls="collapseExample">Past Reunions</button>
 				</div>
 				<div class="d-none d-md-flex col-md-6"></div>
 				<div class="col-12 col-md-6 mx-auto">

@@ -22,6 +22,8 @@ $(document).ready(function()
 		}, 6000);
 	}
 
+	// $('.carousel').carousel('pause');
+	
 	// Initialize Datetimepicker
 	$('.datetimepicker').datetimepicker({
 		timepicker:false,
@@ -126,50 +128,6 @@ $(document).ready(function()
 	// Change the default number of attending adults to 1
 	$('#registration_modal').on('show.bs.modal', function() {
 		$('input#attending_adult').val('1').change();
-	});
-	
-//Gather home page pictures and create a slide show	
-	current_pic = 0;
-	var images = $(".image_div");
-	var imagesHeader = $(".image_caption_header");
-	$(".showing_image").show();	
-	function slide_show()
-	{
-		if(current_pic >= images.length - 1)
-		{
-			current_pic = 0;
-		}
-		else
-		{
-			current_pic++;
-		}
-		
-		$(".showing_image").fadeOut("slow", 
-		function()
-		{
-			$(this).removeClass("showing_image");
-			$(images[current_pic])
-				.addClass("showing_image")
-				.fadeIn("slow");
-			$(imagesHeader[current_pic])
-				.addClass("showing_image")
-				.fadeIn("slow");	
-		});
-	}
-	
-	var start_show = setInterval(function()
-	{
-		slide_show();
-	}, 7000);
-
-//Remove disabled options for additional_tees and fancy cut 
-	$("body").on("change", "#additionalTeeOption, #fancyCutOption", function(e) {
-		if($(this).val() == "Y") {
-			$(this).parent().parent().find("input").removeAttr("disabled");
-		}
-		else {
-			$(this).parent().parent().find("input").attr("disabled", true);
-		}
 	});
 
 	// Toggle descent options

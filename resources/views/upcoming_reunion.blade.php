@@ -249,7 +249,7 @@
 					<div id="electronic_payment_option" class="payment_option my-3 col-11 col-xl-5 mx-auto">
 						<h2>Electronic Payment</h2>
 						<p>All electronic payments can be sent to administrator@jgreunion.com for anyone who already has a paypal account.</p>
-						<p>Click <a href=" https://www.paypal.com/pools/c/810J07gu0f" target="_blank">here</a> to go to paypal.</p>
+						<p>Click <a href=" https://www.paypal.com/pools/c/85OCIIUoUB" target="_blank">here</a> to go to paypal.</p>
 					</div>
 					@if(!Auth::check())
 						<div class="col-12" id="registrationReminderMsg">

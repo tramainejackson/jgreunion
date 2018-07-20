@@ -2,25 +2,22 @@
 
 @section('content')
 	<div class="container-fluid" id="profilePage">
-
+		
 		@include('admin.nav')
 		
-		<div class="row white">
-		
-			<div class="col-2 my-2">
+		<div class="row bg-light">
+			<!-- <div class="col-2 my-2">
 				<div class="">
-					<a href="{{ route('reunions.create') }}" class="btn btn-info btn-lg">Create New Reunion</a>
+					<a href="/reunions/create" class="btn btn-info btn-lg">Create New Reunion</a>
 				</div>
-			</div>
-			
-			<div class="col-8 my-2">
+			</div> -->
+			<div class="col-8 mx-auto my-2">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-info">All Reunions</li>
 					@foreach($reunions as $reunion)
 						@php
 							$totalRegistrations = $reunion->registrations()->where('parent_reg', null);
 						@endphp
-						
 						<li class="list-group-item list-group-item-action reunionItem">
 							<h2 class="" data-toggle="collapse" data-parent="#reunionAccordion" href="#reunionAccordion{{$loop->iteration}}" aria-expanded="true" aria-controls="reunionAccordion1">{{ $reunion->reunion_city . ' ' . $reunion->reunion_year }}</h2>
 							@if($reunion->has_site == 'Y')
@@ -32,8 +29,7 @@
 										</div>
 										<div class="form-group col-4">
 											<label class="form-label" for="reunion_state">State</label>
-											
-											<select class="form-control browser-default" disabled>
+											<select class="form-control" disabled>
 												@foreach($states as $state)
 													<option value="{{ $state->state_abb }}" {{ $reunion->reunion_state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 												@endforeach
@@ -41,8 +37,7 @@
 										</div>
 										<div class="form-group col-4">
 											<label class="form-label" for="reunion_state">Year</label>
-											
-											<select class="form-control browser-default" disabled>
+											<select class="form-control" disabled>
 												@foreach($years as $year)
 													<option value="{{ $year->year_num }}" {{ $reunion->reunion_year == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
 												@endforeach
@@ -87,7 +82,6 @@
 											</div>
 										</div>
 									</div>
-									
 									<div class="form-row justify-content-around mb-3">
 										<button type="button" class="btn btn-primary col-4">Registrations <span class="badge badge-light">{{ $totalRegistrations->count() }}</span>
 										<span class="sr-only">total registrations</span>
@@ -97,14 +91,9 @@
 										<span class="sr-only">total committee members</span>
 										</button>
 									</div>
-									
-									@if($reunion->reunion_complete == 'N')
-										
-										<div class="form-group">
-											<a href="/reunions/{{ $reunion->id }}/edit" class="btn btn-warning btn-lg">Edit Reunion</a>
-										</div>
-										
-									@endif
+									<div class="form-group">
+										<a href="/reunions/{{ $reunion->id }}/edit" class="btn btn-warning btn-lg">Edit Reunion</a>
+									</div>
 								</div>
 							@else
 								<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">

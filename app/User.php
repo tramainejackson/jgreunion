@@ -34,4 +34,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\profile_post');
     }
+	
+	/**
+	* Check the user is admin.
+	*/
+    public function is_admin()
+    {
+        return $this->administrator == 'Y' ? true : false;
+    }
 }

@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('styles')
-	@include('function.bootstrap_css')
-@endsection
-
-@section('scripts')
-	@include('function.bootstrap_js')
-@endsection
-
 @section('content')
 	<div class="container-fluid" id="profilePage">
 		<div id="overlay"></div>

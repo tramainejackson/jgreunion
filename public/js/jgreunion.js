@@ -21,15 +21,40 @@ $(document).ready(function()
 			$(".errorMessage").fadeOut();
 		}, 6000);
 	}
-
-	// $('.carousel').carousel('pause');
+	
+	// Animations initialization
+	new WOW().init();
+	
+	// Initialize MDB select
+	$('.mdb-select').material_select();
 	
 	// Initialize Datetimepicker
-	$('.datetimepicker').datetimepicker({
-		timepicker:false,
-		format:'m/d/Y',
-		startDate:'2018/01/01'
+	$('.datetimepicker').pickadate({
+		// Escape any “rule” characters with an exclamation mark (!).
+		format: 'mm/dd/yyyy',
+		formatSubmit: 'yyyy/mm/dd',
+		min: new Date(1970,1,01),
 	});
+	
+	// Initialize timepicker
+	$('.timepicker').pickatime({
+		// 12 or 24 hour 
+		twelvehour: true,
+		autoclose: true,
+		default: '18:00',
+	});
+	
+	// Dropdown Init
+	$('.dropdown-toggle').dropdown();
+	
+	// // SideNav Scrollbar Initialization
+	// var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+	// Ps.initialize(sideNavScrollbar);
+	// // SideNav Button Initialization
+	// $(".button-collapse").sideNav({
+		// edge: 'left', // Choose the horizontal origin
+		// closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	// });
 	
 	// Add new committee member row
 	$('body').on('click', '.addCommitteeMember', function() {
@@ -311,12 +336,72 @@ $(document).ready(function()
 	$(".memberFilter ").keyup(function(e){
 		startSearch($(".memberFilter ").val());
 	});
-});
+	
+	// Add form to confirm delete modal for deleting carousel images
+	$('body').on('click', '.deleteCarousel', function() {
+		var copiedImage = $(this).parents('.card').find('img').clone();
+		var removeIndex = $('#pictureConfirmDelete form').attr('action').lastIndexOf('/') + 1;
+		var formAction = $('#pictureConfirmDelete form').attr('action').slice(0, removeIndex);
+		formAction = formAction + $(this).parents('.card').find('input').val();
 
-// Initialize Tooltip
-$(function() {
-	$('[data-toggle="tooltip"]').tooltip();
-})
+		$('#pictureConfirmDelete .modal-body').empty();
+		
+		copiedImage.appendTo($('#pictureConfirmDelete .modal-body'));
+		$('#pictureConfirmDelete form').attr('action', formAction);
+	});
+	
+	// Upload new images for the league. Add progress bar while uploading
+	$('body').on('click', 'form[name="new_pictures_form"] button[type="button"]', function() {
+		// event.preventDefault();
+		var formData = new FormData();
+		
+		if(document.getElementById('new_picture_file').files.length > 1) {
+			 var i = 0, len = document.getElementById('new_picture_file').files.length;
+			 
+			for(i; i < len; i++) {
+				formData.append("photo[]", document.getElementById('new_picture_file').files[i]);
+			}
+			
+		} else {
+			
+			formData.append("photo[]", document.getElementById('new_picture_file').files[0]);
+
+		}
+
+		$.ajax({
+			url: "/league_pictures",
+			method: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+			cache: false,
+			xhr: function() {
+				var xhr = new XMLHttpRequest();
+				
+				xhr.upload.addEventListener('progress', function(e) {
+					var progressbar = Math.round((e.loaded/e.total) * 100);
+					$('#progress_modal').modal('show');
+					$('#pro').css('width', progressbar + '%').text(progressbar + '%');
+				});
+				
+				return xhr;
+			},
+			
+			success: function(data) {
+				$('#progress_modal').modal('hide');
+				
+				// Display an error toast
+				toastr.success('Images added successfully.');
+			
+				setTimeout(function() {
+					window.open('/league_pictures', '_self');
+				}, 2000);
+			},
+		});
+		
+		return false;
+	});
+});
 
 // Filter members with search input
 // Check text to see if it matches the search criteria being entered
@@ -588,3 +673,13 @@ function removeMessages() {
 		}, 6000);
 	}
 }
+
+// Tooltips Initialization
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip();
+});
+
+// MDB Lightbox Init
+$(function () {
+	$("#mdb-lightbox-ui").load("/addons/mdb-lightbox-ui.html");
+});

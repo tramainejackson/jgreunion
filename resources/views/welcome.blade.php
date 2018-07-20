@@ -1,15 +1,7 @@
 @extends('layouts.app')
 
-@section('styles')
-	@include('function.bootstrap_css')
-	<link href="/css/mdb.min.css" rel="stylesheet">
-	<style>		
-		#upcoming_btn, #past_btn {
-			padding: 5% 0%;
-			background: radial-gradient(green, green, darkgreen);
-			color: whitesmoke;
-		}
-		
+@section('add_styles')
+	<style>
 		ul#past_reunions {
 			padding: 2% 0%;
 			background: radial-gradient(green, green, darkgreen);
@@ -24,36 +16,54 @@
 			z-index: 10;
 		}
 	
-		.view, .view .mask, .carousel-item.active {
-			max-height: -webkit-fill-available;
-		}
-		
-		.carousel-inner {
-			min-height: 400px;
-			max-height: -webkit-fill-available;
+		.carousel-inner, .carousel-item, .carousel-item .view {
+			height: 100%;
 		}
 		
 		.carousel-caption {
 			max-width: 40%;
 			left: 30%;
 		}
+		
+		html,
+		body,
+		header,
+		.carousel {
+			height: 60vh;
+		}
 
-		.view img, .view video {
-			max-height: -webkit-fill-available;
-			margin: 0 auto;
+		@media (max-width: 740px) {
+			html,
+			body,
+			header,
+			.carousel {
+				height: 100vh;
+			}
+		}
+
+		@media (min-width: 800px) and (max-width: 850px) {
+			html,
+			body,
+			header,
+			.carousel {
+			  height: 100vh;
+			}
+		}
+
+		@media (min-width: 800px) and (max-width: 850px) {
+			.navbar:not(.top-nav-collapse) {
+				background: #929FBA!important;
+			}
 		}
 	</style>
 @endsection
 
-@section('scripts')
-	@include('function.bootstrap_js')
-	<script src="{{ asset('/js/mdb.js') }}"></script>
-@endsection
-
 @section('content')
 	<div id="jgreunion_page">
+	
 		<!--Carousel Wrapper-->
-		<div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="">			
+		<div id="carousel_home" class="carousel slide carousel-fade" data-ride="carousel">	
+		
 			<!--Slides-->
 			<div class="carousel-inner" role="listbox">
 				<nav class="nav nav-pills justify-content-end">
@@ -61,12 +71,16 @@
 						<!-- <a href='/register' class='profileLink nav-link'>Register</a> -->
 						<a href='/login' class='profileLink nav-link'>Login</a>
 					@else
-						@if(Auth::user()->administrator == 'N')
+						@if(!Auth::user()->is_admin())
+							
 							<a href='/profile' class='profileLink nav-link'>My Profile</a>
 						@else
+							
 							<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
+							
 							<a href='/administrator' class='profileLink adminLink nav-link'>Admin</a>
 						@endif
+						
 						<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
 			
 						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -76,41 +90,58 @@
 				</nav>
 			
 				@foreach($images as $image)
-					@if($image->id >= 6)
-						<!--Slides-->
-						<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
-							<div class="view">
-								<img class="d-block mw-100" src="{{ $image->image_root }}/{{ $image->image_name }}.{{ $image->image_suffix}}" alt="First slide" />
-								<div class="mask rgba-black-light"></div>
+					<!--Slides-->
+					<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
+					
+						<div class="view bgrd-attr" style="background-image:url('{{ asset($image->path) }}');">
+
+							<div class="mask rgba-black-slight flex-center">
+								
+								<div class="">
+								
+									@if($image->description)
+									
+										<h2 class='image_caption_header'>{{ $image->description }}</h2>
+									
+									@endif
+									
+								</div>
+								
 							</div>
-							<div class="carousel-caption">
-								<h2 class='image_caption_header'>{{ $image->image_description }}</h2>
-							</div>
+							
 						</div>
-						<!--/Slides-->
-					@else
-					@endif
+						
+					</div>
+					<!--/Slides-->
 				@endforeach
+				
 			</div>
 			<!--/.Slides-->
+			
 			<!--Controls-->
-			<a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+			<a class="carousel-control-prev" href="#carousel_home" role="button" data-slide="prev">
+			
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				<span class="sr-only">Previous</span>
+				
 			</a>
-			<a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+			
+			<a class="carousel-control-next" href="#carousel_home" role="button" data-slide="next">
+			
 				<span class="carousel-control-next-icon" aria-hidden="true"></span>
 				<span class="sr-only">Next</span>
+				
 			</a>
 			<!--/.Controls-->
 		</div>
 		<!--/.Carousel Wrapper-->
 	</div>
-	<div id="jgreunion_past_future" class="bg-white">
+	
+	<div id="jgreunion_past_future" class="white">
 		<ul id="jgreunion_past_future_list" class="container-fluid py-3 m-0">
 			<li class="row pb-3">
 				<div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto">
-					<a href="/upcoming_reunion/{{ $newReunionCheck->count() > 0 ? $newReunionCheck->id : '#' }}" id="upcoming_btn" class="btn btn-lg d-block mt-2">Upcoming Reunion - {{ $newReunionCheck->count() > 0 ? ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year : 'No Reunion Set Yet' }}</a>
+					<a href="/upcoming_reunion/{{ $newReunionCheck->count() > 0 ? $newReunionCheck->id : '#' }}" id="upcoming_btn" class="btn btn-lg d-block mt-2{{ $newReunionCheck->count() < 1 ? ' noActive' : '' }}">Upcoming Reunion - {{ $newReunionCheck->count() > 0 ? ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year : 'No Reunion Set Yet' }}</a>
 				</div>
 
 				<div class="col-12 col-md-6 mx-auto">
@@ -133,6 +164,7 @@
 			</li>
 		</ul>	
 	</div>
+	
 	<div id="reunion_history">
 		<img id="reunion_history_pic" src="images/BlackHistory2015_037.jpg"/> 
 		<p>To The Jackson Green Family,<br/><br/>Earlean Jackson, Victoria Jackson Darby and Hattie Mae Jackson Green, started the Jackson-Green Family 
@@ -146,6 +178,7 @@
 		at the Jackson-Green Family Reunions ranges between 150-200 people. Every two years the Jackson- Green reunion continues the family tradition of uplifting, 
 		celebrating, and honoring family.  The family legacy continues in 2016 as the Jackson-Green families come together in Philadelphia, PA.
 	</div>
+	
 	<div id="reunion_descent" class="container-fluid">
 		<div class="row">
 			<div class="col-12 col-sm-8 col-xl-7">
@@ -185,13 +218,18 @@
 			</div>
 		</div>
 	</div>
+	
 	<footer>
+	
 		<div class="container-fluid">
+		
 			<div class="row">
 				<p class="col-4 text-center my-0 py-3">Created By: Tramaine Jackson</p>
 				<p class="col-4 text-center my-0 py-3">Created Date: July 2015</p>
 				<p class="col-4 text-center my-0 py-3">Title: Jackson/Green Reunion</p>
 			</div>
+			
 		</div>
+		
 	</footer>
 @endsection

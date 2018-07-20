@@ -1,29 +1,50 @@
 @extends('layouts.app')
 
+@section('styles')
+	@include('function.bootstrap_css')
+@endsection
+
+@section('scripts')
+	@include('function.bootstrap_js')
+@endsection
+
 @section('content')
 	<div class="container-fluid" id="profilePage">
-		
-		@include('admin.nav')
-		
-		<div class="row white">
-		
+		<div class="row">
+			<div class="col-12">
+				<div class="jumbotron jumbotron-fluid">
+					<div class="page_header">
+						<h1>Jackson &amp; Green Family Reunion</h1>
+					</div>
+				</div>
+			</div>
+			<div class="col-3">
+				<nav class="nav nav-pills justify-content-center py-3">
+					<a href='/' class='profileLink nav-link'>Home</a>
+					<a href='/logout' class='profileLink nav-link'>Logout</a>
+				</nav>
+			</div>
+			<div class="col-9">
+				<nav class="nav nav-pills justify-content-start py-3">
+					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
+					<a href='/administrator' class='profileLink nav-link border-0'>Family Members</a>
+					<a href='/reunions' class='profileLink nav-link active'>Reunions</a>
+					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
+				</nav>
+			</div>
+		</div>
+		<div class="row bg-light">
 			<div class="col-2 my-2">
 				<div class="">
 					<a href="/reunions" class="btn btn-info btn-lg">All Reunions</a>
 				</div>
 			</div>
-			
 			<div class="col-8 reunionForm">
-			
-				<h1 class="mt-2 mb-0">Create New Reunion</h1>
-				<h4 class="nt-0 mb-4 red-text">**Creating A New Reunion Will Make All Current Reunions Complete**</h4>
-				
+				<h1 class="mt-2 mb-4">Create New Reunion</h1>
 				{!! Form::open(['action' => ['ReunionController@store'], 'method' => 'POST']) !!}
-				
 					<div class="form-block-header">
 						<h3 class="">Location</h3>
 					</div>
-					
 					<div class="form-row">
 						<div class="form-group col-6">
 							<label class="form-label" for="reunion_city">City</label>
@@ -31,8 +52,7 @@
 						</div>
 						<div class="form-group col-6">
 							<label class="form-label" for="reunion_state">State</label>
-							
-							<select class="browser-default form-control" name="reunion_state">
+							<select class="form-control" name="reunion_state">
 								@foreach($states as $state)
 									<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('reunion_state') == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 								@endforeach
@@ -41,8 +61,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="reunion_state">Year</label>
-						
-						<select class="browser-default form-control" name="reunion_year">
+						<select class="form-control" name="reunion_year">
 							@foreach($years as $year)
 								<option value="{{ $year->year_num }}" {{ old('reunion_year') && old('reunion_year') == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
 							@endforeach
@@ -75,7 +94,6 @@
 							</div>
 						</div>
 					</div>
-					
 					<div class="form-group">
 						<label class="form-label" for="child_price">Child Price</label>
 						<div class="input-group">
@@ -88,64 +106,51 @@
 							</div>
 						</div>
 					</div>
-					
 					<div class="form-block-header">
 						<h3 class="">Committee
 							<button type="button" class="btn btn-outline-success mb-2 addCommitteeMember">Add Committee Member</button>
 						</h3>
 					</div>
-					
 					<div class="form-row">
-					
 						<div class="form-group col-4">
 							<label class="form-label" for="member_title">Committee Title</label>
-							
-							<select class="browser-default form-control" name="member_title">
+							<select class="form-control" name="member_title">
 								@foreach($titles as $title)
 									<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
 								@endforeach
 							</select>
 						</div>
-						
 						<div class="form-group col-8">
 							<label class="form-label" for="dl_id">Member</label>
-							
-							<select class="browser-default form-control" name="dl_id">
+							<select class="form-control" name="dl_id">
 								@foreach($members as $member)
 									<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 								@endforeach
 							</select>
 						</div>
 					</div>
-					
 					<div class="form-row committeeRow" hidden>
 						<div class="form-group col-4">
 							<label class="form-label" for="member_title">Committee Title</label>
-							
-							<select class="browser-default form-control" name="member_title[]">
+							<select class="form-control" name="member_title[]">
 								@foreach($titles as $title)
 									<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
 								@endforeach
 							</select>
 						</div>
-						
 						<div class="form-group col-8">
 							<label class="form-label" for="dl_id">Member</label>
-							
-							<select class="browser-default form-control" name="dl_id[]">
+							<select class="form-control" name="dl_id[]">
 								@foreach($members as $member)
 									<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 								@endforeach
 							</select>
 						</div>
 					</div>
-					
 					<div class="form-group">
 						{{ Form::submit('Create New Reunion', ['class' => 'btn btn-primary form-control']) }}
 					</div>
-					
 				{!! Form::close() !!}
-				
 			</div>
 		</div>	
 	</div>

@@ -11,26 +11,6 @@
 |
 */
 
-// Route::get('/test_email/{registration}', function (App\Registration $registration) {
-	// $reunion = $registration->reunion;
-	// $totalYouths = $totalAdults = $totalChildren = 10;
-	// // Get all the shirt sizes
-	// $shirtSizes = explode('; ', $registration->shirt_sizes);
-	
-	// // Get the count of each age group
-	// $adults = explode('; ', $registration->adult_names);
-	// $youths = explode('; ', $registration->youth_names);
-	// $childs = explode('; ', $registration->child_names);
-	
-	// // Get the sizes of the shirts in reference to the amount
-	// // of each age group
-	// $adultSizes = array_slice($shirtSizes, 0, count($adults));
-	// $youthSizes = array_slice($shirtSizes, count($adults), count($youths));
-	// $childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
-	
-    // return view('emails.new_message', compact('reunion', 'registration', 'totalYouths', 'totalAdults', 'totalChildren', 'adultSizes', 'youthSizes', 'childrenSizes'));
-// });
-
 Route::get('/reunion_registration', function () {
 	$images = \App\Images::where('id', '>', '5')->get();
 	$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
@@ -47,13 +27,7 @@ Route::get('/delete_registration/{registration}', function (\App\Registration $r
     return view('admin.delete_modal.delete_registration', compact('registration', 'family'));
 });
 
-Route::get('/', function () {
-	$images = \App\Images::where('id', '>', '5')->get();
-	$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
-	$newReunionCheck = \App\Reunion::where('reunion_complete', 'N')->get()->last();
-	
-    return view('welcome', compact('images', 'reunions', 'newReunionCheck'));
-});
+Route::get('/', 'HomeController@home');
 
 Route::get('/past_reunion/{reunion}', function (\App\Reunion $reunion) {
 	$registrations = \App\Registration::where('reunion_id', $reunion->id);
@@ -89,6 +63,14 @@ Auth::routes();
 Route::resource('/registrations', 'RegistrationController');
 
 Route::get('/registrations/create/{reunion}', 'RegistrationController@create')->name('create_registration');
+
+Route::get('/settings', 'HomeController@settings')->name('settings');
+
+Route::put('/update_settings', 'HomeController@update_settings');
+
+Route::patch('/update_carousel/{picture}', 'HomeController@update_carousel');
+
+Route::delete('/delete_carousel/{picture}', 'HomeController@delete_carousel');
 
 Route::resource('/reunions', 'ReunionController');
 

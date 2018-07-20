@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Reunion_dl;
 use App\Registration;
+use App\CarouselImage;
 use App\Reunion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class HomeController extends Controller
 {
@@ -20,7 +24,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('store');
+        $this->middleware('auth')->except(['store', 'home']);
     }
 
     /**
@@ -42,6 +46,20 @@ class HomeController extends Controller
         return view('home', compact('user', 'userPhone1', 'rows', 'userPhone1', 'userPhone2', 'userPhone3', 'newReunionCheck', 'states'));
     }
 	
+    /**
+     * Show the application home page.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function home()
+    {
+		$images = CarouselImage::all();
+		$reunions = Reunion::orderby('reunion_year', 'desc')->get();
+		$newReunionCheck = Reunion::active();
+		
+		return view('welcome', compact('images', 'reunions', 'newReunionCheck'));
+    }
+	
 	/**
      * Show the application dashboard.
      *
@@ -59,6 +77,18 @@ class HomeController extends Controller
 		$states = \App\State::all();
 
         return view('home', compact('user', 'userPhone1', 'rows', 'userPhone1', 'userPhone2', 'userPhone3', 'newReunionCheck', 'states'));
+    }
+	
+	/**
+     * Show the application settings for admin.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function settings()
+    {
+		$images = CarouselImage::all();
+
+        return view('admin.settings.edit', compact('images'));
     }
 	
 	/**
@@ -149,10 +179,117 @@ class HomeController extends Controller
     }
 	
 	/**
+     * Update the settings for the site.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function update_settings(Request $request) {
+		$counter = 0;
+		
+		if($request->hasFile('photo')) {
+			foreach($request->file('photo') as $newImage) {
+				// Count how many images already saved for every iteration
+				$carouselCount = CarouselImage::all()->count();
+				
+				// Check to see if upload is an image
+				if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+					
+					$addImage = new CarouselImage();
+					// Check to see if images is too large
+					if($newImage->getError() == 1) {
+						$fileName = $request->file('photo')[0]->getClientOriginalName();
+						$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					} elseif($newImage->getError() == 0) {
+						// Check to see if images is about 25MB
+						// If it is then resize it
+						if($newImage->getClientSize() < 25000000) {
+							$image = Image::make($newImage->getRealPath())->orientate();
+							$path = $newImage->store('public/images');
+							
+							// prevent possible upsizing
+							// Create a larger version of the image
+							// and save to large image folder
+							$image->resize(1700, null, function ($constraint) {
+								$constraint->aspectRatio();
+								// $constraint->upsize();
+							});
+							
+							if($image->save(storage_path('app/'. $path))) {}
+							
+							$addImage->path = str_ireplace('public', 'storage', $path);
+							$addImage->height = $image->height();
+							$addImage->width = $image->width();
+							
+							if($carouselCount < 10) {
+							
+								if($addImage->save()) {
+									$counter++;
+								}
+								
+							}
+							
+						} else {
+							// Resize the image before storing. Will need to hash the filename first
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+							
+							$image->save(storage_path('app/'. $path));
+							$addImage->property_id = $showSeason->id;
+							
+							if($carouselCount < 10) {
+								
+								if($addImage->save()) {
+									$counter++;
+								}
+								
+							}
+						}
+					} else {
+						$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+					}
+				} else {
+					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+				}
+			}
+			
+			return redirect()->back()->with('status', 'Images added successfully');
+		}
+	}
+	
+	/**
+     * Update the picture for the site.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function update_carousel(Request $request, CarouselImage $picture) {
+		$picture->description = $request->description;
+		
+		if($picture->save()) {
+			return redirect()->back()->with('status', 'Pictures updated successfully');
+		}
+	}
+	
+	/**
+     * Update the picture for the site.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function delete_carousel(Request $request, CarouselImage $picture) {
+		if($picture) {
+			if($picture->delete()) {
+				return redirect()->back()->with('status', 'Picture deleted successfully');
+			}
+		}
+	}
+
+	/**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
-     */
+    */
     public function update(Request $request, Reunion_dl $reunion_dl)
     {
 		$this->validate($request, [

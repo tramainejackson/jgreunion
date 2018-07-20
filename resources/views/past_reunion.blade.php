@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('styles')
-	@include('function.bootstrap_css')
 	<style>
 		#reunion_page {
 			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset('storage/' . str_ireplace('public/', '', $reunion->picture)) }}');
@@ -33,12 +32,9 @@
 	</style>
 @endsection
 
-@section('scripts')
-	@include('function.bootstrap_js')
-@endsection
-
 @section('content')
 	<div id="reunion_page" class="container-fluid">
+	
 		<div class="row mb-2">
 			<div class="col">
 				<div id="page_header" style="margin: 0px -15px;">
@@ -47,6 +43,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="row mt-5">
 			<div class="col-11 col-lg-9 mx-auto">
 				<div class="pastReunionContent" id="hotel_information">
@@ -174,7 +171,9 @@
 				</div>	
 			</div>
 		</div>
+		
 	</div>
+	
 	<footer>
 		<div class="container-fluid">
 			<div class="row">

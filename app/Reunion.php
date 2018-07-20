@@ -29,4 +29,9 @@ class reunion extends Model
     {
         return $this->hasMany('App\Registration', 'reunion_id');
     }
+	
+    public function scopeActive($query) {
+		return $query->where('reunion_complete', 'N')->get();
+	}
+	
 }

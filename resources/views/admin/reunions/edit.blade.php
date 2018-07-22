@@ -152,15 +152,16 @@
 					<div class="form-row committeeRow" hidden>
 						<div class="form-group col-4">
 							<label class="form-label" for="member_title">Committee Title</label>
-							<select class="form-control" name="member_title[]" disabled>
+							<select class="browser-default form-control" name="member_title[]" disabled>
 								@foreach($titles as $title)
 									<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
 								@endforeach
 							</select>
 						</div>
+						
 						<div class="form-group col-6">
 							<label class="form-label" for="dl_id">Member</label>
-							<select class="form-control" name="dl_id[]" disabled>
+							<select class="browser-default form-control" name="dl_id[]" disabled>
 								@foreach($members as $member)
 									<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 								@endforeach
@@ -231,11 +232,15 @@
 					<div class="form-block-header">
 						<h3 class="text-left">Registered Members
 							<a href="{{ action('RegistrationController@create' , ['reunion' => $reunion->id]) }}" class="btn btn-outline-success mb-2">Add Registration</a>
-							<button type="button" class="btn btn-primary mb-2">Registrations <span class="badge badge-light">{{ $totalRegistrations->count() }}</span>
+							
+							<button type="button" class="btn btn-primary mb-2">Registrations <span class="badge badge-light">{{ $totalRegistrations }}</span>
 							<span class="sr-only">total registrations</span>
 							</button>
+
+							<button type="button" class="btn btn-outline-primary mb-2" data-target="#viewRgistrationsModal" data-toggle="modal">View Registrations Totals</button>
 						</h3>
 					</div>
+					
 					@php $loopCount = 0; @endphp
 					@foreach($reunion->registrations as $registration)
 						@php
@@ -281,6 +286,7 @@
 							</div>
 						@endif
 					@endforeach
+					
 					@if($reunion->registrations->isEmpty())
 						<div class="form-row emptyRegistrations">
 							<h2 class="text-left col-10">No Members Registered Yet</h2>
@@ -331,5 +337,104 @@
 		</div>
 		<!--Modal: modalConfirmDelete-->
 		
+		<!--Modal: modalConfirmDelete-->
+		<div class="modal fade" id="viewRgistrationsModal" tabindex="-1" role="dialog" aria-labelledby="viewRgistrationsModal" aria-hidden="true">
+		
+			<div class="modal-dialog modal-lg" role="document">
+				
+				<!--Content-->
+				<div class="modal-content text-center">
+					<!--Header-->
+					<div class="modal-header d-flex justify-content-center">
+					
+						<p class="heading">View Registration Totals</p>
+					
+					</div>
+
+					<!--Body-->
+					<div class="modal-body">
+						<div class="table-wrapper">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Total People</th>
+										<th># Adults</th>
+										<th># Youth</th>
+										<th># Children</th>
+										<th>$ Total Reg Fees</th>
+										<th>$ Total Reg Paid</th>
+										<th>$ Total Reg Due</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr>
+										<td>{{ $totalRegistrations }}<td>
+										<td><td>
+										<td><td>
+										<td><td>
+										<td><td>
+										<td><td>
+										<td><td>
+									</tr>
+									
+								</tbody>
+								
+							</table>
+							
+						</div>
+						
+						<div class="table-wrapper">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Total Shirts</th>
+										<th>2XL</th>
+										<th>XL</th>
+										<th>Large</th>
+										<th>Medium</th>
+										<th>Small</th>
+										<th>Youth Large</th>
+										<th>Youth Medium</th>
+										<th>Youth Small</th>
+										<th>Youth XS</th>
+										<th>5T</th>
+										<th>4T</th>
+										<th>3T</th>
+										<th>2T</th>
+										<th>12 Month</th>
+									</tr>
+								</thead>
+								
+								<tbody>
+									<tr>
+										<td>{{ $totalRegistrations }}<td>
+										<td><td>
+										<td><td>
+										<td><td>
+										<td><td>
+										<td><td>
+										<td><td>
+									</tr>
+									
+								</tbody>
+								
+							</table>
+							
+						</div>
+					</div>
+
+					<!--Footer-->
+					<div class="modal-footer flex-center">
+						<button type="button" class="btn btn-warning waves-effect" data-dismiss="modal">Close</a>
+					</div>
+					
+				</div>
+				<!--/.Content-->
+				
+			</div>
+			
+		</div>
+		<!--Modal: modalConfirmDelete-->
 	</div>
 @endsection

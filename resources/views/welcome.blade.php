@@ -89,21 +89,46 @@
 					@endif
 				</nav>
 			
-				@foreach($images as $image)
-					<!--Slides-->
-					<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
+				@if($images->count() > 0 && $images != null)
 					
-						<div class="view bgrd-attr" style="background-image:url('{{ asset($image->path) }}');">
+					@foreach($images as $image)
+						<!--Slides-->
+						<div class="carousel-item{{ $loop->first ? ' active' : '' }}">
+						
+							<div class="view bgrd-attr" style="background-image:url('{{ asset($image->path) }}');">
+
+								<div class="mask rgba-black-slight flex-center">
+									
+									<div class="">
+									
+										@if($image->description)
+										
+											<h2 class='image_caption_header'>{{ $image->description }}</h2>
+										
+										@endif
+										
+									</div>
+									
+								</div>
+								
+							</div>
+							
+						</div>
+						<!--/Slides-->
+					
+					@endforeach
+					
+				@else
+					
+					<div class="carousel-item active">
+						
+						<div class="view bgrd-attr" style="background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0)), url(../storage/reunion_background/dark_texture_background.jpg);">
 
 							<div class="mask rgba-black-slight flex-center">
 								
 								<div class="">
 								
-									@if($image->description)
-									
-										<h2 class='image_caption_header'>{{ $image->description }}</h2>
-									
-									@endif
+									<h1 class="white-text display-2">Jackson/Green Reunion</h1>
 									
 								</div>
 								
@@ -112,8 +137,8 @@
 						</div>
 						
 					</div>
-					<!--/Slides-->
-				@endforeach
+				
+				@endif
 				
 			</div>
 			<!--/.Slides-->
@@ -136,12 +161,12 @@
 		</div>
 		<!--/.Carousel Wrapper-->
 	</div>
-	
+
 	<div id="jgreunion_past_future" class="white">
 		<ul id="jgreunion_past_future_list" class="container-fluid py-3 m-0">
 			<li class="row pb-3">
 				<div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto">
-					<a href="/upcoming_reunion/{{ $newReunionCheck->count() > 0 ? $newReunionCheck->id : '#' }}" id="upcoming_btn" class="btn btn-lg d-block mt-2{{ $newReunionCheck->count() < 1 ? ' noActive' : '' }}">Upcoming Reunion - {{ $newReunionCheck->count() > 0 ? ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year : 'No Reunion Set Yet' }}</a>
+					<a href="/upcoming_reunion/{{ $newReunionCheck != null ? $newReunionCheck->id : '#' }}" id="upcoming_btn" class="btn btn-lg d-block mt-2{{ $newReunionCheck == null ? ' noActive' : '' }}">Upcoming Reunion - {{ $newReunionCheck != null ? ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year : 'No Reunion Set Yet' }}</a>
 				</div>
 
 				<div class="col-12 col-md-6 mx-auto">

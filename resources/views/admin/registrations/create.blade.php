@@ -1,60 +1,36 @@
 @extends('layouts.app')
 
-@section('styles')
-	@include('function.bootstrap_css')
-@endsection
-
-@section('scripts')
-	@include('function.bootstrap_js')
-@endsection
-
 @section('content')
 	<div class="container-fluid" id="profilePage">
-		<div class="row">
-			<div class="col-12">
-				<div class="jumbotron jumbotron-fluid">
-					<div class="page_header">
-						<h1>Jackson &amp; Green Family Reunion</h1>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<nav class="nav nav-pills justify-content-center py-3">
-					<a href='/' class='profileLink nav-link'>Home</a>
-					<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
-					
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						{{ csrf_field() }}
-					</form>
-				</nav>
-			</div>
-			<div class="col-9">
-				<nav class="nav nav-pills justify-content-start py-3">
-					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
-					<a href="/administrator" class="profileLink nav-link border-0">Family Members</a>
-					<a href="/reunions" class="profileLink nav-link active">Reunions</a>
-					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
-				</nav>
-			</div>
-		</div>
-		<div class="row bg-light">
+		
+		@include('admin.nav')
+		
+		<div class="row white">
+		
 			<div class="col-2 my-2">
 				<div class="">
 					<a href="/reunions/{{ $reunion->id }}/edit" class="btn btn-info btn-lg">All Registrations</a>
 				</div>
 			</div>
+			
 			<div class="col-8 membersForm">
 				<div class="pt-2 pb-4">
 					<h1 class="text-center">{{ $reunion->reunion_city }} Registration Form</h1>
 				</div>
+				
 				<div class="form-block-header mt-3">
 					<h3 class="mt-2 mb-4">Add A Family Member From List</h3>
 				</div>
+				
 				<div class="form-row mb-5">
+				
 					<div class="form-group col-10">
+					
 						<!-- Select User Already In Distro List -->
-						<select class="custom-select form-control createRegSelect">
+						<select class="browser-default form-control createRegSelect">
+						
 							<option value="#" selected disabled>----- Select A User From Members List -----</option>
+							
 							@foreach($members as $member)
 								@php
 									$thisReg = $member->registrations()->where([

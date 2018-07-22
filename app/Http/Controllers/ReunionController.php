@@ -130,8 +130,9 @@ class ReunionController extends Controller
 		$members = Reunion_dl::orderby('firstname', 'asc')->get();
 		$titles = Committee_Title::all();
 		$reunion_events = $reunion->events()->orderBy('event_date')->get();
-		$totalRegistrations = $reunion->registrations()->where('parent_reg', null);
-		
+		$totalRegistrations = $reunion->registrations()->where('parent_reg', null)->count();
+		$adults = $reunion->registrations()->pluck('adult_names');
+		dd($adults);
 		return view('admin.reunions.edit', compact('reunion', 'reunion_events', 'states', 'years', 'members', 'titles', 'totalRegistrations'));
     }
 
@@ -168,7 +169,9 @@ class ReunionController extends Controller
 			if($reunion->save()) {
 				// dd($request);
 				if(isset($request->event_id)) {
+					
 					if(count($request->event_id) < count($request->event_date)) {
+						
 						foreach($reunion->events as $key => $event) {
 							$eventDate = new Carbon($request->event_date[$key]);
 							$event->event_location = $request->event_location[$key];
@@ -192,7 +195,9 @@ class ReunionController extends Controller
 								
 							}
 						}
+						
 					} else {
+						
 						foreach($reunion->events as $key => $event) {
 							$eventDate = new Carbon($request->event_date[$key]);
 							$event->event_location = $request->event_location[$key];
@@ -203,6 +208,7 @@ class ReunionController extends Controller
 						}
 					}
 				} elseif(!isset($request->event_id) && isset($request->event_date)) {
+					
 					for($x=0; $x < count($request->event_date); $x++) {
 						// Create New Reunion Event Object
 						$event = new Reunion_event();
@@ -218,8 +224,11 @@ class ReunionController extends Controller
 				}
 				
 				if(isset($request->committee_member_id)) {
+					
 					if(count($request->committee_member_id) < count($request->member_title)) {
+						
 						foreach($reunion->committee as $key => $committee_member) {
+							
 							$member_dl = Reunion_dl::find($request->dl_id[$key]);
 							$committee_member->dl_id = $request->dl_id[$key];
 							$committee_member->member_title = $request->member_title[$key];

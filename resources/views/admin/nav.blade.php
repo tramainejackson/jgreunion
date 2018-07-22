@@ -20,7 +20,7 @@
 		<nav class="nav nav-pills justify-content-start py-3">
 			<a href="/administrator" class="profileLink nav-link border-0 active">Family Members</a>
 			
-			<a href="/reunions" class="profileLink nav-link">Reunions</a>
+			<a href="{{ route('reunions.index') }}" class="profileLink nav-link">Reunions</a>
 				
 			<a href="{{ route('settings') }}" class='profileLink nav-link border-0'>Settings</a>
 		

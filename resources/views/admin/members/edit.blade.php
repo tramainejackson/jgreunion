@@ -1,43 +1,11 @@
 @extends('layouts.app')
 
-@section('styles')
-	@include('function.bootstrap_css')
-@endsection
-
-@section('scripts')
-	@include('function.bootstrap_js')
-@endsection
-
 @section('content')
 	<div class="container-fluid" id="profilePage">
-		<div class="row">
-			<div class="col-12">
-				<div class="jumbotron jumbotron-fluid">
-					<div class="page_header">
-						<h1>Jackson &amp; Green Family Reunion</h1>
-					</div>
-				</div>
-			</div>
-			<div class="col-3">
-				<nav class="nav nav-pills justify-content-center py-3">
-					<a href='/' class='profileLink nav-link'>Home</a>
-					<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
-					
-					<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-						{{ csrf_field() }}
-					</form>
-				</nav>
-			</div>
-			<div class="col-9">
-				<nav class="nav nav-pills justify-content-start py-3">
-					<!-- <a href='/profile' class='profileLink nav-link border-0'>My Profile</a> -->
-					<a href='/administrator' class='profileLink nav-link border-0 active'>Family Members</a>
-					<a href='/reunions' class='profileLink nav-link'>Reunions</a>
-					<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
-				</nav>
-			</div>
-		</div>
-		<div class="row bg-light">
+
+		@include('admin.nav')
+		
+		<div class="row white">
 			<div class="col-2 my-2">
 				<div class="">
 					<a href="/administrator" class="btn btn-info btn-lg">All Members</a>
@@ -79,7 +47,7 @@
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label" for="state">State</label>
-							<select class="form-control custom-select" name="state">
+							<select class="form-control form-control browser-default" name="state">
 								@foreach($states as $state)
 									<option value="{{ $state->state_abb }}" {{ $member->state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 								@endforeach
@@ -96,7 +64,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="age_group">Age Group</label>
-						<select class="form-control custom-select" name="age_group">
+						<select class="form-control form-control browser-default" name="age_group">
 							<option value="adult" {{ $member->age_group == 'adult' ? 'selected' : '' }}>Adult</option>
 							<option value="youth" {{ $member->age_group == 'youth' ? 'selected' : '' }}>Youth</option>
 							<option value="child" {{ $member->age_group == 'child' ? 'selected' : '' }}>Child</option>
@@ -104,7 +72,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="mail_preference">Mail Preference</label>
-						<select class="form-control custom-select" name="mail_preference">
+						<select class="form-control form-control browser-default" name="mail_preference">
 							<option value="M" {{ $member->mail_preference == 'M' ? 'selected' : '' }}>Mail</option>
 							<option value="E" {{ $member->mail_preference == 'E' ? 'selected' : '' }}>Email</option>
 						</select>
@@ -127,7 +95,7 @@
 						</div>
 						<div class="form-group text-center col-6">
 							<label for="" class="form-label text-center d-block">Mother</label>
-							<select class="custom-select w-50 mx-auto" name="mother">
+							<select class="form-control browser-default w-50 mx-auto" name="mother">
 								<option value="blank">--- Select Mother ---</option>
 								@foreach($members as $option)
 									<option value="{{ $option->id }}" {{ $option->id == $member->mother ? 'selected' : '' }}>{{ $option->firstname . ' ' . $option->lastname }}</option>
@@ -136,7 +104,7 @@
 						</div>
 						<div class="form-group text-center col-6">
 							<label for="" class="form-label text-center d-block">Father</label>
-							<select class="custom-select w-50 mx-auto" name="father">
+							<select class="form-control browser-default w-50 mx-auto" name="father">
 								<option value="blank">--- Select Father ---</option>
 								@foreach($members as $option)
 									<option value="{{ $option->id }}" {{ $option->id == $member->father ? 'selected' : '' }}>{{ $option->firstname . ' ' . $option->lastname }}</option>
@@ -145,7 +113,7 @@
 						</div>
 						<div class="form-group text-center col-12">
 							<label for="" class="form-label text-center d-block">Spouse</label>
-							<select class="custom-select w-50 mx-auto" name="spouse">
+							<select class="form-control browser-default w-50 mx-auto" name="spouse">
 								<option value="blank">--- Select Spouse ---</option>
 								@foreach($members as $option)
 									<option value="{{ $option->id }}" {{ $option->id == $member->spouse ? 'selected' : '' }}>{{ $option->firstname . ' ' . $option->lastname }}</option>
@@ -155,7 +123,7 @@
 						<div class="form-group text-center col-12">
 							<label for="" class="form-label text-center d-block">Siblings</label>
 							@foreach($siblings as $sibling)
-								<select class="custom-select w-50 mx-auto" name="siblings[]">
+								<select class="form-control browser-default w-50 mx-auto" name="siblings[]">
 									<option value="blank">--- Select A Sibling ---</option>
 									@foreach($members as $option)
 										<option value="{{ $option->id }}" {{ $option->id == $sibling ? 'selected' : '' }}>{{ $option->firstname . ' ' . $option->lastname }}</option>
@@ -166,7 +134,7 @@
 
 						<!-- Blank row for adding a sibling member --> 
 						<div class="form-group text-center col-12 siblingRow hidden">
-							<select class="custom-select w-50 mx-auto" name="siblings[]">
+							<select class="form-control browser-default w-50 mx-auto" name="siblings[]">
 								<option value="blank">--- Select A Sibling ---</option>
 								@foreach($members as $option)
 									<option value="{{ $option->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>
@@ -180,7 +148,7 @@
 						<div class="form-group text-center col-12">
 							<label for="" class="form-label text-center d-block">Children</label>
 							@foreach($children as $child)
-								<select class="custom-select w-50 mx-auto" name="children[]">
+								<select class="form-control browser-default w-50 mx-auto" name="children[]">
 									<option value="blank">--- Select A Child ---</option>
 									@foreach($members as $option)
 										<option value="{{ $option->id }}" {{ $option->id == $child ? 'selected' : '' }}>{{ $option->firstname . ' ' . $option->lastname }}</option>
@@ -191,7 +159,7 @@
 						
 						<!-- Blank row for adding a child member --> 
 						<div class="form-group text-center col-12 childrenRow hidden">
-							<select class="custom-select w-50 mx-auto" name="children[]">
+							<select class="form-control browser-default w-50 mx-auto" name="children[]">
 								<option value="blank">--- Select A Child ---</option>
 								@foreach($members as $option)
 									<option value="{{ $option->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>
@@ -227,7 +195,7 @@
 						<!-- Blank row for adding a household member --> 
 						<div class="form-row hhMemberRow hidden">
 							<div class="form-group col-7">
-								<select class="custom-select" name="houseMember[]">
+								<select class="form-control browser-default" name="houseMember[]">
 									<option value="blank">--- Select A Household Member ---</option>
 									@foreach($members as $option)
 										<option value="{{ $option->id }}">{{ $option->firstname . ' ' . $option->lastname }}</option>

@@ -57,6 +57,8 @@ class HomeController extends Controller
 		$reunions = Reunion::orderby('reunion_year', 'desc')->get();
 		$newReunionCheck = Reunion::active();
 		
+		$newReunionCheck->count() > 0 ? $newReunionCheck = $newReunionCheck->first() : $newReunionCheck = null;
+		
 		return view('welcome', compact('images', 'reunions', 'newReunionCheck'));
     }
 	

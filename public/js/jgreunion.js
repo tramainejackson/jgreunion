@@ -85,7 +85,7 @@ $(document).ready(function()
 			.insertBefore('.reunionEventRow');
 		$('.reunionEventRow').prev()
 			.find('.datetimepicker')
-			.datetimepicker({
+			.pickadate({
 				timepicker:false,
 				format:'m/d/Y',
 				value:'01/01/2018'

@@ -43,9 +43,11 @@
 						<label class="form-label" for="reunion_state">Year</label>
 						
 						<select class="browser-default form-control" name="reunion_year">
-							@foreach($years as $year)
-								<option value="{{ $year->year_num }}" {{ old('reunion_year') && old('reunion_year') == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
-							@endforeach
+							@for($i=0; $i <= 10; $i++)
+								
+								<option value="{{ $carbonDate->addYear()->year }}" {{ old('reunion_year') && old('reunion_year') == $year->year_num ? 'selected' : '' }}>{{ $carbonDate->year }}</option>
+								
+							@endfor
 						</select>
 					</div>
 					<div class="form-block-header">

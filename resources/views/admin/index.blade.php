@@ -14,21 +14,25 @@
 		@include('admin.nav')
 		
 		<div class="row white" id="distribution_list">
-			<div class="col-2 my-2">
-				<div class="">
-					<a href="/members/create" class="btn btn-info btn-lg">Create New Member</a>
-				</div>
-			</div>
+			<div class="col-12 d-flex align-items-center">
 			
-			<div class="col-4 my-2">
-				<div class="form-group">
-					<div class="input-group input-group-lg">
-						<input type="text" name="" class="memberFilter form-control" value="" placeholder="Filter By Name" />
-						<div class="input-group-prepend">
-							<span class="oi oi-magnifying-glass input-group-text"></span>
+				<div class="my-4">
+					<div class="mr-5">
+						<a href="/members/create" class="btn btn-info btn-lg">Create New Member</a>
+					</div>
+				</div>
+				
+				<div class="my-4">
+					<div class="">
+						<div class="input-group input-group-lg">
+							<input type="text" name="" class="memberFilter form-control" value="" placeholder="Filter By Name" />
+							<div class="input-group-prepend">
+								<span class="oi oi-magnifying-glass input-group-text"></span>
+							</div>
 						</div>
 					</div>
 				</div>
+				
 			</div>
 			
 			<div class="col-12">

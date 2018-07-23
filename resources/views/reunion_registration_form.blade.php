@@ -41,7 +41,7 @@
 			</div>
 			<div class="form-group col-6 col-sm-4">
 				<label for="state" class="form-label">State:</label>
-				<select class="form-control custom-select" name="state">
+				<select class="form-control browser-default" name="state">
 					@foreach($states as $state)
 						<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('state') == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 					@endforeach
@@ -92,7 +92,7 @@
 									<span class="input-group-text" id="basic-addon">$</span>
 								</div>
 								
-								<input type="number" name="" class="costPA form-control" value="{{ $reunion->adult_price }}" disabled step="0.01" />
+								<input type="number" name="" class="costPA form-control" value="{{ $reunion->adult_price }}" disabled />
 							</div>
 						</td>
 						<td>
@@ -103,7 +103,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon">$</span>
 								</div>
-								<input type="number" name="total_adult" id="total_adult" class="form-control" disabled/>
+								<input type="number" name="total_adult" id="total_adult" class="form-control" value="{{ $reunion->adult_price }}" disabled/>
 							</div>
 						</td>
 					</tr>
@@ -115,7 +115,7 @@
 							<input type="text" name="attending_adult_name[]" class="attending_adult_name form-control" placeholder="Enter First Name" value="" disabled />
 						</td>
 						<td>
-							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>
+							<select name="adult_shirts[]" class="shirt_size browser-default form-control" disabled>
 								<option value="blank" selected>----- Select A Shirt Size -----</option>
 								<option value="S">Small</option>
 								<option value="M">Medium</option>
@@ -158,7 +158,7 @@
 							<input type="text" name="attending_youth_name[]" class="attending_youth_name form-control" placeholder="Enter First Name" value="" disabled />
 						</td>
 						<td>
-							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>
+							<select name="youth_shirts[]" class="shirt_size browser-default form-control" disabled>
 								<option value="blank" selected>----- Select A Shirt Size -----</option>
 								<option value="S">Youth XSmall</option>
 								<option value="M">Youth Small</option>
@@ -198,7 +198,7 @@
 							<input type="text" name="attending_children_name[]" class="attending_children_name form-control" placeholder="Enter First Name" value="" disabled />
 						</td>
 						<td>
-							<select name="shirt_sizes[]" class="shirt_size custom-select form-control" disabled>
+							<select name="children_shirts[]" class="shirt_size browser-default form-control" disabled>
 								<option value="blank" selected>----- Select A Shirt Size -----</option>
 								<option value="S">12 Months</option>
 								<option value="M">2T</option>
@@ -219,7 +219,8 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text" id="basic-addon">$</span>
 								</div>
-								<input type="number" name="total_amount_due" id="total_amount_due" class="form-control" disabled/>
+								
+								<input type="number" name="total_amount_due" id="total_amount_due" class="form-control" value="{{ $reunion->adult_price }}" disabled/>
 							</div>
 						</td>
 					</tr>

@@ -59,7 +59,7 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-		// dd($registration->adult_names);
+		dd($request);
 		
 		if(!Auth::check()) {
 			$this->validate($request, [
@@ -86,7 +86,9 @@ class RegistrationController extends Controller
 			$registration->phone = $member->phone =  $request->phone != '' ? $request->phone : null;
 			$registration->registree_name = $request->firstname . ' ' . $request->lastname;
 			$registration->reg_date = Carbon::now();
-			$registration->shirt_sizes = isset($request->shirt_sizes) ? join('; ', $request->shirt_sizes) : null;
+			$registration->adult_shirts = isset($request->adult_shirts) ? join('; ', $request->adult_shirts) : null;
+			$registration->youth_shirts = isset($request->youth_shirts) ? join('; ', $request->youth_shirts) : null;
+			$registration->children_shirts = isset($request->children_shirts) ? join('; ', $request->children_shirts) : null;
 			$member->firstname = $request->firstname;
 			$member->lastname = $request->lastname;
 			$member->age_group = 'adult';
@@ -279,9 +281,9 @@ class RegistrationController extends Controller
 		
 		// Get the sizes of the shirts in reference to the amount
 		// of each age group
-		$adultSizes = array_slice($shirtSizes, 0, count($adults));
-		$youthSizes = array_slice($shirtSizes, count($adults), count($youths));
-		$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
+		$adultSizes = explode('; ', $registration->adult_shirts);
+		$youthSizes = explode('; ', $registration->youth_shirts);
+		$childrenSizes = explode('; ', $registration->children_shirts);
 
 		return view('admin.registrations.edit', compact('registration', 'states', 'family', 'adultSizes', 'youthSizes', 'childrenSizes', 'adults', 'youths', 'childs', 'all_members'));
     }
@@ -299,7 +301,9 @@ class RegistrationController extends Controller
 		$registration->total_amount_due = $request->total_amount_due;
 		$registration->total_amount_paid = $request->total_amount_paid;
 		$registration->due_at_reg = $request->due_at_reg;
-		$registration->shirt_sizes = implode('; ', $request->shirt_sizes);
+		$registration->adult_shirts = implode('; ', $request->adult_sizes);
+		$registration->youth_shirts = implode('; ', $request->youth_sizes);
+		$registration->children_shirts = implode('; ', $request->children_sizes);
 		$registration->reg_notes = $request->reg_notes;
 
 		if($registration->dl_id != null) {

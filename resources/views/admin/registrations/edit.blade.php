@@ -170,7 +170,7 @@
 													</div>
 												</div>
 
-												<select class="browser-default form-control my-1" name="shirt_sizes[]">
+												<select class="browser-default form-control my-1" name="adult_sizes[]">
 													<option value="S" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Small</option>
 													<option value="M" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Medium</option>
 													<option value="L" {{ isset($adultSizes[$loop->iteration - 1]) ? $adultSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Large</option>
@@ -183,6 +183,7 @@
 									@endforeach
 								@endif
 							</div>
+							
 							<div class="form-group col-4">
 								@if($youths != null)
 									@foreach($youths as $family_reg)
@@ -197,7 +198,7 @@
 													</div>
 												</div>
 													
-												<select class="browser-default form-control my-1" name="shirt_sizes[]">
+												<select class="browser-default form-control my-1" name="youth_sizes[]">
 													<option value="S" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>Youth XSmall</option>
 													<option value="M" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>Youth Small</option>
 													<option value="L" {{ isset($youthSizes[$loop->iteration - 1]) ? $youthSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>Youth Medium</option>
@@ -210,6 +211,7 @@
 									@endforeach
 								@endif
 							</div>
+							
 							<div class="form-group col-4">
 								@if($childs != null)
 									@foreach($childs as $family_reg)
@@ -224,7 +226,7 @@
 													</div>
 												</div>
 												
-												<select class="browser-default form-control my-1" name="shirt_sizes[]">
+												<select class="browser-default form-control my-1" name="children_sizes[]">
 													<option value="S" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'S' ? 'selected' : '' : ' '}}>12 Months</option>
 													<option value="M" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'M' ?  'selected' : ''  : '' }}>2T</option>
 													<option value="L" {{ isset($childrenSizes[$loop->iteration - 1]) ? $childrenSizes[$loop->iteration - 1] == 'L' ?  'selected' : '' : '' }}>3T</option>
@@ -284,6 +286,7 @@
 											</div>
 										</div>
 									</div>
+									
 									<div class="card">
 										<div class="card-header" style="background: linear-gradient(to bottom right, #f7ff7f, black); color: whitesmoke;">
 											<h3 class="col-12"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Add New Member</h3>

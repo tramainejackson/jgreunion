@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('styles')
-	@include('function.bootstrap_css')
 	<style>
 		#reunion_page {
 			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset('storage/' . str_ireplace('public/', '', $reunion->picture)) }}');
@@ -36,10 +35,6 @@
 			}
 		}
 	</style>
-@endsection
-
-@section('scripts')
-	@include('function.bootstrap_js')
 @endsection
 
 @section('content')

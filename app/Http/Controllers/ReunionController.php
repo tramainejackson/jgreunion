@@ -50,11 +50,11 @@ class ReunionController extends Controller
     public function create()
     {
 		$states = State::all();
-		$years = Year::all();
 		$members = Reunion_dl::orderby('firstname', 'asc')->get();
 		$titles = Committee_Title::all();
+		$carbonDate = Carbon::now()->subYear();
 		
-        return view('admin.reunions.create', compact('states', 'years', 'members', 'titles'));
+        return view('admin.reunions.create', compact('states', 'carbonDate', 'members', 'titles'));
     }
 
     /**
@@ -126,14 +126,84 @@ class ReunionController extends Controller
     public function edit(Reunion $reunion)
     {
 		$states = State::all();
-		$years = Year::all();
+		$carbonDate = Carbon::now()->subYear();
 		$members = Reunion_dl::orderby('firstname', 'asc')->get();
 		$titles = Committee_Title::all();
 		$reunion_events = $reunion->events()->orderBy('event_date')->get();
 		$totalRegistrations = $reunion->registrations()->where('parent_reg', null)->count();
-		$adults = $reunion->registrations()->pluck('adult_names');
-		dd($adults);
-		return view('admin.reunions.edit', compact('reunion', 'reunion_events', 'states', 'years', 'members', 'titles', 'totalRegistrations'));
+		$adults = $reunion->registrations()->where('parent_reg', null)->pluck('adult_names');
+		$youths = $reunion->registrations()->where('parent_reg', null)->pluck('youth_names');
+		$children = $reunion->registrations()->where('parent_reg', null)->pluck('children_names');
+		$adultShirts = $reunion->registrations()->where('parent_reg', null)->pluck('adult_shirts');
+		$youthShirts = $reunion->registrations()->where('parent_reg', null)->pluck('youth_shirts');
+		$childrenShirts = $reunion->registrations()->where('parent_reg', null)->pluck('children_shirts');
+
+		$totalAdults = count(array_filter(explode(';', $adults->implode(';'))));
+		$totalYouths = count(array_filter(explode(';', $youths->implode(';'))));
+		$totalChildren = count(array_filter(explode(';', $children->implode(';'))));
+
+		$totalShirts = count(array_filter(explode(';', $adultShirts->implode(';')))) + count(array_filter(explode(';', $youthShirts->implode(';')))) + count(array_filter(explode(';', $childrenShirts->implode(';'))));
+		
+		$totalFees = $reunion->registrations()->totalRegFees();
+		$totalRegFeesPaid = $reunion->registrations()->totalRegFeesPaid();
+		$totalRegFeesDue = $reunion->registrations()->totalRegFeesDue();
+		
+		// Shirts Sizes Totals
+		// Adults
+		$aSm = $aMd = $aLg = $aXl = $aXXl = $aXXXl = 0; 
+		foreach(array_filter(explode(';', $adultShirts->implode(';'))) as $shirtSize) {
+			if(trim($shirtSize) == 'S') {
+				$aSm++;
+			} elseif(trim($shirtSize) == 'M') {
+				$aMd++;
+			} elseif(trim($shirtSize) == 'L') {
+				$aLg++;
+			} elseif(trim($shirtSize) == 'XL') {
+				$aXl++;
+			} elseif(trim($shirtSize) == 'XXL') {
+				$aXXl++;
+			} elseif(trim($shirtSize) == 'XXXL') {
+				$aXXXl++;
+			}
+		}
+
+		// Youths
+		$yXSm = $ySm = $yMd = $yLg = 0; 
+		foreach(array_filter(explode(';', $youthShirts->implode(';'))) as $shirtSize) {
+			if(trim($shirtSize) == 'S') {
+				$yXSm++;
+			} elseif(trim($shirtSize) == 'M') {
+				$ySm++;
+			} elseif(trim($shirtSize) == 'L') {
+				$yMd++;
+			} elseif(trim($shirtSize) == 'XL') {
+				$yLg++;
+			} elseif(trim($shirtSize) == 'XXL') {
+				$aSm++;
+			} elseif(trim($shirtSize) == 'XXXL') {
+				$aLg++;
+			}
+		}
+		
+		// Children
+		$c6 = $c5T = $c4T = $c3T = $c2T = $c12M = 0; 
+		foreach(array_filter(explode(';', $childrenShirts->implode(';'))) as $shirtSize) {
+			if(trim($shirtSize) == 'S') {
+				$c12M++;
+			} elseif(trim($shirtSize) == 'M') {
+				$c2T++;
+			} elseif(trim($shirtSize) == 'L') {
+				$c3T++;
+			} elseif(trim($shirtSize) == 'XL') {
+				$c4T++;
+			} elseif(trim($shirtSize) == 'XXL') {
+				$c5T++;
+			} elseif(trim($shirtSize) == 'XXXL') {
+				$c6++;
+			}
+		}
+		
+		return view('admin.reunions.edit', compact('reunion', 'reunion_events', 'states', 'carbonDate', 'members', 'titles', 'totalRegistrations', 'totalAdults', 'totalYouths', 'totalChildren', 'totalFees', 'totalRegFeesPaid', 'totalRegFeesDue', 'totalShirts', 'aSm', 'aMd', 'aLg', 'aXl', 'aXXl', 'aXXXl', 'yXSm', 'ySm', 'yMd', 'yLg', 'c5T', 'c4T', 'c3T', 'c2T', 'c12M', 'c6'));
     }
 
     /**

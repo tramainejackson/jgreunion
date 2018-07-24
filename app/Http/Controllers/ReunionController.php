@@ -143,10 +143,10 @@ class ReunionController extends Controller
 		$totalChildren = count(array_filter(explode(';', $children->implode(';'))));
 
 		$totalShirts = count(array_filter(explode(';', $adultShirts->implode(';')))) + count(array_filter(explode(';', $youthShirts->implode(';')))) + count(array_filter(explode(';', $childrenShirts->implode(';'))));
-		
-		$totalFees = $reunion->registrations()->totalRegFees();
-		$totalRegFeesPaid = $reunion->registrations()->totalRegFeesPaid();
-		$totalRegFeesDue = $reunion->registrations()->totalRegFeesDue();
+
+		$totalFees = is_numeric($reunion->registrations()->totalRegFees()) ? $reunion->registrations()->totalRegFees() : 0;
+		$totalRegFeesPaid = is_numeric($reunion->registrations()->totalRegFeesPaid()) ? $reunion->registrations()->totalRegFeesPaid() : 0;
+		$totalRegFeesDue = is_numeric($reunion->registrations()->totalRegFeesDue()) ? $reunion->registrations()->totalRegFeesDue() : 0;
 		
 		// Shirts Sizes Totals
 		// Adults

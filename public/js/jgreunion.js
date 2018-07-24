@@ -32,7 +32,6 @@ $(document).ready(function()
 	$('.datetimepicker').pickadate({
 		// Escape any “rule” characters with an exclamation mark (!).
 		format: 'mm/dd/yyyy',
-		formatSubmit: 'yyyy/mm/dd',
 		min: new Date(1970,1,01),
 	});
 	
@@ -87,8 +86,7 @@ $(document).ready(function()
 			.find('.datetimepicker')
 			.pickadate({
 				timepicker:false,
-				format:'m/d/Y',
-				value:'01/01/2018'
+				format:'mm/dd/yyyy',
 			});
 	});
 
@@ -196,9 +194,6 @@ $(document).ready(function()
 			$(newAdultRow).insertBefore($("#attending_adult_row_default"));
 			$('.attending_adult_name').first().val($('input#firstname').val());
 		}
-		
-		$('#total_adult').val(count * $('.costPA').val());
-		$('#total_amount_due').val($('.costPC').val() + $('.costPY').val() + (count * $('.costPA').val()));
 	});
 	
 	//Add name rows for youths and edit the total amount due
@@ -216,9 +211,6 @@ $(document).ready(function()
 			$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
 			$(newAdultRow).insertBefore($("#attending_youth_row_default"));
 		}
-
-		$('#total_youth').val(count * $('.costPY').val());
-		$('#total_amount_due').val($('.costPC').val() + (count * $('.costPY').val()) + $('.costPA').val());
 	});
 	
 	//Add name rows for children
@@ -236,9 +228,6 @@ $(document).ready(function()
 			$(newAdultRow).removeAttr('id').find('input, select').removeAttr('disabled');
 			$(newAdultRow).insertBefore($("#attending_children_row_default"));
 		}
-
-		$('#total_children').val(count * $('.costPC').val());
-		$('#total_amount_due').val((count * $('.costPC').val()) + $('.costPY').val() + $('.costPA').val());
 	});
 	
 	//

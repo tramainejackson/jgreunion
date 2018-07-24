@@ -18,11 +18,11 @@
 	</div>
 	<div class="col-9">
 		<nav class="nav nav-pills justify-content-start py-3">
-			<a href="/administrator" class="profileLink nav-link border-0 active">Family Members</a>
+			<a href="/administrator" class="profileLink nav-link{{ str_contains(url()->current(), ['members', 'administrator']) ? ' active' : '' }}">Family Members</a>
 			
-			<a href="{{ route('reunions.index') }}" class="profileLink nav-link">Reunions</a>
+			<a href="{{ route('reunions.index') }}" class="profileLink nav-link{{ str_contains(url()->current(), 'reunion') ? ' active' : '' }}">Reunions</a>
 				
-			<a href="{{ route('settings') }}" class='profileLink nav-link border-0'>Settings</a>
+			<a href="{{ route('settings') }}" class="profileLink nav-link{{ str_contains(url()->current(), 'setting') ? ' active' : '' }}">Settings</a>
 		
 			<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
 			

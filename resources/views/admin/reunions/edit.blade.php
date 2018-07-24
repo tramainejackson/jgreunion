@@ -225,7 +225,8 @@
 					<div class="form-row reunionEventRow" hidden>
 						<div class="form-group col-3">
 							<label class="form-label" for="member_title">Event Date</label>
-							<input type="text" name="event_date[]" class="form-control datetimepicker" disabled />
+							
+							<input type="text" name="event_date[]" class="form-control datetimepicker" placeholder="Select a date" disabled />
 						</div>
 						<div class="form-group col-3">
 							<label class="form-label" for="member_title">Event Location</label>
@@ -233,6 +234,7 @@
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label" for="dl_id">Description</label>
+							
 							<textarea class="form-control" name="event_description[]" placeholder="Enter A Description of The Event" rows="1" disabled></textarea>
 						</div>
 						<div class="form-group col-2">
@@ -263,41 +265,66 @@
 
 							$childs = $registration->children_names != null || $registration->children_names != '' ? explode('; ', $registration->children_names) : null;
 						@endphp
+						
 						@if($registration->parent_reg == null)
+							
 							@php $loopCount++; @endphp
-							<div class="form-row">
-								<div class="form-group col-1">
-									<span class="d-inline-block">{{ $loopCount }}.</span>
-									<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
-								</div>
+							
+							<div class="form-row my-2">
+								
 								@if($registration->dl_id == null)
-									<div class="form-group col-5">
-										<select class="form-control browser-default" name="" disabled>
-											<option value="">{{ $registration->registree_name }}</option>
-										</select>
+									
+									<div class="col">
+										<div class="d-inline-block">
+											<span class="">{{ $loopCount }}.</span>
+											
+											<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
+										</div>
+										
+										<div class="d-inline-block">
+											<select class="form-control browser-default" name="" disabled>
+												<option value="">{{ $registration->registree_name }}</option>
+											</select>
+										</div>
 									</div>
+									
 								@else
-									<div class="form-group col-5">
-										<select class="form-control browser-default" name="" disabled>
-											@foreach($members as $member)
-												<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
-											@endforeach
-										</select>
+									
+									<div class="col d-flex align-items-center justify-content-center">
+										<div class="mr-2">
+											<span class="">{{ $loopCount }}.</span>
+											
+											<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
+										</div>
+										
+										<div class="">
+											<select class="form-control browser-default" name="" disabled>
+												@foreach($members as $member)
+													<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
+												@endforeach
+											</select>
+										</div>
 									</div>
+									
 								@endif
-								<div class="form-group col-2">
-									<button type="button" class="btn btn-primary mb-2 w-100">Family Total <span class="badge badge-light">{{ (count($adults) + count($youths) + count($childs)) }}</span>
+								
+								<div class="col">
+									<button type="button" class="btn btn-primary btn-block mb-2">Family Total <span class="badge badge-light">{{ (count($adults) + count($youths) + count($childs)) }}</span>
 									<span class="sr-only">total household members</span>
 									</button>
 								</div>
-								<div class="form-group col-2">
-									<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning d-block">Edit</a>
+								
+								<div class="col">
+									<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning btn-block">Edit</a>
 								</div>
-								<div class="form-group col-2">
-									<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger d-block text-truncate deleteRegistration" onclick="removeRegistrationModal({{ $registration->id }});">Delete Registration</button>
+								
+								<div class="col">
+									<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger btn-block text-truncate deleteRegistration" onclick="removeRegistrationModal({{ $registration->id }});">Delete Registration</button>
 								</div>
 							</div>
+							
 						@endif
+						
 					@endforeach
 					
 					@if($reunion->registrations->isEmpty())

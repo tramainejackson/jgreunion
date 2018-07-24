@@ -45,7 +45,9 @@
 					<h1 class="">{{ $reunion->reunion_year . ' ' . $reunion->reunion_city }} Registration Form</h1>
 				</div>
 				<div class="modal-body">
+				
 					@include('reunion_registration_form')
+					
 				</div>
 			</div>
 		</div>
@@ -309,23 +311,4 @@
 		</div>
 	</div>
 	
-	<script>
-		//Add total amounts to pay for registration
-		$("body").on("change", "#attending_adult, #attending_youth, #attending_children", function(e) {
-			var attendingNumA = $("#attending_adult").val();
-			var attendingNumY = $("#attending_youth").val();
-			var attendingNumC = $("#attending_children").val();
-			var totalAmountA = Number(attendingNumA * $(".costPA").val());
-			var totalAmountY = Number(attendingNumY * $(".costPY").val());
-			var totalAmountC = Number(attendingNumC * $(".costPC").val());
-			var totalDue = Number(totalAmountA + totalAmountY + totalAmountC);
-			$("#total_adult").val(totalAmountA);
-			$("#total_youth").val(totalAmountY);
-			$("#total_children").val(totalAmountC);
-			$("#total_amount_due").val(totalDue);
-		});
-	</script>
-	@if($errors->count() > 0)
-		<script>$('#registration_modal').modal('show');</script>
-	@endif
 @endsection

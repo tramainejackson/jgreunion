@@ -233,10 +233,43 @@
 			</table>
 		</div>
 	{!! Form::close() !!}
-	<script>
-		$('body').on('change', '#firstname', function(e) {
-			console.log($(this).val());
-			$('.attending_adult_name').first().val($(this).val());
-		});
-	</script>
+	
+	@section('add_scripts')
+		<script>
+			$('body').on('change', '#firstname', function(e) {
+				console.log($(this).val());
+				$('.attending_adult_name').first().val($(this).val());
+			});
+		</script>
+
+		<script>
+			//Add total amounts to pay for registration
+			$("body").on("change", "#attending_adult, #attending_youth, #attending_children", function(e) {
+				var attendingNumA = $("#attending_adult").val();
+				var attendingNumY = $("#attending_youth").val();
+				var attendingNumC = $("#attending_children").val();
+				var totalAmountA = Number(attendingNumA * $(".costPA").val());
+				var totalAmountY = Number(attendingNumY * $(".costPY").val());
+				var totalAmountC = Number(attendingNumC * $(".costPC").val());
+				var totalDue = Number(totalAmountA + totalAmountY + totalAmountC);
+				$("#total_adult").val(totalAmountA);
+				$("#total_youth").val(totalAmountY);
+				$("#total_children").val(totalAmountC);
+				$("#total_amount_due").val(totalDue);
+				
+				console.log(totalAmountA);
+				console.log(totalAmountY);
+				console.log(totalAmountC);
+			});
+		</script>
+		
+	@endsection
+	
+	@if($errors->count() > 0)
+		
+		@section('add_scripts')
+			<script>$('#registration_modal').modal('show');</script>
+		@endsection
+		
+	@endif
 </div>

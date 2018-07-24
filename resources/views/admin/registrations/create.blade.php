@@ -24,7 +24,7 @@
 				
 				<div class="form-row mb-5">
 				
-					<div class="form-group col-10">
+					<div class="col-9 align-items-center justify-content-center d-flex">
 					
 						<!-- Select User Already In Distro List -->
 						<select class="browser-default form-control createRegSelect">
@@ -43,8 +43,9 @@
 							@endforeach
 						</select>
 					</div>
-					<div class="form-group col-2">
-						<a href="#" class="btn btn-info createRegSelectLink">Go</a>
+					
+					<div class="col-3">
+						<a href="#" class="btn btn-info btn-block createRegSelectLink">Go</a>
 					</div>
 				</div>
 				
@@ -89,7 +90,7 @@
 						</div>
 						<div class="form-group col-4">
 							<label class="form-label" for="state">State</label>
-							<select class="form-control custom-select" name="state">
+							<select class="form-control browser-default" name="state">
 								@foreach($states as $state)
 									<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('state') == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 								@endforeach
@@ -106,7 +107,7 @@
 					</div>
 					<div class="form-group">
 						<label class="form-label" for="mail_preference">Mail Preference</label>
-						<select class="form-control custom-select" name="mail_preference">
+						<select class="form-control browser-default" name="mail_preference">
 							<option value="M" {{ old('mail_preference') && old('mail_preference') == 'M' ? 'selected' : '' }}>Mail</option>
 							<option value="E" {{ old('mail_preference') && old('mail_preference') == 'E' ? 'selected' : '' }}>Email</option>
 						</select>

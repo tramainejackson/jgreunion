@@ -237,7 +237,7 @@ class ReunionController extends Controller
 			}
 			
 			if($reunion->save()) {
-				// dd($request);
+				
 				if(isset($request->event_id)) {
 					
 					if(count($request->event_id) < count($request->event_date)) {

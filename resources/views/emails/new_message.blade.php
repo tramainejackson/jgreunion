@@ -106,11 +106,13 @@
 					<li style="padding:2px 0px;">Email Address: {{ $registration->email != null ? $registration->email : 'No Email Address Added' }}</li>
 					<li style="padding:2px 0px;">Phone: {{ $registration->phone != null ? $registration->phone : 'No Phone Number Added' }}</li>
 					<li style="padding:2px 0px;">Address: {{ $registration->address . ' ' . $registration->city . ', ' . $registration->state . ' '. $registration->zip }}</li>
+					
 					@php
 						$adults = explode('; ', $registration->adult_names);
 						$youths = explode('; ', $registration->youth_names);
 						$childs = explode('; ', $registration->children_names);
 					@endphp
+					
 					<li style="padding:2px 0px;">Total Adults: 
 						<u>{{ $totalAdults }}</u>
 						@if(count($adults) == 1 && $adults[0] == '')

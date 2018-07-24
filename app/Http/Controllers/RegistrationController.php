@@ -59,9 +59,8 @@ class RegistrationController extends Controller
      */
     public function store(Request $request)
     {
-		dd($request);
-		
 		if(!Auth::check()) {
+			
 			$this->validate($request, [
 				'firstname' => 'required|max:50',
 				'lastname' => 'required|max:50',
@@ -297,7 +296,6 @@ class RegistrationController extends Controller
      */
     public function update(Request $request, Registration $registration)
     {
-		// dd($request);
 		$registration->total_amount_due = $request->total_amount_due;
 		$registration->total_amount_paid = $request->total_amount_paid;
 		$registration->due_at_reg = $request->due_at_reg;

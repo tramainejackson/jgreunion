@@ -211,7 +211,7 @@ class HomeController extends Controller
 							// prevent possible upsizing
 							// Create a larger version of the image
 							// and save to large image folder
-							$image->resize(1700, null, function ($constraint) {
+							$image->resize(1600, null, function ($constraint) {
 								$constraint->aspectRatio();
 								// $constraint->upsize();
 							});

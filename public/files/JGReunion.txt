@@ -2,6 +2,8 @@
 		Jackson / Green Family Reunion
 ------------------------------------------------
 
+Reunion pictures not showing on active site
+Not adding shirt sizes somewhere
 Create a button that checks for duplicates
 Add a footer
 Allow user to have a profile and be an admin

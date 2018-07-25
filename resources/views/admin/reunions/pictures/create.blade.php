@@ -55,10 +55,9 @@
 							<h2 class="">Current Images</h2>
 						</div>
 						
-						@foreach($images as $image)
+						@foreach($reunion->images as $image)
 					
 							<div class="col-4 my-1">
-								{!! Form::open(['action' => ['HomeController@update_carousel', 'picture' => $image->id], 'method' => 'PATCH']) !!}
 								
 									<!--Card-->
 									<div class="card">
@@ -93,8 +92,6 @@
 										
 									</div>
 									<!--/.Card-->
-								
-								{!! Form::close() !!}
 								
 							</div>
 							

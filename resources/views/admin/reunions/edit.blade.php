@@ -9,10 +9,12 @@
 		
 			<div class="col-2 my-2">
 				<div class="">
-					<a href="/reunions" class="btn btn-info btn-lg">All Reunions</a>
+					<a href="{{ route('reunions.index') }}" class="btn btn-info btn-lg btn-block my-2">All Reunions</a>
+					
+					<a href="{{ route('create_reunion_pictures', ['reunion' => $reunion->id]) }}" class="btn btn-lg btn-block btn-outline-light-green">Add Reunion Photos</a>
 					
 					@if($reunion->reunion_complete == 'N')
-						<a href="#" type="button" data-target="#completeReunionModal" data-toggle="modal" class="btn btn-warning btn-lg">Complete Reunion</a>
+						<a href="#" type="button" data-target="#completeReunionModal" data-toggle="modal" class="btn btn-warning btn-lg btn-block my-2">Complete Reunion</a>
 					@endif
 				</div>
 			</div>
@@ -21,6 +23,40 @@
 			
 				<div class="">
 					<h2 class="text-left">Edit {{ ucwords($reunion->reunion_city) }} Reunion</h2>
+				</div>
+				
+				<div class="reunionBgrdWrapper">
+					<div class="reunionBgrdDiv mb-3 z-depth-1-half rounded" style="min-height:200px; background: url('{{ asset($reunion->picture) }}') no-repeat center;">
+						<div class="rgba-black-light white-text d-flex flex-column align-items-center justify-content-center" style="min-height:200px;">
+							<div class="">
+								<h1 class="h1-responsive">Change Background</h1>
+							</div>
+							
+							{!! Form::open(['method' => 'PUT', 'files' => true]) !!}
+							
+								<div class="md-form">
+								
+									<div class="file-field">
+										<div class="btn btn-primary btn-sm float-left">
+											<span>Choose file</span>
+											<input type="file" id="new_reunion_background" name="new_reunion_background" />
+										</div>
+										<div class="file-path-wrapper">
+										   <input class="file-path validate white-text" type="text" placeholder="Upload Picture" />
+										   
+										   <input class="hidden" type="number" value="{{ $reunion->id }}" hidden />
+										</div>
+									</div>
+								</div>
+									
+								<div class="animated" style="visibility:hidden;">
+									<button class="btn btn-block btn-success reunionBgrdImg" type="button">Change Photo</button>
+								</div>
+							
+							{!! Form::close()!!}
+							
+						</div>
+					</div>
 				</div>
 				
 				{!! Form::open(['action' => ['ReunionController@update', 'reunion' => $reunion->id], 'method' => 'PUT', 'files' => true]) !!}

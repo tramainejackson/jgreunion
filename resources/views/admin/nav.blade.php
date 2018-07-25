@@ -21,7 +21,7 @@
 		<nav class="nav nav-pills justify-content-start py-3">
 			<a href="/administrator" class="profileLink nav-link{{ str_contains(url()->current(), ['members', 'administrator']) ? ' active' : '' }}">Family Members</a>
 			
-			<a href="{{ route('reunions.index') }}" class="profileLink nav-link{{ str_contains(url()->current(), 'reunions') ? ' active' : '' }}">Reunions</a>
+			<a href="{{ route('reunions.index') }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">Reunions</a>
 				
 			<a href="{{ route('settings') }}" class="profileLink nav-link{{ str_contains(url()->current(), 'setting') ? ' active' : '' }}">Settings</a>
 		

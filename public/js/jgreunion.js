@@ -348,26 +348,73 @@ $(document).ready(function()
 		$('#pictureConfirmDelete form').attr('action', formAction);
 	});
 	
-	// Upload new images for the league. Add progress bar while uploading
-	$('body').on('click', 'form[name="new_pictures_form"] button[type="button"]', function() {
-		// event.preventDefault();
-		var formData = new FormData();
+	// Show button to submit new reunion background after file has been added
+	$('body').on('change', 'input[name="new_reunion_background"]', function() {
+		$('.reunionBgrdImg').parent().addClass('flipInX').removeAttr('style');
+	});
+	
+	// // Upload new images for the league. Add progress bar while uploading
+	// $('body').on('click', 'form[name="new_pictures_form"] button[type="button"]', function() {
+		// // event.preventDefault();
+		// var formData = new FormData();
 		
-		if(document.getElementById('new_picture_file').files.length > 1) {
-			 var i = 0, len = document.getElementById('new_picture_file').files.length;
+		// if(document.getElementById('new_picture_file').files.length > 1) {
+			 // var i = 0, len = document.getElementById('new_picture_file').files.length;
 			 
-			for(i; i < len; i++) {
-				formData.append("photo[]", document.getElementById('new_picture_file').files[i]);
-			}
+			// for(i; i < len; i++) {
+				// formData.append("photo[]", document.getElementById('new_picture_file').files[i]);
+			// }
 			
-		} else {
+		// } else {
 			
-			formData.append("photo[]", document.getElementById('new_picture_file').files[0]);
+			// formData.append("photo[]", document.getElementById('new_picture_file').files[0]);
 
-		}
+		// }
+
+		// $.ajax({
+			// url: "/reunions/",
+			// method: "PATCH",
+			// data: formData,
+			// contentType: false,
+			// processData: false,
+			// cache: false,
+			// xhr: function() {
+				// var xhr = new XMLHttpRequest();
+				
+				// xhr.upload.addEventListener('progress', function(e) {
+					// var progressbar = Math.round((e.loaded/e.total) * 100);
+					// $('#progress_modal').modal('show');
+					// $('#pro').css('width', progressbar + '%').text(progressbar + '%');
+				// });
+				
+				// return xhr;
+			// },
+			
+			// success: function(data) {
+				// $('#progress_modal').modal('hide');
+				
+				// // Display an error toast
+				// toastr.success('Images added successfully.');
+			
+				// setTimeout(function() {
+					// window.open('/league_pictures', '_self');
+				// }, 2000);
+			// },
+		// });
+		
+		// return false;
+	// });
+	
+	// Upload new image for the current reunion
+	$('body').on('click', 'button.reunionBgrdImg', function() {
+		event.preventDefault();
+		
+		var formData = new FormData();
+		var reunion_id = $(this).parent().prev().find('input[type="number"]').val();
+		formData.append("photo", document.getElementById('new_reunion_background').files[0]);
 
 		$.ajax({
-			url: "/league_pictures",
+			url: "/reunion_image_add/" + reunion_id,
 			method: "POST",
 			data: formData,
 			contentType: false,
@@ -386,14 +433,12 @@ $(document).ready(function()
 			},
 			
 			success: function(data) {
-				$('#progress_modal').modal('hide');
+				// Display a success toast
+				toastr.success(data);
 				
-				// Display an error toast
-				toastr.success('Images added successfully.');
-			
-				setTimeout(function() {
-					window.open('/league_pictures', '_self');
-				}, 2000);
+				$(".reunionBgrdWrapper").load("/reunions/" + reunion_id + "/edit .reunionBgrdDiv", function(responseTxt, statusTxt, xhr) {
+					$('#progress_modal').modal('toggle');
+				});
 			},
 		});
 		

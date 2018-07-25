@@ -30,6 +30,14 @@ class reunion extends Model
         return $this->hasMany('App\Registration', 'reunion_id');
     }
 	
+	/**
+     * Get the registered members for the reunion.
+     */
+    public function images()
+    {
+        return $this->hasMany('App\ReunionImage');
+    }
+	
     public function scopeActive($query) {
 		return $query->where('reunion_complete', 'N')->get();
 	}

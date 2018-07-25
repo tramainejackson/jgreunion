@@ -10,11 +10,16 @@ use App\Reunion_dl;
 use App\State;
 use App\Year;
 use App\Committee_Title;
+use App\CarouselImage;
+use App\ReunionImage;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ReunionController extends Controller
 {
@@ -55,8 +60,183 @@ class ReunionController extends Controller
 		$carbonDate = Carbon::now()->subYear();
 		
         return view('admin.reunions.create', compact('states', 'carbonDate', 'members', 'titles'));
+    }    
+	
+	/**
+     * Show the form for creating new pictures for specific reunion.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function create_reunion_pictures(Reunion $reunion)
+    {
+		$images = CarouselImage::all();
+		
+        return view('admin.reunions.pictures.create', compact('images', 'reunion'));
     }
+	
+	/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function update_reunion_image(Request $request, Reunion $reunion)
+	{
+		if($request->hasFile('photo')) {
+			$newImage = $request->file('photo');
+			
+			// Check to see if upload is an image
+			if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+				
+				// Check to see if images is too large
+				if($newImage->getError() == 1) {
+					
+					$fileName = $request->file('photo')[0]->getClientOriginalName();
+					$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					
+				} elseif($newImage->getError() == 0) {
+					
+					// Check to see if images is about 25MB
+					// If it is then resize it
+					if($newImage->getClientSize() < 25000000) {
+						$image = Image::make($newImage->getRealPath())->orientate();
+						$path = $newImage->store('public/reunion_background');
+						
+						if($image->save(storage_path('app/'. $path))) {
+							// Prevent possible upsizing
+							// Create a larger version of the image
+							// and save to large image folder
+							$image->resize(1700, null, function ($constraint) {
+								$constraint->aspectRatio();
+								// $constraint->upsize();
+							});
+							
+							if($image->save(storage_path('app/'. $path))) {
+							
+								$reunion->picture = str_ireplace('public', 'storage', $path);
 
+								if($reunion->save()) {}
+								
+							}
+						}
+						
+					} else {
+						// Resize the image before storing. Will need to hash the filename first
+						$path = $newImage->store('public/reunion_background');
+						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+							$constraint->aspectRatio();
+							$constraint->upsize();
+						});
+						
+						if($image->save(storage_path('app/'. $path))) {
+							
+							$reunion->picture = str_ireplace('public', 'storage', $path);
+
+							if($reunion->save()) {}
+							
+						}
+							
+					}
+				} else {
+					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+				}
+			} else {
+				$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+			}
+
+			return 'Image added';
+		}
+
+	}
+	
+	/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function update_reunion_pictures(Request $request, Reunion $reunion)
+	{
+		if($request->hasFile('photo')) {
+			foreach($request->file('photo') as $newImage) {
+				
+				// Check to see if upload is an image
+				if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+					
+					$addImage = new ReunionImage();
+					
+					// Check to see if images is too large
+					if($newImage->getError() == 1) {
+						$fileName = $request->file('photo')[0]->getClientOriginalName();
+						$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					} elseif($newImage->getError() == 0) {
+						// Check to see if images is about 25MB
+						// If it is then resize it
+						if($newImage->getClientSize() < 25000000) {
+							$image = Image::make($newImage->getRealPath())->orientate();
+							$path = $newImage->store('public/images');
+							
+							if($image->save(storage_path('app/'. $path))) {
+								// prevent possible upsizing
+								// Create a larger version of the image
+								// and save to large image folder
+								$image->resize(1700, null, function ($constraint) {
+									$constraint->aspectRatio();
+									// $constraint->upsize();
+								});
+								
+								
+								if($image->save(storage_path('app/'. str_ireplace('images', 'images/lg', $path)))) {
+									// Get the height of the current large image
+									$addImage->lg_height = $image->height();
+									
+									// Create a smaller version of the image
+									// and save to large image folder
+									$image->resize(544, null, function ($constraint) {
+										$constraint->aspectRatio();
+									});
+									
+									if($image->save(storage_path('app/'. str_ireplace('images', 'images/sm', $path)))) {
+										// Get the height of the current small image
+										$addImage->sm_height = $image->height();
+									}
+								}
+							}
+							
+							$addImage->path = str_ireplace('public', 'storage', $path);
+							$addImage->reunion_id = $reunion->id;
+
+							if($addImage->save()) {}
+							
+						} else {
+							// Resize the image before storing. Will need to hash the filename first
+							$path = $newImage->store('public/images');
+							$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+								$constraint->aspectRatio();
+								$constraint->upsize();
+							});
+							
+							$image->save(storage_path('app/'. $path));
+							$addImage->property_id = $showSeason->id;
+							
+							if($carouselCount < 10) {
+								
+								if($addImage->save()) {
+									$counter++;
+								}
+								
+							}
+						}
+					} else {
+						$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+					}
+				} else {
+					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+				}
+			}
+			
+			return redirect()->back()->with('status', 'Images added successfully');
+		}
+	}
+	
     /**
      * Store a newly created resource in storage.
      *
@@ -277,6 +457,7 @@ class ReunionController extends Controller
 							$event->save();
 						}
 					}
+
 				} elseif(!isset($request->event_id) && isset($request->event_date)) {
 					
 					for($x=0; $x < count($request->event_date); $x++) {
@@ -337,7 +518,9 @@ class ReunionController extends Controller
 							$committee_member->save();
 						}
 					}
+					
 				} elseif(!isset($request->committee_member_id) && isset($request->member_title)) {
+
 					for($x=0; $x < count($request->member_title); $x++) {
 						// Create New Reunion Object
 						$committee_member = new Reunion_committee();

@@ -66,7 +66,7 @@ Route::resource('/reunions', 'ReunionController');
 
 Route::get('/registrations/create/{reunion}', 'RegistrationController@create')->name('create_registration');
 
-Route::delete('/delete_carousel/{picture}', 'HomeController@delete_carousel');
+Route::get('/reunions/{reunion}/pictures/create', 'ReunionController@create_reunion_pictures')->name('create_reunion_pictures');
 
 Route::get('/settings', 'HomeController@settings')->name('settings');
 
@@ -82,11 +82,16 @@ Route::get('/members/{reunion_dl}/edit', 'HomeController@edit')->name('edit_memb
 
 Route::post('/members', 'HomeController@store')->name('add_member');
 
+Route::post('/reunion_images_add/{reunion}', 'ReunionController@update_reunion_pictures');
+
+Route::post('/reunion_image_add/{reunion}', 'ReunionController@update_reunion_image');
+
 Route::put('/members/{reunion_dl}', 'HomeController@update')->name('update_member');
 
 Route::put('/members/{reunion_dl}/add_house_hold', 'HomeController@add_house_hold')->name('add_house_hold');
 
 Route::put('/registrations/{registration}/add_registration_member', 'RegistrationController@add_registration_member')->name('add_registration_member');
+
 
 Route::delete('/members/{reunion_dl}/remove_house_hold', 'HomeController@remove_house_hold')->name('remove_house_hold');
 
@@ -95,3 +100,5 @@ Route::delete('/remove_reg_member/{registration}/{remove_ind_member}', 'Registra
 Route::delete('/reunion_events/{reunion_event}', 'ReunionController@remove_event')->name('remove_event');
 
 Route::delete('/reunion_committee_members/{reunion_committee}', 'ReunionController@remove_committee_member')->name('remove_committee_member');
+
+Route::delete('/delete_carousel/{picture}', 'HomeController@delete_carousel');

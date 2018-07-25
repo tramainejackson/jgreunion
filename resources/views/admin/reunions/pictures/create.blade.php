@@ -1,154 +1,154 @@
-@extends('layouts.app')
+ @extends('layouts.app')
 
 @section('content')
-	<div class="container-fluid" id="profilePage">
-		
+	<div class="container-fluid" id="">
+	
 		@include('admin.nav')
 		
 		<div class="row white">
-		
+
 			<div class="col-2 my-2">
 				<div class="">
-					<a href="/reunions" class="btn btn-info btn-lg">All Reunions</a>
+					<a href="{{ route('reunions.index') }}" class="btn btn-info btn-lg btn-block my-2">All Reunions</a>
+					
+					<a href="{{ route('reunions.edit', ['reunion' => $reunion->id]) }}" class="btn btn-lg btn-block btn-outline-primary">Edit {{ $reunion->reunion_city . ' ' . $reunion->reunion_year }} Reunion</a>
+					
 				</div>
 			</div>
 			
-			<div class="col-8 reunionForm">
-			
-				<h1 class="mt-2 mb-0">Create New Reunion</h1>
-				<h4 class="nt-0 mb-4 red-text">**Creating A New Reunion Will Make All Current Reunions Complete**</h4>
-				
-				{!! Form::open(['action' => ['ReunionController@store'], 'method' => 'POST']) !!}
-				
-					<div class="form-block-header">
-						<h3 class="">Location</h3>
+			<div class="col-8 my-5 mx-auto">
+	
+				{!! Form::open(['action' => ['ReunionController@update_reunion_pictures', 'reunion' => $reunion->id], 'method' => 'POST', 'files' => true, 'class' => 'mb-5']) !!}
+					
+					<div class="">
+						<h2 class="">Add Images For {{ $reunion->reunion_city . ' ' . $reunion->reunion_year }}</h2>
 					</div>
 					
-					<div class="form-row">
-						<div class="form-group col-6">
-							<label class="form-label" for="reunion_city">City</label>
-							<input type="text" name="reunion_city" class="form-control" value="{{  old('reunion_city') }}" placeholder="Enter City For Next Reunion" />
-						</div>
-						<div class="form-group col-6">
-							<label class="form-label" for="reunion_state">State</label>
-							
-							<select class="browser-default form-control" name="reunion_state">
-								@foreach($states as $state)
-									<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('reunion_state') == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="reunion_state">Year</label>
+					<div class="md-form">
+					
+						<div class="file-field">
 						
-						<select class="browser-default form-control" name="reunion_year">
-							@for($i=0; $i <= 10; $i++)
-								
-								<option value="{{ $carbonDate->addYear()->year }}" {{ old('reunion_year') && old('reunion_year') == $year->year_num ? 'selected' : '' }}>{{ $carbonDate->year }}</option>
-								
-							@endfor
-						</select>
-					</div>
-					<div class="form-block-header">
-						<h3 class="">Prices</h3>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="adult_price">Adult Price</label>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">$</span>
+							<div class="btn btn-primary btn-sm float-left">
+								<span>Choose file</span>
+								<input type="file" id="new_picture_file" name="photo[]" multiple="multiple" />
 							</div>
-							<input type="number" name="adult_price" class="form-control" value="{{ old('adult_price') }}" step="0.01" placeholder="Price For Adult 18-Older" />
-							<div class="input-group-append">
-								<span class="input-group-text" id="basic-addon1">Per Adult</span>
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="form-label" for="youth_price">Youth Price</label>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">$</span>
-							</div>
-							<input type="number" name="youth_price" class="form-control" value="{{ old('youth_price') }}" step="0.01" placeholder="Price For Youth 4-18" />
-							<div class="input-group-append">
-								<span class="input-group-text" id="basic-addon1">Per Youth</span>
-							</div>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label class="form-label" for="child_price">Child Price</label>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<span class="input-group-text" id="basic-addon1">$</span>
-							</div>
-							<input type="number" name="child_price" class="form-control" value="{{ old('child_price') }}" aria-label="Username" aria-describedby="basic-addon1" step="0.01" placeholder="Price For Children 3-Under" />
-							<div class="input-group-append">
-								<span class="input-group-text" id="basic-addon1">Per Child</span>
-							</div>
-						</div>
-					</div>
-					
-					<div class="form-block-header">
-						<h3 class="">Committee
-							<button type="button" class="btn btn-outline-success mb-2 addCommitteeMember">Add Committee Member</button>
-						</h3>
-					</div>
-					
-					<div class="form-row">
-					
-						<div class="form-group col-4">
-							<label class="form-label" for="member_title">Committee Title</label>
 							
-							<select class="browser-default form-control" name="member_title">
-								@foreach($titles as $title)
-									<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
-								@endforeach
-							</select>
-						</div>
-						
-						<div class="form-group col-8">
-							<label class="form-label" for="dl_id">Member</label>
-							
-							<select class="browser-default form-control" name="dl_id">
-								@foreach($members as $member)
-									<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
-								@endforeach
-							</select>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text" placeholder="Upload Up To 10 Pictures At A Time" />
+							</div>
 						</div>
 					</div>
-					
-					<div class="form-row committeeRow" hidden>
-						<div class="form-group col-4">
-							<label class="form-label" for="member_title">Committee Title</label>
-							
-							<select class="browser-default form-control" name="member_title[]">
-								@foreach($titles as $title)
-									<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
-								@endforeach
-							</select>
-						</div>
-						
-						<div class="form-group col-8">
-							<label class="form-label" for="dl_id">Member</label>
-							
-							<select class="browser-default form-control" name="dl_id[]">
-								@foreach($members as $member)
-									<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
-								@endforeach
-							</select>
-						</div>
-					</div>
-					
-					<div class="form-group">
-						{{ Form::submit('Create New Reunion', ['class' => 'btn btn-primary form-control']) }}
+
+					<div class="md-form">
+						<button class="btn btn-success" type="submit">Add Pictures</button>
 					</div>
 					
 				{!! Form::close() !!}
 				
+				<hr/>
+
+				@if($reunion->images->isNotEmpty())
+					
+					<div class="row">
+					
+						<div class="col-12 mt-5">
+							<h2 class="">Current Images</h2>
+						</div>
+						
+						@foreach($images as $image)
+					
+							<div class="col-4 my-1">
+								{!! Form::open(['action' => ['HomeController@update_carousel', 'picture' => $image->id], 'method' => 'PATCH']) !!}
+								
+									<!--Card-->
+									<div class="card">
+									
+										<!--Card image-->
+										<div class="view">
+											<img src="{{ asset($image->path) }}" class="img-fluid" alt="photo">
+											<a href="#">
+												<div class="mask rgba-white-slight"></div>
+											</a>
+										</div>
+										
+										<!--Card content-->
+										<div class="card-body text-center">
+										
+											<!--Title-->
+											<h4 class="card-title">Description</h4>
+											
+											<!--Input-->
+											<div class="md-form">
+												<textarea  name="description" class="md-textarea form-control" placeholder="Enter A Description For The Picture">{{ $image->description }}</textarea>
+											</div>
+											
+											<div class="md-form">
+												<input class="hidden" value="{{ $image->id }}" hidden />
+											</div>
+											
+											<button class="btn btn-primary" type="submit">Update</button>
+											
+											<button class="btn btn-danger deleteCarousel" type="button"data-toggle="modal" data-target="#pictureConfirmDelete">Delete</button>
+										</div>
+										
+									</div>
+									<!--/.Card-->
+								
+								{!! Form::close() !!}
+								
+							</div>
+							
+						@endforeach
+					
+					</div>
+					
+				@else
+					<div class="row">
+					
+						<div class="col-12 my-5">
+							<h2 class="text-center">No Current Images For This Reunion</h2>
+						</div>
+						
+					</div>
+				@endif
+				
 			</div>
-		</div>	
+			
+		</div>
+		
+		<!--Modal: modalConfirmDelete-->
+		<div class="modal fade" id="pictureConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		
+			<div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+			
+				{!! Form::open(['action' => ['HomeController@delete_carousel', 'picture' => 'null'], 'method' => 'DELETE']) !!}
+				
+					<!--Content-->
+					<div class="modal-content text-center">
+						<!--Header-->
+						<div class="modal-header d-flex justify-content-center">
+							<p class="heading">Are you sure you want to delete this image?</p>
+						</div>
+
+						<!--Body-->
+						<div class="modal-body"></div>
+
+						<!--Footer-->
+						<div class="modal-footer flex-center">
+							<button type="submit" class="btn btn-outline-danger">Yes</button>
+							
+							<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">No</a>
+						</div>
+						
+					</div>
+					<!--/.Content-->
+					
+				{!! Form::close() !!}
+				
+			</div>
+			
+		</div>
+		<!--Modal: modalConfirmDelete-->
+			
 	</div>
 @endsection

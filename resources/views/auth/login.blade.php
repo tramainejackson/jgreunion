@@ -7,7 +7,7 @@
 				<div class="row">
 					<div class="col">
 						<nav class="nav nav-pills justify-content-end">
-							<a href="/" class="homeLink nav-link">Home</a>
+							<a href="/" class="homeLink profileLink nav-link">Home</a>
 							
 							@if(!Auth::check())
 								<!-- <a href='/register' class='profileLink nav-link'>Register</a> -->

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('styles')
+@section('add_styles')
 	<style>
 		#reunion_page {
-			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset('storage/' . str_ireplace('public/', '', $reunion->picture)) }}');
+			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset($reunion->picture) }}');
 		}
 		
 		@media only screen and (max-width:576px) {

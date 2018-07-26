@@ -116,8 +116,9 @@ class RegistrationController extends Controller
 				$registration->dl_id = $member->id;
 				
 				if($registration->save()) {
-					// \Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
-					// \Mail::to('desmund94@gmail.com')->send(new Registration_User($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+					\Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+					
+					\Mail::to('desmund94@gmail.com')->send(new Registration_User($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
 					
 					$newAdults = explode('; ', $registration->adult_names);
 					if(count($newAdults) > 1) {

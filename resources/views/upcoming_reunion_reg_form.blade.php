@@ -83,15 +83,15 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<div class="row d-sm-none">
-						<button type="button" class="btn m-3" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile">Menu</button>
+					<div class="row">
+						<button type="button" class="btn m-3 btn-dark" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile">Menu</button>
 					</div>
 					<div class="row collapse" id="upcoming_reunion_mobile">
 						<div class="col">
 							<nav class="">
 								<a href="/" class="btn btn-info btn-lg d-block my-2">Home</a>
 								
-								<a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationFormLink" class="btn btn-info btn-lg w-100 d-block">Registration Form</a>
+								<a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationFormLink" class="btn btn-info btn-lg d-block">Registration Form</a>
 
 								<a class="btn btn-lg my-2 d-block" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">Jackson/Green Facebook Page Click Here</a>
 							</nav>
@@ -153,14 +153,17 @@
 										<span class="text-danger">{{ $errors->first('city') }}</span>
 									@endif
 								</div>
+								
 								<div class="form-group col-6 col-sm-4">
 									<label for="state" class="form-label">State:</label>
+									
 									<select class="form-control browser-default" name="state">
 										@foreach($states as $state)
 											<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('state') == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
 										@endforeach
 									</select>
 								</div>
+								
 								<div class="form-group col-6 col-sm-4">
 									<label for="zip" class="form-label">Zip:</label>
 									<input type="number" name="zip" id="zip" class="form-control" placeholder="Enter Zip Code" value="{{ old('zip') }}" />
@@ -195,6 +198,7 @@
 									<li class="p-1 m-1 costPY"><span class="d-block text-center">Cost Per Youth</span><span class="d-block text-center">$<span class="youthCostSpan">{{ $reunion->youth_price }}</span></span></li>
 									<li class="p-1 m-1 costPC"><span class="d-block text-center">Cost Per Child</span><span class="d-block text-center">$<span class="childCostSpan">{{ $reunion->child_price }}</span></span></li>
 								</ul>
+								
 								<div id="adult_row" class="mt-3">
 									<div class="d-flex align-items-center mb-1">
 										<h4 class="w-75 m-0">Adults (Ages 16+)</h4>
@@ -213,11 +217,13 @@
 									</div>
 
 									<div class="form-row attending_adult_row" id="attending_adult_row_default">
+									
 										<div class="form-group col-6">
 											<input type="text" name="attending_adult_name[]" class="attending_adult_name form-control" placeholder="Enter First Name" value="" disabled />
 										</div>
+										
 										<div class="form-group col-6">
-											<select name="shirt_sizes[]" class="shirt_size browser-default form-control" disabled>
+											<select name="adult_shirts[]" class="shirt_size browser-default form-control" disabled>
 												<option value="blank" selected>----- Select A Shirt Size -----</option>
 												<option value="S">Small</option>
 												<option value="M">Medium</option>
@@ -248,11 +254,13 @@
 									</div>
 
 									<div class="form-row attending_youth_row" id="attending_youth_row_default">
+									
 										<div class="form-group col-6">
 											<input type="text" name="attending_youth_name[]" class="attending_youth_name form-control" placeholder="Enter First Name" value="" disabled />
 										</div>
+										
 										<div class="form-group col-6">
-											<select name="shirt_sizes[]" class="shirt_size browser-default form-control" disabled>
+											<select name="youth_shirts[]" class="shirt_size browser-default form-control" disabled>
 												<option value="blank" selected>----- Select A Shirt Size -----</option>
 												<option value="S">Youth XSmall</option>
 												<option value="M">Youth Small</option>
@@ -282,11 +290,13 @@
 									</div>
 									
 									<div class="form-row attending_children_row" id="attending_children_row_default">
+									
 										<div class="form-group col-6">
 											<input type="text" name="attending_children_name[]" class="attending_children_name form-control" placeholder="Enter First Name" value="" disabled />
 										</div>
+										
 										<div class="form-group col-6">
-											<select name="shirt_sizes[]" class="shirt_size browser-default form-control" disabled>
+											<select name="children_shirts[]" class="shirt_size browser-default form-control" disabled>
 												<option value="blank" selected>----- Select A Shirt Size -----</option>
 												<option value="S">12 Months</option>
 												<option value="M">2T</option>

@@ -72,6 +72,7 @@
 				</nav>
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="d-none d-xl-block col-xl-2">
 				<div class="my-2">
@@ -309,7 +310,9 @@
 					@endif
 				</div>
 			</div>
+			
 			<div class="col-md-2"></div>
+			
 		</div>
 	</div>
 	

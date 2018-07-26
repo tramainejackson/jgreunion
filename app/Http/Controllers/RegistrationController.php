@@ -381,7 +381,9 @@ class RegistrationController extends Controller
 				}
 				
 				$registration->shirt_sizes = implode('; ', array_merge($adultSizes, $youthSizes, $childrenSizes));
+				
 			} elseif($member->age_group == 'youth') {
+				
 				if(count(explode('; ', $registration->youth_names)) > 1) {
 					$registration->youth_names .= '; ' . $member->firstname;
 					array_push($youthSizes, 'S');
@@ -396,7 +398,9 @@ class RegistrationController extends Controller
 				}
 				
 				$registration->shirt_sizes = implode('; ', array_merge($adultSizes, $youthSizes, $childrenSizes));
+				
 			} elseif($member->age_group == 'child') {
+				
 				$registration->shirt_sizes .= '; ' . 'S';
 				
 				if(count(explode('; ', $registration->children_names)) > 1) {

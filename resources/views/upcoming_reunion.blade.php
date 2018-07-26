@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('add_styles')
+
 	<style>
 		#reunion_page {
 			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset($reunion->picture) }}');
@@ -35,6 +36,7 @@
 			}
 		}
 	</style>
+	
 @endsection
 
 @section('content')
@@ -63,7 +65,7 @@
 					<a href="/" class="btn btn-info btn-lg d-block my-2">Home</a>
 					
 					@if(!Auth::check())
-						<a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationFormLink" class="btn btn-info btn-lg w-100 d-block">Registration Form</a>
+						<a href="/upcoming_reunion/{{$reunion->id}}/registration_form" id="registrationFormLink" class="btn btn-info btn-lg d-block">Registration Form</a>
 					@endif
 					
 					<a class="btn btn-lg my-2 d-block" id="fb_link" href="https://www.facebook.com/groups/129978977047141/" target="_blank">Jackson/Green Facebook Page Click Here</a>
@@ -78,7 +80,7 @@
 				
 				@if(!Auth::check())
 					<div id="registration_btn" class="my-1">
-						<button type="button" id="registrationFormBtn" class="btn btn-info btn-lg w-100 d-block" data-toggle="modal" data-target="#registration_modal">Registration Form</button>
+						<a type="button" id="registrationFormBtn" class="btn btn-info btn-lg d-block" data-toggle="modal" data-target="#registration_modal">Registration Form</a>
 					</div>
 				@endif
 				

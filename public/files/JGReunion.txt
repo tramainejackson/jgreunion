@@ -2,11 +2,12 @@
 		Jackson / Green Family Reunion
 ------------------------------------------------
 
-Reunion pictures not showing on active site
-Not adding shirt sizes somewhere
+Fix mail issue
 Create a button that checks for duplicates
 Add a footer
 Allow user to have a profile and be an admin
+Fixed: Not adding shirt sizes somewhere
+Fixed: Reunion pictures not showing on active site
 Done: Make all other reunion registrations inactive when new reunion created
 Done: Create a settings page for admin
 Done: Fix slideshow on home page

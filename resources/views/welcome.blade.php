@@ -40,21 +40,6 @@
 				height: 100vh;
 			}
 		}
-
-		@media (min-width: 800px) and (max-width: 850px) {
-			html,
-			body,
-			header,
-			.carousel {
-			  height: 100vh;
-			}
-		}
-
-		@media (min-width: 800px) and (max-width: 850px) {
-			.navbar:not(.top-nav-collapse) {
-				background: #929FBA!important;
-			}
-		}
 	</style>
 @endsection
 

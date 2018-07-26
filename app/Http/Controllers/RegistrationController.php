@@ -88,6 +88,7 @@ class RegistrationController extends Controller
 			$registration->adult_shirts = isset($request->adult_shirts) ? join('; ', $request->adult_shirts) : null;
 			$registration->youth_shirts = isset($request->youth_shirts) ? join('; ', $request->youth_shirts) : null;
 			$registration->children_shirts = isset($request->children_shirts) ? join('; ', $request->children_shirts) : null;
+			
 			$member->firstname = $request->firstname;
 			$member->lastname = $request->lastname;
 			$member->age_group = 'adult';
@@ -111,14 +112,14 @@ class RegistrationController extends Controller
 			$registration->youth_names = isset($request->attending_youth_name) ? join('; ', $request->attending_youth_name) : null;
 			$registration->children_names = isset($request->attending_children_name) ? join('; ', $request->attending_children_name) : null;
 			$registration->total_amount_due = $registration->due_at_reg = $request->total_amount_due;
-			
+			// dd($registration->children_names);
 			if($member->save()) {
 				$registration->dl_id = $member->id;
 				
 				if($registration->save()) {
-					\Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+					\Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion));
 					
-					\Mail::to('desmund94@gmail.com')->send(new Registration_User($registration, $registration->reunion, $request->attending_adult, $request->attending_youth, $request->attending_children));
+					\Mail::to('desmund94@gmail.com')->send(new Registration_User($registration, $registration->reunion));
 					
 					$newAdults = explode('; ', $registration->adult_names);
 					if(count($newAdults) > 1) {

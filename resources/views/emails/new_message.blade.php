@@ -103,54 +103,95 @@
 				<h3 style="margin: 35px 35px 20px;">Registration:</h3>
 				<ul>
 					<li style="padding:2px 0px;">Registree: {{ ucwords($registration->registree_name) }}</li>
+					
 					<li style="padding:2px 0px;">Email Address: {{ $registration->email != null ? $registration->email : 'No Email Address Added' }}</li>
+					
 					<li style="padding:2px 0px;">Phone: {{ $registration->phone != null ? $registration->phone : 'No Phone Number Added' }}</li>
+					
 					<li style="padding:2px 0px;">Address: {{ $registration->address . ' ' . $registration->city . ', ' . $registration->state . ' '. $registration->zip }}</li>
 					
 					@php
+
 						$adults = explode('; ', $registration->adult_names);
-						$youths = explode('; ', $registration->youth_names);
-						$childs = explode('; ', $registration->children_names);
+						
+						$adultSizes = explode('; ', $registration->adult_shirts);
+
 					@endphp
 					
 					<li style="padding:2px 0px;">Total Adults: 
-						<u>{{ $totalAdults }}</u>
+						<u>{{ count($adults) }}</u>
+						
 						@if(count($adults) == 1 && $adults[0] == '')
+							
 							<em><span style="padding:0px 35px; width:100%; display:block;">No Names Entered</span></em>
+						
 						@else
+							
 							@foreach($adults as $adult)
 								<em><span style="padding:0px 35px; width:100%; display:block;">{{ ucwords(strtolower($adult)) . ' - ' . $adultSizes[$loop->iteration - 1] . ' (Shirt Size)' }}</span></em>
 							@endforeach
+							
 						@endif
 					</li>
+					
+					@php
+					
+						$youths = explode('; ', $registration->youth_names);
+						
+						$youthSizes = explode('; ', $registration->youth_shirts);
+						
+					@endphp
+					
 					<li style="padding:2px 0px;">Total Youth: 
-						<u>{{ $totalYouths }}</u>
+						<u>{{ count($youths) }}</u>
 						@if(count($youths) == 1 && $youths[0] == '')
+							
 							<em><span style="padding:0px 35px; width:100%; display:block;">No Names Entered</span></em>
+							
 						@else
+							
 							@foreach($youths as $youth)
 								<em><span style="padding:0px 35px; width:100%; display:block;">{{ ucwords(strtolower($youth)) . ' - ' . $youthSizes[$loop->iteration - 1] . ' (Shirt Size)' }}</span></em>
 							@endforeach
+							
 						@endif
 					</li>
+					
+					@php
+
+						$children = explode('; ', $registration->children_names);
+						
+						$childrenSizes = explode('; ', $registration->children_shirts);
+						
+					@endphp
+					
 					<li style="padding:2px 0px;">Total Children: 
-						<u>{{ $totalChildren }}</u>
-						@if(count($childs) == 1 && $childs[0] == '')
+						<u>{{ count($children) }}</u>
+						@if(count($children) == 1 && $children[0] == '')
+							
 							<em><span style="padding:0px 35px; width:100%; display:block;">No Names Entered</span></em>
+							
 						@else
-							@foreach($childs as $child)
+							
+							@foreach($children as $child)
 								<em><span style="padding:0px 35px; width:100%; display:block;">{{ ucwords(strtolower($child)) . ' - ' . $childrenSizes[$loop->iteration - 1] . ' (Shirt Size)' }}</span></em>
 							@endforeach
+							
 						@endif
 					</li>
 				</ul>
+				
 				<p style="padding: 0px 35px;">Thank you for registering online for the {{ $reunion->reunion_year }} Family Reunion Registration which will be located in {{ $reunion->reunion_city . ' ' . $reunion->reunion_state }}. If you have any questions please feel free to reach out to us anytime.</p>
+				
 				<p style="padding:0px 35px;">Above is all the information that we received on your registration form. If any of this information is incorrect, please respond to this email so that we can correct the information.</p>
+				
 				<p style="padding:0px 35px;">Your Total Amount Due is $<span style="color:darkred;">{{ $registration->total_amount_due }}.</span> The total amount due needs to be paid in full at least one month before the reunion.</p>
 			</div>
+			
 			<footer style="box-sizing: border-box; width: 100% !important;">
 				<h3 style="border-bottom:1px solid gray; text-align: center; background: #5b955a; color: whitesmoke; padding: 35px;">2017 {{ config('app.name') }}. All rights reserved.</h3>
 			</footer>
+			
 		</div>
 	</div>
 </body>

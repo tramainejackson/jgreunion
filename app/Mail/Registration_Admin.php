@@ -35,20 +35,10 @@ class Registration_Admin extends Mailable
      *
      * @return void
      */
-    public function __construct(Registration $registration, $reunion, $total_adults, $total_youth, $total_children)
+    public function __construct(Registration $registration, $reunion)
     {
         $this->registration = $registration;
-        $this->totalYouths = $total_youth;
-        $this->totalAdults = $total_adults;
-        $this->totalChildren = $total_children;
         $this->reunion = $reunion;
-		$this->adults = explode('; ', $this->registration->adult_names);
-		$this->youths = explode('; ', $this->registration->youth_names);
-		$this->childs = explode('; ', $this->registration->child_names);
-		$this->shirtSizes = explode('; ', $this->registration->shirt_sizes);
-		$this->adultSizes = array_slice($this->shirtSizes, 0, count($this->adults));
-		$this->youthSizes = array_slice($this->shirtSizes, count($this->adults), count($this->youths));
-		$this->childrenSizes = array_slice($this->shirtSizes, (count($this->adults) + count($this->youths)));
     }
 
     /**
@@ -58,6 +48,6 @@ class Registration_Admin extends Mailable
      */
     public function build()
     {	
-        return $this->subject($this->reunion->reunion_year . ' Online Reunion Registration')->view('emails.new_message', compact('reunion', 'registration', 'totalYouths', 'totalAdults', 'totalChildren', 'adultSizes', 'youthSizes', 'childrenSizes'));
+        return $this->subject($this->reunion->reunion_year . ' Online Reunion Registration')->view('emails.new_message', compact('reunion', 'registration'));
     }
 }

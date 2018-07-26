@@ -45,7 +45,9 @@
 		</div>
 		
 		<div class="row mt-5">
+		
 			<div class="col-11 col-lg-9 mx-auto">
+			
 				<div class="pastReunionContent" id="hotel_information">
 					<h2 id="hotel_information_header">Hotel Information</h2>
 					<div id="hotel_content" class="container-fluid">
@@ -77,32 +79,20 @@
 				<hr/>
 
 				<div class="pastReunionContent" id="activities_information">
+				
 					<h2 id="activities_information_header">Activities</h2>
+					
 					<div class="activities_content p-3 mx-md-5">
-						<h2>Thursday, August 4<sup>th</sup></h2>
-						<ul>
-							<li>12PM - Reunion Check In Starts</li>
-							<li>6-8PM Meet and Greet (Hospitality Suite)</li>
-							<li>6-8PM Line Dance Fun</li>
-						</ul>
+						@foreach($reunion->events as $event)
 						
-						<h2>Friday, August 5<sup>th</sup></h2>
-						<ul>
-							<li>12-6PM Neshaminy State Park Family Picnic</li>
-							<li>6PM-Until Philadelphia Night Attractions (Free Time)</li>
-						</ul>
+							<h2>{{ $event->formatted_date() }}</h2>
 						
-						<h2>Saturday, August 6<sup>th</sup></h2>
-						<ul>
-							<li>Enjoy Philadelphia During the Day</li>
-							<li>6-10PM Family Banquet</li>
-							<li><i>Banquet Attire: Black and Gold</i></li>
-						</ul>
-						
-						<h2>Sunday, August 7<sup>th</sup></h2>
-						<ul>
-							<li>10AM-12PM Church Service</li>
-						</ul>
+							<ul>
+								<li><span class="font-weight-bold">Location:</span> {{ $event->event_location }}</li>
+								<li><span class="font-weight-bold">Description:</span> {{ $event->event_description }}</li>
+							</ul>
+							
+						@endforeach
 						
 						<h2>Additional Information</h2>
 						<p>
@@ -121,55 +111,74 @@
 				<hr/>
 				
 				<div class="pastReunionContent" id="contact_information">
+				
 					<h2 id="contact_information_header">Committee Information</h2>
-					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2 table-responsive">
+					
+					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2 table-wrapper">
 						<table id="contact_information_table" class="table text-center">
 							<tr>
 								<th><u>Title</u></th>
 								<th><u>Name</u></th>
 								<th><u>Email Address</u></th>
 							</tr>
+							
 							@foreach($committee_members as $committee_member)
+							
 								<tr>
 									<td>{{ ucwords(str_ireplace('_', ' ', $committee_member->member_title)) }}</td>
+									
 									<td>{{ ucwords($committee_member->member_name) }}</td>
+									
 									<td><i>{{ strtolower($committee_member->member_email) }}</i></td>
 								</tr>
+								
 							@endforeach
-							<tr>
-								<td>President</td>
-								<td>Lorenzo Jackson Sr</td>
-								<td><i>mrlorenzo412@yahoo.com</i></td>
-							</tr>
-							<tr>
-								<td>Vice President</td>
-								<td>Lorenzo Jackson Jr</td>
-								<td><i>lorenzodevonj@yahoo.com</i></td>
-							</tr>
-							<tr>
-								<td>Treasurer</td>
-								<td>Deborah Jackson</td>
-								<td><i>jacksond1961@yahoo.com</i></td>
-							</tr>
-							<tr>
-								<td>Correspondence</td>
-								<td>Mia Jackson</td>
-								<td><i>kamhya@gmail.com</i></td>
-							</tr>
-							<tr>
-								<td>Correspondence</td>
-								<td>Tawana Craig</td>
-								<td class="text-truncate"><i>tawanacraig69@gmail.com</i></td>
-							</tr>
-							<tr>
-								<td>Correspondence</td>
-								<td>Lavern Battle</td>
-								<td><i></i></td>
-							</tr>
-						</table>	
+							
+						</table>
+						
 					</div>
-				</div>	
+					
+				</div>
+				
+				<hr/>
+				
+				<div class="pastReunionContent" id="reunion_pictures">
+					@if($reunion->images->isNotEmpty())
+						<div class="">
+							<h2 id="contact_information_header">Pictures</h2>
+						</div>
+						
+						<div class="row">
+						
+							<div id="mdb-lightbox-ui"></div>
+
+							<div class="mdb-lightbox">
+							
+								@foreach($reunion->images as $image)
+									<figure class="col-md-4">
+										<!--Large image-->
+										<a href="{{ asset(str_ireplace('images', 'images/lg', $image->path)) }}" data-size="1700x{{ $image->lg_height }}">
+											<!-- Thumbnail-->
+											<img src="{{ asset(str_ireplace('images', 'images/sm', $image->path)) }}" class="img-fluid">
+										</a>
+									</figure>
+									
+								@endforeach
+								
+							</div>
+							
+						</div>
+					@else
+						
+						<div class="hidden">
+							<h2 class="">No reunion pictures</h2>
+						</div>
+						
+					@endif
+				</div>
+				
 			</div>
+			
 		</div>
 		
 	</div>

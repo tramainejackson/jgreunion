@@ -62,6 +62,18 @@ class registration extends Model
     */
     public function scopeTotalRegFeesDue($query)
     {
-        return $query->select((DB::raw('SUM(total_amount_due) as totalRegFeesDue')))->first()->totalRegFeesDue;
+        return $query->select((DB::raw('SUM(total_amount_due) as totalRegFeesDue')))
+			->first()
+			->totalRegFeesDue;
+    }
+	
+	/**
+     * Get the total of all the registration fees left to be paid.
+    */
+    public function scopeMemberRegistered($query, $member_id)
+    {
+        return $query->where('family_member_id', $member_id)
+			->get()
+			->first();
     }
 }

@@ -100,17 +100,20 @@
 					
 					<div class="form-group">
 						<label class="form-label" for="notes">Additional Notes</label>
+						
 						<textarea class="form-control" name="notes" placeholder="Enter Additional Notes">{{ $family_member->notes }}</textarea>
 					</div>
 					
 					<div class="form-row familyTreeGroup">
+					
 						<div class="form-group col-12">
 							<h2 class="text-center">Family Tree</h2>
 						</div>
+						
 						<div class="form-group text-center col-12">
 						
 							<button type="button" class="w-25 mx-auto btn my-2 descentInput{{ $family_member->descent == 'jackson' ? ' btn-success active' : ' btn-outline-success' }}">
-								<input type="checkbox" name="descent" value="jackson" hidden {{ $family_member->descent == 'Y' ? 'checked' : '' }} />Jackson
+								<input type="checkbox" name="descent" value="jackson" hidden {{ $family_member->descent == 'jackson' ? 'checked' : '' }} />Jackson
 							</button>
 							
 							<button type="button" class="w-25 mx-auto btn my-2 descentInput{{ $family_member->descent == 'green' ? ' btn-success active' : ' btn-outline-success' }}">
@@ -120,7 +123,9 @@
 						
 						<div class="form-group text-center col-6">
 							<label for="" class="form-label text-center d-block">Mother</label>
+							
 							<select class="form-control browser-default w-50 mx-auto" name="mother">
+							
 								<option value="blank" selected disabled>--- Select Mother ---</option>
 								
 								@foreach($members as $option)
@@ -206,7 +211,9 @@
 							@foreach($children as $child)
 							
 								<select class="form-control browser-default w-50 mx-auto" name="children[]">
+								
 									<option value="blank">--- Select A Child ---</option>
+									
 									@foreach($members as $option)
 									
 										<option value="{{ $option->id }}" {{ $option->id == $child ? 'selected' : '' }}>{{ $option->full_name() }}</option>

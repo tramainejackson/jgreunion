@@ -77,110 +77,106 @@
 				<hr/>
 
 				<div class="pastReunionContent" id="activities_information">
+				
 					<h2 id="activities_information_header">Activities</h2>
-					<div class="activities_content p-3 mx-md-5">
-						<h2>Thursday, August 4<sup>th</sup></h2>
-						<ul>
-							<li>12PM - Reunion Check In Starts</li>
-							<li>6-8PM Meet and Greet (Hospitality Suite)</li>
-							<li>6-8PM Line Dance Fun</li>
-						</ul>
+					
+					@if($events->count() < 1)
 						
-						<h2>Friday, August 5<sup>th</sup></h2>
-						<ul>
-							<li>12-6PM Neshaminy State Park Family Picnic</li>
-							<li>6PM-Until Philadelphia Night Attractions (Free Time)</li>
-						</ul>
+						<div class="col-12">
+							<p class="text-center mt-3 emptyInfo">No Activities Added Yet</p>
+						</div>
 						
-						<h2>Saturday, August 6<sup>th</sup></h2>
-						<ul>
-							<li>Enjoy Philadelphia During the Day</li>
-							<li>6-10PM Family Banquet</li>
-							<li><i>Banquet Attire: Black and Gold</i></li>
-						</ul>
+					@else
 						
-						<h2>Sunday, August 7<sup>th</sup></h2>
-						<ul>
-							<li>10AM-12PM Church Service</li>
-						</ul>
+						<div class="activities_content col-10 mx-auto my-2 py-2">
 						
-						<h2>Additional Information</h2>
-						<p>
-							On Friday evening and Saturday morning, you are free to partake in the many
-							Philadelphia activities. We have included the activities you can choose from. Some places 
-							(Philadelphia Zoo, Sesame Place and Philly Bus Tour) the committee will setup group 
-							rates if enough people show interest in going.
-						</p>
-						<p>
-							***Parx Casino, Philadelphia Zoo, Franklin Mills Mall, Sesame Place, Skyzone Trampoline
-							Park, Arnold's Family Fun (bowling, go-carts), Philly Bus Tour, Movie Tavern, Downtown Philly***
-						</p>
-					</div>
+							@foreach($events as $events)
+							
+								<div class="activitiesEvent container-fluid">
+								
+									<div class="row">
+									
+										@foreach($events as $event)
+											@php
+												$eventDate = new Carbon\Carbon($event->event_date);
+											@endphp
+											
+											@if($loop->first)
+												<div class="col-12 my-3">
+													<h2 class="activitiesEventLocation d-inline">{{ $eventDate->format('m/d/Y') }}</h2>
+												</div>
+											@endif
+													
+											@if($loop->first)
+												<div class="col-12">
+													<ul class="activitiesDescription col-12">
+											@endif
+												<li class=""><b><em>Location:&nbsp;</em></b>{{ $event->event_location }}</li>
+												<li class=""><b><em>Event Description:&nbsp;</em></b>{{ $event->event_description }}</li>
+												@if(!$loop->last)<li class="spacer-sm"></li>@endif
+											@if($loop->last)
+													</ul>
+												</div>
+											@endif
+											
+										@endforeach
+										
+									</div>
+									
+								</div>
+								
+							@endforeach
+							
+						</div>
+						
+					@endif
+					
 				</div>	
 				
 				<hr/>
 				
 				<div class="pastReunionContent" id="contact_information">
+				
 					<h2 id="contact_information_header">Committee Information</h2>
-					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2 table-responsive">
+					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2 table-wrapper">
+					
 						<table id="contact_information_table" class="table text-center">
-							<tr>
-								<th><u>Title</u></th>
-								<th><u>Name</u></th>
-								<th><u>Email Address</u></th>
-							</tr>
-							@foreach($committee_members as $committee_member)
+							<thead>
+							
 								<tr>
-									<td>{{ ucwords(str_ireplace('_', ' ', $committee_member->member_title)) }}</td>
-									<td>{{ ucwords($committee_member->member_name) }}</td>
-									<td><i>{{ strtolower($committee_member->member_email) }}</i></td>
+									<th><u>Title</u></th>
+									<th><u>Name</u></th>
+									<th><u>Email Address</u></th>
 								</tr>
-							@endforeach
-							<tr>
-								<td>President</td>
-								<td>Lorenzo Jackson Sr</td>
-								<td><i>mrlorenzo412@yahoo.com</i></td>
-							</tr>
-							<tr>
-								<td>Vice President</td>
-								<td>Lorenzo Jackson Jr</td>
-								<td><i>lorenzodevonj@yahoo.com</i></td>
-							</tr>
-							<tr>
-								<td>Treasurer</td>
-								<td>Deborah Jackson</td>
-								<td><i>jacksond1961@yahoo.com</i></td>
-							</tr>
-							<tr>
-								<td>Correspondence</td>
-								<td>Mia Jackson</td>
-								<td><i>kamhya@gmail.com</i></td>
-							</tr>
-							<tr>
-								<td>Correspondence</td>
-								<td>Tawana Craig</td>
-								<td class="text-truncate"><i>tawanacraig69@gmail.com</i></td>
-							</tr>
-							<tr>
-								<td>Correspondence</td>
-								<td>Lavern Battle</td>
-								<td><i></i></td>
-							</tr>
-						</table>	
+								
+							</thead>
+							
+							<tbody>
+							
+								@foreach($committee_members as $committee)
+									<tr>
+										<td>{{ ucwords(str_ireplace('_', ' ', $committee->member_title)) }}</td>
+										<td>{{ ucwords($committee->member_name) }}</td>
+										<td><i>{{ $committee->member_email }}</i></td>
+									</tr>
+								@endforeach
+								
+								<tr>
+								
+									<td>Web Designer</td>
+									<td>Tramaine Jackson</td>
+									<td><i>jackson.tramaine3@yahoo.com</i></td>
+									
+								</tr>
+								
+							</tbody>
+							
+						</table>
+						
 					</div>
 				</div>	
 			</div>
 		</div>
 		
 	</div>
-	
-	<footer>
-		<div class="container-fluid">
-			<div class="row">
-				<p class="col-4 text-center my-0 py-3">Created By: Tramaine Jackson</p>
-				<p class="col-4 text-center my-0 py-3">Created Date: July 2015</p>
-				<p class="col-4 text-center my-0 py-3">Title: Jackson/Green Reunion</p>
-			</div>
-		</div>
-	</footer>
 @endsection

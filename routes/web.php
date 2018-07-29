@@ -29,13 +29,6 @@ Route::get('/delete_registration/{registration}', function (\App\Registration $r
 
 Route::get('/', 'HomeController@home');
 
-Route::get('/past_reunion/{reunion}', function (\App\Reunion $reunion) {
-	$registrations = \App\Registration::where('reunion_id', $reunion->id);
-	$committee_members = $reunion->committee;
-	
-    return view('past_reunion', compact('registrations', 'reunion', 'committee_members'));
-});
-
 Route::get('/upcoming_reunion/{reunion}/registration_form', function (\App\Reunion $reunion) {
 	$states = \App\State::all();
 	
@@ -57,6 +50,8 @@ Route::resource('/members', 'FamilyMemberController');
 Route::resource('/registrations', 'RegistrationController');
 
 Route::resource('/reunions', 'ReunionController');
+
+Route::get('/past_reunion/{reunion}', 'ReunionController@show_past_reunion')->name('show_past_reunion');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

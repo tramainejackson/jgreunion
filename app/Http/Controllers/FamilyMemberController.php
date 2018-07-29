@@ -104,19 +104,12 @@ class FamilyMemberController extends Controller
 		$family_member = $member;
         $states = State::all();
 		$members = FamilyMember::orderby('firstname', 'asc')->get();
-		$siblings = explode('; ', $family_member->sibling);
-		$children = explode('; ', $family_member->child);
-		$family_members = FamilyMember::where([
-			['family_id', $family_member->family_id],
-			['family_id', '<>', 'null']
-		])->get();
-		$potential_family_members = FamilyMember::where([
-			['address', $family_member->address],
-			['city', $family_member->city],
-			['state', $family_member->state]
-		])->get();
-		$active_reunion = Reunion::where('reunion_complete', 'N')->first();
-		$registered_for_reunion = Registration::where('family_member_id', $family_member->id)->get()->first();
+		$siblings = explode('; ', $family_member->siblings);
+		$children = explode('; ', $family_member->children);
+		$family_members = FamilyMember::household($family_member->family_id);
+		$potential_family_members = FamilyMember::potentialHousehold($member);
+		$active_reunion = Reunion::active()->first();
+		$registered_for_reunion = Registration::memberRegistered($family_member->id);
 		
         return view('admin.members.edit', compact('states', 'family_members', 'family_member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
     }
@@ -128,8 +121,9 @@ class FamilyMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FamilyMember $family_member)
+    public function update(Request $request, FamilyMember $member)
     {
+		// dd($request);
         $this->validate($request, [
 			'firstname' => 'required|max:30',
 			'lastname' => 'required|max:30',
@@ -140,7 +134,6 @@ class FamilyMemberController extends Controller
 			'zip' => 'nullable|max:99999|min:0|numeric',
 		]);
 
-		$member->firstname = $family_member;
 		$member->firstname = $request->firstname;
 		$member->lastname = $request->lastname;
 		$member->email = $request->email;
@@ -153,13 +146,12 @@ class FamilyMemberController extends Controller
 		$member->mother = $request->mother != 'blank' ? $request->mother : null;
 		$member->father = $request->father != 'blank' ? $request->father : null;
 		$member->spouse = $request->spouse != 'blank' ? $request->spouse : null;
-		$member->sibling = str_ireplace('; blank', '', implode('; ', $request->siblings)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->siblings)) : null;
-		$member->child = str_ireplace('; blank', '', implode('; ', $request->children)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->children)) : null;
+		$member->siblings = str_ireplace('; blank', '', implode('; ', $request->siblings)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->siblings)) : null;
+		$member->children = str_ireplace('; blank', '', implode('; ', $request->children)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->children)) : null;
 		$houseMembers = str_ireplace('; blank', '', implode('; ', $request->houseMember)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->houseMember)) : null;
 		$member->phone = $request->phone;
 		$member->age_group = $request->age_group;
 		$member->mail_preference = $request->mail_preference;
-		// dd($member);
 		
 		// If household members isn't empty then add a family ID
 		// to all the parties
@@ -189,7 +181,7 @@ class FamilyMemberController extends Controller
 		}
 
 		if($member->save()) {
-			return redirect()->action('HomeController@edit', $member)->with('status', 'Member Updated Successfully');
+			return redirect()->back()->with('status', 'Member Updated Successfully');
 		}
     }
 

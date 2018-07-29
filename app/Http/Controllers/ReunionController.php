@@ -29,7 +29,7 @@ class ReunionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except(['show', 'show_past_reunion']);
     }
 	
     /**
@@ -288,7 +288,7 @@ class ReunionController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+    */
     public function show(Reunion $reunion)
     {
 		$registrations = $reunion->registrations;
@@ -300,6 +300,23 @@ class ReunionController extends Controller
 		return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion', 'states'));
 
     }
+	
+	/**
+     * Display the past reunion.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+    */
+	
+	public function show_past_reunion(Reunion $reunion)
+	{
+		$registrations = \App\Registration::where('reunion_id', $reunion->id);
+		$committee_members = $reunion->committee;
+		$events = $reunion->events->groupBy('event_date');
+		
+		return view('past_reunion', compact('registrations', 'reunion', 'committee_members', 'events'));
+
+	}
 
     /**
      * Show the form for editing the specified resource.

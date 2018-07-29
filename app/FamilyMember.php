@@ -47,4 +47,27 @@ class FamilyMember extends Model
     {
         return $this->firstname . ' ' . $this->lastname;
     }
+	
+	/**
+	* Get the user for the family member account.
+	*/
+    public function scopeHousehold($query, $family_id)
+    {
+        return $query->where([
+			['family_id', $family_id],
+			['family_id', '<>', 'null']
+		])->get();
+    }
+	
+	/**
+	* Get the user for the family member account.
+	*/
+    public function scopePotentialHousehold($query, $family_member)
+    {
+        return $query->where([
+			['address', $family_member->address],
+			['city', $family_member->city],
+			['state', $family_member->state]
+		])->get();
+    }
 }

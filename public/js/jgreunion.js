@@ -156,8 +156,22 @@ $(document).ready(function()
 	// Toggle descent options
 	$("body").on("click", ".descentInput", function(e) {
 		e.preventDefault();
-		$(this).addClass("active text-light").children().attr('checked', true);
-		$(this).siblings().removeClass('active text-light').children().removeAttr('checked');
+		
+		if($(this).hasClass('active')) {
+			
+			$(this).toggleClass("btn-outline-success btn-success active").children().removeAttr('checked');
+			
+		} else {
+			
+			$(this).toggleClass("btn-outline-success btn-success active").children().attr('checked', true);
+
+			if($(this).siblings().hasClass('active')) {
+				
+				$(this).siblings().toggleClass("btn-outline-success btn-success active").children().removeAttr('checked');
+				
+			}
+		}
+
 	});
 	
 	// Add Household Member Row

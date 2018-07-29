@@ -19,14 +19,25 @@
 	</div>
 	<div class="col-9">
 		<nav class="nav nav-pills justify-content-start py-3">
-			<a href="/administrator" class="profileLink nav-link{{ str_contains(url()->current(), ['members', 'administrator']) ? ' active' : '' }}">Family Members</a>
-			
-			<a href="{{ route('reunions.index') }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">Reunions</a>
-				
-			<a href="{{ route('settings') }}" class="profileLink nav-link{{ str_contains(url()->current(), 'setting') ? ' active' : '' }}">Settings</a>
 		
-			<!-- <a href='/settings' class='profileLink nav-link'>Settings</a> -->
-			
+			@if(Auth::user()->is_admin())
+				
+				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), 'members') && !Auth::user()->is_admin() ? ' active' : '' }}">My Profile</a>
+
+				<a href="/administrator" class="profileLink nav-link{{ str_contains(url()->current(), ['members', 'administrator']) ? ' active' : '' }}">Family Members</a>
+				
+				<a href="{{ route('reunions.index') }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">Reunions</a>
+
+				<a href="{{ route('settings') }}" class="profileLink nav-link{{ str_contains(url()->current(), 'setting') ? ' active' : '' }}">Settings</a>
+		
+			@else
+				
+				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), 'members') ? ' active' : '' }}">My Profile</a>
+				
+				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">New Post</a>
+				
+			@endif
+
 		</nav>
 	</div>
 </div>

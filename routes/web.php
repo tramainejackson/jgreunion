@@ -36,16 +36,6 @@ Route::get('/past_reunion/{reunion}', function (\App\Reunion $reunion) {
     return view('past_reunion', compact('registrations', 'reunion', 'committee_members'));
 });
 
-Route::get('/upcoming_reunion/{reunion}', function (\App\Reunion $reunion) {
-	$registrations = \App\Registration::where('reunion_id', $reunion->id)->get();
-	$committee_members = $reunion->committee;
-	$committee_president = $committee_members->isNotEmpty() ? $committee_members->where('member_title', 'president')->first()->reunion_dl : $committee_members;
-	$states = \App\State::all();
-	$events = $reunion->events->groupBy('event_date');
-	
-    return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion', 'states'));
-});
-
 Route::get('/upcoming_reunion/{reunion}/registration_form', function (\App\Reunion $reunion) {
 	$states = \App\State::all();
 	
@@ -60,9 +50,15 @@ Route::get('/administrator', function () {
 
 Auth::routes();
 
+Route::resource('/administrator', 'AdministratorController');
+
+Route::resource('/members', 'FamilyMemberController');
+
 Route::resource('/registrations', 'RegistrationController');
 
 Route::resource('/reunions', 'ReunionController');
+
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/registrations/create/{reunion}', 'RegistrationController@create')->name('create_registration');
 
@@ -74,19 +70,9 @@ Route::put('/update_settings', 'HomeController@update_settings');
 
 Route::patch('/update_carousel/{picture}', 'HomeController@update_carousel');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/members/create', 'HomeController@create')->name('new_member');
-
-Route::get('/members/{reunion_dl}/edit', 'HomeController@edit')->name('edit_member');
-
-Route::post('/members', 'HomeController@store')->name('add_member');
-
 Route::post('/reunion_images_add/{reunion}', 'ReunionController@update_reunion_pictures');
 
 Route::post('/reunion_image_add/{reunion}', 'ReunionController@update_reunion_image');
-
-Route::put('/members/{reunion_dl}', 'HomeController@update')->name('update_member');
 
 Route::put('/members/{reunion_dl}/add_house_hold', 'HomeController@add_house_hold')->name('add_house_hold');
 

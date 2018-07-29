@@ -28,11 +28,11 @@ class User extends Authenticatable
     ];
 	
 	/**
-	* Get the post for the user.
+	* Get the family member account for the user.
 	*/
-    public function post()
+    public function member()
     {
-        return $this->hasMany('App\profile_post');
+        return $this->hasOne('App\FamilyMember');
     }
 	
 	/**

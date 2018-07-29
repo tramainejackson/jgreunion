@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class reunion extends Model
+class Reunion extends Model
 {
     /**
      * Get the committee members for the reunion.
      */
     public function committee()
     {
-        return $this->hasMany('App\Reunion_committee');
+        return $this->hasMany('App\ReunionCommittee');
     }
 	
 	/**

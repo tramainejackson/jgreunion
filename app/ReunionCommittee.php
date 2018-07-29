@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class reunion_committee extends Model
+class ReunionCommittee extends Model
 {
     /**
      * Get the distribution list member for the committee member.
      */
-    public function reunion_dl()
+    public function family_member()
     {
-        return $this->belongsTo('App\Reunion_dl', 'dl_id');
+        return $this->belongsTo('App\Family_Member');
     }
 	
 	/**
@@ -20,5 +20,13 @@ class reunion_committee extends Model
     public function reunion()
     {
         return $this->belongsTo('App\Reunion');
+    }
+	
+	/**
+     * Get the president for the committee member.
+     */
+    public function scopePresident($query)
+    {
+        return $query->where('member_title', 'president')->first();
     }
 }

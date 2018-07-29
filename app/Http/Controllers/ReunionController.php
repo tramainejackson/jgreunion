@@ -4,11 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Registration;
 use App\Reunion;
-use App\Reunion_committee;
+use App\ReunionCommittee;
 use App\Reunion_event;
-use App\Reunion_dl;
+use App\FamilyMember;
 use App\State;
-use App\Year;
 use App\Committee_Title;
 use App\CarouselImage;
 use App\ReunionImage;
@@ -30,7 +29,7 @@ class ReunionController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except('show');
     }
 	
     /**
@@ -40,11 +39,9 @@ class ReunionController extends Controller
      */
     public function index()
     {
-        $reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
-		$states = State::all();
-		$years = Year::all();
+        $reunions = Reunion::orderby('reunion_year', 'desc')->get();
 		
-        return view('admin.reunions.index', compact('reunions', 'states', 'years'));
+        return view('admin.reunions.index', compact('reunions'));
     }
 
     /**
@@ -55,7 +52,7 @@ class ReunionController extends Controller
     public function create()
     {
 		$states = State::all();
-		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$members = FamilyMember::orderby('firstname', 'asc')->get();
 		$titles = Committee_Title::all();
 		$carbonDate = Carbon::now()->subYear();
 		
@@ -268,7 +265,7 @@ class ReunionController extends Controller
 				$committee_member = new Reunion_committee();
 				
 				// Get member from distro list
-				$member = Reunion_dl::find($request->dl_id[$x]);
+				$member = FamilyMember::find($request->dl_id[$x]);
 				
 				$committee_member->dl_id = $member->id;
 				$committee_member->reunion_id = $reunion->id;
@@ -292,9 +289,16 @@ class ReunionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Reunion $reunion)
     {
-        //
+		$registrations = $reunion->registrations;
+		$committee_members = $reunion->committee;
+		$committee_president = $reunion->committee()->president();
+		$states = \App\State::all();
+		$events = $reunion->events->groupBy('event_date');
+		
+		return view('upcoming_reunion', compact('registrations', 'committee_members', 'events', 'committee_president', 'reunion', 'states'));
+
     }
 
     /**
@@ -307,7 +311,7 @@ class ReunionController extends Controller
     {
 		$states = State::all();
 		$carbonDate = Carbon::now()->subYear();
-		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$members = FamilyMember::orderby('firstname', 'asc')->get();
 		$titles = Committee_Title::all();
 		$reunion_events = $reunion->events()->orderBy('event_date')->get();
 		$totalRegistrations = $reunion->registrations()->where('parent_reg', null)->count();
@@ -480,7 +484,7 @@ class ReunionController extends Controller
 						
 						foreach($reunion->committee as $key => $committee_member) {
 							
-							$member_dl = Reunion_dl::find($request->dl_id[$key]);
+							$member_dl = FamilyMember::find($request->dl_id[$key]);
 							$committee_member->dl_id = $request->dl_id[$key];
 							$committee_member->member_title = $request->member_title[$key];
 							$committee_member->member_name = $member_dl->firstname . ' ' . $member_dl->lastname;
@@ -494,7 +498,7 @@ class ReunionController extends Controller
 							$committee_member = new Reunion_committee();
 							
 							// Get member from distro list
-							$member = Reunion_dl::find($request->dl_id[$x]);
+							$member = FamilyMember::find($request->dl_id[$x]);
 							
 							$committee_member->dl_id = $member->id;
 							$committee_member->reunion_id = $reunion->id;
@@ -509,7 +513,7 @@ class ReunionController extends Controller
 						}
 					} else {
 						foreach($reunion->committee as $key => $committee_member) {
-							$member_dl = Reunion_dl::find($request->dl_id[$key]);
+							$member_dl = FamilyMember::find($request->dl_id[$key]);
 							$committee_member->dl_id = $request->dl_id[$key];
 							$committee_member->member_title = $request->member_title[$key];
 							$committee_member->member_name = $member_dl->firstname . ' ' . $member_dl->lastname;
@@ -526,7 +530,7 @@ class ReunionController extends Controller
 						$committee_member = new Reunion_committee();
 						
 						// Get member from distro list
-						$member = Reunion_dl::find($request->dl_id[$x]);
+						$member = FamilyMember::find($request->dl_id[$x]);
 						
 						$committee_member->dl_id = $member->id;
 						$committee_member->reunion_id = $reunion->id;

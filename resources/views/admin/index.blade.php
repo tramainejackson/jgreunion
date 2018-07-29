@@ -14,6 +14,7 @@
 		@include('admin.nav')
 		
 		<div class="row white" id="distribution_list">
+		
 			<div class="col-12 d-flex align-items-center">
 			
 				<div class="my-4">

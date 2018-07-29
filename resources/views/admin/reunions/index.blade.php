@@ -37,26 +37,26 @@
 											<label class="form-label" for="reunion_state">State</label>
 											
 											<select class="form-control browser-default" disabled>
-												@foreach($states as $state)
-													<option value="{{ $state->state_abb }}" {{ $reunion->reunion_state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
-												@endforeach
+
+												<option value="{{ $reunion->reunion_state }}" >{{ $reunion->reunion_state }}</option>
+
 											</select>
 										</div>
 										<div class="form-group col-4">
 											<label class="form-label" for="reunion_state">Year</label>
 											
 											<select class="form-control browser-default" disabled>
-											
-												@foreach($years as $year)
-													<option value="{{ $year->year_num }}" {{ $reunion->reunion_year == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
-												@endforeach
 												
+												<option value="{{ $reunion->reunion_year }}">{{ $reunion->reunion_year }}</option>
+													
 											</select>
 											
 										</div>
 									</div>
+									
 									<div class="form-row my-3">
 										<div class="form-group col-4">
+										
 											<label class="form-label" for="adult_price">Adult Price</label>
 											
 											<div class="input-group">
@@ -70,7 +70,9 @@
 											</div>
 											
 										</div>
+										
 										<div class="form-group col-4">
+										
 											<label class="form-label" for="youth_price">Youth Price</label>
 											
 											<div class="input-group">
@@ -84,7 +86,9 @@
 											</div>
 											
 										</div>
+										
 										<div class="form-group col-4">
+										
 											<label class="form-label" for="child_price">Child Price</label>
 											
 											<div class="input-group">
@@ -128,7 +132,9 @@
 								</div>
 								
 							@endif
+							
 						</li>
+						
 					@endforeach
 				</ul>
 			</div>

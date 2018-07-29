@@ -1754,18 +1754,17 @@ button.yes_delete {
   padding: 10% 0%;
   color: white;
 }
-footer {
-  background: linear-gradient(white 12%, black 40%, black);
-  color: white;
-}
+
 div#navi form {
 	position: relative;
 }
+
 div.showing_image {
   width: 100%;
   /* max-height: 400px; */
   margin: 0% 0%;
 }
+
 div.image_div {
     display: none;
     position: relative;

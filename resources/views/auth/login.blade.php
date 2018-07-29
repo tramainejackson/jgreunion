@@ -10,7 +10,8 @@
 							<a href="/" class="homeLink profileLink nav-link">Home</a>
 							
 							@if(!Auth::check())
-								<!-- <a href='/register' class='profileLink nav-link'>Register</a> -->
+								<a href='/register' class='profileLink nav-link'>Register</a>
+							
 								<a href='/login' class='profileLink nav-link active'>Login</a>
 							@else
 								<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->

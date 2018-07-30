@@ -41,6 +41,8 @@ Route::get('/administrator', function () {
     return view('admin.index', compact('registrations', 'distribution_list'));
 });
 
+Route::get('/members/duplicates', 'FamilyMemberController@duplicates')->name('duplicate_members');
+
 Auth::routes();
 
 Route::resource('/administrator', 'AdministratorController');
@@ -54,6 +56,7 @@ Route::resource('/reunions', 'ReunionController');
 Route::get('/past_reunion/{reunion}', 'ReunionController@show_past_reunion')->name('show_past_reunion');
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 
 Route::get('/registrations/create/{reunion}', 'RegistrationController@create')->name('create_registration');
 
@@ -72,7 +75,6 @@ Route::post('/reunion_image_add/{reunion}', 'ReunionController@update_reunion_im
 Route::put('/members/{reunion_dl}/add_house_hold', 'HomeController@add_house_hold')->name('add_house_hold');
 
 Route::put('/registrations/{registration}/add_registration_member', 'RegistrationController@add_registration_member')->name('add_registration_member');
-
 
 Route::delete('/members/{reunion_dl}/remove_house_hold', 'HomeController@remove_house_hold')->name('remove_house_hold');
 

@@ -6,15 +6,18 @@
 		@include('admin.nav')
 		
 		<div class="row white">
+		
 			@if(Auth::user()->is_admin())
+				
 				<div class="col-2 my-2">
 					<div class="">
-						<a href="/administrator" class="btn btn-info btn-lg">All Members</a>
-						<a href="{{ route('members.create') }}" class="btn btn-info btn-lg my-2">Add New Member</a>
+						<a href="/administrator" class="btn btn-info btn-lg btn-block">All Members</a>
+						
+						<a href="{{ route('members.create') }}" class="btn btn-info btn-lg my-2 btn-block">Add New Member</a>
 
 						@if($active_reunion != null)
 							
-							<a href="/registrations" class="btn btn-success btn-lg mw-100{{ $registered_for_reunion != null ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion != null ? 'Member Already Registered For ' . $active_reunion->reunion_city . ' Reunion'  : 'Add Member To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
+							<a href="/registrations" class="btn btn-success btn-block btn-lg{{ $registered_for_reunion != null ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion != null ? 'Member Already Registered For ' . $active_reunion->reunion_city . ' Reunion'  : 'Add Member To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
 						
 							{!! Form::open(['action' => 'RegistrationController@store', 'method' => 'POST', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
 								<input type="text" name="reg_member" class="" value="{{ $family_member->id }}" hidden />

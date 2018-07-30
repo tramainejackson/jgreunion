@@ -14,7 +14,7 @@ class AdministratorController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'admin']);
     }
 	
     /**
@@ -25,8 +25,10 @@ class AdministratorController extends Controller
     public function index()
     {
 		$distribution_list = FamilyMember::orderby('lastname', 'asc')->orderby('address', 'asc')->get();
+		$duplicates_check = FamilyMember::checkDuplicates();
+		$duplicates = $duplicates_check->isNotEmpty() ? $duplicates_check : null;
 		
-		return view('admin.index', compact('registrations', 'distribution_list'));
+		return view('admin.index', compact('registrations', 'distribution_list', 'duplicates'));
 
     }
 

@@ -9,6 +9,24 @@ class FamilyMember extends Model
 {
 	use SoftDeletes;
 
+	/**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'firstname', 'lastname',
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'id', 'user_id',
+    ];
+	
     /**
      * The attributes that should be mutated to dates.
      *
@@ -51,6 +69,14 @@ class FamilyMember extends Model
 	/**
 	* Get the user for the family member account.
 	*/
+    public function full_address()
+    {
+		return $this->address . ' ' . $this->city . ', ' . $this->state;
+	}
+	
+	/**
+	* Get the user for the family member account.
+	*/
     public function scopeHousehold($query, $family_id)
     {
         return $query->where([
@@ -69,5 +95,33 @@ class FamilyMember extends Model
 			['city', $family_member->city],
 			['state', $family_member->state]
 		])->get();
+    }
+	
+	/**
+	* Check for duplicated
+	*/
+    public function scopeCheckDuplicates($query)
+    {
+		return $query->selectRaw('firstname, lastname, city,  state')
+			->groupBy('firstname')
+			->groupBy('lastname')
+			->groupBy('city')
+			->groupBy('state')
+			->havingRaw('COUNT(firstname) > 1 AND COUNT(lastname) > 1 AND COUNT(city) > 1 AND COUNT(state) > 1')
+			->get();
+    }
+	
+	/**
+	* Get all the duplicates that were found
+	*/
+    public function scopeGetDuplicates($query, $firstname, $lastname, $city, $state)
+    {
+		return $query->where([
+				['firstname', 'LIKE', '%' . $firstname . '%'],
+				['lastname', 'LIKE', '%' . $lastname . '%'],
+				['city', 'LIKE', '%' . $city . '%'],
+				['state', 'LIKE', '%' . $state . '%'],
+			])
+			->get();
     }
 }

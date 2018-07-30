@@ -33,7 +33,7 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-		$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
+		$reunions = Reunion::orderby('reunion_year', 'desc')->get();
 
         return view('admin.registrations.index', compact('reunions'));
     }

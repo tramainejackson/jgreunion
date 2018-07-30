@@ -1,13 +1,5 @@
 @extends('layouts.app')
 
-@section('add_styles')
-	<style>
-		.oi {
-			top: 0px;
-		}
-	</style>
-@endsection
-
 @section('content')
 	<div class="container-fluid" id="profilePage">
 		
@@ -18,13 +10,21 @@
 			<div class="col-12 d-flex align-items-center">
 			
 				<div class="my-4">
-					<div class="mr-5">
+					<div class="">
 						<a href="/members/create" class="btn btn-info btn-lg">Create New Member</a>
 					</div>
 				</div>
 				
+				@if($duplicates !== null)
+					<div class="my-4">
+						<div class="ml-3">
+							<a href="{{ route('duplicate_members') }}" class="btn btn-lg blue darken-2">Check Duplicates</a>
+						</div>
+					</div>
+				@endif
+				
 				<div class="my-4">
-					<div class="">
+					<div class="ml-5">
 						<div class="input-group input-group-lg">
 							<input type="text" name="" class="memberFilter form-control" value="" placeholder="Filter By Name" />
 							<div class="input-group-prepend">

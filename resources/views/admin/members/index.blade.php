@@ -2,119 +2,87 @@
 
 @section('content')
 	<div class="container-fluid" id="profilePage">
-		<div class="row">
-			<div class="col-12">
-				<div class="jumbotron jumbotron-fluid">
-					<div class="page_header">
-						<h1>Jackson &amp; Green Family Reunion</h1>
+		
+		@include('admin.nav')
+		
+		<div class="row white" id="distribution_list">
+		
+			<div class="col-12 d-flex align-items-center">
+			
+				<div class="my-4">
+					<div class="">
+						<a href="/members/create" class="btn btn-info btn-lg">Create New Member</a>
 					</div>
 				</div>
-			</div>
-			<div class="col-3">
-				<nav class="nav nav-pills justify-content-center py-3">
-					<a href='/' class='profileLink nav-link'>Home</a>
-					<a href='/logout' class='profileLink nav-link'>Logout</a>
-				</nav>
-			</div>
-			<div class="col-9">
-				<nav class="nav nav-pills justify-content-start py-3">
-					<a href='/profile' class='profileLink nav-link border-0'>My Profile</a>
-					<a href='/registrations' class='profileLink nav-link'>Registrations</a>
-					<a href='/administrator' class='profileLink nav-link'>Family Members</a>
-					<a href='/reunions' class='profileLink nav-link active'>Reunions</a>
-					<a href='/settings' class='profileLink nav-link'>Settings</a>
-				</nav>
-			</div>
-		</div>
-		<div class="row bg-light">
-			<div class="col-2 my-2">
-				<div class="">
-					<a href="/reunions/create" class="btn btn-info btn-lg">Create New Reunion</a>
+				
+				@if($duplicates !== null)
+					<div class="my-4">
+						<div class="ml-3">
+							<a href="{{ route('duplicate_members') }}" class="btn btn-lg blue darken-2">Check Duplicates</a>
+						</div>
+					</div>
+				@endif
+				
+				<div class="my-4">
+					<div class="ml-5">
+						<div class="input-group input-group-lg">
+							<input type="text" name="" class="memberFilter form-control" value="" placeholder="Filter By Name" />
+							<div class="input-group-prepend">
+								<span class="oi oi-magnifying-glass input-group-text"></span>
+							</div>
+						</div>
+					</div>
 				</div>
+				
 			</div>
-			<div class="col-8 my-2">
-				<ul class="list-group">
-					<li class="list-group-item list-group-item-info">All Reunions</li>
-					@foreach($reunions as $reunion)
-						<li class="list-group-item list-group-item-action reunionItem">
-							<h2 class="" data-toggle="collapse" data-parent="#reunionAccordion" href="#reunionAccordion{{$loop->iteration}}" aria-expanded="true" aria-controls="reunionAccordion1">{{ $reunion->reunion_city . ' ' . $reunion->reunion_year }}</h2>
-							@if($reunion->has_site == 'Y')
-								{!! Form::open(['action' => ['ReunionController@update', 'reunion' => $reunion->id], 'method' => 'POST']) !!}
-									<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">
-										<div class="form-row my-3">
-											<div class="form-group col-4">
-												<label class="form-label" for="reunion_city">City</label>
-												<input type="text" name="reunion_city" class="form-control" value="{{ old('reunion_city') ? old('reunion_city') : $reunion->reunion_city }}" />
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="reunion_state">State</label>
-												<select class="form-control" name="reunion_state">
-													@foreach($states as $state)
-														<option value="{{ $state->state_abb }}" {{ old('reunion_state') && old('reunion_state') == $state->state_abb ? 'selected' : $reunion->reunion_state == $state->state_abb ? 'selected' : '' }}>{{ $state->state_name }}</option>
-													@endforeach
-												</select>
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="reunion_state">Year</label>
-												<select class="form-control" name="reunion_year">
-													@foreach($years as $year)
-														<option value="{{ $year->year_num }}" {{ old('reunion_year') && old('reunion_year') == $year->year_num ? 'selected' : $reunion->reunion_year == $year->year_num ? 'selected' : '' }}>{{ $year->year_num }}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
-										<div class="form-row my-3">
-											<div class="form-group col-4">
-												<label class="form-label" for="adult_price">Adult Price</label>
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text" id="basic-addon1">$</span>
-													</div>
-													<input type="number" name="adult_price" class="form-control" value="{{ old('adult_price') ? old('adult_price') : $reunion->adult_price }}" step="0.01" placeholder="Price For Adult 18-Older" />
-													<div class="input-group-append">
-														<span class="input-group-text" id="basic-addon1">Per Adult</span>
-													</div>
-												</div>
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="youth_price">Youth Price</label>
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text" id="basic-addon1">$</span>
-													</div>
-													<input type="number" name="youth_price" class="form-control" value="{{ old('youth_price') ? old('youth_price') : $reunion->youth_price }}" step="0.01" placeholder="Price For Youth 4-18" />
-													<div class="input-group-append">
-														<span class="input-group-text" id="basic-addon1">Per Youth</span>
-													</div>
-												</div>
-											</div>
-											<div class="form-group col-4">
-												<label class="form-label" for="child_price">Child Price</label>
-												<div class="input-group">
-													<div class="input-group-prepend">
-														<span class="input-group-text" id="basic-addon1">$</span>
-													</div>
-													<input type="number" name="child_price" class="form-control" value="{{ old('child_price') ? old('child_price') : $reunion->child_price }}" aria-label="Username" aria-describedby="basic-addon1" step="0.01" placeholder="Price For Children 3-Under" />
-													<div class="input-group-append">
-														<span class="input-group-text" id="basic-addon1">Per Child</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											{{ Form::submit('Update', ['class' => 'btn btn-primary form-control']) }}
-										</div>
-									</div>
-								{!! Form::close() !!}
-							@else
-								<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">
-									<h3 class="text-center">No Additional Information For This Reunion</h3>
-								</div>
-							@endif
-						</li>
-					@endforeach
-				</ul>
-			</div>
+			
+			<div class="col-12">
+			
+				<div class="table-wrapper">
+				
+					<table class="table table-striped table-hover">
+					
+						<thead>
+							<tr>
+								<th>Firstname</th>
+								<th>Lastname</th>
+								<th>Address</th>
+								<th>City</th>
+								<th>State</th>
+								<th>Zip</th>
+								<th>Phone</th>
+								<th>Email</th>
+								<th>Preference</th>
+								<th>Notes</th>
+								<th>Edit</th>
+							</tr>
+						</thead>
+						
+						<tbody>
+						
+							@foreach($distribution_list as $member)
+								<tr>
+									<td class="text-truncate nameSearch">{{ $member->firstname }}</td>
+									<td class="text-truncate nameSearch">{{ $member->lastname }}</td>
+									<td class="text-truncate">{{ $member->address }}</td>
+									<td class="text-truncate">{{ $member->city }}</td>
+									<td class="text-truncate">{{ $member->state }}</td>
+									<td class="text-truncate">{{ $member->zip }}</td>
+									<td class="text-truncate">{{ $member->phone }}</td>
+									<td class="text-truncate">{{ $member->email }}</td>
+									<td class="text-truncate" data-toggle="tooltip" data-placement="left" title="{{ $member->mail_preference == 'M' ? 'Mail' : 'Email' }}">{{ $member->mail_preference }}</td>
+									<td class="text-truncate" data-toggle="tooltip" data-placement="left" title="{{ $member->notes }}">{{ $member->notes != null ? 'Y' : 'N' }}</td>
+									<td class="text-truncate"><a href="/members/{{ $member->id }}/edit" class="btn btn-warning">Edit</a></td>
+								</tr>			
+							@endforeach
+							
+						</tbody>
+						
+					</table>
+					
+				</div>
+				
+			</div>			
 		</div>
 	</div>
 @endsection

@@ -5,28 +5,23 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class RedirectIfAuthenticated
+class CheckAdmin
 {
     /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
-     * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle($request, Closure $next)
     {
 		$user = Auth::user();
 		
-        if (Auth::guard($guard)->check()) {
-			if($user->administrator == 'Y') {
-				return redirect('/administrator');
-			} else {
-				return redirect('/home');
-			}
-        }
-
+		if(!$user->is_admin()) {
+			return redirect()->action('FamilyMemberController@edit', ['member' => $user->member->id]);
+		}
+		
         return $next($request);
     }
 }

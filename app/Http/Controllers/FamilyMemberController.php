@@ -17,7 +17,11 @@ class FamilyMemberController extends Controller
      */
     public function index()
     {
-        //
+        $distribution_list = FamilyMember::orderby('lastname', 'asc')->orderby('address', 'asc')->get();
+		$duplicates_check = FamilyMember::checkDuplicates();
+		$duplicates = $duplicates_check->isNotEmpty() ? $duplicates_check : null;
+		
+		return view('admin.index', compact('registrations', 'distribution_list', 'duplicates'));
     }
 
     /**
@@ -28,11 +32,10 @@ class FamilyMemberController extends Controller
     public function create()
     {
         $states = \App\State::all();
-		$descent_options = \App\Descent_option::all();
 
-        return view('admin.members.create', compact('states', 'descent_options'));
+        return view('admin.members.create', compact('states'));
     }
-
+	
     /**
      * Store a newly created resource in storage.
      *
@@ -90,7 +93,7 @@ class FamilyMemberController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**
@@ -194,5 +197,20 @@ class FamilyMemberController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+	/**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function duplicates()
+    {
+		$duplicates_check = FamilyMember::checkDuplicates();
+		$duplicates_check = $duplicates_check->isNotEmpty() ? $duplicates_check : null;
+		$allMembers = FamilyMember::all();
+		
+		return view('admin.members.duplicates', compact('duplicates_check', 'allMembers'));
+
     }
 }

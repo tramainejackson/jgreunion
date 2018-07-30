@@ -17,7 +17,7 @@
 			
 				<h1 class="mt-2 mb-4">Create New Member</h1>
 				
-				{!! Form::open(['action' => ['HomeController@store'], 'method' => 'POST']) !!}
+				{!! Form::open(['action' => ['FamilyMemberController@store'], 'method' => 'POST']) !!}
 				
 					<div class="form-group">
 						<label class="form-label" for="firstname">Firstname</label>

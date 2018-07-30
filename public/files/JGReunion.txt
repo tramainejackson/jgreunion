@@ -5,6 +5,7 @@
 Create a button that checks for duplicates
 Fixed: Not adding shirt sizes somewhere
 Fixed: Reunion pictures not showing on active site
+Done: Add pictures to current and past reunions pages
 Done: Add a footer
 Done: Allow user to have a profile and be an admin
 Done: Fix mail issue

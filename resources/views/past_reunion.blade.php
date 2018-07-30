@@ -45,7 +45,9 @@
 		</div>
 		
 		<div class="row mt-5">
+		
 			<div class="col-11 col-lg-9 mx-auto">
+			
 				<div class="pastReunionContent" id="hotel_information">
 					<h2 id="hotel_information_header">Hotel Information</h2>
 					<div id="hotel_content" class="container-fluid">
@@ -79,7 +81,7 @@
 				<div class="pastReunionContent" id="activities_information">
 				
 					<h2 id="activities_information_header">Activities</h2>
-					
+
 					@if($events->count() < 1)
 						
 						<div class="col-12">
@@ -138,6 +140,7 @@
 				<div class="pastReunionContent" id="contact_information">
 				
 					<h2 id="contact_information_header">Committee Information</h2>
+
 					<div id="" class="bg-white contactContent mx-0 mx-md-3 px-0 px-md-2 table-wrapper">
 					
 						<table id="contact_information_table" class="table text-center">
@@ -174,8 +177,48 @@
 						</table>
 						
 					</div>
-				</div>	
+					
+				</div>
+				
+				<hr/>
+				
+				<div class="pastReunionContent" id="reunion_pictures">
+					@if($reunion->images->isNotEmpty())
+						<div class="">
+							<h2 id="contact_information_header">Pictures</h2>
+						</div>
+						
+						<div class="row">
+						
+							<div id="mdb-lightbox-ui"></div>
+
+							<div class="mdb-lightbox">
+							
+								@foreach($reunion->images as $image)
+									<figure class="col-md-4">
+										<!--Large image-->
+										<a href="{{ asset(str_ireplace('images', 'images/lg', $image->path)) }}" data-size="1700x{{ $image->lg_height }}">
+											<!-- Thumbnail-->
+											<img src="{{ asset(str_ireplace('images', 'images/sm', $image->path)) }}" class="img-fluid">
+										</a>
+									</figure>
+									
+								@endforeach
+								
+							</div>
+							
+						</div>
+					@else
+						
+						<div class="hidden">
+							<h2 class="">No reunion pictures</h2>
+						</div>
+						
+					@endif
+				</div>
+				
 			</div>
+			
 		</div>
 		
 	</div>

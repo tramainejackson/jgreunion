@@ -213,4 +213,71 @@ class FamilyMemberController extends Controller
 		return view('admin.members.duplicates', compact('duplicates_check', 'allMembers'));
 
     }
+	
+	/**
+     * Delete the duplicate account.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function delete_duplicates(FamilyMember $member)
+    {
+		$duplicates = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state);
+		$returnData = [];
+		
+		if($duplicates->count() == 2) {
+			foreach($duplicates as $dupe) { 
+				// Check and see if the account has an active user profile
+				// Check and see if the account has any reunion registrations
+				if($dupe->user !== null || $dupe->registrations->isNotEmpty()) {
+					// dd($dupe->user);
+				} else {
+					
+					if($member->id == $dupe->id) {
+						
+						if($dupe->delete()) {
+							array_push($returnData, 'Removed Account', 'Remove Card');
+							return $returnData;
+						}
+						
+					}
+				}
+			}
+			
+		} else {
+			foreach($duplicates as $dupe) { 
+				// Check and see if the account has an active user profile
+				// Check and see if the account has any reunion registrations
+				if($dupe->user !== null || $dupe->registrations->isNotEmpty()) {
+					if($dupe->registrations->isNotEmpty()) {
+						
+						array_push($returnData, 'Unable to remove that duplicate account because it has a registration associated with it.');
+						return $returnData;
+						
+					} else {
+						
+						array_push($returnData, 'Removed Account');
+						return $returnData;
+						
+					}
+				} else {
+					
+					if($member->id == $dupe->id) {
+						
+						if($dupe->delete()) {
+							array_push($returnData, 'Removed Account');
+							return $returnData;
+						}
+						
+					}
+				}
+			}
+		}
+		
+		// $duplicates_check = FamilyMember::checkDuplicates();
+		// $duplicates_check = $duplicates_check->isNotEmpty() ? $duplicates_check : null;
+		// $allMembers = FamilyMember::all();
+		
+		// return view('admin.members.duplicates', compact('duplicates_check', 'allMembers'));
+
+    }
 }

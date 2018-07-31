@@ -16,7 +16,7 @@ $(document).ready(function()
 		setTimeout(function() {
 			$(".flashMessage").fadeOut();
 		}, 6000);
-	}else if($(".errorMessage").length > 0) {
+	} else if($(".errorMessage").length > 0) {
 		setTimeout(function() {
 			$(".errorMessage").fadeOut();
 		}, 6000);
@@ -54,6 +54,11 @@ $(document).ready(function()
 		// edge: 'left', // Choose the horizontal origin
 		// closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
 	// });
+	
+	// Delete duplicate family member account
+	$('body').on('click', '.deleteDupe', function() {
+		deleteDupe($(this).children().val());
+	});
 	
 	// Add new committee member row
 	$('body').on('click', '.addCommitteeMember', function() {
@@ -266,54 +271,6 @@ $(document).ready(function()
 		});
 	});
 	
-//Change color of input text when changed
-	$("body").on("change", "form#edit_adminUser_form input", function(e) {
-		var names = nameCheck($("form#edit_adminUser_form input:nth-of-type(1)"), $("form#edit_adminUser_form input:nth-of-type(2)"));
-		var username = usernameCheck($("form#edit_adminUser_form input:nth-of-type(3)"));
-		var password = passwordCheck($("form#edit_adminUser_form input:nth-of-type(4)"));
-		var totalErrors = names + username + password;
-		switch(totalErrors) {
-			case 1:
-				
-				break;
-			case 2:
-				
-				break;
-			case 3:
-				
-				break;
-			case 4:
-				
-				break;
-			default:
-				
-				break;
-		}
-	});
-	$("body").on("change", "form#add_adminUser_form input", function(e) {
-		var names = nameCheck($("form#add_adminUser_form input:nth-of-type(1)"), $("form#add_adminUser_form input:nth-of-type(2)"));
-		var username = usernameCheck($("form#add_adminUser_form input:nth-of-type(3)"));
-		var password = passwordCheck($("form#add_adminUser_form input:nth-of-type(4)"));
-		var totalErrors = names + username + password;
-		switch(totalErrors) {
-			case 1:
-				
-				break;
-			case 2:
-				
-				break;
-			case 3:
-				
-				break;
-			case 4:
-				
-				break;
-			default:
-				
-				break;
-		}
-	});
-	
 //Add scroll to the top button
 	$(window).scroll(function()	{
 		var containerHeight = $("#container").innerHeight();
@@ -366,58 +323,6 @@ $(document).ready(function()
 	$('body').on('change', 'input[name="new_reunion_background"]', function() {
 		$('.reunionBgrdImg').parent().addClass('flipInX').removeAttr('style');
 	});
-	
-	// // Upload new images for the league. Add progress bar while uploading
-	// $('body').on('click', 'form[name="new_pictures_form"] button[type="button"]', function() {
-		// // event.preventDefault();
-		// var formData = new FormData();
-		
-		// if(document.getElementById('new_picture_file').files.length > 1) {
-			 // var i = 0, len = document.getElementById('new_picture_file').files.length;
-			 
-			// for(i; i < len; i++) {
-				// formData.append("photo[]", document.getElementById('new_picture_file').files[i]);
-			// }
-			
-		// } else {
-			
-			// formData.append("photo[]", document.getElementById('new_picture_file').files[0]);
-
-		// }
-
-		// $.ajax({
-			// url: "/reunions/",
-			// method: "PATCH",
-			// data: formData,
-			// contentType: false,
-			// processData: false,
-			// cache: false,
-			// xhr: function() {
-				// var xhr = new XMLHttpRequest();
-				
-				// xhr.upload.addEventListener('progress', function(e) {
-					// var progressbar = Math.round((e.loaded/e.total) * 100);
-					// $('#progress_modal').modal('show');
-					// $('#pro').css('width', progressbar + '%').text(progressbar + '%');
-				// });
-				
-				// return xhr;
-			// },
-			
-			// success: function(data) {
-				// $('#progress_modal').modal('hide');
-				
-				// // Display an error toast
-				// toastr.success('Images added successfully.');
-			
-				// setTimeout(function() {
-					// window.open('/league_pictures', '_self');
-				// }, 2000);
-			// },
-		// });
-		
-		// return false;
-	// });
 	
 	// Upload new image for the current reunion
 	$('body').on('click', 'button.reunionBgrdImg', function() {
@@ -566,6 +471,44 @@ function emptyInputCheck() {
 	
 		return true;
 	}
+}
+
+// Remove event from reunion
+function deleteDupe(member_id) {
+	event.preventDefault();
+	
+	var removeRow = $('.deleteDupe input[value="' + member_id + '"]').parent().parent();
+	var removeCard = $(removeRow).parent().parent();
+	
+	$.ajax({
+	  method: "DELETE",
+	  url: "/members_remove/duplicate/" + member_id,
+	  data: {'family_member_remove':member_id}
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		$(removeRow).addClass('bounceOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+			
+			toastr.success(data[0]);
+			$(removeRow).remove();
+		
+			if(data[1] == 'Remove Card') {
+				
+				$(removeCard).addClass('bounceOut');
+				
+				setTimeout(function() {
+					$(removeCard).remove();
+				}, 1000);
+				
+			}
+			
+		});
+		
+	});
 }
 
 // Add individual member to household

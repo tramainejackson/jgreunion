@@ -17,17 +17,20 @@
 
 		<!-- Styles -->
 
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
 		<!-- Bootstrap core CSS -->
-		<link href="/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/css/mdb.min.css" rel="stylesheet">
+		<link href="{{ asset('/css/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('/css/mdb.min.css') }}" rel="stylesheet">
 
 		<!-- Custom CSS -->
-		<link href="/css/jgreunion.css" rel="stylesheet">
+		<link href="{{ asset('/css/jgreunion.css') }}" rel="stylesheet">
 		
 		@yield('add_styles')
 		
 		@if(substr_count(request()->server('HTTP_USER_AGENT'), 'rv:') > 0)
-			<link href="/css/myIEcss.css" rel="stylesheet">
+			<link href="{{ asset('/css/myIEcss.css') }}" rel="stylesheet">
 		@endif
 
 		<!--[if lte IE 9]> <script>window.open("oldBrowser/index.php", "_self");</script> <![endif]-->
@@ -116,13 +119,13 @@
 		
 		<!-- Scripts -->
 		<!-- Bootstrap core JS -->
-		<script src="/js/jquery-3.3.1.min.js"></script>
-		<script src="/js/popper.min.js"></script>
-		<script src="/js/bootstrap.min.js"></script>
-		<script src="/js/mdb.min.js"></script>
+		<script src="{{ asset('/js/jquery-3.3.1.min.js') }}"></script>
+		<script src="{{ asset('/js/popper.min.js') }}"></script>
+		<script src="{{ asset('/js/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('/js/mdb.min.js') }}"></script>
 
 		<!-- Custom JS -->
-		<script src="/js/jgreunion.js"></script>
+		<script src="{{ asset('/js/jgreunion.js') }}"></script>
 		
 		@yield('add_scripts')
 		

@@ -28,7 +28,7 @@
 				@foreach($duplicates_check as $duplicate)
 				
 					<!--Card-->
-					<div class="card default-color-dark my-2">
+					<div class="card default-color-dark my-2 animated">
 					
 						<div class="d-flex flex-center">
 							<h2 class="py-5">{{ $duplicate->full_name() }}</h2>
@@ -39,7 +39,7 @@
 						
 							@foreach(App\FamilyMember::getDuplicates($duplicate->firstname, $duplicate->lastname, $duplicate->city, $duplicate->state) as $dupe)
 								
-								<div class="d-flex align-items-center justify-content-center">
+								<div class="d-flex align-items-center justify-content-center animated">
 									
 									<div class="d-flex flex-column align-items-center justify-content-center">
 										<p class="">Has User Profile</p>
@@ -59,9 +59,14 @@
 									
 									<p class="mx-2 my-0">{{ $dupe->full_address() }}</p>
 									
-									<button class="btn btn-rounded red lighten-1" type="button">Delete</button>
+									<button class="btn btn-rounded red lighten-1 deleteDupe" type="button">Delete
+										<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
+									</button>
 									
-									<button class="btn btn-rounded orange accent-1" type="button">Not A Dupe</button>
+									<button class="btn btn-rounded orange accent-1 keepDupe" type="button">Not A Dupe
+										<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
+									</button>
+									
 								</div>
 							
 							@endforeach

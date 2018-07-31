@@ -59,6 +59,7 @@
 						@if(!Auth::user()->is_admin())
 							
 							<a href='/profile' class='profileLink nav-link'>My Profile</a>
+							
 						@else
 							
 							<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
@@ -155,7 +156,7 @@
 				<div class="col-12 col-md-6 mb-3 mb-md-0 mx-auto">
 					@if($newReunionCheck != null)
 
-						<a href="/upcoming_reunion/{{ $newReunionCheck->id }}" id="upcoming_btn" class="btn btn-lg d-block mt-2">Upcoming Reunion - {{ ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year }}</a>
+						<a href="{{ route('reunions.show', ['reunion' => $newReunionCheck->id]) }}" id="upcoming_btn" class="btn btn-lg d-block mt-2">Upcoming Reunion - {{ ucwords($newReunionCheck->reunion_city) . ' ' . $newReunionCheck->reunion_year }}</a>
 
 					@else
 						

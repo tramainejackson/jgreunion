@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('/', 'HomeController@home');
+
 Route::get('/reunion_registration', function () {
 	$images = \App\Images::where('id', '>', '5')->get();
 	$reunions = \App\Reunion::orderby('reunion_year', 'desc')->get();
@@ -27,18 +29,10 @@ Route::get('/delete_registration/{registration}', function (\App\Registration $r
     return view('admin.delete_modal.delete_registration', compact('registration', 'family'));
 });
 
-Route::get('/', 'HomeController@home');
-
 Route::get('/upcoming_reunion/{reunion}/registration_form', function (\App\Reunion $reunion) {
 	$states = \App\State::all();
 	
     return view('upcoming_reunion_reg_form', compact('reunion', 'states'));
-});
-
-Route::get('/administrator', function () {
-	$distribution_list = \App\Reunion_dl::orderby('lastname', 'asc')->orderby('address', 'asc')->get();
-	
-    return view('admin.index', compact('registrations', 'distribution_list'));
 });
 
 Route::get('/members/duplicates', 'FamilyMemberController@duplicates')->name('duplicate_members');
@@ -56,7 +50,6 @@ Route::resource('/reunions', 'ReunionController');
 Route::get('/past_reunion/{reunion}', 'ReunionController@show_past_reunion')->name('show_past_reunion');
 
 Route::get('/home', 'HomeController@index')->name('home');
-
 
 Route::get('/registrations/create/{reunion}', 'RegistrationController@create')->name('create_registration');
 
@@ -85,3 +78,5 @@ Route::delete('/reunion_events/{reunion_event}', 'ReunionController@remove_event
 Route::delete('/reunion_committee_members/{reunion_committee}', 'ReunionController@remove_committee_member')->name('remove_committee_member');
 
 Route::delete('/delete_carousel/{picture}', 'HomeController@delete_carousel');
+
+Route::delete('/members_remove/duplicate/{member}', 'FamilyMemberController@delete_duplicates');

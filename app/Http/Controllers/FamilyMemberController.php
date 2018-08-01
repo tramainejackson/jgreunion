@@ -221,63 +221,88 @@ class FamilyMemberController extends Controller
     */
     public function delete_duplicates(FamilyMember $member)
     {
-		$duplicates = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state);
+		$duplicates = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state)->get();
+		$usersInDupes = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state)->users()->get();
 		$returnData = [];
-		
-		if($duplicates->count() == 2) {
-			foreach($duplicates as $dupe) { 
-				// Check and see if the account has an active user profile
-				// Check and see if the account has any reunion registrations
-				if($dupe->user !== null || $dupe->registrations->isNotEmpty()) {
-					// dd($dupe->user);
-				} else {
-					
-					if($member->id == $dupe->id) {
-						
-						if($dupe->delete()) {
-							array_push($returnData, 'Removed Account', 'Remove Card');
-							return $returnData;
-						}
-						
+
+		if($usersInDupes->count() >= 1) {
+			
+			$userAccount = $usersInDupes->first();
+			
+			if($userAccount->id !== $member->id) {
+				if($member->user) {
+					if($userAccount->user->email === null) {
+						$userAccount->user->email = $member->user->email;
 					}
 				}
+
+				// If the account being deleted has a registration
+				// Change the registration to the account with a profile
+				if($member->registrations->isNotEmpty()) {
+					
+					foreach($member->registrations as $dupeReg) {
+						$dupeReg->family_member_id = $userAccount->id;
+						
+						if($dupeReg->save()) {}
+					}
+					
+				}
+				
+				// Delete the member account
+				if($member->delete()) {
+
+					array_push($returnData, 'Removed Account',  $duplicates->count() - 1 == 1 ? 'Remove Card' : null);
+					return $returnData;
+					
+				}
+				
 			}
 			
 		} else {
-			foreach($duplicates as $dupe) { 
-				// Check and see if the account has an active user profile
-				// Check and see if the account has any reunion registrations
-				if($dupe->user !== null || $dupe->registrations->isNotEmpty()) {
-					if($dupe->registrations->isNotEmpty()) {
-						
-						array_push($returnData, 'Unable to remove that duplicate account because it has a registration associated with it.');
-						return $returnData;
-						
-					} else {
-						
-						array_push($returnData, 'Removed Account');
-						return $returnData;
-						
-					}
-				} else {
+
+			// Get the parent account that any additional accounts
+			// will be associated to
+			$userAccount = $duplicates->first();
 					
-					if($member->id == $dupe->id) {
-						
-						if($dupe->delete()) {
-							array_push($returnData, 'Removed Account');
-							return $returnData;
-						}
-						
-					}
+			// If the account being deleted has a registration
+			// Change the registration to the account with a profile
+			if($member->registrations->isNotEmpty()) {
+				foreach($member->registrations as $dupeReg) {
+					$dupeReg->family_member_id = $userAccount->id;
+					
+					if($dupeReg->save()) {}
 				}
 			}
+
+			if($member->delete()) {
+
+				array_push($returnData, 'Removed Account', $duplicates->count() - 1 == 1 ? 'Remove Card' : null);
+				return $returnData;
+				
+			}
+			
 		}
+
+    }
+	
+	/**
+     * Keep the potential duplicate account.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function keep_duplicate(FamilyMember $member)
+    {
+		$duplicates = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state)->get();
+		$returnData = [];
 		
-		// $duplicates_check = FamilyMember::checkDuplicates();
-		// $duplicates_check = $duplicates_check->isNotEmpty() ? $duplicates_check : null;
-		// $allMembers = FamilyMember::all();
+		$member->duplicate = 'N';
 		
-		// return view('admin.members.duplicates', compact('duplicates_check', 'allMembers'));
+		if($member->save()) {
+
+			array_push($returnData, 'Account Saved', $duplicates->count() - 1 == 1 ? 'Remove Card' : null);
+			return $returnData;
+			
+		}
 
     }
 }

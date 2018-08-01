@@ -80,3 +80,5 @@ Route::delete('/reunion_committee_members/{reunion_committee}', 'ReunionControll
 Route::delete('/delete_carousel/{picture}', 'HomeController@delete_carousel');
 
 Route::delete('/members_remove/duplicate/{member}', 'FamilyMemberController@delete_duplicates');
+
+Route::post('/members_keep/duplicate/{member}', 'FamilyMemberController@keep_duplicate');

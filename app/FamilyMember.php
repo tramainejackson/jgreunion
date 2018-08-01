@@ -121,7 +121,16 @@ class FamilyMember extends Model
 				['lastname', 'LIKE', '%' . $lastname . '%'],
 				['city', 'LIKE', '%' . $city . '%'],
 				['state', 'LIKE', '%' . $state . '%'],
-			])
-			->get();
+				['duplicate', null],
+			]);
     }
+	
+	/**
+	* Get all the duplicates that were found
+	*/
+    public function scopeUsers($query)
+    {
+		return $query->where('user_id', '<>', null);
+    }
+	
 }

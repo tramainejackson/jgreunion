@@ -60,6 +60,11 @@ $(document).ready(function()
 		deleteDupe($(this).children().val());
 	});
 	
+	// Keep the potential duplicate family member account
+	$('body').on('click', '.keepDupe', function() {
+		keepDupe($(this).children().val());
+	});
+	
 	// Add new committee member row
 	$('body').on('click', '.addCommitteeMember', function() {
 		var newCommitteeRow = $('.committeeRow').clone();
@@ -440,7 +445,9 @@ function emptyInputCheck() {
 	}
 	
 	if($('.attending_children_row').not('#attending_children_row_default').length > 0) {
+		
 		$('.attending_children_row').not('#attending_children_row_default').each(function(e) {
+			
 			var thisName = $(this).find('input');
 			var thisShirt = $(this).find('select option:selected');
 			var thisSelect = $(this).find('select');
@@ -454,12 +461,17 @@ function emptyInputCheck() {
 				$(thisSelect).addClass('error_border');
 				errors = false;
 			}
+			
 		});
+		
 	}
 	
 	if(errors === false) {
+		
 		return false;
+		
 	} else {
+		
 		// Remove Registration Modal First
 		$('#registration_modal').modal('hide').ready(function() {
 			// Bring up loading modal when form is submitted on registration page
@@ -470,6 +482,7 @@ function emptyInputCheck() {
 		$('input#total_adult, input#total_youth, input#total_children, input#total_amount_due').removeAttr('disabled');
 	
 		return true;
+		
 	}
 }
 
@@ -483,6 +496,44 @@ function deleteDupe(member_id) {
 	$.ajax({
 	  method: "DELETE",
 	  url: "/members_remove/duplicate/" + member_id,
+	  data: {'family_member_remove':member_id}
+	})
+	
+	.fail(function() {	
+		alert("Fail");
+	})
+	
+	.done(function(data) {
+		$(removeRow).addClass('bounceOut').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+			
+			toastr.success(data[0]);
+			$(removeRow).remove();
+		
+			if(data[1] == 'Remove Card') {
+				
+				$(removeCard).addClass('bounceOut');
+				
+				setTimeout(function() {
+					$(removeCard).remove();
+				}, 1000);
+				
+			}
+			
+		});
+		
+	});
+}
+
+// Keep potential duplicate
+function keepDupe(member_id) {
+	event.preventDefault();
+	
+	var removeRow = $('.keepDupe input[value="' + member_id + '"]').parent().parent();
+	var removeCard = $(removeRow).parent().parent();
+	
+	$.ajax({
+	  method: "POST",
+	  url: "/members_keep/duplicate/" + member_id,
 	  data: {'family_member_remove':member_id}
 	})
 	

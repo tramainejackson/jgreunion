@@ -37,7 +37,7 @@
 						<!--Card content-->
 						<div class="card-body text-center">
 						
-							@foreach(App\FamilyMember::getDuplicates($duplicate->firstname, $duplicate->lastname, $duplicate->city, $duplicate->state) as $dupe)
+							@foreach(App\FamilyMember::getDuplicates($duplicate->firstname, $duplicate->lastname, $duplicate->city, $duplicate->state)->get() as $dupe)
 								
 								<div class="d-flex align-items-center justify-content-center animated">
 									

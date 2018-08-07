@@ -11,7 +11,7 @@ class ReunionCommittee extends Model
      */
     public function family_member()
     {
-        return $this->belongsTo('App\Family_Member');
+        return $this->belongsTo('App\FamilyMember');
     }
 	
 	/**

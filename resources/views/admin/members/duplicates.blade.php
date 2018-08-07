@@ -25,59 +25,74 @@
 			
 			<div class="col-8 mx-auto my-2">
 			
-				@foreach($duplicates_check as $duplicate)
-				
-					<!--Card-->
-					<div class="card default-color-dark my-2 animated">
+				@if($duplicates_check !== null)
 					
-						<div class="d-flex flex-center">
-							<h2 class="py-5">{{ $duplicate->full_name() }}</h2>
-						</div>
+					@foreach($duplicates_check as $duplicate)
+					
+						<!--Card-->
+						<div class="card default-color-dark my-2 animated">
 						
-						<!--Card content-->
-						<div class="card-body text-center">
-						
-							@foreach(App\FamilyMember::getDuplicates($duplicate->firstname, $duplicate->lastname, $duplicate->city, $duplicate->state)->get() as $dupe)
-								
-								<div class="d-flex align-items-center justify-content-center animated">
+							<div class="d-flex flex-center">
+								<h2 class="py-5">{{ $duplicate->full_name() }}</h2>
+							</div>
+							
+							<!--Card content-->
+							<div class="card-body text-center">
+							
+								@foreach(App\FamilyMember::getDuplicates($duplicate->firstname, $duplicate->lastname, $duplicate->city, $duplicate->state)->get() as $dupe)
 									
-									<div class="d-flex flex-column align-items-center justify-content-center">
-										<p class="">Has User Profile</p>
+									<div class="d-flex align-items-center justify-content-center animated">
 										
-										@if($dupe->user_id !== null)
+										<div class="d-flex flex-column align-items-center justify-content-center">
+											<p class="">Has User Profile</p>
 											
-											<i class="fa fa-check-square" aria-hidden="true"></i>
-											
-										@else
-											
-											<i class="fa fa-window-close" aria-hidden="true"></i>
-											
-										@endif
+											@if($dupe->user_id !== null)
+												
+												<i class="fa fa-check-square" aria-hidden="true"></i>
+												
+											@else
+												
+												<i class="fa fa-window-close" aria-hidden="true"></i>
+												
+											@endif
+										</div>
+										
+										<p class="mx-2 my-0">{{ $dupe->full_name() }}</p>
+										
+										<p class="mx-2 my-0">{{ $dupe->full_address() }}</p>
+										
+										<button class="btn btn-rounded red lighten-1 deleteDupe" type="button">Delete
+											<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
+										</button>
+										
+										<button class="btn btn-rounded orange accent-1 keepDupe" type="button">Not A Dupe
+											<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
+										</button>
+										
 									</div>
-									
-									<p class="mx-2 my-0">{{ $dupe->full_name() }}</p>
-									
-									<p class="mx-2 my-0">{{ $dupe->full_address() }}</p>
-									
-									<button class="btn btn-rounded red lighten-1 deleteDupe" type="button">Delete
-										<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
-									</button>
-									
-									<button class="btn btn-rounded orange accent-1 keepDupe" type="button">Not A Dupe
-										<input type="text" class="hidden" value="{{ $dupe->id }}" hidden />
-									</button>
-									
-								</div>
-							
-							@endforeach
+								
+								@endforeach
+								
+							</div>
 							
 						</div>
+						<!--/.Card-->
 						
-					</div>
-					<!--/.Card-->
+					@endforeach
 					
-				@endforeach
+				@else
+				
+					<div class="">
+					
+						<h2 class="">There are no duplicates currently found in the system</h2>
+					
+					</div>
+					
+				@endif
+				
 			</div>
+			
 		</div>
+		
 	</div>
 @endsection

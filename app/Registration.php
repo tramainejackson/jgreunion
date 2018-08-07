@@ -42,6 +42,14 @@ class registration extends Model
     }
 	
 	/**
+     * Get only the parent registration.
+    */
+    public function scopeParents($query)
+    {
+        return $query->where('parent_reg', null);
+    }
+	
+	/**
      * Get the total cost of all the registrations.
     */
     public function scopeTotalRegFees($query)

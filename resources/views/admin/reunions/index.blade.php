@@ -121,6 +121,12 @@
 											<a href="/reunions/{{ $reunion->id }}/edit" class="btn btn-warning btn-lg">Edit Reunion</a>
 										</div>
 										
+									@else
+										
+										<div class="form-group">
+											<a href="{{ route('create_reunion_pictures', ['reunion' => $reunion->id]) }}" class="btn btn-lg btn-outline-light-green">Add Reunion Photos</a>
+										</div>
+										
 									@endif
 									
 								</div>

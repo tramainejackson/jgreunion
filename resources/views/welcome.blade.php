@@ -194,7 +194,7 @@
 	
 		<img id="reunion_history_pic" src="images/BlackHistory2015_037.jpg"/>
 		
-		<p>To The Jackson Green Family,<br/><br/>Earlean Jackson, Victoria Jackson Darby and Hattie Mae Jackson Green, started the Jackson-Green Family 
+		<p class="py-5">To The Jackson Green Family,<br/><br/>Earlean Jackson, Victoria Jackson Darby and Hattie Mae Jackson Green, started the Jackson-Green Family 
 		Reunion in the winter of 1982.<br/><br/>In beginning of forming the family reunion tradition, Earlean, Hattie Mae and Victoria knew that they 
 		wanted a family reunion but didn’t want to be partial to either side of the family. Therefore the decision was made to form the family reunion 
 		with both the Jackson (father’s line of decent) and Green (mother’s line of decent) families. <br/><br/>The first family reunion was held on the 
@@ -212,10 +212,12 @@
 		
 			<div class="col-12 col-sm-8 col-xl-7">
 			
-				<div id="jackson_descent" class="reunion_descent_info">
+				<div id="jackson_descent" class="reunion_descent_info mt-3 mb-5 wow fadeInUp" data-wow-delay="0.6s">
 				
-					<h2 id="jackson_descent_header" class="descent_info">Jackson Line of Descent</h2>
-					<p>Rev. Sandy Jackson II and his wife Venus, had nine children and forty grandchildren come from their union.</p>
+					<h2 class="descent_info cooltext2 display-4">Jackson Line of Descent</h2>
+					
+					<p class="px-2">Rev. Sandy Jackson II and his wife Venus, had nine children and forty grandchildren come from their union.</p>
+					
 					<ol>
 						<li>Louis Jackson (six children)</li>
 						<li>Darryl Jackson (two children)</li>
@@ -229,10 +231,12 @@
 					</ol>
 				</div>
 				
-				<div class="reunion_descent_info" id="green_descent">
+				<div id="green_descent" class="reunion_descent_info mt-3 mb-5 wow fadeInUp" data-wow-delay="0.6s">
 				
-					<h2 id="green_descent_header" class="descent_info">Green Line of Descent</h2>
-					<p>From the union of Peter and Laura Green, there were eight children and fifty-six grandchildren.</p>
+					<h2 class="descent_info cooltext2 display-4">Green Line of Descent</h2>
+					
+					<p class="px-2">From the union of Peter and Laura Green, there were eight children and fifty-six grandchildren.</p>
+					
 					<ol>
 						<li>Davis Green</li>
 						<li>Richard Green (four children)</li>
@@ -244,15 +248,24 @@
 						<li>Victoria Angus Green (eleven children)</li>
 					</ol>
 					
-					<p>It was from the union of Sandy Jackson (Rev. Sandy and Venus Jackson’s son) and Clander Green<br/>(Peter and Laura Green’s daughter) that brought the Jackson-Green families together.</p>
-				</div>						
+				</div>
+				
 			</div>
 			
-			<div class="col-0 col-sm-4 col-xl-5 align-self-center">
+			<div class="col-sm-4 col-xl-5 align-self-center wow fadeInRight" data-wow-delay="0.6s">
 				<img id="family_tree_pic" src="images/funkynewtree.jpg"/>
 			</div>
 			
 		</div>
 		
+		<div class="row">
+		
+			<div class="col-12">
+				
+				<h3 class="h3-responsive px-5">It was from the union of Sandy Jackson (Rev. Sandy and Venus Jackson’s son) and Clander Green (Peter and Laura Green’s daughter) that brought the Jackson-Green families together.</h3>
+				
+			</div>
+			
+		</div>
 	</div>
 @endsection

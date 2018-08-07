@@ -71,7 +71,7 @@ class FamilyMember extends Model
 	*/
     public function full_address()
     {
-		return $this->address . ' ' . $this->city . ', ' . $this->state;
+		return $this->address . ', ' . $this->city . ', ' . $this->state . ' ' . $this->zip;
 	}
 	
 	/**
@@ -102,7 +102,8 @@ class FamilyMember extends Model
 	*/
     public function scopeCheckDuplicates($query)
     {
-		return $query->selectRaw('firstname, lastname, city,  state')
+		return $query->selectRaw('firstname, lastname, city, state')
+			->where('duplicate', null)
 			->groupBy('firstname')
 			->groupBy('lastname')
 			->groupBy('city')

@@ -8,10 +8,7 @@
 		}
 		
 		@media only screen and (max-width:576px) {
-			#reunion_page {
-				background: none;
-			}
-			
+
 			#reunion_page::after {
 				content: "";
 				position: fixed;
@@ -27,13 +24,6 @@
 				z-index: -10;
 			}
 			
-			.activities_content:nth-of-type(2) {
-				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('/images/cookout.jpg');
-				background-size: cover !important;
-				background-attachment: fixed !important;
-				background-position: center center !important;
-				background-repeat: no-repeat !important;
-			}
 		}
 	</style>
 	
@@ -90,7 +80,7 @@
 				</div>
 			</div>
 			<div class="col-12 col-xl-8">
-				<h1 class="text-center py-5 text-light display-xl-3 display-4">Jackson/Green Family Reunion {{ $reunion->reunion_year }}</h1>
+				<h1 class="text-center py-5 text-light display-4">Jackson/Green Family Reunion {{ $reunion->reunion_year }}</h1>
 			</div>
 			<div class="d-none col-xl-2"></div>
 		</div>
@@ -106,12 +96,14 @@
 					<div class="col-12 col-xl-4 my-1">
 						<img src="{{ asset('storage//reunion_background/charlotte_hotel.jpg') }}" class="mw-100" />
 					</div>
+					
 					<div class="col-12 col-xl-8">
 						<p class="my-1"><span class="hotelInfoLabel">Hotel:</span> Sheraton Charlotte Hotel</p>
 						<p class="my-1"><span class="hotelInfoLabel">Location:</span> 555 South McDowell Street, South Tower, Charlotte, NC, 28204</p>
 						<p class="my-1"><span class="hotelInfoLabel">Room:</span> $128/per night (not including taxes and fees)</p>
 						<p class="my-1"><span class="hotelInfoLabel">Contact:</span> (704) 372-4100</p>
 					</div>
+					
 					<div class="col-12">
 						<div class="form-block-header mb-xl-3">
 							<h3 class="text-center">Hotel Amenities</h2>							
@@ -149,7 +141,7 @@
 						
 					@else
 						
-						<div class="activities_content col-10 mx-auto my-2 py-2">
+						<div class="activities_content col-11 col-md-10 mx-auto my-2 py-2">
 							@foreach($events as $events)
 								<div class="activitiesEvent container-fluid">
 									<div class="row">
@@ -197,7 +189,7 @@
 						<h2 id="" class="text-center text-light">Committee Information</h2>
 					</div>
 					
-					<div class="col-12 table-wrapper">
+					<div class="col-12 table-responsive">
 						<table id="" class="table table-hover">
 							<thead>
 								<tr>
@@ -240,13 +232,15 @@
 						@endif
 						
 						@if($committee_president->count() > 0)
-							<p id="checks_address">
-								<span>Address:</span>
-								<span>{{ $committee_president->address }}</span>
-								<span>{{ $committee_president->city. ', ' . $committee_president->state . ' ' .$committee_president->zip }}</span>
-							</p>
-							<p class="paymentsFinePrint">*Partial payments accepted</p>
-							<p class="paymentsFinePrint">*Any return checks will incur a $30 penalty fee</p>
+
+							@if(strlen($committee_president->family_member->full_address()) > 5)
+								<p id="checks_address">
+									<span>Address:</span>
+									<span>{{ $committee_president->family_member->full_address()}}</span></span>
+								</p>
+								<p class="paymentsFinePrint">*Partial payments accepted</p>
+								<p class="paymentsFinePrint">*Any return checks will incur a $30 penalty fee</p>
+							@endif
 							
 							@if($reunion->registration_form != null)
 								<p>Click 
@@ -293,40 +287,54 @@
 							<p class="text-center emptyInfo mt-3">No Family Member Have Registered Yet</p>
 						</div>
 					@else
-						<div class="col-8 col-sm-4 mx-auto">
-							<ol class="mt-4" id="registered_members_information_ul">
-								@php
-									function ucname($string) {
-										$string =ucwords(strtolower($string));
+						@php
+							function ucname($string) {
+								$string =ucwords(strtolower($string));
 
-										foreach (array('-', '\'') as $delimiter) {
-										  if (strpos($string, $delimiter)!==false) {
-											$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
-										  }
-										}
-										return $string;
-									}
-								@endphp
-								@php $loopCount = 0; @endphp
-								@foreach($registrations as $registration)
-									@if($registration->parent_reg == null)
-										@php $loopCount++; @endphp
-										<li class="">{{ ucname($registration->registree_name) }}
-											@if($registration->children_reg)
-												<ul class="">
-													@foreach($registration->children_reg as $reg_member)
-														@php $firstname = explode(" ", $reg_member->registree_name); @endphp
-														<li class="">{{ ucwords(strtolower($firstname[0])) }}</li>
-													@endforeach
-												</ul>
-											@endif
-										</li>
-									@endif
+								foreach (array('-', '\'') as $delimiter) {
+								  if (strpos($string, $delimiter)!==false) {
+									$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
+								  }
+								}
+								return $string;
+							}
+						@endphp
+
+						@foreach($registrations->chunk(10) as $chunck)
+							
+							<div class="col-12 col-xl-4 mx-auto my-3">
+							
+								@foreach($chunck as $registration)
+										
+									<div class="px-3 py-3 my-1 rounded z-depth-1 rgba-stylish-strong white-text">
+									
+										<span>{{ $loop->iteration + (($loop->parent->iteration - 1) * 10) }}.</span>
+										
+										<h2 class="h2-responsive d-inline-block mb-1">{{ ucname($registration->registree_name) }}</h2>
+									
+										@if($registration->children_reg)
+										
+											@foreach($registration->children_reg as $reg_member)
+													@php $firstname = explode(" ", $reg_member->registree_name); @endphp
+													
+													<h3 class="h3-responsive pl-5 my-1">{{ ucwords(strtolower($firstname[0])) }}</h3>
+													
+											@endforeach
+											
+										@endif
+										
+									</div>
+								
 								@endforeach
-							</ol>
-						</div>
+								
+							</div>
+							
+						@endforeach
+						
 					@endif
+					
 				</div>
+				
 			</div>
 			
 			<div class="col-md-2"></div>

@@ -11,7 +11,11 @@
 				<div class="">
 					<a href="{{ route('reunions.index') }}" class="btn btn-info btn-lg btn-block my-2">All Reunions</a>
 					
-					<a href="{{ route('reunions.edit', ['reunion' => $reunion->id]) }}" class="btn btn-lg btn-block btn-outline-primary">Edit {{ $reunion->reunion_city . ' ' . $reunion->reunion_year }} Reunion</a>
+					@if($reunion->reunion_complete == 'N')
+						
+						<a href="{{ route('reunions.edit', ['reunion' => $reunion->id]) }}" class="btn btn-lg btn-block btn-outline-primary">Edit {{ $reunion->reunion_city . ' ' . $reunion->reunion_year }} Reunion</a>
+				
+					@endif
 					
 				</div>
 			</div>

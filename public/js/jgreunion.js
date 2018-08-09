@@ -46,6 +46,13 @@ $(document).ready(function()
 	// Dropdown Init
 	$('.dropdown-toggle').dropdown();
 	
+	// Table Adjustments
+	$('#family_members_table').DataTable({
+		"scrollX": true,
+	});
+	$('.dataTables_length').addClass('bs-select');
+
+
 	// // SideNav Scrollbar Initialization
 	// var sideNavScrollbar = document.querySelector('.custom-scrollbar');
 	// Ps.initialize(sideNavScrollbar);

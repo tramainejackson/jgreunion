@@ -35,7 +35,7 @@
 								@php
 									$thisReg = $member->registrations()->where([
 										['reunion_id', '=', $reunion->id],
-										['dl_id', '=', $member->id]
+										['family_member_id', '=', $member->id]
 									])->first();
 								@endphp
 								
@@ -52,11 +52,14 @@
 				<div class="form-block-header mt-5">
 					<h3 class="mt-2 mb-4">Create A Family Member To Add To Registration</h3>
 				</div>
+				
 				<!-- Create Form -->
-				{!! Form::open(['action' => 'HomeController@store', 'method' => 'POST']) !!}
+				{!! Form::open(['action' => 'RegistrationController@store', 'method' => 'POST']) !!}
+				
 					<div class="hidden" hidden>
 						<input type="text" name="reunion_id" class="hidden" value="{{ $reunion->id }}" hidden />
 					</div>
+					
 					<div class="form-row">
 						<div class="form-group col-6">
 							<label class="form-label" for="firstname">Firstname</label>
@@ -75,14 +78,17 @@
 							@endif
 						</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="form-label" for="email">Email Address</label>
 						<input type="text" name="email" class="form-control" value="{{  old('email') }}" placeholder="Enter Email Address" />
 					</div>
+					
 					<div class="form-group">
 						<label class="form-label" for="address">Address</label>
 						<input type="text" name="address" class="form-control" value="{{  old('address') }}" placeholder="Enter Address" />
 					</div>
+					
 					<div class="form-row">
 						<div class="form-group col-4">
 							<label class="form-label" for="city">City</label>
@@ -101,10 +107,12 @@
 							<input type="number" name="zip" class="form-control" max="99999" value="{{  old('zip') }}" placeholder="Enter Zip Code" />
 						</div>
 					</div>
+					
 					<div class="form-group">
 						<label class="form-label" for="phone">Phone</label>
 						<input type="number" name="phone" class="form-control" value="{{  old('phone') }}" placeholder="##########" />
 					</div>
+					
 					<div class="form-group">
 						<label class="form-label" for="mail_preference">Mail Preference</label>
 						<select class="form-control browser-default" name="mail_preference">
@@ -112,11 +120,15 @@
 							<option value="E" {{ old('mail_preference') && old('mail_preference') == 'E' ? 'selected' : '' }}>Email</option>
 						</select>
 					</div>
+					
 					<div class="form-group">
 						{{ Form::submit('Create New Member And Registration', ['class' => 'btn btn-primary form-control']) }}
 					</div>
 				{!! Form::close() !!}
+				
 			</div>
-		</div>	
+			
+		</div>
+		
 	</div>
 @endsection

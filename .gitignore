@@ -1,5 +1,7 @@
 /node_modules
 /public/hot
+/public/css/*addons
+/public/js/*addons
 /public/addons
 /public/css/mdb*
 /public/js/modules

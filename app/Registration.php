@@ -22,7 +22,7 @@ class registration extends Model
      */
     public function reunion_dl()
     {
-        return $this->belongsTo('App\Reunion_dl', 'dl_id');
+        return $this->belongsTo('App\FamilyMember', 'family_member_id');
     }
 	
 	/**
@@ -80,8 +80,6 @@ class registration extends Model
     */
     public function scopeMemberRegistered($query, $member_id)
     {
-        return $query->where('family_member_id', $member_id)
-			->get()
-			->first();
+        return $query->where('family_member_id', $member_id);
     }
 }

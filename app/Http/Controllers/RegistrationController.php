@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Registration;
 use App\Reunion;
-use App\Reunion_dl;
+use App\FamilyMember;
 use App\State;
 use App\Mail\Registration_Admin;
 use App\Mail\Registration_User;
@@ -45,7 +45,7 @@ class RegistrationController extends Controller
      */
     public function create(Reunion $reunion)
     {
-		$members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$members = FamilyMember::orderby('firstname', 'asc')->get();
 		$states = State::all();
 		
         return view('admin.registrations.create', compact('reunion', 'members', 'states'));
@@ -72,7 +72,7 @@ class RegistrationController extends Controller
 			]);
 		
 			// Create New Member
-			$member = new Reunion_dl();
+			$member = new FamilyMember();
 
 			// Create New Registration
 			$registration = new Registration();
@@ -112,9 +112,10 @@ class RegistrationController extends Controller
 			$registration->youth_names = isset($request->attending_youth_name) ? join('; ', $request->attending_youth_name) : null;
 			$registration->children_names = isset($request->attending_children_name) ? join('; ', $request->attending_children_name) : null;
 			$registration->total_amount_due = $registration->due_at_reg = $request->total_amount_due;
+			
 			// dd($registration->children_names);
 			if($member->save()) {
-				$registration->dl_id = $member->id;
+				$registration->family_member_id = $member->id;
 				
 				if($registration->save()) {
 					\Mail::to($registration->email)->send(new Registration_Admin($registration, $registration->reunion));
@@ -127,7 +128,7 @@ class RegistrationController extends Controller
 							// Skip the first adult name
 							if($key > 0) {
 								// Create New Member
-								$adultMember = new Reunion_dl();
+								$adultMember = new FamilyMember();
 
 								// Create New Registration
 								$adultRegistration = new Registration();
@@ -159,7 +160,7 @@ class RegistrationController extends Controller
 						
 						foreach($newYouths as $newYouth) {
 							// Create New Member
-							$youthMember = new Reunion_dl();
+							$youthMember = new FamilyMember();
 
 							// Create New Registration
 							$youthRegistration = new Registration();
@@ -190,7 +191,7 @@ class RegistrationController extends Controller
 						
 						foreach($newChildren as $newChild) {
 							// Create New Member
-							$childMember = new Reunion_dl();
+							$childMember = new FamilyMember();
 
 							// Create New Registration
 							$childRegistration = new Registration();
@@ -220,15 +221,16 @@ class RegistrationController extends Controller
 			}
 			
 		} else {
+			
 			$registration = new Registration();
 			$reunion = Reunion::find($request->reunion_id);
-			$member = Reunion_dl::find($request->reg_member);
+			$member = FamilyMember::find($request->reg_member);
 			$totalPrice = $reunion->adult_price;
 			$adults = $member->firstname;
 			$youth = '';
 			$children = '';
 			
-			$registration->dl_id = $member->id;
+			$registration->family_member_id = $member->id;
 			$registration->reunion_id = $reunion->id;
 			$registration->registree_name = $member->firstname . ' ' . $member->lastname;
 			$registration->total_amount_due = $registration->due_at_reg = $totalPrice;
@@ -265,9 +267,9 @@ class RegistrationController extends Controller
      */
     public function edit(Registration $registration)
     {
-		$all_members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$all_members = FamilyMember::orderby('firstname', 'asc')->get();
 		$states = State::all();
-		$family = Reunion_dl::where([
+		$family = FamilyMember::where([
 			['family_id', $registration->family_id],
 			['family_id', '<>', null]
 		])->get();
@@ -306,9 +308,9 @@ class RegistrationController extends Controller
 		$registration->children_shirts = implode('; ', $request->children_sizes);
 		$registration->reg_notes = $request->reg_notes;
 
-		if($registration->dl_id != null) {
-			$registration->registree_name = $registration->reunion_dl->firstname . ' ' . $registration->reunion_dl->lastname;
-			$registration->dl_id = $registration->reunion_dl->id;
+		if($registration->family_member_id != null) {
+			$registration->registree_name = $registration->FamilyMember->firstname . ' ' . $registration->FamilyMember->lastname;
+			$registration->family_member_id = $registration->FamilyMember->id;
 		}
 		
 		if($registration->save()) {
@@ -337,13 +339,13 @@ class RegistrationController extends Controller
      */
     public function add_registration_member(Request $request, Registration $registration)
     {
-		if(isset($request->dl_id)) {
-			$member = Reunion_dl::find($request->dl_id);
+		if(isset($request->family_member_id)) {
+			$member = FamilyMember::find($request->family_member_id);
 
 			// Create a new registration
 			$newRegistration = new Registration();
 			$newRegistration->reunion_id = $registration->reunion_id;
-			$newRegistration->dl_id = $member->id;
+			$newRegistration->family_member_id = $member->id;
 			$newRegistration->reg_date = $registration->reg_date;
 			$newRegistration->registree_name = $member->firstname . ' ' . $member->lastname;
 			$newRegistration->parent_reg = $registration->id;
@@ -435,11 +437,11 @@ class RegistrationController extends Controller
 				'lastname' => 'required|max:50',
 			]);
 			// Create New Member
-			$member = new Reunion_dl();
+			$member = new FamilyMember();
 			$member->firstname = $request->firstname;
 			$member->lastname = $request->lastname;
 			$member->age_group = $request->age_group;
-			$maxFamilyID = Reunion_dl::max('family_id');
+			$maxFamilyID = FamilyMember::max('family_id');
 
 			// Create a new registration
 			$newRegistration = new Registration();
@@ -450,22 +452,22 @@ class RegistrationController extends Controller
 			
 			// If household members isn't empty then add a family ID
 			// to all the parties
-			if($registration->reunion_dl->family_id == null) {
+			if($registration->FamilyMember->family_id == null) {
 				$newFamilyID = $maxFamilyID + 1;
 				$member->family_id = $newFamilyID;
-				$registration->reunion_dl->family_id = $newFamilyID;
+				$registration->FamilyMember->family_id = $newFamilyID;
 				
-				if($registration->reunion_dl->save()) {}
+				if($registration->FamilyMember->save()) {}
 			} else {
-				$member->family_id = $registration->reunion_dl->family_id;
+				$member->family_id = $registration->FamilyMember->family_id;
 			}
 			
-			$newRegistration->address = $member->address = $registration->reunion_dl->address;
-			$newRegistration->city = $member->city = $registration->reunion_dl->city;
-			$newRegistration->state = $member->state = $registration->reunion_dl->state;
-			$newRegistration->zip = $member->zip = $registration->reunion_dl->zip;
-			$newRegistration->phone = $member->phone = $registration->reunion_dl->phone != null ? $registration->reunion_dl->phone : null;
-			$newRegistration->email = $registration->reunion_dl->email != null ? $registration->reunion_dl->email : null;
+			$newRegistration->address = $member->address = $registration->FamilyMember->address;
+			$newRegistration->city = $member->city = $registration->FamilyMember->city;
+			$newRegistration->state = $member->state = $registration->FamilyMember->state;
+			$newRegistration->zip = $member->zip = $registration->FamilyMember->zip;
+			$newRegistration->phone = $member->phone = $registration->FamilyMember->phone != null ? $registration->FamilyMember->phone : null;
+			$newRegistration->email = $registration->FamilyMember->email != null ? $registration->FamilyMember->email : null;
 			
 			// Get all the shirt sizes
 			$shirtSizes = explode('; ', $registration->shirt_sizes);
@@ -534,7 +536,7 @@ class RegistrationController extends Controller
 			$registration->total_amount_due = $registration->due_at_reg - $registration->total_amount_paid;
 			
 			if($member->save()) {
-				$newRegistration->dl_id = $member->id;
+				$newRegistration->family_member_id = $member->id;
 				
 				if($newRegistration->save()) {
 					if($registration->save()) {
@@ -564,9 +566,9 @@ class RegistrationController extends Controller
 		$childrenSizes = array_slice($shirtSizes, (count($adults) + count($youths)));
 		$removeIndex = 0;
 		$removedName = "";
-		$all_members = Reunion_dl::orderby('firstname', 'asc')->get();
+		$all_members = FamilyMember::orderby('firstname', 'asc')->get();
 		$states = State::all();
-		$family = Reunion_dl::where([
+		$family = FamilyMember::where([
 			['family_id', $registration->family_id],
 			['family_id', '<>', null]
 		])->get();

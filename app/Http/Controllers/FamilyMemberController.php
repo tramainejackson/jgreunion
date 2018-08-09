@@ -69,7 +69,7 @@ class FamilyMemberController extends Controller
 				
 				$registration = new Registration();
 				$totalPrice = $reunion->adult_price;
-				$registration->dl_id = $member->id;
+				$registration->family_member_id = $member->id;
 				$registration->reunion_id = $reunion->id;
 				$registration->registree_name = $member->firstname . ' ' . $member->lastname;
 				$registration->total_amount_due = $registration->due_at_reg = $totalPrice;
@@ -80,7 +80,7 @@ class FamilyMemberController extends Controller
 					return redirect()->action('RegistrationController@edit', $registration)->with('status', 'Member and Registration Created Successfully');				
 				}
 			} else {
-				return redirect()->action('HomeController@edit', $member)->with('status', 'Member Created Successfully');				
+				return redirect()->action('FamilyMemberController@edit', $member)->with('status', 'Member Created Successfully');				
 			}
 		}
     }
@@ -112,7 +112,7 @@ class FamilyMemberController extends Controller
 		$family_members = FamilyMember::household($family_member->family_id);
 		$potential_family_members = FamilyMember::potentialHousehold($member);
 		$active_reunion = Reunion::active()->first();
-		$registered_for_reunion = Registration::memberRegistered($family_member->id);
+		$registered_for_reunion = Registration::memberRegistered($family_member->id)->first();
 		
         return view('admin.members.edit', compact('states', 'family_members', 'family_member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
     }
@@ -194,9 +194,14 @@ class FamilyMemberController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FamilyMember $member)
     {
-        //
+        if($member->delete()) {
+			
+			return redirect()->action('FamilyMemberController@index')->with('status', 'Family member account deleted successfully');
+			
+		}
+		
     }
 
 	/**

@@ -14,8 +14,8 @@
 			<div class="col-8 membersForm">
 			
 				<h1 class="mt-2 mb-4">Edit
-					@if($registration->dl_id != null)
-						<a href="/members/{{ $registration->dl_id }}/edit" class="">{{ $registration->registree_name }}</a> ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})
+					@if($registration->family_member_id != null)
+						<a href="/members/{{ $registration->family_member_id }}/edit" class="">{{ $registration->registree_name }}</a> ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})
 					@else
 						{{ $registration->registree_name }} ({{ $registration->reunion->reunion_city }} Reunion {{ $registration->reunion->reunion_year }})
 					@endif
@@ -27,15 +27,20 @@
 					@if($registration->family_id != null)
 						<div class="form-group">
 							<label class="form-label" for="registree">Registree</label>
+							
 							<select class="browser-default form-control" name="registree">
+								
 								@foreach($family as $family_member)
+								
 									<option value="{{ $family_member->id }}" {{ $family_member->id == $registration->reunion_dl->id ? 'selected' : '' }}>{{ $family_member->firstname . ' ' . $family_member->lastname }}</option>
+									
 								@endforeach
+								
 							</select>
 						</div>
 					@endif
 					
-					@if($registration->dl_id != null)
+					@if($registration->family_member_id != null)
 						<div class="form-group">
 							<label class="form-label" for="address">Address</label>
 							<input type="text" name="address" class="form-control" value="{{ $registration->reunion_dl->address }}" placeholder="Enter Address" disabled />
@@ -127,12 +132,16 @@
 							<div class="form-group col-4">
 								<label class="form-label text-danger" for="total_amount_due">Due Amount</label>
 								<div class="input-group">
+								
 									<div class="input-group-prepend">
-										<span class="input-group-text" id="basic-addon1">$</span>
+										<span class="input-group-text" id="">$</span>
 									</div>
+									
 									<input type="number" name="total_amount_due" class="form-control" value="{{ $registration->total_amount_due > 0 ? $registration->total_amount_due : '' }}" placeholder="Enter Due Cost" step="0.01" />
+									
 								</div>
 							</div>
+							
 							<div class="form-group col-4">
 								<label class="form-label text-danger" for="total_amount_paid">Paid Amount</label>
 								<div class="input-group">
@@ -160,11 +169,15 @@
 						<div class="form-row" id="shirt_sizes_div">
 							<div class="form-group col-4">
 								@if($adults != null)
+								
 									@foreach($adults as $family_reg)
+									
 										@if($family_reg != '' || $family_reg != null)
 											<div class="my-1">
 												<div class="input-group">
+												
 													<input type="text" name="" class="form-control" value="{{ $family_reg }}" disabled />
+
 													<div class="input-group-append">
 														<button class="btn btn-outline-danger removeRegIndividualBtn{{ $family_reg == $registration->reunion_dl->firstname ? ' disabled' : '' }}" type="button" onclick="remove_from_reg('{{ $registration->id }}', 'adult{{ $loop->iteration }}')" {{ $family_reg == $registration->reunion_dl->firstname ? ' disabled' : '' }}>Remove</button>
 													</div>
@@ -269,17 +282,19 @@
 										<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
 											<div class="card-body">
 												<div class="form-group">
+												
 													<label class="form-label" for="dl_id">Member</label>
+													
 													<select class="form-control browser-default" name="dl_id">
 														@foreach($all_members as $thisMember)
 															@php
 																$thisReg = $thisMember->registrations()->where([
 																	['reunion_id', '=', $registration->reunion_id],
-																	['dl_id', '=', $thisMember->id]
+																	['family_member_id', '=', $thisMember->id]
 																])->first();
 															@endphp
 															
-															<option value="{{ $thisMember->id }}" class="{{ $thisReg != null ? $thisReg->dl_id == $thisMember->id ? 'text-danger' : '' : '' }}" {{ $thisReg != null ? $thisReg->dl_id == $thisMember->id ? 'disabled' : '' : '' }}>{{ $thisMember->firstname . ' ' . $thisMember->lastname }}{{ $thisReg != null ? $thisReg->dl_id == $thisMember->id ? ' - member already registered' : '' : '' }}</option>
+															<option value="{{ $thisMember->id }}" class="{{ $thisReg != null ? $thisReg->family_member_id == $thisMember->id ? 'text-danger' : '' : '' }}" {{ $thisReg != null ? $thisReg->family_member_id == $thisMember->id ? 'disabled' : '' : '' }}>{{ $thisMember->firstname . ' ' . $thisMember->lastname }}{{ $thisReg != null ? $thisReg->family_member_id == $thisMember->id ? ' - member already registered' : '' : '' }}</option>
 														@endforeach
 													</select>
 												</div>

@@ -14,14 +14,19 @@
 						<a href="/administrator" class="btn btn-info btn-lg btn-block">All Members</a>
 						
 						<a href="{{ route('members.create') }}" class="btn btn-info btn-lg my-2 btn-block">Add New Member</a>
+						
+						<a href="#" type="button" data-toggle="modal" data-target="#modalConfirmDelete" class="btn btn-danger btn-lg mb-2 btn-block">Delete Member</a>
 
 						@if($active_reunion != null)
 							
 							<a href="/registrations" class="btn btn-success btn-block btn-lg{{ $registered_for_reunion != null ? ' disabled' : '' }}" style="white-space: initial;" onclick="event.preventDefault(); document.getElementById('one_click_registration').submit();">{{ $registered_for_reunion != null ? 'Member Already Registered For ' . $active_reunion->reunion_city . ' Reunion'  : 'Add Member To ' . $active_reunion->reunion_city . ' Reunion' }}</a>
 						
 							{!! Form::open(['action' => 'RegistrationController@store', 'method' => 'POST', 'style' => 'display:none;', 'id' => 'one_click_registration']) !!}
+							
 								<input type="text" name="reg_member" class="" value="{{ $family_member->id }}" hidden />
+								
 								<input type="text" name="reunion_id" class="" value="{{ $active_reunion->id }}" hidden />
+								
 							{!! Form::close() !!}
 						@endif
 					</div>
@@ -256,6 +261,7 @@
 						@if($family_members->count() > 1)
 							
 							@foreach($family_members as $family_member)
+							
 								<div class="form-row">
 									<div class="form-group col-8">
 										<input class="form-control" value="{{ $family_member->firstname . ' ' . $family_member->lastname }}" disabled />
@@ -267,7 +273,9 @@
 										</div>
 									</div>
 								</div>
+								
 							@endforeach
+							
 						@endif
 						
 						<!-- Blank row for adding a household member --> 
@@ -286,11 +294,15 @@
 						</div>
 
 						@if($potential_family_members->count() > $family_members->count())
-							<div class="form-block-header">
+							
+						<div class="form-block-header">
 								<h3 class="">Potential Household Members</h3>
 							</div>
+							
 							@foreach($potential_family_members as $potential_family_member)
+							
 								@if($potential_family_member->id != $family_member->id)
+									
 									<div class="form-row">
 										<div class="form-group col-8">
 											<input class="form-control" value="{{ $potential_family_member->firstname . ' ' . $potential_family_member->lastname }}" disabled />
@@ -303,7 +315,9 @@
 										</div>
 									</div>
 								@endif
+								
 							@endforeach
+							
 						@endif
 					</div>
 					<div class="form-group">
@@ -313,4 +327,42 @@
 			</div>
 		</div>	
 	</div>
+	
+	<!--Modal: modalConfirmDelete-->
+	<div class="modal fade" id="modalConfirmDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	
+		<div class="modal-dialog modal-sm modal-notify modal-danger" role="document">
+		
+			<!--Content-->
+			<div class="modal-content text-center">
+			
+				<!--Header-->
+				<div class="modal-header d-flex justify-content-center">
+					<p class="heading">Are you sure you want to delete this family member?</p>
+				</div>
+
+				<!--Body-->
+				<div class="modal-body">
+					<i class="fa fa-times fa-4x animated rotateIn"></i>
+				</div>
+
+				<!--Footer-->
+				<div class="modal-footer flex-center">
+					{!! Form::open(['action' => ['FamilyMemberController@destroy', 'member' => $family_member->id], 'method' => 'DELETE']) !!}
+					
+						<button type="submit" class="btn btn-outline-danger">Yes</button>
+						
+						<button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">No</button>
+						
+					{!! Form::close() !!}
+					
+				</div>
+				
+			</div>
+			<!--/.Content-->
+			
+		</div>
+		
+	</div>
+	<!--Modal: modalConfirmDelete-->
 @endsection

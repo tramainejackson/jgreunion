@@ -1,10 +1,14 @@
 ------------------------------------------------
 		Jackson / Green Family Reunion
 ------------------------------------------------
-
+Add a left nav for mobile
+Update adding and removing of household members
 Fixed: Not adding shirt sizes somewhere
 Fixed: Reunion pictures not showing on active site
+Done: Add deletions of family members
+Done: Style duplicates page
 Done: Finish the check duplicates
+Done: Add magnifying glass to seach input
 Done: Create a button that checks for duplicates
 Done: Add pictures to current and past reunions pages
 Done: Add a footer

@@ -45,7 +45,7 @@
 			.activities_content:nth-of-type(2)::after {
 				content: "";
 				display: block;
-				position: fixed;
+				position: absolute;
 				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../images/cookout.jpg") no-repeat center center;
 				-webkit-background-size: cover;
 				-moz-background-size: cover;

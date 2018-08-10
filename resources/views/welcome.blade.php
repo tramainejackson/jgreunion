@@ -40,6 +40,12 @@
 				height: 100vh;
 			}
 		}
+		
+		@media (max-width: 740px) {
+			.bgrd-attr {
+				background-position: bottom center !important;
+			}
+		}
 	</style>
 @endsection
 
@@ -112,9 +118,17 @@
 
 							<div class="mask rgba-black-slight flex-center">
 								
-								<div class="">
+								<div class="d-none d-sm-block">
 								
-									<h1 class="white-text display-2">Jackson/Green Reunion</h1>
+									<h1 class="white-text text-center display-2">Jackson/Green Reunion</h1>
+									
+								</div>
+								
+								<div class="d-sm-none">
+								
+									<h1 class="white-text text-center display-2 wow fadeInRight" data-wow-delay="0.6s">Jackson</h1>
+									<h1 class="white-text text-center display-2 wow fadeInLeft" data-wow-delay="0.6s">Green</h1>
+									<h1 class="white-text text-center display-2 wow fadeInUp" data-wow-delay="0.6s">Reunion</h1>
 									
 								</div>
 								

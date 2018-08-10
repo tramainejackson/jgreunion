@@ -3,28 +3,39 @@
 @section('add_styles')
 
 	<style>
+	
 		#reunion_page {
 			background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset($reunion->picture) }}');
 		}
 		
 		@media only screen and (max-width:576px) {
-
-			#reunion_page::after {
+			
+			#reunion_page {
+				background: initial !important;
+				background-size: initial !important;
+				background-attachment: initial !important;
+				background-position: initial !important;
+				background-repeat: initial !important;
+			}
+			
+			#reunion_page::before {
 				content: "";
+				display: block;
 				position: fixed;
-				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset('storage/' . str_ireplace('public/', '', $reunion->picture)) }}');
+				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset($reunion->picture) }}') no-repeat center center;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
 				background-size: cover;
-				background-attachment: fixed;
-				background-position: center center;
-				background-repeat: no-repeat;
+				width: 100%;
+				height: 100%;
 			    top: 0;
 				left: 0;
-				bottom: 0;
-				right: 0;
-				z-index: -10;
+				z-index: -1;
 			}
 			
 		}
+
 	</style>
 	
 @endsection
@@ -47,7 +58,7 @@
 	
 	<div id="reunion_page" class="container-fluid pb-4">
 		<div class="row d-xl-none">
-			<button type="button" class="btn btn-dark btn-lg m-3" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile">Menu</button>
+			<button type="button" class="btn btn-dark m-3 px-4" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile"><i class="fa fa-bars" aria-hidden="true"></i></button>
 		</div>
 		<div class="row collapse" id="upcoming_reunion_mobile">
 			<div class="col">

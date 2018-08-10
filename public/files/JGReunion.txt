@@ -1,6 +1,7 @@
 ------------------------------------------------
 		Jackson / Green Family Reunion
 ------------------------------------------------
+Style past reunion header
 Add a left nav for mobile
 Update adding and removing of household members
 Fixed: Not adding shirt sizes somewhere

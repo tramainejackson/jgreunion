@@ -13,6 +13,33 @@
 			text-shadow: 2px 1px 10px darkgrey;
 		}
 		
+		@media only screen and (max-width:576px) {
+			
+			#reunion_page {
+				background: initial !important;
+				background-size: initial !important;
+				background-attachment: initial !important;
+				background-position: initial !important;
+				background-repeat: initial !important;
+			}
+			
+			#reunion_page::before {
+				content: "";
+				display: block;
+				position: fixed;
+				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url('{{ asset($reunion->picture) }}') no-repeat center center;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				width: 100%;
+				height: 100%;
+			    top: 0;
+				left: 0;
+				z-index: -1;
+			}
+			
+		}
 	</style>
 	
 @endsection

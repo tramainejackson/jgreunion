@@ -59,8 +59,11 @@
 			<div class="carousel-inner" role="listbox">
 				<nav class="nav nav-pills justify-content-end">
 					@if(!Auth::check())
-						<!-- <a href='/register' class='profileLink nav-link'>Register</a> -->
-						<a href='/login' class='profileLink nav-link'>Login</a>
+						
+						<a href='/login' class='profileLink nav-link d-none d-sm-block'>Login</a>
+
+						<a href='/login' class="profileLink nav-link d-sm-none wow fadeInDown" data-wow-delay="0.6s">Login</a>
+
 					@else
 						@if(!Auth::user()->is_admin())
 							
@@ -71,6 +74,7 @@
 							<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
 							
 							<a href='/administrator' class='profileLink adminLink nav-link'>Admin</a>
+							
 						@endif
 						
 						<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>

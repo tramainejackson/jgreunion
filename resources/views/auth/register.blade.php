@@ -40,7 +40,7 @@
 					
 						<div class="form-row">
 
-							<div class="form-group col-6">
+							<div class="form-group col-12 col-md-6">
 								{{ Form::label('first_name', 'Firstname', ['class' => 'regInput regFNInput nameInput form-control-label']) }}
 								{{ Form::text('first_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Firstname', 'value' => old('first_name')]) }}
 								
@@ -49,7 +49,7 @@
 								@endif
 							</div>
 							
-							<div class="form-group col-6">
+							<div class="form-group col-12 col-md-6">
 								{{ Form::label('last_name', 'Lastname', ['class' => 'regInput regFNInput nameInput form-control-label']) }}
 								{{ Form::text('last_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Lastname', 'value' => old('last_name')]) }}
 								
@@ -80,7 +80,7 @@
 						
 						<div class="form-row">
 							
-							<div class="form-group col-6">
+							<div class="form-group col-12 col-md-6">
 								{{ Form::label('password', 'Password', ['class' => 'regInput regFNInput nameInput form-control-label']) }}
 								
 								{{ Form::text('password', '', ['class' => 'form-control', 'placeholder' => 'Enter Password']) }}
@@ -90,7 +90,7 @@
 								@endif
 							</div>
 							
-							<div class="form-group col-6">
+							<div class="form-group col-12 col-md-6">
 							
 								{{ Form::label('password_confirmation', 'Confirm Password', ['class' => 'regInput regFNInput nameInput form-control-label']) }}
 								

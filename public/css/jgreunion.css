@@ -4,9 +4,11 @@ body {
   background-color: black;
   font-family: 'Josefin Slab', serif !important;
 }
+
 button:focus {
 	outline:0 !important;
 }
+
 button:hover {
 	cursor: pointer;
 }
@@ -2112,7 +2114,7 @@ table#contact_information_table th {
 	}
 
 	div#registration_div_wrapper, div#login_div_wrapper {
-		padding: 3% 10%;
+		padding: 0% 0% 15%;
 	}
 	
 	.activities_content ul {
@@ -2140,7 +2142,7 @@ table#contact_information_table th {
 	}
 
 	nav.nav {
-		display: none !important;
+		
 	}
 	
 	div#navi {

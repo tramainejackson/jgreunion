@@ -2140,29 +2140,6 @@ table#contact_information_table th {
 	.activities_content ul {
 		padding: 0%;
 	}
-		
-	.activities_content:nth-of-type(2) {
-		background: initial !important;
-		background-size: initial !important;
-		background-attachment: initial !important;
-		background-position: initial !important;
-		background-repeat: initial !important;
-	}
-	
-	.activities_content:nth-of-type(2)::after {
-		content: "";
-		position: absolute;
-		background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../images/cookout.jpg");
-		background-size: cover;
-		background-attachment: fixed;
-		background-position: center center;
-		background-repeat: no-repeat;
-		top: 0;
-		left: 0;
-		bottom: 0;
-		right: 0;
-		z-index: -10;
-	}
 	
 	#reunion_page h1.display-4 {
 		font-size: 325%;

@@ -34,6 +34,31 @@
 				z-index: -1;
 			}
 			
+			.activities_content:nth-of-type(2) {
+				background: initial !important;
+				background-size: initial !important;
+				background-attachment: initial !important;
+				background-position: initial !important;
+				background-repeat: initial !important;
+			}
+			
+			.activities_content:nth-of-type(2)::after {
+				content: "";
+				display: block;
+				position: absolute;
+				background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), url("../images/cookout.jpg") no-repeat center center;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+				width: 100%;
+				height: 100%;
+			    top: 0;
+				left: 0;
+				z-index: -1;
+				
+			}
+			
 		}
 
 	</style>

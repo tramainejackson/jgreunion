@@ -72,7 +72,7 @@
 					
 						<div class="row">
 						
-							<div class="col-12 col-lg-3 mt-3">
+							<div class="col-12 col-lg-3 my-3">
 								<img id="hotel_pic" src="{{ asset($reunion->hotel->picture) }}"/>
 							</div>
 							

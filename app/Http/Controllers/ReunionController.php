@@ -141,6 +141,10 @@ class ReunionController extends Controller
 			}
 
 			return 'Image added';
+			
+		} else {
+			
+			
 		}
 
 	}
@@ -231,6 +235,11 @@ class ReunionController extends Controller
 			}
 			
 			return redirect()->back()->with('status', 'Images added successfully');
+			
+		} else {
+			
+			return redirect()->back()->with('status', 'No Images Added');
+			
 		}
 	}
 	

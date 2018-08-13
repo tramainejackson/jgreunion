@@ -4,6 +4,7 @@
 Add a left nav for mobile
 Update adding and removing of household members
 Fixed: Not adding shirt sizes somewhere
+Fixed: Fix issue with registrations link on member edit page
 Fixed: Reunion pictures not showing on active site
 Done: Style past reunion header
 Done: Add deletions of family members

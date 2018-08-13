@@ -107,13 +107,13 @@ class FamilyMemberController extends Controller
 		$family_member = $member;
         $states = State::all();
 		$members = FamilyMember::orderby('firstname', 'asc')->get();
-		$siblings = explode('; ', $family_member->siblings);
-		$children = explode('; ', $family_member->children);
+		$siblings = explode('; ', $family_member->sibling);
+		$children = explode('; ', $family_member->child);
 		$family_members = FamilyMember::household($family_member->family_id);
 		$potential_family_members = FamilyMember::potentialHousehold($member);
 		$active_reunion = Reunion::active()->first();
-		$registered_for_reunion = Registration::memberRegistered($family_member->id)->first();
-		
+		$registered_for_reunion = $active_reunion !== null ? Registration::memberRegistered($family_member->id, $active_reunion->id)->first() : null;
+
         return view('admin.members.edit', compact('states', 'family_members', 'family_member', 'active_reunion', 'potential_family_members', 'members', 'siblings', 'children', 'registered_for_reunion'));
     }
 

@@ -78,8 +78,11 @@ class registration extends Model
 	/**
      * Get the total of all the registration fees left to be paid.
     */
-    public function scopeMemberRegistered($query, $member_id)
+    public function scopeMemberRegistered($query, $member_id, $reunion_id)
     {
-        return $query->where('family_member_id', $member_id);
+        return $query->where([
+			['family_member_id', $member_id], 
+			['reunion_id', $reunion_id], 
+		]);
     }
 }

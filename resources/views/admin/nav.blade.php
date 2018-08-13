@@ -19,12 +19,12 @@
 	</div>
 	<div class="col-9">
 		<nav class="nav nav-pills justify-content-start py-3">
-		
+
 			@if(Auth::user()->is_admin())
 				
-				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), 'members') && !Auth::user()->is_admin() ? ' active' : '' }}">My Profile</a>
+				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), 'members') && (isset($family_member) ? $family_member->id == Auth::user()->member->id ? true : false : false) ? ' active' : '' }}">My Profile</a>
 
-				<a href="/administrator" class="profileLink nav-link{{ str_contains(url()->current(), ['members', 'administrator']) ? ' active' : '' }}">Family Members</a>
+				<a href="/administrator" class="profileLink nav-link{{ str_contains(url()->current(), ['members', 'administrator']) && (isset($family_member) ? $family_member->id != Auth::user()->member->id ? true : false : true) ? ' active' : '' }}">Family Members</a>
 				
 				<a href="{{ route('reunions.index') }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">Reunions</a>
 

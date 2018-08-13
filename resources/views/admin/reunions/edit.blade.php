@@ -375,12 +375,17 @@
 					@endforeach
 					
 					@if($reunion->registrations->isEmpty())
+						
 						<div class="form-row emptyRegistrations">
 							<h2 class="text-left col-10">No Members Registered Yet</h2>
 						</div>
+						
 					@endif
+					
 					<div class="form-group">
-						{{ Form::submit('Update Reunion', ['class' => 'btn btn-primary form-control']) }}
+					
+						<button class="btn btn-primary form-control" type="submit">Update Reunion</button>
+						
 					</div>
 				{!! Form::close() !!}
 			</div>

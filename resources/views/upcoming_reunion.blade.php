@@ -145,6 +145,8 @@
 							
 							<p class="my-1"><span class="hotelInfoLabel">Contact:</span> {{ $reunion->hotel->phone }}</p>
 							
+							<p class="my-1"><span class="hotelInfoLabel">Additional Info:</span> Please call for any room upgrades.</p>
+							
 							@if($reunion->hotel->book_room_link == null)
 								<p class="my-1">*** Please Call To Book Room ***</p>
 							@endif
@@ -175,6 +177,7 @@
 										<li class="text-center text-muted">We're still gathering information about the hotel and its amenities. Check back later for additional information</li>
 										
 									@endif
+									
 								</ul>
 								
 							</div>

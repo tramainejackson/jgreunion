@@ -73,7 +73,7 @@
 						<div class="row">
 						
 							<div class="col-12 col-lg-3 mt-3">
-								<img id="hotel_pic" src="/images/crowne-plaza-feasterville-trevose.jpg"/>
+								<img id="hotel_pic" src="{{ asset($reunion->hotel->picture) }}"/>
 							</div>
 							
 							<div class="col-12 col-lg-9">
@@ -82,38 +82,48 @@
 							
 									<div class="col-12 col-lg-6">
 
-										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Address:</b> 4700 Street Rd, Feasterville-Trevose, PA 19053</p>
+										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Hotel:</b> {{ $reunion->hotel->name }}</p>
 										
-										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Phone:</b> 1-215-364-2000</p>
+										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Address:</b> {{ $reunion->hotel->location }}</p>
 										
-										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Rooms:</b> $109/per night plus taxes for a standard room</p>
+										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Phone:</b> {{ $reunion->hotel->phone }}</p>
 										
-										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Additional Info:</b> Please call for any room upgrades.</p><br/>
+										<p class="hotelContentInfo my-1"><b class="font-weight-bold text-uppercase">Rooms:</b> ${{ $reunion->hotel->cost }}/per night plus taxes for a standard room</p>
 									
 									</div>
 									
 									<div class="col-12 col-lg-6">
 										
-										<dl>
-											<dt class="featuresList hotelContentInfo text-uppercase"><b>Hotel Features:</b></dt>
+										<ul class="list-unstyled">
+										
+											<li class="featuresList hotelContentInfo text-uppercase pt-1 font-weight-bold"><b>Hotel Features:</b></li>
 											
-											<dd class="featuresList hotelContentInfo">Complimentary Wifi</dd>
+											@if($reunion->hotel->features->isNotEmpty())
+										
+												@foreach($reunion->hotel->features as $hotel_feature)
+												
+													<li class="">{{ $hotel_feature->feature_desc }}</li>
+												
+												@endforeach
+												
+											@else
+												
+												<li class="text-center text-muted">We're still gathering information about the hotel and its amenities. Check back later for additional information</li>
+												
+											@endif
 											
-											<dd class="featuresList hotelContentInfo">Free Parking</dd>
-											<dd class="featuresList hotelContentInfo">Microwave/Refrigerator in guest room</dd>
-											<dd class="featuresList hotelContentInfo">Fitness Center</dd>
-											<dd class="featuresList hotelContentInfo">Swimming Pool</dd>
-											<dd class="featuresList hotelContentInfo">Sofa-Bed</dd>
-											<dd class="featuresList hotelContentInfo">Rollway Bed/Cot</dd>
-											<dd class="featuresList hotelContentInfo">Electronic Check</dd>
-										</dl>
+										</ul>
 										
 									</div>
 									
 								</div>
+								
+							</div>
 							
 						</div>
+						
 					</div>
+					
 				</div>
 
 				<hr/>
@@ -125,7 +135,7 @@
 					@if($events->count() < 1)
 						
 						<div class="col-12 white rounded">
-							<p class="text-center mt-3 emptyInfo">No Activities Added Yet</p>
+							<p class="text-center mt-3 emptyInfo">No Activities Added</p>
 						</div>
 						
 					@else
@@ -150,12 +160,20 @@
 											@endif
 													
 											@if($loop->first)
+												
 												<div class="col-12">
 													<ul class="activitiesDescription col-12">
+													
 											@endif
+											
 												<li class=""><b><em>Location:&nbsp;</em></b>{{ $event->event_location }}</li>
+												
 												<li class=""><b><em>Event Description:&nbsp;</em></b>{{ $event->event_description }}</li>
-												@if(!$loop->last)<li class="spacer-sm"></li>@endif
+												
+												@if(!$loop->last)
+														<li class="spacer-sm"></li>
+												@endif
+												
 											@if($loop->last)
 													</ul>
 												</div>
@@ -197,11 +215,15 @@
 							<tbody>
 							
 								@foreach($committee_members as $committee)
+								
 									<tr>
+									
 										<td>{{ ucwords(str_ireplace('_', ' ', $committee->member_title)) }}</td>
 										<td>{{ ucwords($committee->member_name) }}</td>
 										<td><i>{{ $committee->member_email }}</i></td>
+										
 									</tr>
+									
 								@endforeach
 								
 								<tr>

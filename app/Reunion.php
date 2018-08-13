@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Reunion extends Model
 {
     /**
+     * Get the hotel for the reunion.
+     */
+    public function hotel()
+    {
+        return $this->hasOne('App\ReunionHotel');
+    }
+	
+	/**
      * Get the committee members for the reunion.
      */
     public function committee()

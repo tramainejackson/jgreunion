@@ -126,39 +126,75 @@
 			
 				<!-- Hotel information -->
 				<div class="row reunion_content" id="hotel_information">
-					<div class="col-12 reunionInformationHeader py-1">
-						<h2 id="" class="text-center text-light">Hotel Information</h2>
-					</div>
-					<div class="col-12 col-xl-4 my-1">
-						<img src="{{ asset('storage//reunion_background/charlotte_hotel.jpg') }}" class="mw-100" />
-					</div>
-					
-					<div class="col-12 col-xl-8">
-						<p class="my-1"><span class="hotelInfoLabel">Hotel:</span> Sheraton Charlotte Hotel</p>
-						<p class="my-1"><span class="hotelInfoLabel">Location:</span> 555 South McDowell Street, South Tower, Charlotte, NC, 28204</p>
-						<p class="my-1"><span class="hotelInfoLabel">Room:</span> $128/per night (not including taxes and fees)</p>
-						<p class="my-1"><span class="hotelInfoLabel">Contact:</span> (704) 372-4100</p>
-					</div>
-					
-					<div class="col-12">
-						<div class="form-block-header mb-xl-3">
-							<h3 class="text-center">Hotel Amenities</h2>							
+				
+					@if($reunion->hotel)
+						
+						<div class="col-12 reunionInformationHeader py-1">
+							<h2 id="" class="text-center text-light">Hotel Information</h2>
 						</div>
-						<div class="">
-							<ul class="list-unstyled px-1">
-								<li class="">1. Indoor/Outdoor Pools</li>
-								<li class="">2. Onsite dining - Social Bar & Kitchen, Evoke Restaurant, Craft City Social Club and City Lights Rooftop</li>
-								<li class="">3. 24-hour in-room dining</li>
-								<li class="">4. Sheraton Fitness Center is complimentary for all hotel guests and open 24/7</li>
-								<li class="">5. Parking: Valet Parking: $25 per night / Self Parking: $20 per night</li>
-								<li class="">6. High Speed Internet Access in all guestrooms ($10.95 / daily) </li>
-								<li class="">7. Complimentary wireless Internet in lobby</li>
-							</ul>
+						<div class="col-12 col-xl-4 my-1">
+							<img src="{{ asset($reunion->hotel->picture) }}" class="mw-100" />
 						</div>
-					</div>
-					<div class="col-12 text-center">
-						<a href="https://www.starwoodmeeting.com/events/start.action?id=1710311975&key=273CEDE2" class="btn btn-warning btn-lg" target="_blank">Book Hotel Room</a>
-					</div>
+						
+						<div class="col-12 col-xl-8">
+							<p class="my-1"><span class="hotelInfoLabel">Hotel:</span> {{ $reunion->hotel->name }}</p>
+							
+							<p class="my-1"><span class="hotelInfoLabel">Location:</span> {{ $reunion->hotel->location }}</p>
+							
+							<p class="my-1"><span class="hotelInfoLabel">Room:</span> ${{ $reunion->hotel->cost }}/per night (not including taxes and fees)</p>
+							
+							<p class="my-1"><span class="hotelInfoLabel">Contact:</span> {{ $reunion->hotel->phone }}</p>
+							
+							@if($reunion->hotel->book_room_link == null)
+								<p class="my-1">*** Please Call To Book Room ***</p>
+							@endif
+						
+						</div>
+						
+						<div class="col-12">
+						
+							<div class="form-block-header mb-xl-3">
+							
+								<h3 class="text-center">Hotel Amenities</h2>							
+							</div>
+							
+							<div class="">
+							
+								<ul class="list-unstyled px-1">
+								
+									@if($reunion->hotel->features->isNotEmpty())
+										
+										@foreach($reunion->hotel->features as $hotel_feature)
+										
+											<li class="">{{ $hotel_feature->feature_desc }}</li>
+										
+										@endforeach
+										
+									@else
+										
+										<li class="text-center text-muted">We're still gathering information about the hotel and its amenities. Check back later for additional information</li>
+										
+									@endif
+								</ul>
+								
+							</div>
+						</div>
+						
+						@if($reunion->hotel->book_room_link !== null)
+							
+							<div class="col-12 text-center">
+								<a href="{{ $reunion->hotel->book_room_link }}" class="btn btn-warning btn-lg" target="_blank">Book Hotel Room</a>
+							</div>
+							
+						@endif
+					
+					@else
+						
+						<div class="col-12">
+							<h2 class="text-center">No Hotel Added Yet For This Reunion</h2>
+						</div>
+						
+					@endif
 				</div>
 				
 				<hr/>

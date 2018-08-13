@@ -521,7 +521,7 @@ class ReunionController extends Controller
 						
 						for($x=count($request->committee_member_id); $x < count($request->member_title); $x++) {
 							// Create New Reunion Object
-							$committee_member = new Reunion_committee();
+							$committee_member = new ReunionCommittee();
 							
 							// Get member from distro list
 							$member = FamilyMember::find($request->dl_id[$x]);
@@ -553,7 +553,7 @@ class ReunionController extends Controller
 
 					for($x=0; $x < count($request->member_title); $x++) {
 						// Create New Reunion Object
-						$committee_member = new Reunion_committee();
+						$committee_member = new ReunionCommittee();
 						
 						// Get member from distro list
 						$member = FamilyMember::find($request->dl_id[$x]);
@@ -607,10 +607,10 @@ class ReunionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function remove_committee_member(Reunion_committee $reunion_committee)
+    public function remove_committee_member(ReunionCommittee $ReunionCommittee)
     {
-		if($reunion_committee->delete()) {
-			return $reunion_committee;
+		if($ReunionCommittee->delete()) {
+			return $ReunionCommittee;
 		}
     }
 }

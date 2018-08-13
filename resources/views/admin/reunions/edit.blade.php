@@ -158,26 +158,37 @@
 							</button>
 						</h3>
 					</div>
+					
 					<div class="form-row">
 						<span class="text-muted col-12">*Select From Listed Family Members</span>
 					</div>
+					
 					@foreach($reunion->committee as $committee_member)
 						<div class="form-row">
 							<div class="form-group col-4">
 								<label class="form-label" for="member_title">Committee Title</label>
+								
 								<select class="form-control browser-default" name="member_title[]">
 									@foreach($titles as $title)
+									
 										<option value="{{ $title->title_name }}" {{ old('member_title') && old('member_title') == $title->title_name ? 'selected' : $committee_member->member_title == $title->title_name ? 'selected' : '' }}>{{ ucwords(str_ireplace('_', ' ', $title->title_name)) }}</option>
+										
 									@endforeach
 								</select>
+								
 								<input type="text" name="committee_member_id[]" class="hidden" value="{{ $committee_member->id }}" hidden />
+								
 							</div>
+							
 							<div class="form-group col-6">
 								<label class="form-label" for="dl_id">Member</label>
+								
 								<select class="form-control browser-default" name="dl_id[]">
+								
 									@foreach($members as $member)
-										<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $committee_member->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
+										<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $committee_member->family_member_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 									@endforeach
+									
 								</select>
 							</div>
 							<div class="form-group col-2">
@@ -308,7 +319,7 @@
 							
 							<div class="form-row my-2">
 								
-								@if($registration->dl_id == null)
+								@if($registration->family_member_id == null)
 									
 									<div class="col">
 										<div class="d-inline-block">
@@ -336,7 +347,7 @@
 										<div class="">
 											<select class="form-control browser-default" name="" disabled>
 												@foreach($members as $member)
-													<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->dl_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
+													<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->family_member_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
 												@endforeach
 											</select>
 										</div>

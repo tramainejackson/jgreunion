@@ -143,7 +143,7 @@
 					</div>
 					
 					<div class="form-group">
-						{{ Form::submit('Create New Reunion', ['class' => 'btn btn-primary form-control']) }}
+						<button class="btn btn-primary form-control" type="submit">Create New Reunion</button>
 					</div>
 					
 				{!! Form::close() !!}

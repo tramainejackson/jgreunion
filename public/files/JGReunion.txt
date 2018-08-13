@@ -3,6 +3,7 @@
 ------------------------------------------------
 Add a left nav for mobile
 Update adding and removing of household members
+Fix removal of duplicates when there is 2 registrations also check if committee member
 Fixed: Not adding shirt sizes somewhere
 Fixed: Fix issue with registrations link on member edit page
 Fixed: Reunion pictures not showing on active site

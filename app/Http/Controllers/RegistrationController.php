@@ -300,22 +300,28 @@ class RegistrationController extends Controller
      */
     public function update(Request $request, Registration $registration)
     {
+
 		$registration->total_amount_due = $request->total_amount_due;
 		$registration->total_amount_paid = $request->total_amount_paid;
 		$registration->due_at_reg = $request->due_at_reg;
 		$registration->adult_shirts = implode('; ', $request->adult_sizes);
-		$registration->youth_shirts = implode('; ', $request->youth_sizes);
-		$registration->children_shirts = implode('; ', $request->children_sizes);
+		$registration->youth_shirts = implode('; ', isset($request->youth_sizes) ? $request->youth_sizes : array());
+		$registration->children_shirts = implode('; ', isset($request->children_sizes) ? $request->children_sizes : array());
 		$registration->reg_notes = $request->reg_notes;
 
 		if($registration->family_member_id != null) {
-			$registration->registree_name = $registration->FamilyMember->firstname . ' ' . $registration->FamilyMember->lastname;
-			$registration->family_member_id = $registration->FamilyMember->id;
+			
+			$registration->registree_name = $registration->reunion_dl->firstname . ' ' . $registration->reunion_dl->lastname;
+			$registration->family_member_id = $registration->reunion_dl->id;
+			
 		}
 		
 		if($registration->save()) {
+			
 			return redirect()->action('RegistrationController@edit', $registration)->with('status', 'Registration Updated Successfully');
+			
 		}
+		
     }
 
     /**
@@ -431,7 +437,9 @@ class RegistrationController extends Controller
 					return redirect()->back()->with('status', 'New Member Added to Registration Successfully');
 				}
 			}
+			
 		} else {
+			
 			$this->validate($request, [
 				'firstname' => 'required|max:50',
 				'lastname' => 'required|max:50',
@@ -455,19 +463,19 @@ class RegistrationController extends Controller
 			if($registration->FamilyMember->family_id == null) {
 				$newFamilyID = $maxFamilyID + 1;
 				$member->family_id = $newFamilyID;
-				$registration->FamilyMember->family_id = $newFamilyID;
+				$registration->reunion_dl->family_id = $newFamilyID;
 				
-				if($registration->FamilyMember->save()) {}
+				if($registration->reunion_dl->save()) {}
 			} else {
-				$member->family_id = $registration->FamilyMember->family_id;
+				$member->family_id = $registration->reunion_dl->family_id;
 			}
 			
-			$newRegistration->address = $member->address = $registration->FamilyMember->address;
-			$newRegistration->city = $member->city = $registration->FamilyMember->city;
-			$newRegistration->state = $member->state = $registration->FamilyMember->state;
-			$newRegistration->zip = $member->zip = $registration->FamilyMember->zip;
-			$newRegistration->phone = $member->phone = $registration->FamilyMember->phone != null ? $registration->FamilyMember->phone : null;
-			$newRegistration->email = $registration->FamilyMember->email != null ? $registration->FamilyMember->email : null;
+			$newRegistration->address = $member->address = $registration->reunion_dl->address;
+			$newRegistration->city = $member->city = $registration->reunion_dl->city;
+			$newRegistration->state = $member->state = $registration->reunion_dl->state;
+			$newRegistration->zip = $member->zip = $registration->reunion_dl->zip;
+			$newRegistration->phone = $member->phone = $registration->reunion_dl->phone != null ? $registration->reunion_dl->phone : null;
+			$newRegistration->email = $registration->reunion_dl->email != null ? $registration->reunion_dl->email : null;
 			
 			// Get all the shirt sizes
 			$shirtSizes = explode('; ', $registration->shirt_sizes);

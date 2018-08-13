@@ -149,8 +149,8 @@ class FamilyMemberController extends Controller
 		$member->mother = $request->mother != 'blank' ? $request->mother : null;
 		$member->father = $request->father != 'blank' ? $request->father : null;
 		$member->spouse = $request->spouse != 'blank' ? $request->spouse : null;
-		$member->siblings = str_ireplace('; blank', '', implode('; ', $request->siblings)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->siblings)) : null;
-		$member->children = str_ireplace('; blank', '', implode('; ', $request->children)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->children)) : null;
+		$member->sibling = str_ireplace('; blank', '', implode('; ', $request->siblings)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->siblings)) : null;
+		$member->child = str_ireplace('; blank', '', implode('; ', $request->children)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->children)) : null;
 		$houseMembers = str_ireplace('; blank', '', implode('; ', $request->houseMember)) != 'blank' ? str_ireplace('; blank', '', implode('; ', $request->houseMember)) : null;
 		$member->phone = $request->phone;
 		$member->age_group = $request->age_group;

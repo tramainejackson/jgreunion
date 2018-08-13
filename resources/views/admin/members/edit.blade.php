@@ -320,9 +320,13 @@
 							
 						@endif
 					</div>
+					
 					<div class="form-group">
-						{{ Form::submit('Update Member', ['class' => 'btn btn-primary form-control']) }}
+					
+						<button class="btn btn-primary form-control" type="submit">Update Member</button>
+
 					</div>
+					
 				{!! Form::close() !!}
 			</div>
 		</div>	

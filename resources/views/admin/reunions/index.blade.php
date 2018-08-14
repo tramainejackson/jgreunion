@@ -7,13 +7,13 @@
 		
 		<div class="row white">
 		
-			<div class="col-2 my-2">
+			<div class="col-12 col-lg-2 my-2">
 				<div class="">
 					<a href="{{ route('reunions.create') }}" class="btn btn-info btn-lg">Create New Reunion</a>
 				</div>
 			</div>
 			
-			<div class="col-8 my-2">
+			<div class="col-12 col-md-10 col-lg-9 my-3 mx-auto">
 				<ul class="list-group">
 					<li class="list-group-item list-group-item-info">All Reunions</li>
 					@foreach($reunions as $reunion)
@@ -29,11 +29,11 @@
 								
 								<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">
 									<div class="form-row my-3">
-										<div class="form-group col-4">
+										<div class="form-group col-12 col-md-4">
 											<label class="form-label" for="reunion_city">City</label>
 											<input type="text" class="form-control" value="{{ $reunion->reunion_city }}" disabled />
 										</div>
-										<div class="form-group col-4">
+										<div class="form-group col-6 col-md-4">
 											<label class="form-label" for="reunion_state">State</label>
 											
 											<select class="form-control browser-default" disabled>
@@ -42,7 +42,7 @@
 
 											</select>
 										</div>
-										<div class="form-group col-4">
+										<div class="form-group col-6 col-md-4">
 											<label class="form-label" for="reunion_state">Year</label>
 											
 											<select class="form-control browser-default" disabled>
@@ -55,7 +55,7 @@
 									</div>
 									
 									<div class="form-row my-3">
-										<div class="form-group col-4">
+										<div class="form-group col-12 col-md-4">
 										
 											<label class="form-label" for="adult_price">Adult Price</label>
 											
@@ -71,7 +71,7 @@
 											
 										</div>
 										
-										<div class="form-group col-4">
+										<div class="form-group col-12 col-md-4">
 										
 											<label class="form-label" for="youth_price">Youth Price</label>
 											
@@ -87,7 +87,7 @@
 											
 										</div>
 										
-										<div class="form-group col-4">
+										<div class="form-group col-12 col-md-4">
 										
 											<label class="form-label" for="child_price">Child Price</label>
 											
@@ -106,11 +106,11 @@
 									</div>
 									
 									<div class="form-row justify-content-around mb-3">
-										<button type="button" class="btn btn-primary col-4">Registrations <span class="badge badge-light">{{ $totalRegistrations->count() }}</span>
+										<button type="button" class="btn btn-primary col-12 col-md-4">Registrations <span class="badge badge-light">{{ $totalRegistrations->count() }}</span>
 										<span class="sr-only">total registrations</span>
 										</button>
 
-										<button type="button" class="btn btn-primary col-4">Committee Members <span class="badge badge-light">{{ $reunion->committee->count() }}</span>
+										<button type="button" class="btn btn-primary col-12 col-md-4">Committee Members <span class="badge badge-light">{{ $reunion->committee->count() }}</span>
 										<span class="sr-only">total committee members</span>
 										</button>
 									</div>

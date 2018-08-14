@@ -7,7 +7,7 @@
 		
 		<div class="row white">
 		
-			<div class="col-2 my-2">
+			<div class="col-12 col-xl-2 my-2">
 				<div class="">
 					<a href="{{ route('reunions.index') }}" class="btn btn-info btn-lg btn-block my-2">All Reunions</a>
 					
@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			
-			<div class="col-8 my-2">
+			<div class="col-12 col-xl-10 my-2 mx-auto">
 			
 				<div class="">
 					<h2 class="text-left">Edit {{ ucwords($reunion->reunion_city) }} Reunion</h2>
@@ -111,7 +111,7 @@
 						</select>
 					</div>
 					<div class="form-row">
-						<div class="form-group col-4">
+						<div class="form-group col-12 col-md-4">
 							<label class="form-label" for="adult_price">Adult Price</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -123,7 +123,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group col-4">
+						
+						<div class="form-group col-12 col-md-4">
 							<label class="form-label" for="youth_price">Youth Price</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -135,7 +136,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="form-group col-4">
+						
+						<div class="form-group col-12 col-md-4">
 							<label class="form-label" for="child_price">Child Price</label>
 							<div class="input-group">
 								<div class="input-group-prepend">
@@ -165,7 +167,7 @@
 					
 					@foreach($reunion->committee as $committee_member)
 						<div class="form-row">
-							<div class="form-group col-4">
+							<div class="form-group col-6 col-md-4 col-lg-4 mb-0 mb-md-2">
 								<label class="form-label" for="member_title">Committee Title</label>
 								
 								<select class="form-control browser-default" name="member_title[]">
@@ -180,7 +182,7 @@
 								
 							</div>
 							
-							<div class="form-group col-6">
+							<div class="form-group col-6 col-md-4 col-lg-4 mb-0 mb-md-2">
 								<label class="form-label" for="dl_id">Member</label>
 								
 								<select class="form-control browser-default" name="dl_id[]">
@@ -191,7 +193,7 @@
 									
 								</select>
 							</div>
-							<div class="form-group col-2">
+							<div class="form-group col-12 col-md-4 col-lg-4 mb-5 mb-md-2">
 								<label class="form-label m-0" for="">&nbsp;</label>
 								
 								<button type="button" class="btn btn-danger w-100 m-0" onclick="event.preventDefault(); removeCommitteeMember({{ $committee_member->id }});">Delete Member</button>
@@ -206,7 +208,7 @@
 					@endif
 					
 					<div class="form-row committeeRow" hidden>
-						<div class="form-group col-4">
+						<div class="form-group col-6 col-md-4 mb-0 mb-md-2">
 							<label class="form-label" for="member_title">Committee Title</label>
 							
 							<select class="browser-default form-control" name="member_title[]" disabled>
@@ -216,7 +218,7 @@
 							</select>
 						</div>
 						
-						<div class="form-group col-6">
+						<div class="form-group col-6 col-md-4 mb-0 mb-md-2">
 							<label class="form-label" for="dl_id">Member</label>
 							<select class="browser-default form-control" name="dl_id[]" disabled>
 								@foreach($members as $member)
@@ -224,9 +226,10 @@
 								@endforeach
 							</select>
 						</div>
-						<div class="form-group col-2">
+						<div class="form-group col-12 col-md-4 mb-5 mb-md-2">
 							<label class="form-label" for="">&nbsp;</label>
-							<button type="button" class="btn btn-danger w-100 removeCommitteeMember">Remove</button>
+							
+							<button type="button" class="btn btn-danger w-100 removeCommitteeMember m-0">Remove</button>
 						</div>
 					</div>
 					
@@ -321,7 +324,7 @@
 								
 								@if($registration->family_member_id == null)
 									
-									<div class="col">
+									<div class="col-12">
 										<div class="d-inline-block">
 											<span class="">{{ $loopCount }}.</span>
 											
@@ -337,14 +340,14 @@
 									
 								@else
 									
-									<div class="col d-flex align-items-center justify-content-center">
+									<div class="col-12 col-md d-flex align-items-center justify-content-md-center mb-1">
 										<div class="mr-2">
 											<span class="">{{ $loopCount }}.</span>
 											
 											<input type="text" class="hidden selectRegistration" value="{{ $registration->id }}" hidden />
 										</div>
 										
-										<div class="">
+										<div class="flex-grow-1">
 											<select class="form-control browser-default" name="" disabled>
 												@foreach($members as $member)
 													<option value="{{ $member->id }}" {{ old('dl_id') && old('dl_id') == $member->id ? 'selected' : $registration->family_member_id == $member->id ? 'selected' : '' }}>{{ $member->firstname . ' ' . $member->lastname }}</option>
@@ -355,17 +358,17 @@
 									
 								@endif
 								
-								<div class="col">
-									<button type="button" class="btn btn-primary btn-block mb-2">Family Total <span class="badge badge-light">{{ (count($adults) + count($youths) + count($childs)) }}</span>
+								<div class="col-12 col-md mb-1 justify-content-center d-flex align-items-center">
+									<button type="button" class="btn btn-primary btn-block mb-1 mb-md-2">Family Total <span class="badge badge-light">{{ (count($adults) + count($youths) + count($childs)) }}</span>
 									<span class="sr-only">total household members</span>
 									</button>
 								</div>
 								
-								<div class="col">
+								<div class="col-12 col-md-auto justify-content-center d-flex align-items-center mb-1">
 									<a href="/registrations/{{ $registration->id }}/edit" class="btn btn-warning btn-block">Edit</a>
 								</div>
 								
-								<div class="col">
+								<div class="col-12 col-md mb-4 mb-md-1 justify-content-center d-flex align-items-center">
 									<button type="button" data-toggle="modal" data-target=".delete_registration{{ $loop->iteration }}" class="btn btn-danger btn-block text-truncate deleteRegistration" onclick="removeRegistrationModal({{ $registration->id }});">Delete Registration</button>
 								</div>
 							</div>
@@ -446,7 +449,7 @@
 					<!--Body-->
 					<div class="modal-body">
 					
-						<div class="table-wrapper">
+						<div class="table-responsive">
 						
 							<table class="table table-hover">
 							
@@ -479,7 +482,7 @@
 							
 						</div>
 						
-						<div class="table-wrapper">
+						<div class="table-responsive">
 						
 							<table class="table table-hover">
 							

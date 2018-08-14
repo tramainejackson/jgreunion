@@ -7,13 +7,13 @@
 		
 		<div class="row white">
 		
-			<div class="col-2 my-2">
+			<div class="col-12 col-md-2 my-2">
 				<div class="">
 					<a href="/reunions" class="btn btn-info btn-lg">All Reunions</a>
 				</div>
 			</div>
 			
-			<div class="col-8 reunionForm">
+			<div class="col-10 col-md-11 col-lg-9 reunionForm mx-auto">
 			
 				<h1 class="mt-2 mb-0">Create New Reunion</h1>
 				<h4 class="nt-0 mb-4 red-text">**Creating A New Reunion Will Make All Current Reunions Complete**</h4>
@@ -99,7 +99,7 @@
 					
 					<div class="form-row">
 					
-						<div class="form-group col-4">
+						<div class="form-group col-6 col-md-4">
 							<label class="form-label" for="member_title">Committee Title</label>
 							
 							<select class="browser-default form-control" name="member_title">
@@ -109,7 +109,7 @@
 							</select>
 						</div>
 						
-						<div class="form-group col-8">
+						<div class="form-group col-6 col-md-8">
 							<label class="form-label" for="dl_id">Member</label>
 							
 							<select class="browser-default form-control" name="dl_id">
@@ -121,7 +121,7 @@
 					</div>
 					
 					<div class="form-row committeeRow" hidden>
-						<div class="form-group col-4">
+						<div class="form-group col-6 col-md-4">
 							<label class="form-label" for="member_title">Committee Title</label>
 							
 							<select class="browser-default form-control" name="member_title[]">
@@ -131,7 +131,7 @@
 							</select>
 						</div>
 						
-						<div class="form-group col-8">
+						<div class="form-group col-6 col-md-8">
 							<label class="form-label" for="dl_id">Member</label>
 							
 							<select class="browser-default form-control" name="dl_id[]">

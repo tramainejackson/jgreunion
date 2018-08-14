@@ -35,11 +35,19 @@ class FamilyMember extends Model
     protected $dates = ['deleted_at'];
 	
 	/**
-     * Get the committee members for the reunion.
+     * Get the registrations for the family member.
      */
     public function registrations()
     {
         return $this->hasMany('App\Registration');
+    }
+	
+	/**
+     * Get the committees that the member is a part of.
+     */
+    public function committees()
+    {
+        return $this->hasMany('App\ReunionCommittee');
     }
 	
 	/**

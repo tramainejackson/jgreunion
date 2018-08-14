@@ -228,63 +228,88 @@ class FamilyMemberController extends Controller
     {
 		$duplicates = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state)->get();
 		$usersInDupes = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state)->users()->get();
+		$committee_member = $member->committees;
+		$reunion_registrations = $member->registrations;
 		$returnData = [];
-
-		if($usersInDupes->count() >= 1) {
 			
-			$userAccount = $usersInDupes->first();
-			
-			if($userAccount->id !== $member->id) {
-				if($member->user) {
-					if($userAccount->user->email === null) {
-						$userAccount->user->email = $member->user->email;
-					}
-				}
-
-				// If the account being deleted has a registration
-				// Change the registration to the account with a profile
-				if($member->registrations->isNotEmpty()) {
-					
-					foreach($member->registrations as $dupeReg) {
-						$dupeReg->family_member_id = $userAccount->id;
-						
-						if($dupeReg->save()) {}
-					}
-					
-				}
-				
-				// Delete the member account
-				if($member->delete()) {
-
-					array_push($returnData, 'Removed Account',  $duplicates->count() - 1 == 1 ? 'Remove Card' : null);
-					return $returnData;
-					
-				}
-				
+		$userAccount = $usersInDupes->count() >= 1 ? $usersInDupes->first() : $duplicates->first();
+		
+		if($userAccount->id == $member->id) {
+			$userAccount = $usersInDupes->count() >= 1 ? $usersInDupes->last() : $duplicates->last();
+		}
+		
+		if($userAccount->user && $member->user) {
+			if($userAccount->user->email === null) {
+				$userAccount->user->email = $member->user->email;
 			}
+		} elseif(!$userAccount->user && $member->user) {
 			
-		} else {
+		}
 
-			// Get the parent account that any additional accounts
-			// will be associated to
-			$userAccount = $duplicates->first();
+		// If the account being deleted has a registration
+		// Change the registration to the account with a profile
+		if($member->registrations->isNotEmpty()) {
+			
+			foreach($member->registrations as $dupeReg) {
+				// Check if there is a registration for 
+				// the parent account already
+				if(Registration::memberRegistered($userAccount->id, $dupeReg->reunion_id)->get()->isNotEmpty()) {
+					$parentReg = Registration::memberRegistered($userAccount->id, $dupeReg->reunion_id)->first();
 					
-			// If the account being deleted has a registration
-			// Change the registration to the account with a profile
-			if($member->registrations->isNotEmpty()) {
-				foreach($member->registrations as $dupeReg) {
+					$parentReg->youth_names = $parentReg->youth_names !== null ? $parentReg->youth_names : $dupeReg->youth_names;
+					$parentReg->children_names = $parentReg->children_names !== null ? $parentReg->children_names : $dupeReg->children_names;
+					$parentReg->adult_shirts = $parentReg->adult_shirts !== null ? $parentReg->adult_shirts : $dupeReg->adult_shirts;
+					$parentReg->youth_shirts = $parentReg->youth_shirts !== null ? $parentReg->youth_shirts : $dupeReg->youth_shirts;
+					$parentReg->children_shirts = $parentReg->children_shirts !== null ? $parentReg->children_shirts : $dupeReg->children_shirts;
+					$parentReg->email = $parentReg->email !== null ? $parentReg->email : $dupeReg->email;
+					$parentReg->address = $parentReg->address !== null ? $parentReg->address : $dupeReg->address;
+					$parentReg->city = $parentReg->city !== null ? $parentReg->city : $dupeReg->city;
+					$parentReg->city = $parentReg->city !== null ? $parentReg->city : $dupeReg->city;
+					$parentReg->state = $parentReg->state !== null ? $parentReg->state : $dupeReg->state;
+					$parentReg->zip = $parentReg->zip !== null ? $parentReg->zip : $dupeReg->zip;
+					$parentReg->phone = $parentReg->phone !== null ? $parentReg->phone : $dupeReg->phone;
+					$parentReg->due_at_reg = $parentReg->due_at_reg !== null ? $parentReg->due_at_reg : $dupeReg->due_at_reg;
+					$parentReg->total_amount_due = $parentReg->total_amount_due !== null ? $parentReg->total_amount_due : $dupeReg->total_amount_due;
+					$parentReg->total_amount_paid = $parentReg->total_amount_paid !== null ? $parentReg->total_amount_paid : $dupeReg->total_amount_paid;
+					$parentReg->reg_notes = $parentReg->reg_notes !== null ? $parentReg->reg_notes : $dupeReg->reg_notes;
+					$parentReg->parent_reg = $parentReg->parent_reg !== null ? $parentReg->parent_reg : $dupeReg->parent_reg;
+					$parentReg->additional_tees = $parentReg->additional_tees !== null ? $parentReg->additional_tees : $dupeReg->additional_tees;
+					$parentReg->addt_sizes = $parentReg->addt_sizes !== null ? $parentReg->addt_sizes : $dupeReg->addt_sizes;
+					
+					if($parentReg->save()) {
+						
+						if($dupeReg->delete()) {}
+					}
+					
+				} else {
+					
 					$dupeReg->family_member_id = $userAccount->id;
 					
 					if($dupeReg->save()) {}
 				}
-			}
-
-			if($member->delete()) {
-
-				array_push($returnData, 'Removed Account', $duplicates->count() - 1 == 1 ? 'Remove Card' : null);
-				return $returnData;
 				
 			}
+			
+		}
+		
+		// If the account being deleted is a part of
+		// a reunion committee. Update with parent account id
+		if($member->committees->isNotEmpty()) {
+			foreach($member->committees as $committee_member) {
+				
+				$committee_member->family_member_id = $userAccount->id;
+					
+				if($committee_member->save()) {}
+					
+			}
+		}
+		
+		// Delete the member account
+		if($member->delete()) {
+
+			array_push($returnData, 'Removed Account',  $duplicates->count() - 1 == 1 ? 'Remove Card' : null);
+			
+			return $returnData;
 			
 		}
 

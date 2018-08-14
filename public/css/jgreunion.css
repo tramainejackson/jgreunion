@@ -1723,11 +1723,13 @@ div.image_div {
     background-repeat: no-repeat;
     background-position: 100% 30%;
 }
+
 .slideShowImage {
 	min-height: 400px;
 	max-height: 400px;
 	width: 100%;
 }
+
 button#admin_login_btn, button#admin_page_btn {
 	border: none;
 	background-color: bisque;
@@ -1736,11 +1738,13 @@ button#admin_login_btn, button#admin_page_btn {
 	height: 100%;
 	padding: 25.1% 2%;
 }
+
 div#image_slide_show {
   position: inherit;
   height: 100%;
   width: 100%;
 }
+
 div#image_caption {
 	position: absolute;
 	color: white;
@@ -1749,13 +1753,17 @@ div#image_caption {
 	width: 70%;
 	margin: 0% 14%;
 }  
+
 h2.image_caption_header {
-  color: white;
-  border: solid 2px;
-  border-radius: 5px;
-  background: rgba(58, 58, 21, 0.5);
-  box-shadow: 0px 0px 5px black;
+	color: white;
+	border: solid 2px;
+	border-radius: 5px;
+	background: rgba(58, 58, 21, 0.5);
+	box-shadow: 0px 0px 5px black;
+	padding: 5%;
+	text-align: center;
 }
+
 button#stop_slideshow {
   display: block;
   width: 44.5%;

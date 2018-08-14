@@ -259,7 +259,9 @@
 						<textarea class="form-control" name="reg_notes" placeholder="Enter registration notes for {{ $registration->registree_name }}">{{ $registration->reg_notes }}</textarea>
 					</div>
 					<div class="form-group">
-						{{ Form::submit('Update Registration', ['class' => 'btn btn-primary form-control']) }}
+					
+						<button class="btn btn-primary form-control" type="submit">Update Registration</button>
+						
 					</div>
 				{!! Form::close() !!}
 				<!-- End update form -->
@@ -346,11 +348,14 @@
 							</div>
 							<div class="modal-footer">
 								<div class="form-group">
-									{{ Form::submit('Add To Registration', ['class' => 'btn btn-primary btn-lg form-control']) }}
+								
+									<button class="btn btn-primary btn-lg form-control" type="submit">Add To Registration</button>
+
 								</div>
 							</div>
 						{!! Form::close() !!}
 					</div>
+					
 					<script>
 						$('body').on('change', '#add_reg_members_form [name="age_group"]', function() {
 							if($('[name="age_group"]').val() == 'adult') {

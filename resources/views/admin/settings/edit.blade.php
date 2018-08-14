@@ -7,7 +7,7 @@
 		
 		<div class="row white">
 
-			<div class="col-8 my-5 mx-auto">
+			<div class="col-11 col-md-8 my-5 mx-auto">
 			
 				@if($images->count() < 10)
 					
@@ -58,7 +58,7 @@
 						
 						@foreach($images as $image)
 					
-							<div class="col-4 my-1">
+							<div class="col-12 col-md-6 col-lg-4 my-1">
 								{!! Form::open(['action' => ['HomeController@update_carousel', 'picture' => $image->id], 'method' => 'PATCH']) !!}
 								
 									<!--Card-->

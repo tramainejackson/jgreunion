@@ -7,13 +7,13 @@
 		
 		<div class="row white">
 		
-			<div class="col-2 my-2">
+			<div class="col-12 col-lg-2 my-2">
 				<div class="">
 					<a href="/administrator" class="btn btn-info btn-lg">All Members</a>
 				</div>
 			</div>
 			
-			<div class="col-8 membersForm">
+			<div class="col-11 col-lg-8 membersForm mx-auto">
 			
 				<h1 class="mt-2 mb-4">Create New Member</h1>
 				
@@ -94,7 +94,9 @@
 					</div>
 					
 					<div class="form-group">
-						{{ Form::submit('Create New Member', ['class' => 'btn btn-primary form-control']) }}
+					
+						<button class="btn btn-primary form-control" type="submit">Create New Member</button>
+
 					</div>
 					
 				{!! Form::close() !!}

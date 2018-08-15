@@ -53,14 +53,14 @@ $(document).ready(function()
 	$('.dataTables_length').addClass('bs-select');
 
 
-	// // SideNav Scrollbar Initialization
-	// var sideNavScrollbar = document.querySelector('.custom-scrollbar');
-	// Ps.initialize(sideNavScrollbar);
-	// // SideNav Button Initialization
-	// $(".button-collapse").sideNav({
-		// edge: 'left', // Choose the horizontal origin
-		// closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
-	// });
+	// SideNav Button Initialization
+	$(".button-collapse").sideNav({
+		edge: 'left', // Choose the horizontal origin
+		closeOnClick: true // Closes side-nav on <a> clicks, useful for Angular/Meteor
+	});
+	// SideNav Scrollbar Initialization
+	var sideNavScrollbar = document.querySelector('.custom-scrollbar');
+	Ps.initialize(sideNavScrollbar);
 	
 	// Delete duplicate family member account
 	$('body').on('click', '.deleteDupe', function() {
@@ -336,6 +336,11 @@ $(document).ready(function()
 		$('.reunionBgrdImg').parent().addClass('flipInX').removeAttr('style');
 	});
 	
+	// Show button to submit new reunion hotel image after file has been added
+	$('body').on('change', 'input[name="new_hotel_picture"]', function() {
+		$('.reunionHotelImage').parent().addClass('flipInX').removeAttr('style');
+	});
+	
 	// Upload new image for the current reunion
 	$('body').on('click', 'button.reunionBgrdImg', function() {
 		event.preventDefault();
@@ -368,6 +373,47 @@ $(document).ready(function()
 				toastr.success(data);
 				
 				$(".reunionBgrdWrapper").load("/reunions/" + reunion_id + "/edit .reunionBgrdDiv", function(responseTxt, statusTxt, xhr) {
+					$('#progress_modal').modal('toggle');
+				});
+			},
+		});
+		
+		return false;
+	});
+	
+	// Upload new image for the current reunions hotel
+	$('body').on('click', 'button.reunionHotelImage', function() {
+		event.preventDefault();
+		
+		var formData = new FormData();
+		var reunion_id = $(this).parent().prev().find('input[type="number"]').val();
+		formData.append("photo", document.getElementById('new_hotel_picture').files[0]);
+		formData.append("reunion", reunion_id);
+
+		$.ajax({
+			url: "/reunion_hotel_image_add/" + reunion_id,
+			method: "POST",
+			data: formData,
+			contentType: false,
+			processData: false,
+			cache: false,
+			xhr: function() {
+				var xhr = new XMLHttpRequest();
+				
+				xhr.upload.addEventListener('progress', function(e) {
+					var progressbar = Math.round((e.loaded/e.total) * 100);
+					$('#progress_modal').modal('show');
+					$('#pro').css('width', progressbar + '%').text(progressbar + '%');
+				});
+				
+				return xhr;
+			},
+			
+			success: function(data) {
+				// Display a success toast
+				toastr.success(data);
+				
+				$(".reunionHotelImageWrapper").load("/reunions/" + reunion_id + "/edit .reunionHotelImageDiv", function(responseTxt, statusTxt, xhr) {
 					$('#progress_modal').modal('toggle');
 				});
 			},

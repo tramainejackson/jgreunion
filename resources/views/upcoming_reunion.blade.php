@@ -137,17 +137,19 @@
 						</div>
 						
 						<div class="col-12 col-xl-8">
-							<p class="my-1"><span class="hotelInfoLabel">Hotel:</span> {{ $reunion->hotel->name }}</p>
+							<p class="my-1"><span class="hotelInfoLabel">Hotel:</span> {{ $reunion->hotel->name != null ? $reunion->hotel->name : 'Not Hotel Added Yet' }}</p>
 							
-							<p class="my-1"><span class="hotelInfoLabel">Location:</span> {{ $reunion->hotel->location }}</p>
+							<p class="my-1"><span class="hotelInfoLabel">Location:</span> {{ $reunion->hotel->location != null ? $reunion->hotel->location : 'Not Hotel Location Added Yet' }}</p>
 							
-							<p class="my-1"><span class="hotelInfoLabel">Room:</span> ${{ $reunion->hotel->cost }}/per night (not including taxes and fees)</p>
+							<p class="my-1"><span class="hotelInfoLabel">Room:</span> {{ $reunion->hotel->cost != null ? '$' . $reunion->hotel->cost . '/per night (not including taxes and fees)' : 'Not Hotel Room Cost Added Yet' }}</p>
 							
-							<p class="my-1"><span class="hotelInfoLabel">Contact:</span> {{ $reunion->hotel->phone }}</p>
+							<p class="my-1"><span class="hotelInfoLabel">Contact:</span> {{ $reunion->hotel->phone != null ? $reunion->hotel->phone : 'Not Hotel Contact Added Yet'  }}</p>
 							
-							<p class="my-1"><span class="hotelInfoLabel">Additional Info:</span> Please call for any room upgrades.</p>
+							@if($reunion->hotel->phone != null)
+								<p class="my-1"><span class="hotelInfoLabel">Additional Info:</span> Please call for any room upgrades.</p>
+							@endif
 							
-							@if($reunion->hotel->book_room_link == null)
+							@if($reunion->hotel->book_room_link == null && $reunion->hotel->phone != null)
 								<p class="my-1">*** Please Call To Book Room ***</p>
 							@endif
 						

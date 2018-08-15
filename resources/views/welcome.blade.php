@@ -52,38 +52,107 @@
 @section('content')
 	<div id="jgreunion_page">
 	
-		<!--Carousel Wrapper-->
-		<div id="carousel_home" class="carousel slide carousel-fade" data-ride="carousel">	
-		
-			<!--Slides-->
-			<div class="carousel-inner" role="listbox">
-				<nav class="nav nav-pills justify-content-end">
-					@if(!Auth::check())
-						
-						<a href='/login' class='profileLink nav-link d-none d-sm-block'>Login</a>
+		<div class="d-block d-lg-none">
+			
+			<!-- SideNav slide-out button -->
+			<a href="#" data-activates="slide-out" class="btn btn-primary p-3 button-collapse position-absolute" style="z-index: 1;"><i class="fa fa-bars"></i></a>
 
-						<a href='/login' class="profileLink nav-link d-sm-none wow fadeInDown" data-wow-delay="0.6s">Login</a>
+			<!-- Sidebar navigation -->
+			<div id="slide-out" class="side-nav fixed">
+				<ul class="custom-scrollbar">
+					<!-- Logo -->
+					<li>
+						<div class="">
+							<img src="{{ asset('/images/jg-logo.png') }}" class="img-fluid flex-center" />
+						</div>
+					</li>
+					<!--/. Logo -->
+
+					<!-- Side navigation links -->
+					@if(!Auth::check())
+					
+						<li class="">
+							<a href='/login' class='profileLink nav-link d-none d-sm-block'>Login</a>
+						</li>
+
+						<li class="">
+							<a href='/login' class="profileLink nav-link d-sm-none wow fadeInDown" data-wow-delay="0.6s">Login</a>
+						</li>
 
 					@else
 						@if(!Auth::user()->is_admin())
 							
-							<a href='/profile' class='profileLink nav-link'>My Profile</a>
+							<li class="">
+								<a href='/profile' class='profileLink nav-link'>My Profile</a>
+							</li>
 							
 						@else
 							
 							<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
 							
-							<a href='/administrator' class='profileLink adminLink nav-link'>Admin</a>
+							<li class="">
+								<a href='/administrator' class='profileLink adminLink nav-link'>Admin</a>
+							</li>
+							
 							
 						@endif
 						
-						<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+						<li class="">
+							<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+						</li>
 			
 						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 							{{ csrf_field() }}
 						</form>
 					@endif
-				</nav>
+
+					<!--/. Side navigation links -->
+				</ul>
+
+				<div class="sidenav-bg"></div>
+			  
+			</div>
+			<!--/. Sidebar navigation -->
+			
+		</div>
+		
+		<!--Carousel Wrapper-->
+		<div id="carousel_home" class="carousel slide carousel-fade" data-ride="carousel">	
+		
+			<!--Slides-->
+			<div class="carousel-inner" role="listbox">
+			
+				<div class="d-none d-lg-block">
+				
+					<nav class="nav nav-pills justify-content-end">
+						@if(!Auth::check())
+							
+							<a href='/login' class='profileLink nav-link d-none d-sm-block'>Login</a>
+
+							<a href='/login' class="profileLink nav-link d-sm-none wow fadeInDown" data-wow-delay="0.6s">Login</a>
+
+						@else
+							@if(!Auth::user()->is_admin())
+								
+								<a href='/profile' class='profileLink nav-link'>My Profile</a>
+								
+							@else
+								
+								<!-- <a href='/profile' class='profileLink nav-link'>My Profile</a> -->
+								
+								<a href='/administrator' class='profileLink adminLink nav-link'>Admin</a>
+								
+							@endif
+							
+							<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+				
+							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+								{{ csrf_field() }}
+							</form>
+						@endif
+					</nav>
+					
+				</div>
 			
 				@if($images->count() > 0 && $images != null)
 					

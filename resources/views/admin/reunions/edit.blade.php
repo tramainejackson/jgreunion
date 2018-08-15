@@ -26,10 +26,11 @@
 				</div>
 				
 				<div class="reunionBgrdWrapper">
+				
 					<div class="reunionBgrdDiv mb-3 z-depth-1-half rounded" style="min-height:200px; background: url('{{ asset($reunion->picture) }}') no-repeat center;">
 						<div class="rgba-black-light white-text d-flex flex-column align-items-center justify-content-center" style="min-height:200px;">
 							<div class="">
-								<h1 class="h1-responsive">Change Background</h1>
+								<h1 class="h1-responsive">Change Reunion Background</h1>
 							</div>
 							
 							{!! Form::open(['method' => 'PUT', 'files' => true]) !!}
@@ -111,6 +112,7 @@
 						</select>
 					</div>
 					<div class="form-row">
+					
 						<div class="form-group col-12 col-md-4">
 							<label class="form-label" for="adult_price">Adult Price</label>
 							<div class="input-group">
@@ -148,6 +150,96 @@
 									<span class="input-group-text" id="basic-addon1">Per Child</span>
 								</div>
 							</div>
+						</div>
+					</div>
+					
+					<!-- Hotel Information Section -->
+					<div class="form-block-header">
+						<h3 class="">Hotel Information</h3>
+					</div>
+					
+					<div class="reunionHotelImageWrapper">
+						
+						<div class="reunionHotelImageDiv mb-3 mx-3 z-depth-1-half rounded" style="min-height:200px; background: url('{{ asset($reunion->hotel ? $reunion->hotel->picture : 'blank') }}') no-repeat center;">
+						
+							<div class="rgba-black-light white-text d-flex flex-column align-items-center justify-content-center" style="min-height:200px;">
+								<div class="">
+									<h1 class="h1-responsive">Change Hotel Photo</h1>
+								</div>
+								
+								<div class="md-form">
+								
+									<div class="file-field">
+										<div class="btn btn-primary btn-sm float-left">
+											<span>Choose file</span>
+											<input type="file" id="new_hotel_picture" name="new_hotel_picture" />
+										</div>
+										
+										<div class="file-path-wrapper">
+										   <input class="file-path validate white-text" type="text" placeholder="Upload Picture" />
+										   
+										   <input class="hidden" type="number" value="{{ $reunion->id }}" hidden />
+										</div>
+									</div>
+								</div>
+									
+								<div class="animated" style="visibility:hidden;">
+									<button class="btn btn-block btn-success reunionHotelImage" type="button">Change Photo</button>
+								</div>
+								
+							</div>
+							
+						</div>
+						
+					</div>
+					
+					<div class="form-group col-12">
+						<label class="form-label" for="member_title">Hotel Name</label>
+						
+						<input type="text" name="hotel_name" class="form-control" value="{{ $reunion->hotel ? $reunion->hotel->name : '' }}" placeholder="Enter Hotel Name" />
+					</div>
+					
+					<div class="form-group col-12">
+						<label class="form-label" for="hotel_address">Hotel Address</label>
+						
+						<input type="text" name="hotel_address" class="form-control" value="{{ $reunion->hotel ? $reunion->hotel->location : '' }}" placeholder="Enter Hotel Address" />
+					</div>
+						
+					<div class="form-row">
+					
+						<div class="form-group col-12 col-md-6" style="padding-left: 20px;">
+							<label class="form-label" for="hotel_phone">Hotel Phone Number</label>
+							
+							<input type="text" name="hotel_phone" class="form-control" value="{{ $reunion->hotel ? $reunion->hotel->phone : '' }}" placeholder="Enter Hotel Phone Number" />
+						</div>
+						
+						<div class="form-group col-12 col-md-6" style="padding-right: 20px;">
+							<label class="form-label" for="hotel_cost">Hotel Room Cost</label>
+							
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-dollar" aria-hidden="true"></i></span>
+								</div>
+								
+								<input type="text" name="hotel_cost" class="form-control" value="{{ $reunion->hotel ? $reunion->hotel->cost : '' }}" placeholder="Enter Hotel Room Nightly Cost" />
+								
+								<div class="input-group-append">
+									<span class="input-group-text" id="">Per Night</span>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+					
+					<div class="form-group col-12">
+						<label class="form-label" for="hotel_room_booking">Hotel Room Booking Link</label>
+						
+						<div class="input-group mb-3">
+							<div class="input-group-prepend">
+								<span class="input-group-text">https://</span>
+							</div>
+							
+							<input type="text" name="hotel_room_booking" class="form-control" value="{{ $reunion->hotel ? $reunion->hotel->book_room_link : '' }}" placeholder="Enter Link To Book A Room" />
 						</div>
 					</div>
 					

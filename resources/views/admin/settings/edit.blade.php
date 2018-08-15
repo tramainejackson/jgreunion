@@ -103,6 +103,10 @@
 					
 					</div>
 					
+				@else
+					
+					<h2 class="text-center">There are no images currently added to the home page</h2>
+
 				@endif
 				
 			</div>

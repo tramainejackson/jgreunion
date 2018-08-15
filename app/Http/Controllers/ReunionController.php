@@ -11,6 +11,7 @@ use App\State;
 use App\Committee_Title;
 use App\CarouselImage;
 use App\ReunionImage;
+use App\ReunionHotel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -129,6 +130,93 @@ class ReunionController extends Controller
 							$reunion->picture = str_ireplace('public', 'storage', $path);
 
 							if($reunion->save()) {}
+							
+						}
+							
+					}
+				} else {
+					$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+				}
+			} else {
+				$error .= "<li class='errorItem'>The file " . $fileName . " may be corrupt and could not be uploaded</li>";
+			}
+
+			return 'Image added';
+			
+		} else {
+			
+			
+		}
+
+	}
+	
+	/**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+    */
+    public function update_hotel_image(Request $request, Reunion $reunion)
+	{
+		$hotel;
+		
+		if($reunion->hotel) {
+			$hotel = $reunion->hotel;
+		} else {
+			$hotel = new ReunionHotel();
+			$hotel->reunion_id = $reunion->id;
+		}
+		
+		if($request->hasFile('photo')) {
+			$newImage = $request->file('photo');
+			
+			// Check to see if upload is an image
+			if($newImage->guessExtension() == 'jpeg' || $newImage->guessExtension() == 'png' || $newImage->guessExtension() == 'gif' || $newImage->guessExtension() == 'webp' || $newImage->guessExtension() == 'jpg') {
+				
+				// Check to see if images is too large
+				if($newImage->getError() == 1) {
+					
+					$fileName = $request->file('photo')[0]->getClientOriginalName();
+					$error .= "<li class='errorItem'>The file " . $fileName . " is too large and could not be uploaded</li>";
+					
+				} elseif($newImage->getError() == 0) {
+					
+					// Check to see if images is about 25MB
+					// If it is then resize it
+					if($newImage->getClientSize() < 25000000) {
+						$image = Image::make($newImage->getRealPath())->orientate();
+						$path = $newImage->store('public/images');
+						
+						if($image->save(storage_path('app/'. $path))) {
+							// Prevent possible upsizing
+							// Create a larger version of the image
+							// and save to large image folder
+							$image->resize(1700, null, function ($constraint) {
+								$constraint->aspectRatio();
+								// $constraint->upsize();
+							});
+							
+							if($image->save(storage_path('app/'. $path))) {
+							
+								$hotel->picture = str_ireplace('public', 'storage', $path);
+
+								if($hotel->save()) {}
+								
+							}
+						}
+						
+					} else {
+						// Resize the image before storing. Will need to hash the filename first
+						$path = $newImage->store('public/images');
+						$image = Image::make($newImage)->orientate()->resize(1500, null, function ($constraint) {
+							$constraint->aspectRatio();
+							$constraint->upsize();
+						});
+						
+						if($image->save(storage_path('app/'. $path))) {
+							
+							$hotel->picture = str_ireplace('public', 'storage', $path);
+
+							if($hotel->save()) {}
 							
 						}
 							
@@ -434,92 +522,140 @@ class ReunionController extends Controller
 			}
 		} else {
 			
+			$hotel;
+		
+			if($reunion->hotel) {
+				$hotel = $reunion->hotel;
+			} else {
+				$hotel = new ReunionHotel();
+				$hotel->reunion_id = $reunion->id;
+			}
+			
 			$reunion->reunion_city = $request->reunion_city;
 			$reunion->reunion_state = $request->reunion_state;
 			$reunion->reunion_year = $request->reunion_year;
 			$reunion->adult_price = $request->adult_price;
 			$reunion->youth_price = $request->youth_price;
 			$reunion->child_price = $request->child_price;
+			$hotel->name = $request->hotel_name;
+			$hotel->location = $request->hotel_address;
+			$hotel->phone = $request->hotel_phone;
+			$hotel->cost = $request->hotel_cost;
+			$hotel->book_room_link = $request->hotel_room_booking;
 			
 			if($request->hasFile('paper_reg_form')) {
 				$path = $request->file('paper_reg_form')->store('public/reg_forms');
 				$reunion->registration_form = $path;
 			}
 			
-			if($reunion->save()) {
+			if($hotel->save()) {
 				
-				if(isset($request->event_id)) {
+				if($reunion->save()) {
 					
-					if(count($request->event_id) < count($request->event_date)) {
+					if(isset($request->event_id)) {
 						
-						foreach($reunion->events as $key => $event) {
-							$eventDate = new Carbon($request->event_date[$key]);
-							$event->event_location = $request->event_location[$key];
-							$event->event_description = $request->event_description[$key];
-							$event->event_date = $eventDate;
+						if(count($request->event_id) < count($request->event_date)) {
+							
+							foreach($reunion->events as $key => $event) {
+								$eventDate = new Carbon($request->event_date[$key]);
+								$event->event_location = $request->event_location[$key];
+								$event->event_description = $request->event_description[$key];
+								$event->event_date = $eventDate;
 
-							$event->save();
+								$event->save();
+							}
+							
+							for($x=count($request->event_id); $x < count($request->event_date); $x++) {
+								// Create New Reunion Event Object
+								$event = new Reunion_event();
+							
+								$eventDate = new Carbon($request->event_date[$x]);
+								$event->reunion_id = $reunion->id;
+								$event->event_location = $request->event_location[$x];
+								$event->event_description = $request->event_description[$x];
+								$event->event_date = $eventDate;
+								
+								if($event->save()) {
+									
+								}
+							}
+							
+						} else {
+							
+							foreach($reunion->events as $key => $event) {
+								$eventDate = new Carbon($request->event_date[$key]);
+								$event->event_location = $request->event_location[$key];
+								$event->event_description = $request->event_description[$key];
+								$event->event_date = $eventDate;
+
+								$event->save();
+							}
 						}
+
+					} elseif(!isset($request->event_id) && isset($request->event_date)) {
 						
-						for($x=count($request->event_id); $x < count($request->event_date); $x++) {
+						for($x=0; $x < count($request->event_date); $x++) {
 							// Create New Reunion Event Object
 							$event = new Reunion_event();
-						
+
 							$eventDate = new Carbon($request->event_date[$x]);
 							$event->reunion_id = $reunion->id;
 							$event->event_location = $request->event_location[$x];
 							$event->event_description = $request->event_description[$x];
-							$event->event_date = $eventDate;
+							$event->event_date = $eventDate->toDateString();
 							
-							if($event->save()) {
+							if($event->save()) {}
+						}
+					}
+					
+					if(isset($request->committee_member_id)) {
+						
+						if(count($request->committee_member_id) < count($request->member_title)) {
+							
+							foreach($reunion->committee as $key => $committee_member) {
 								
+								$member_dl = FamilyMember::find($request->dl_id[$key]);
+								$committee_member->family_member_id = $request->dl_id[$key];
+								$committee_member->member_title = $request->member_title[$key];
+								$committee_member->member_name = $member_dl->firstname . ' ' . $member_dl->lastname;
+								$committee_member->member_email = $member_dl->email;
+								$committee_member->member_phone = $member_dl->phone;
+								$committee_member->save();
+							}
+							
+							for($x=count($request->committee_member_id); $x < count($request->member_title); $x++) {
+								// Create New Reunion Object
+								$committee_member = new ReunionCommittee();
+								
+								// Get member from distro list
+								$member = FamilyMember::find($request->dl_id[$x]);
+								
+								$committee_member->family_member_id = $member->id;
+								$committee_member->reunion_id = $reunion->id;
+								$committee_member->member_name = $member->firstname . ' ' . $member->lastname;
+								$committee_member->member_title = $request->member_title[$x];
+								$committee_member->member_email = $member->email;
+								$committee_member->member_phone = $member->phone;
+								
+								if($committee_member->save()) {
+									
+								}
+							}
+						} else {
+							foreach($reunion->committee as $key => $committee_member) {
+								$member_dl = FamilyMember::find($request->dl_id[$key]);
+								$committee_member->family_member_id = $request->dl_id[$key];
+								$committee_member->member_title = $request->member_title[$key];
+								$committee_member->member_name = $member_dl->firstname . ' ' . $member_dl->lastname;
+								$committee_member->member_email = $member_dl->email;
+								$committee_member->member_phone = $member_dl->phone;
+								$committee_member->save();
 							}
 						}
 						
-					} else {
-						
-						foreach($reunion->events as $key => $event) {
-							$eventDate = new Carbon($request->event_date[$key]);
-							$event->event_location = $request->event_location[$key];
-							$event->event_description = $request->event_description[$key];
-							$event->event_date = $eventDate;
+					} elseif(!isset($request->committee_member_id) && isset($request->member_title)) {
 
-							$event->save();
-						}
-					}
-
-				} elseif(!isset($request->event_id) && isset($request->event_date)) {
-					
-					for($x=0; $x < count($request->event_date); $x++) {
-						// Create New Reunion Event Object
-						$event = new Reunion_event();
-
-						$eventDate = new Carbon($request->event_date[$x]);
-						$event->reunion_id = $reunion->id;
-						$event->event_location = $request->event_location[$x];
-						$event->event_description = $request->event_description[$x];
-						$event->event_date = $eventDate->toDateString();
-						
-						if($event->save()) {}
-					}
-				}
-				
-				if(isset($request->committee_member_id)) {
-					
-					if(count($request->committee_member_id) < count($request->member_title)) {
-						
-						foreach($reunion->committee as $key => $committee_member) {
-							
-							$member_dl = FamilyMember::find($request->dl_id[$key]);
-							$committee_member->family_member_id = $request->dl_id[$key];
-							$committee_member->member_title = $request->member_title[$key];
-							$committee_member->member_name = $member_dl->firstname . ' ' . $member_dl->lastname;
-							$committee_member->member_email = $member_dl->email;
-							$committee_member->member_phone = $member_dl->phone;
-							$committee_member->save();
-						}
-						
-						for($x=count($request->committee_member_id); $x < count($request->member_title); $x++) {
+						for($x=0; $x < count($request->member_title); $x++) {
 							// Create New Reunion Object
 							$committee_member = new ReunionCommittee();
 							
@@ -537,43 +673,11 @@ class ReunionController extends Controller
 								
 							}
 						}
-					} else {
-						foreach($reunion->committee as $key => $committee_member) {
-							$member_dl = FamilyMember::find($request->dl_id[$key]);
-							$committee_member->family_member_id = $request->dl_id[$key];
-							$committee_member->member_title = $request->member_title[$key];
-							$committee_member->member_name = $member_dl->firstname . ' ' . $member_dl->lastname;
-							$committee_member->member_email = $member_dl->email;
-							$committee_member->member_phone = $member_dl->phone;
-							$committee_member->save();
-						}
 					}
-					
-				} elseif(!isset($request->committee_member_id) && isset($request->member_title)) {
-
-					for($x=0; $x < count($request->member_title); $x++) {
-						// Create New Reunion Object
-						$committee_member = new ReunionCommittee();
 						
-						// Get member from distro list
-						$member = FamilyMember::find($request->dl_id[$x]);
-						
-						$committee_member->family_member_id = $member->id;
-						$committee_member->reunion_id = $reunion->id;
-						$committee_member->member_name = $member->firstname . ' ' . $member->lastname;
-						$committee_member->member_title = $request->member_title[$x];
-						$committee_member->member_email = $member->email;
-						$committee_member->member_phone = $member->phone;
-						
-						if($committee_member->save()) {
-							
-						}
-					}
+					return redirect()->action('ReunionController@edit', $reunion)->with('status', 'Reunion Updated Succssfully');
 				}
-					
-				return redirect()->action('ReunionController@edit', $reunion)->with('status', 'Reunion Updated Succssfully');
 			}
-			
 		}
     }
 

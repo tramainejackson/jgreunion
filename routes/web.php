@@ -65,6 +65,8 @@ Route::post('/reunion_images_add/{reunion}', 'ReunionController@update_reunion_p
 
 Route::post('/reunion_image_add/{reunion}', 'ReunionController@update_reunion_image');
 
+Route::post('/reunion_hotel_image_add/{reunion}', 'ReunionController@update_hotel_image');
+
 Route::put('/members/{reunion_dl}/add_house_hold', 'HomeController@add_house_hold')->name('add_house_hold');
 
 Route::put('/registrations/{registration}/add_registration_member', 'RegistrationController@add_registration_member')->name('add_registration_member');

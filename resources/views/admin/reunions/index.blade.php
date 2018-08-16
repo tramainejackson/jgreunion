@@ -13,21 +13,21 @@
 				</div>
 			</div>
 			
-			<div class="col-12 col-md-10 col-lg-9 my-3 mx-auto">
-				<ul class="list-group">
+			<div class="col-12 col-md-10 col-lg-9 my-3 mx-auto" >
+			
+				<ul class="list-group accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+				
 					<li class="list-group-item list-group-item-info">All Reunions</li>
+					
 					@foreach($reunions as $reunion)
-						@php
-							$totalRegistrations = $reunion->registrations()->where('parent_reg', null);
-						@endphp
 						
 						<li class="list-group-item list-group-item-action reunionItem{{ $reunion->reunion_complete == 'N' ? ' activeReunionItem' : '' }}">
 						
-							<h2 class="" data-toggle="collapse" data-parent="#reunionAccordion" href="#reunionAccordion{{$loop->iteration}}" aria-expanded="true" aria-controls="reunionAccordion1">{{ $reunion->reunion_city . ' ' . $reunion->reunion_year }}</h2>
+							<h2 class="" role="tab" id="headingOne{{$loop->iteration}}" data-toggle="collapse" data-parent="#accordionEx" href="#reunionAccordion{{$loop->iteration}}" aria-expanded="true" aria-controls="reunionAccordion{{$loop->iteration}}">{{ $reunion->reunion_city . ' ' . $reunion->reunion_year }}</h2>
 							
 							@if($reunion->has_site == 'Y')
 								
-								<div class="container-fluid collapse" id="reunionAccordion{{$loop->iteration}}">
+								<div class="container-fluid collapse{{ $loop->iteration == 1 ? ' show' : '' }}" role="tabpanel" id="reunionAccordion{{$loop->iteration}}" data-parent="#accordionEx">
 									<div class="form-row my-3">
 										<div class="form-group col-12 col-md-4">
 											<label class="form-label" for="reunion_city">City</label>
@@ -106,7 +106,7 @@
 									</div>
 									
 									<div class="form-row justify-content-around mb-3">
-										<button type="button" class="btn btn-primary col-12 col-md-4">Registrations <span class="badge badge-light">{{ $totalRegistrations->count() }}</span>
+										<button type="button" class="btn btn-primary col-12 col-md-4">Registrations <span class="badge badge-light">{{ $reunion->registrations->count() }}</span>
 										<span class="sr-only">total registrations</span>
 										</button>
 

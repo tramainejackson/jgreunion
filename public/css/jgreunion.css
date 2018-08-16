@@ -13,6 +13,10 @@ button:hover {
 	cursor: pointer;
 }
 
+.btn {
+	line-height: 1;
+}
+
 .hidden {
 	display: none;
 }

@@ -5,7 +5,7 @@ Update adding and removing of household members
 Fixed: Not adding shirt sizes somewhere
 Fixed: Fix issue with registrations link on member edit page
 Fixed: Reunion pictures not showing on active site
-**Fixed: Fix removal of duplicates when there is 2 registrations also check if committee member
+Fixed: Fix removal of duplicates when there is 2 registrations also check if committee member
 Done: Add a left nav for mobile
 Done: Add hotel inputs to edit reunion page
 Done: Update responsiveness

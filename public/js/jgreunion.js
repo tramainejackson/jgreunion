@@ -544,7 +544,6 @@ function deleteDupe(member_id) {
 	event.preventDefault();
 	
 	var removeRow = $('.deleteDupe input[value="' + member_id + '"]').parent().parent();
-	var removeCard = $(removeRow).parent().parent();
 	
 	$.ajax({
 	  method: "DELETE",
@@ -561,16 +560,18 @@ function deleteDupe(member_id) {
 			
 			toastr.success(data[0]);
 			$(removeRow).remove();
-		
-			if(data[1] == 'Remove Card') {
-				
-				$(removeCard).addClass('bounceOut');
-				
-				setTimeout(function() {
-					$(removeCard).remove();
-				}, 1000);
-				
-			}
+			
+			$('.duplicatesCol').fadeTo('fast', 0.00);
+			$(data[1]).find('.duplicatesCol')
+				.addClass('invisible')
+				.appendTo('.duplicatesCol')
+				.siblings()
+				.remove()
+				.unwrap();
+
+			setTimeout(function() {
+				$('body').find('.duplicatesCol').removeClass('invisible').addClass('fadeIn');
+			}, 1000);
 			
 		});
 		

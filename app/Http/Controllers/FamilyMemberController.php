@@ -213,9 +213,8 @@ class FamilyMemberController extends Controller
     {
 		$duplicates_check = FamilyMember::checkDuplicates();
 		$duplicates_check = $duplicates_check->isNotEmpty() ? $duplicates_check : null;
-		$allMembers = FamilyMember::all();
 		
-		return view('admin.members.duplicates', compact('duplicates_check', 'allMembers'));
+		return view('admin.members.duplicates', compact('duplicates_check'));
 
     }
 	
@@ -227,25 +226,45 @@ class FamilyMemberController extends Controller
     public function delete_duplicates(FamilyMember $member)
     {
 		$duplicates = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state)->get();
-		$usersInDupes = FamilyMember::getDuplicates($member->firstname, $member->lastname, $member->city, $member->state)->users()->get();
+		$userAccount = $duplicates->first();
 		$committee_member = $member->committees;
 		$reunion_registrations = $member->registrations;
+		$profile_post = $member->posts;
+
 		$returnData = [];
-			
-		$userAccount = $usersInDupes->count() >= 1 ? $usersInDupes->first() : $duplicates->first();
-		
-		if($userAccount->id == $member->id) {
-			$userAccount = $usersInDupes->count() >= 1 ? $usersInDupes->last() : $duplicates->last();
-		}
 		
 		if($userAccount->user && $member->user) {
 			if($userAccount->user->email === null) {
 				$userAccount->user->email = $member->user->email;
 			}
 		} elseif(!$userAccount->user && $member->user) {
-			
+			$userAccount->user_id = $member->user->id;
 		}
 
+		$userAccount->family_id = $userAccount->family_id !== null ? $userAccount->family_id : $member->family_id;
+		$userAccount->email = $userAccount->email !== null ? $userAccount->email : $member->email;
+		$userAccount->address = $userAccount->address !== null ? $userAccount->address : $member->address;
+		$userAccount->city = $userAccount->city !== null ? $userAccount->city : $member->city;
+		$userAccount->state = $userAccount->state !== null ? $userAccount->state : $member->state;
+		$userAccount->zip = $userAccount->zip !== null ? $userAccount->zip : $member->zip;
+		$userAccount->phone = $userAccount->phone !== null ? $userAccount->phone : $member->phone;
+		$userAccount->descent = $userAccount->descent !== null ? $userAccount->descent : $member->descent;
+		$userAccount->mother = $userAccount->mother !== null ? $userAccount->mother : $member->mother;
+		$userAccount->father = $userAccount->father !== null ? $userAccount->father : $member->father;
+		$userAccount->spouse = $userAccount->spouse !== null ? $userAccount->spouse : $member->spouse;
+		$userAccount->sibling = $userAccount->sibling !== null ? $userAccount->sibling : $member->sibling;
+		$userAccount->child = $userAccount->child !== null ? $userAccount->child : $member->child;
+		$userAccount->notes = $userAccount->notes !== null ? $userAccount->notes : $member->notes;
+		$userAccount->age_group = $userAccount->age_group !== null ? $userAccount->age_group : $member->age_group;
+		$userAccount->mail_preference = $userAccount->mail_preference !== null ? $userAccount->mail_preference : $member->mail_preference;
+		$userAccount->instagram = $userAccount->instagram !== null ? $userAccount->instagram : $member->instagram;
+		$userAccount->facebook = $userAccount->facebook !== null ? $userAccount->facebook : $member->facebook;
+		$userAccount->twitter = $userAccount->twitter !== null ? $userAccount->twitter : $member->twitter;
+		$userAccount->show_contact = $userAccount->show_contact !== null ? $userAccount->show_contact : $member->show_contact;
+		$userAccount->show_socail = $userAccount->show_socail !== null ? $userAccount->show_socail : $member->show_socail;
+		
+		if($userAccount->save()) {}
+		
 		// If the account being deleted has a registration
 		// Change the registration to the account with a profile
 		if($member->registrations->isNotEmpty()) {
@@ -303,12 +322,15 @@ class FamilyMemberController extends Controller
 					
 			}
 		}
-		
+
 		// Delete the member account
 		if($member->delete()) {
-
-			array_push($returnData, 'Removed Account',  $duplicates->count() - 1 == 1 ? 'Remove Card' : null);
 			
+			$duplicates_check = FamilyMember::checkDuplicates();
+			$duplicates_check = $duplicates_check->isNotEmpty() ? $duplicates_check : null;
+
+			array_push($returnData, 'Removed Account', view('admin.members.duplicates', compact('duplicates_check'))->render());
+
 			return $returnData;
 			
 		}

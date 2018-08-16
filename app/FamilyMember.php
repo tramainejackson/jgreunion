@@ -53,17 +53,25 @@ class FamilyMember extends Model
 	/**
 	* Get the post for the user.
 	*/
-    public function post()
+    public function posts()
     {
         return $this->hasMany('App\ProfilePost');
     }
 	
 	/**
-	* Get the user for the family member account.
+	* Get the user account for the family member account.
 	*/
     public function user()
     {
         return $this->belongsTo('App\User');
+    }	
+	
+	/**
+	* Get the image avatar for the family member account.
+	*/
+    public function avatar()
+    {
+        return $this->hasOne('App\ProfileAvatar');
     }
 	
 	/**

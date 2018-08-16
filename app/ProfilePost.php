@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class profile_post extends Model
+class ProfilePost extends Model
 {
     use SoftDeletes;
 
@@ -19,8 +19,9 @@ class profile_post extends Model
 	/**
 	* Get the user for the current post.
 	*/
-    public function user()
+    public function family_member()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\FamilyMember');
     }
+
 }

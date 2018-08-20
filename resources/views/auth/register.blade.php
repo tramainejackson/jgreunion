@@ -83,7 +83,7 @@
 							<div class="form-group col-12 col-md-6">
 								{{ Form::label('password', 'Password', ['class' => 'regInput regFNInput nameInput form-control-label']) }}
 								
-								{{ Form::text('password', '', ['class' => 'form-control', 'placeholder' => 'Enter Password']) }}
+								<input type="password" name="password" class="form-control" placeholder="Enter Password" />
 								
 								@if ($errors->has('password'))
 									<span class="text-danger">{{ $errors->first('password') }}</span>
@@ -94,7 +94,7 @@
 							
 								{{ Form::label('password_confirmation', 'Confirm Password', ['class' => 'regInput regFNInput nameInput form-control-label']) }}
 								
-								{{ Form::text('password_confirmation', '', ['class' => 'form-control', 'placeholder' => 'Confirm Password']) }}
+								<input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" />
 
 							</div>
 							

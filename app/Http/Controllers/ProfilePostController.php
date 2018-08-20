@@ -2,8 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\profile_post;
+use App\Registration;
+use App\Reunion;
+use App\ReunionCommittee;
+use App\FamilyMember;
+use App\State;
+use App\ProfilePost;
+use App\Committee_Title;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class ProfilePostController extends Controller
 {
@@ -14,7 +27,7 @@ class ProfilePostController extends Controller
      */
     public function index()
     {
-        //
+        return view('users.index');
     }
 
     /**

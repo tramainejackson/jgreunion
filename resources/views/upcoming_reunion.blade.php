@@ -82,9 +82,11 @@
 	</div>
 	
 	<div id="reunion_page" class="container-fluid pb-4">
+	
 		<div class="row d-xl-none">
 			<button type="button" class="btn btn-dark m-3 px-4" data-toggle="collapse" data-target="#upcoming_reunion_mobile" aria-expanded="false" aria-controls="upcoming_reunion_mobile"><i class="fa fa-bars" aria-hidden="true"></i></button>
 		</div>
+		
 		<div class="row collapse" id="upcoming_reunion_mobile">
 			<div class="col">
 				<nav class="">
@@ -120,6 +122,7 @@
 			</div>
 			<div class="d-none col-xl-2"></div>
 		</div>
+		
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-11 col-xl-8 mx-auto">
@@ -133,7 +136,7 @@
 							<h2 id="" class="text-center text-light">Hotel Information</h2>
 						</div>
 						<div class="col-12 col-xl-4 my-1">
-							<img src="{{ asset($reunion->hotel->picture) }}" class="mw-100" />
+							<img src="{{ asset($reunion->hotel->picture != null ? $reunion->hotel->picture : '/images/hotel_default.jpg' ) }}" class="mw-100" />
 						</div>
 						
 						<div class="col-12 col-xl-8">

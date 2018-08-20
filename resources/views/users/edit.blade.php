@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
 	<div class="container-fluid" id="profilePage">
 
 		@include('admin.nav')
@@ -42,27 +41,7 @@
 			
 			<div class="col-11 col-xl-8 membersForm mx-auto">
 			
-				@if($active_reunion != null)
-					
-					@if($registered_for_reunion === null)
-					
-						<h3 class="h3-responsive red-text text-center"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>There is an upcoming reunion to {{ $active_reunion->reunion_city . ', ' . $active_reunion->reunion_state }}. Click here for more information and to register for the reunion <i class="fa fa-exclamation-circle" aria-hidden="true"></i></h3>
-						
-					@else
-
-						<h3 class="h3-responsive cyan-text text-center">You're all set for the next reunion. Click here to see if there has been any updates</h3>
-
-					@endif
-
-					<div class="text-center">
-						
-						<a href="{{ route('member_registration', ['reunion' => $active_reunion->id, 'member' => $family_member->id]) }}" class="btn peach-gradient">New Reunion Information</a>
-						
-					</div>
-					
-				@endif
-				
-				<h1 class="mt-2 mb-4">Edit {{ $family_member->full_name() }}</h1>
+				<h1 class="mt-2 mb-4">Edit {{ $family_member->firstname . ' ' . $family_member->lastname }}</h1>
 				
 				{!! Form::open(['action' => ['FamilyMemberController@update', 'family_member' => $family_member->id], 'method' => 'PUT']) !!}
 				

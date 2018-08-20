@@ -60,6 +60,7 @@
 			<!-- Sidebar navigation -->
 			<div id="slide-out" class="side-nav fixed">
 				<ul class="custom-scrollbar">
+				
 					<!-- Logo -->
 					<li>
 						<div class="">
@@ -80,10 +81,11 @@
 						</li>
 
 					@else
+						
 						@if(!Auth::user()->is_admin())
 							
 							<li class="">
-								<a href='/profile' class='profileLink nav-link'>My Profile</a>
+								<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class='profileLink nav-link'>My Profile</a>
 							</li>
 							
 						@else
@@ -104,6 +106,7 @@
 						<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 							{{ csrf_field() }}
 						</form>
+						
 					@endif
 
 					<!--/. Side navigation links -->
@@ -132,9 +135,10 @@
 							<a href='/login' class="profileLink nav-link d-sm-none wow fadeInDown" data-wow-delay="0.6s">Login</a>
 
 						@else
+							
 							@if(!Auth::user()->is_admin())
 								
-								<a href='/profile' class='profileLink nav-link'>My Profile</a>
+								<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class='profileLink nav-link'>My Profile</a>
 								
 							@else
 								
@@ -149,7 +153,9 @@
 							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
 								{{ csrf_field() }}
 							</form>
+							
 						@endif
+						
 					</nav>
 					
 				</div>

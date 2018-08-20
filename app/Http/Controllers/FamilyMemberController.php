@@ -7,6 +7,7 @@ use App\FamilyMember;
 use App\State;
 use App\Registration;
 use App\Reunion;
+use Carbon\Carbon;
 
 class FamilyMemberController extends Controller
 {
@@ -201,6 +202,70 @@ class FamilyMemberController extends Controller
 			return redirect()->action('FamilyMemberController@index')->with('status', 'Family member account deleted successfully');
 			
 		}
+		
+    }
+	
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function reunion_registration(Reunion $reunion, FamilyMember $member)
+    {
+		
+		$states = \App\State::all();
+		$registered_for_reunion = Registration::memberRegistered($member->id, $reunion->id)->first();
+
+		return view('users.registration', compact('reunion', 'member', 'states', 'registered_for_reunion'));
+		
+    }
+	
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function store_registration(Request $request, Reunion $reunion, FamilyMember $member)
+    {
+		
+		$this->validate($request, [
+			'registree' => 'required|max:100',
+			'address' => 'required|max:100',
+			'city' => 'required|max:100',
+			'zip' => 'required|max:99999|min:0|numeric',
+			'email' => 'required|email',
+			'phone' => 'nullable|numeric',
+		]);
+		
+		// Create New Registration
+		$registration = new Registration();
+		$registration->reunion_id = $reunion->id;
+		$registration->family_member_id = $member->id;
+		$registration->adult_names = $member->firstname;
+		$registration->address = $request->address;
+		$registration->city = $request->city;
+		$registration->state = $request->state;
+		$registration->zip = $request->zip;
+		$registration->email = $request->email;
+		$registration->phone = $request->phone;
+		$registration->registree_name = $request->registree;
+		$registration->reg_date = Carbon::now();
+		
+		// Calculate registration cost
+		$aCost = $request->numAdults * $reunion->adult_price;
+		$yCost = $request->numYouth * $reunion->youth_price;
+		$cCost = $request->numChildren * $reunion->child_price;
+		
+		$registration->due_at_reg = $registration->total_amount_due = ($aCost + $yCost + $cCost);
+		
+		if($registration->save()) {
+			
+			return redirect()->back()->with('status', 'You have been registered for the upcoming reunion');
+			
+		}
+		
 		
     }
 

@@ -15,7 +15,7 @@ class FamilyMember extends Model
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname',
+        'firstname', 'lastname', 'email',
     ];
 
     /**

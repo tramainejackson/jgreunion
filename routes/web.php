@@ -47,11 +47,15 @@ Route::resource('/registrations', 'RegistrationController');
 
 Route::resource('/reunions', 'ReunionController');
 
+Route::resource('/posts', 'ProfilePostController');
+
 Route::get('/past_reunion/{reunion}', 'ReunionController@show_past_reunion')->name('show_past_reunion');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/registrations/create/{reunion}', 'RegistrationController@create')->name('create_registration');
+
+Route::get('/member_registration/{reunion}/{member}', 'FamilyMemberController@reunion_registration')->name('member_registration');
 
 Route::get('/reunions/{reunion}/pictures/create', 'ReunionController@create_reunion_pictures')->name('create_reunion_pictures');
 
@@ -60,6 +64,8 @@ Route::get('/settings', 'HomeController@settings')->name('settings');
 Route::put('/update_settings', 'HomeController@update_settings');
 
 Route::patch('/update_carousel/{picture}', 'HomeController@update_carousel');
+
+Route::post('/member_registration/{reunion}/{member}', 'FamilyMemberController@store_registration');
 
 Route::post('/reunion_images_add/{reunion}', 'ReunionController@update_reunion_pictures');
 

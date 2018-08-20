@@ -45,9 +45,13 @@
 		
 			@else
 				
-				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), 'members') ? ' active' : '' }}">My Profile</a>
+				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), ['members']) ? ' active' : '' }}">My Profile</a>
 				
-				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">New Post</a>
+				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), ['member_registration']) ? ' active' : '' }}">My Registrations</a>
+				
+				<a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), ['index']) ? ' active' : '' }}">All Family Members</a>
+				
+				<!-- <a href="{{ route('posts.index') }}" class="profileLink nav-link{{ str_contains(url()->current(), ['post']) ? ' active' : '' }}">Family Post</a> -->
 				
 			@endif
 
@@ -123,9 +127,19 @@
 		
 			@else
 				
+				<li><a href="/" class="profileLink nav-link">Home</a></li>
+				
 				<li><a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), 'members') ? ' active' : '' }}">My Profile</a></li>
 				
-				<li><a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">New Post</a></li>
+				<li class="">
+					<a href="{{ route('logout') }}" class="profileLink nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log Out</a>
+				</li>
+	
+				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+					{{ csrf_field() }}
+				</form>
+				
+				<!-- <li><a href="{{ route('members.edit', ['family_member' => Auth::user()->member->id]) }}" class="profileLink nav-link{{ str_contains(url()->current(), ['registrations', 'reunions']) ? ' active' : '' }}">New Post</a></li> -->
 				
 			@endif
 

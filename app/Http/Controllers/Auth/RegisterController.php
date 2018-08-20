@@ -73,6 +73,7 @@ class RegisterController extends Controller
 			$user->member()->create([
 				'firstname' => $data['first_name'],
 				'lastname' => $data['last_name'],
+				'email' => $data['email'],
 			]);
 		}
 		
